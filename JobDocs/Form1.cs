@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using iTextSharp.text.pdf;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
 
 namespace JobDocs
 {
@@ -17,13 +18,14 @@ namespace JobDocs
     {
         List<string> columnsList = new List<string>();
         List<string> dtColumnsList = new List<string>
-        {"<Not Mapped>", "Title", "First Name", "Last Name", "Company Name",
+        {"<--->", "Title", "First Name", "Last Name", "Company Name",
             "Address Line 1", "Address Line 2", "Address Line 3",
             "Locality","State","Postcode","Country"
         };
+        List<string> mappedList = new List<string>();
         string path = "";
         int columnCount = 0;
-
+        string pdfPath = "";
 
         public Form1()
         {
@@ -32,45 +34,99 @@ namespace JobDocs
 
         private void button1_Click(object sender, EventArgs e)
         {
-         
+            string fileName = Path.GetFileName(path);
+            string JobNo =txtJobNo.Text!=""? txtJobNo.Text: "111222";
+            pdfPath = $"S:\\SCRIPTS\\Test Programmes\\TEMP\\{JobNo} - Data Summary.pdf";
+            PdfReader pdfReader = new PdfReader(@"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf");
+            PdfStamper pdfStamper = new PdfStamper(pdfReader, new System.IO.FileStream(pdfPath, System.IO.FileMode.OpenOrCreate));
+            pdfStamper.AcroFields.SetField("Date", DateTime.Today.ToShortDateString());
+            pdfStamper.AcroFields.SetField("Job No", JobNo);
+            pdfStamper.AcroFields.SetField("Job Name", txtJobName.Text);
+            pdfStamper.AcroFields.SetField("Customer", txtCustomer.Text);
+            pdfStamper.AcroFields.SetField("Original_File", fileName.Substring(fileName.IndexOf('-') +1 ));
+            //for (int i = 0; i < columnCount; i++)
+            //{
+            //    pdfStamper.AcroFields.SetField($"Col{i+1}", columnsList[i]);
+            //}
+            int j = 0;
 
-            PdfReader pdfReader = new PdfReader(@"C:\Users\Gayan\Documents\MSOL\test data\DATA SUMMARY SHEET - APR18 - Fillable.pdf");
-            PdfStamper pdfStamper = new PdfStamper(pdfReader, new System.IO.FileStream(@"C:\Users\Gayan\Documents\MSOL\test data\filled.pdf", System.IO.FileMode.OpenOrCreate));
-            pdfStamper.AcroFields.SetField("Col1", "222000");
+        for (int i =0; i< flowLayoutPanel2.Controls.Count;i++)
+            {
+                
+                ComboBox c = (ComboBox)flowLayoutPanel2.Controls[i];
+                if (c.SelectedIndex > 0)
+                {
+                    j++;
+                    pdfStamper.AcroFields.SetField($"Col{j}", columnsList[i]);
+                    pdfStamper.AcroFields.SetField($"dtCol{j}", c.SelectedValue.ToString());
+
+                }
+            }
+           
             pdfStamper.Close();
             pdfReader.Close();
+
+            PdfReader pdfReader2 = new PdfReader(@"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf");
+            PdfStamper pdfStamper2 = new PdfStamper(pdfReader2, new System.IO.FileStream($"S:\\SCRIPTS\\Test Programmes\\TEMP\\{JobNo} - Production Report.pdf", System.IO.FileMode.OpenOrCreate));
+            pdfStamper2.AcroFields.SetField("Job No", JobNo);
+            pdfStamper2.AcroFields.SetField("Job Name", txtJobName.Text);
+            pdfStamper2.AcroFields.SetField("Customer", txtCustomer.Text);
+            pdfStamper2.Close();
+            pdfReader2.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string Filepath = @"C:\Users\Gayan\Documents\MSOL\test data\DATA SUMMARY SHEET - APR18 - Fillable.pdf";
+            //// string Filepath = $"S:\\SCRIPTS\\Test Programmes\\TEMP\\{JobNo} - Data Summary.pdf";
 
-            using (PrintDialog Dialog = new PrintDialog())
-            {
-                Dialog.ShowDialog();
+            // using (PrintDialog Dialog = new PrintDialog())
+            // {
+            //     Dialog.ShowDialog();
 
-                ProcessStartInfo printProcessInfo = new ProcessStartInfo()
-                {
-                    Verb = "print",
-                    CreateNoWindow = true,
-                    FileName = Filepath,
-                    WindowStyle = ProcessWindowStyle.Hidden
-                };
+            //     ProcessStartInfo printProcessInfo = new ProcessStartInfo()
+            //     {
+            //         Verb = "print",
+            //         CreateNoWindow = true,
+            //         FileName = @"C:\temp\LETTER TABLE SCRIPT.txt",
+            //         WindowStyle = ProcessWindowStyle.Hidden
+            //     };
 
-                Process printProcess = new Process();
-                printProcess.StartInfo = printProcessInfo;
-                printProcess.Start();
+            //     Process printProcess = new Process();
+            //     printProcess.StartInfo = printProcessInfo;
 
-                printProcess.WaitForInputIdle();
+            //     printProcess.Start();
 
-                Thread.Sleep(3000);
+            //     printProcess.WaitForInputIdle();
 
-                if (false == printProcess.CloseMainWindow())
-                {
-                    printProcess.Kill();
-                }
-            }
+            //     Thread.Sleep(3000);
+
+            //     if (false == printProcess.CloseMainWindow())
+            //     {
+            //         printProcess.Kill();
+            //     }
+            // }
+
+            Print(pdfPath, "RICOH MP C5503 PCL 6");
+
         }
+
+        public static bool Print(string file, string printer)
+        {
+          
+            //try
+            //{
+                Process.Start(
+                   Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
+                        @"SOFTWARE\Microsoft\Windows\CurrentVersion" +
+                        @"\App Paths\AcroRd32.exe").GetValue("").ToString(),
+                   string.Format("/h /t \"{0}\" \"{1}\"", file, "RICOH MP C5503 PCL 6"));
+                return true;
+            //}
+            //catch { }
+            //return false;
+        }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
