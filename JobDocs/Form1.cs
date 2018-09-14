@@ -118,7 +118,7 @@ namespace JobDocs
                 Process.Start(
                    Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
                         @"SOFTWARE\Microsoft\Windows\CurrentVersion" +
-                        @"\App Paths\AcroRd32.exe").GetValue("").ToString(),
+                        @"\App Paths\Acrobat.exe").GetValue("").ToString(),
                    string.Format("/h /t \"{0}\" \"{1}\"", file, "RICOH MP C5503 PCL 6"));
                 return true;
             //}
