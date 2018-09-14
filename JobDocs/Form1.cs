@@ -18,11 +18,11 @@ namespace JobDocs
     {
         List<string> columnsList = new List<string>();
         List<string> dtColumnsList = new List<string>
-        {"<--->", "Title", "First Name", "Last Name", "Company Name",
+        {"<Select or Enter DT Field>", "Title", "First Name", "Last Name", "Company Name",
             "Address Line 1", "Address Line 2", "Address Line 3",
             "Locality","State","Postcode","Country"
         };
-        List<string> mappedList = new List<string>();
+        List<string> outputList = new List<string>();
         string path = "";
         int columnCount = 0;
         string pdfPath = "";
@@ -32,37 +32,52 @@ namespace JobDocs
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void createPdf()
         {
             string fileName = Path.GetFileName(path);
-            string JobNo =txtJobNo.Text!=""? txtJobNo.Text: "111222";
+            string JobNo = txtJobNo.Text != "" ? txtJobNo.Text : "111222";
             pdfPath = $"S:\\SCRIPTS\\Test Programmes\\TEMP\\{JobNo} - Data Summary.pdf";
             PdfReader pdfReader = new PdfReader(@"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf");
+            //PdfReader pdfReader = new PdfReader(@"PDF Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf");
+
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new System.IO.FileStream(pdfPath, System.IO.FileMode.OpenOrCreate));
             pdfStamper.AcroFields.SetField("Date", DateTime.Today.ToShortDateString());
             pdfStamper.AcroFields.SetField("Job No", JobNo);
             pdfStamper.AcroFields.SetField("Job Name", txtJobName.Text);
             pdfStamper.AcroFields.SetField("Customer", txtCustomer.Text);
-            pdfStamper.AcroFields.SetField("Original_File", fileName.Substring(fileName.IndexOf('-') +1 ));
-            //for (int i = 0; i < columnCount; i++)
-            //{
-            //    pdfStamper.AcroFields.SetField($"Col{i+1}", columnsList[i]);
-            //}
+            pdfStamper.AcroFields.SetField("Original_File", fileName.Substring(fileName.IndexOf('-') + 1));
+
             int j = 0;
 
-        for (int i =0; i< flowLayoutPanel2.Controls.Count;i++)
+            for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
             {
-                
+
                 ComboBox c = (ComboBox)flowLayoutPanel2.Controls[i];
                 if (c.SelectedIndex > 0)
                 {
                     j++;
                     pdfStamper.AcroFields.SetField($"Col{j}", columnsList[i]);
                     pdfStamper.AcroFields.SetField($"dtCol{j}", c.SelectedValue.ToString());
-
+                    outputList.Add(c.SelectedValue.ToString());
                 }
             }
-           
+            string[] addressArr = new string[9];
+            for(int k =0;k<outputList.Count;k++)
+            {
+                if (outputList[k] == "Title")
+                {
+                    addressArr[0] += "Title ";
+                }
+                if (outputList[k] == "First Name")
+                {
+                    addressArr[0] += "First Name ";
+                }
+                if (outputList[k] == "First Name")
+                {
+                    addressArr[0] += "Last Name";
+                }
+            }
+       
             pdfStamper.Close();
             pdfReader.Close();
 
@@ -73,6 +88,11 @@ namespace JobDocs
             pdfStamper2.AcroFields.SetField("Customer", txtCustomer.Text);
             pdfStamper2.Close();
             pdfReader2.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            createPdf();     
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -106,27 +126,27 @@ namespace JobDocs
             //     }
             // }
 
+            createPdf();
+
             Print(pdfPath, "RICOH MP C5503 PCL 6");
 
         }
 
         public static bool Print(string file, string printer)
         {
-          
-            //try
-            //{
+            try
+            {
                 Process.Start(
                    Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
                         @"SOFTWARE\Microsoft\Windows\CurrentVersion" +
                         @"\App Paths\Acrobat.exe").GetValue("").ToString(),
                    string.Format("/h /t \"{0}\" \"{1}\"", file, "RICOH MP C5503 PCL 6"));
                 return true;
-            //}
-            //catch { }
-            //return false;
+            }
+            catch (Exception ex)
+            { MessageBox.Show($"An error occurred: '{ex.Message}'"); }
+            return false;
         }
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -149,10 +169,9 @@ namespace JobDocs
             {
                 columnCount = columnsList.Count;
                 for(int i=0;i<columnsList.Count;i++)
-                {
-                    
-                    flowLayoutPanel1.Controls.Add(new TextBox { Text = columnsList[i], Name = $"txtBox{i}" });
-                    flowLayoutPanel2.Controls.Add(new ComboBox { DataSource = new List<string>(dtColumnsList), Name = $"combo{i}" });
+                {                  
+                    flowLayoutPanel1.Controls.Add(new TextBox { Text = columnsList[i], Size = new System.Drawing.Size(150, 25), Name = $"txtBox{i}" });
+                    flowLayoutPanel2.Controls.Add(new ComboBox { DataSource = new List<string>(dtColumnsList),Size=new System.Drawing.Size(150,25), Name = $"combo{i},", AutoCompleteMode=AutoCompleteMode.SuggestAppend,AutoCompleteSource=AutoCompleteSource.ListItems });
                 }
             }
         }
