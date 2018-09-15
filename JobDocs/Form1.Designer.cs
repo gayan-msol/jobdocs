@@ -120,6 +120,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(526, 514);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(122, 56);
@@ -148,6 +149,7 @@
             this.checkBoxDataSummary.TabIndex = 20;
             this.checkBoxDataSummary.Text = "Data Summary";
             this.checkBoxDataSummary.UseVisualStyleBackColor = true;
+            this.checkBoxDataSummary.CheckedChanged += new System.EventHandler(this.checkBoxDataSummary_CheckedChanged);
             // 
             // checkBoxProductionReport
             // 
