@@ -32,7 +32,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.txtJobNo = new System.Windows.Forms.TextBox();
             this.txtJobName = new System.Windows.Forms.TextBox();
-            this.txtCustomer = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,6 +43,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
+            this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -78,20 +78,6 @@
             this.txtJobName.Name = "txtJobName";
             this.txtJobName.Size = new System.Drawing.Size(252, 20);
             this.txtJobName.TabIndex = 10;
-            // 
-            // txtCustomer
-            // 
-            this.txtCustomer.AutoCompleteCustomSource.AddRange(new string[] {
-            "Scott Print",
-            "Advance Press",
-            "Optima Press",
-            "Hydraulic Supermarket"});
-            this.txtCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtCustomer.Location = new System.Drawing.Point(104, 103);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(252, 20);
-            this.txtCustomer.TabIndex = 11;
             // 
             // dateTimePicker1
             // 
@@ -204,11 +190,28 @@
             this.label5.TabIndex = 22;
             this.label5.Text = "Source Fileds";
             // 
+            // comboBoxCustomer
+            // 
+            this.comboBoxCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxCustomer.FormattingEnabled = true;
+            this.comboBoxCustomer.Items.AddRange(new object[] {
+            " ",
+            "SCOTT PRINT",
+            "HYDRAULIC SUPERMARKET",
+            "ADVANCE PRESS",
+            "QUALITY PRESS"});
+            this.comboBoxCustomer.Location = new System.Drawing.Point(104, 102);
+            this.comboBoxCustomer.Name = "comboBoxCustomer";
+            this.comboBoxCustomer.Size = new System.Drawing.Size(252, 21);
+            this.comboBoxCustomer.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 582);
+            this.Controls.Add(this.comboBoxCustomer);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.txtJobName);
@@ -224,7 +227,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.txtCustomer);
             this.Name = "Form1";
             this.Text = "Job Docs";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -238,7 +240,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtJobNo;
         private System.Windows.Forms.TextBox txtJobName;
-        private System.Windows.Forms.TextBox txtCustomer;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -250,6 +251,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ComboBox comboBoxCustomer;
     }
 }
 

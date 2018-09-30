@@ -28,6 +28,9 @@ namespace JobDocs
         int columnCount = 0;
         string dataSummaryPdf = "";
         string prodRepPdf = "";
+        string dataSummaryTemplate = @"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
+        string productioReportTemplate = @"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
+
 
         public Form1()
         {
@@ -42,69 +45,78 @@ namespace JobDocs
             {
                 string jobDirectory = Path.GetDirectoryName(path);
                 string JobNo = txtJobNo.Text != "" ? txtJobNo.Text : "0000";
-
+                string customer = comboBoxCustomer.SelectedItem == null ? comboBoxCustomer.Text : comboBoxCustomer.SelectedItem.ToString();
 
                 if (checkBoxDataSummary.Checked)
                 {
                     string fileName = Path.GetFileName(path);
                     dataSummaryPdf = $"{jobDirectory}\\{JobNo} - Data Summary.pdf";
-                    PdfReader pdfReader = new PdfReader(@"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf");
+                    PdfReader pdfReader = new PdfReader(dataSummaryTemplate);
                     //PdfReader pdfReader = new PdfReader(@"C:\Users\Gayan\Documents\MSOL\test data\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf");
-                    PdfStamper pdfStamper = new PdfStamper(pdfReader, new System.IO.FileStream(dataSummaryPdf, System.IO.FileMode.OpenOrCreate));
-                    pdfStamper.AcroFields.SetField("Date", DateTime.Today.ToShortDateString());
-                    pdfStamper.AcroFields.SetField("Job No", JobNo);
-                    pdfStamper.AcroFields.SetField("Job Name", txtJobName.Text);
-                    pdfStamper.AcroFields.SetField("Customer", txtCustomer.Text);
-                    pdfStamper.AcroFields.SetField("Original_File", fileName.Substring(fileName.IndexOf('-') + 1));
 
-                    int j = 0;
-
-                    for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
+                    using (PdfStamper pdfStamper = new PdfStamper(pdfReader, new System.IO.FileStream(dataSummaryPdf, System.IO.FileMode.OpenOrCreate)))
                     {
+                        pdfStamper.AcroFields.SetField("Date", DateTime.Today.ToShortDateString());
+                        pdfStamper.AcroFields.SetField("Job No", JobNo);
+                        pdfStamper.AcroFields.SetField("Job Name", txtJobName.Text);
+                        pdfStamper.AcroFields.SetField("Customer", customer);
+                        pdfStamper.AcroFields.SetField("Original_File", fileName.Substring(fileName.IndexOf('-') + 1));
 
-                        ComboBox c = (ComboBox)flowLayoutPanel2.Controls[i];
-                        if (c.SelectedIndex > 0)
-                        {
-                            j++;
-                            pdfStamper.AcroFields.SetField($"Col{j}", columnsList[i]);
-                            pdfStamper.AcroFields.SetField($"dtCol{j}", c.SelectedValue.ToString());
-                            outputList.Add(c.SelectedValue.ToString());
-                        }
-                    }
-                    string[] addressArr = new string[9];
-                    for (int k = 0; k < outputList.Count; k++)
-                    {
-                        if (outputList[k] == "Title")
-                        {
-                            addressArr[0] += "Title ";
-                        }
-                        if (outputList[k] == "First Name")
-                        {
-                            addressArr[0] += "First Name ";
-                        }
-                        if (outputList[k] == "First Name")
-                        {
-                            addressArr[0] += "Last Name";
-                        }
-                    }
+                        int j = 0;
 
-                    pdfStamper.Close();
+                        for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
+                        {
+
+                            ComboBox c = (ComboBox)flowLayoutPanel2.Controls[i];
+                            if (c.SelectedIndex > 0 || c.Text != "")// index 0 is the displayed value which should be ignored
+                            {
+                                j++;
+                                string column = c.SelectedItem == null ? c.Text : c.SelectedItem.ToString();
+                                pdfStamper.AcroFields.SetField($"Col{j}", columnsList[i]);
+                                pdfStamper.AcroFields.SetField($"dtCol{j}", column);
+                                outputList.Add(column);
+                            }
+                        }
+                        string[] addressArr = new string[9];
+                        for (int k = 0; k < outputList.Count; k++)
+                        {
+                            if (outputList[k] == "Title")
+                            {
+                                addressArr[0] += "Title ";
+                            }
+                            if (outputList[k] == "First Name")
+                            {
+                                addressArr[0] += "First Name ";
+                            }
+                            if (outputList[k] == "First Name")
+                            {
+                                addressArr[0] += "Last Name";
+                            }
+                        }
+                    }           
+
                     pdfReader.Close();
                 }
 
                 if (checkBoxProductionReport.Checked)
                 {
-                    PdfReader pdfReader2 = new PdfReader(@"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf");
-                    PdfStamper pdfStamper2 = new PdfStamper(pdfReader2, new System.IO.FileStream($"{jobDirectory}\\{JobNo} - Production Report.pdf", System.IO.FileMode.OpenOrCreate));
-                    pdfStamper2.AcroFields.SetField("Job No", JobNo);
-                    pdfStamper2.AcroFields.SetField("Job Name", txtJobName.Text);
-                    pdfStamper2.AcroFields.SetField("Customer", txtCustomer.Text);
-                    pdfStamper2.Close();
+                    PdfReader pdfReader2 = new PdfReader(productioReportTemplate);
+                    //PdfReader pdfReader2 = new PdfReader(@"C:\Users\Gayan\Documents\MSOL\test data\PRODUCTION REPORT SEP17 - TEMPLATE.pdf");
+
+                    using (PdfStamper pdfStamper2 = new PdfStamper(pdfReader2, new System.IO.FileStream($"{jobDirectory}\\{JobNo} - Production Report.pdf", System.IO.FileMode.OpenOrCreate)))
+                    {
+                        pdfStamper2.AcroFields.SetField("Job No", JobNo);
+                        pdfStamper2.AcroFields.SetField("Job Name", txtJobName.Text);
+                        pdfStamper2.AcroFields.SetField("Customer", customer);
+                        pdfStamper2.Close();
+                    }
+                   
                     pdfReader2.Close();
                 }
             }
             catch(Exception e)
             {
+         
                 MessageBox.Show(e.Message);
             }
 
@@ -116,55 +128,12 @@ namespace JobDocs
         {
             createPdf();
 
-            button2.Enabled = true;
+           // button2.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //// string Filepath = $"S:\\SCRIPTS\\Test Programmes\\TEMP\\{JobNo} - Data Summary.pdf";
-            /*
-            PrintDocument printDoc = new PrintDocument();
-            printDoc.DefaultPageSettings.Landscape = true;
-            printDoc.DefaultPageSettings.PaperSize = new PaperSize("Custom Size", 800, 582);
-            printDoc.DefaultPageSettings.PaperSize.RawKind = 120;
-            printDoc.DefaultPageSettings.Margins.Left = 10; //100 = 1 inch = 2.54 cm
-         
-            printDoc.DocumentName = "My Document Name"; //this can affect name of output PDF file if printer is a PDF printer
-                                                        //printDoc.PrinterSettings.PrinterName = "CutePDF";
-            printDoc.PrintPage += new PrintPageEventHandler(printDoc_PrintPage);
-
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.Document = printDoc; //Document property must be set before ShowDialog()
-
-            DialogResult dialogResult = printDialog.ShowDialog();
-            if (dialogResult == DialogResult.OK)
-            {
-                printDoc.Print(); //start the print
-            }
-
-            void printDoc_PrintPage(object senderp, PrintPageEventArgs arg)
-            {
-                Graphics g = arg.Graphics;
-                string textToPrint = txtJobNo.Text;
-                Font font1 = new Font("Courier New", 16);
-                Font font = new Font("Courier New", 12);
-                // e.PageBounds is total page size (does not consider margins)
-                // e.MarginBounds is the portion of page inside margins
-
-                int x1 = arg.MarginBounds.Left;
-                int y1 = arg.MarginBounds.Top;
-                int w = arg.MarginBounds.Width;
-                int h = arg.MarginBounds.Height;
-         
-              //  g.DrawRectangle(Pens.Red, x1, y1, w, h); //draw a rectangle around the margins of the page, also we can use: g.DrawRectangle(Pens.Red, e.MarginBounds)
-                g.DrawString(textToPrint, font1, Brushes.Black, x1, y1);
-                g.DrawString("new text", font, Brushes.Black, x1, 200);
-
-                arg.HasMorePages = false; //set to true to continue printing next page
-            }
-            */
-
-            try
+           try
             {
 
                 Print(dataSummaryPdf, "RICOH MP C5503 PCL 6");
