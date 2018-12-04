@@ -12,22 +12,24 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>S:\SCRIPTS\Test Programmes\Updates\JobDocs\</PublishUrl>
+    <PublishUrl>\\MSOL-P1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
+    <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\Msol-p1\SCRIPTS\Test Programmes\Published\JobDocs\</InstallUrl>
-    <UpdateUrl>\\Msol-p1\SCRIPTS\Test Programmes\Updates\JobDocs\</UpdateUrl>
+    <InstallUrl>\\MSOL-P1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</InstallUrl>
+    <UpdateUrl>\\MSOL-P1\Groups\SCRIPTS\DotNetProgrammes\Updates\JobDocs\</UpdateUrl>
+    <PublisherName>MSOL</PublisherName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>

@@ -170,6 +170,9 @@ namespace JobDocs
         private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            columnsList.Clear();
+            flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel2.Controls.Clear();
             foreach (string file in files)
             {
                 if (file.Substring(file.Length - 4, 4) == ".txt")
