@@ -60,7 +60,7 @@
             this.button1.Location = new System.Drawing.Point(526, 452);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 56);
-            this.button1.TabIndex = 2;
+            this.button1.TabIndex = 7;
             this.button1.Text = "Create PDF";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -70,14 +70,14 @@
             this.txtJobNo.Location = new System.Drawing.Point(104, 21);
             this.txtJobNo.Name = "txtJobNo";
             this.txtJobNo.Size = new System.Drawing.Size(100, 20);
-            this.txtJobNo.TabIndex = 9;
+            this.txtJobNo.TabIndex = 0;
             // 
             // txtJobName
             // 
             this.txtJobName.Location = new System.Drawing.Point(104, 62);
             this.txtJobName.Name = "txtJobName";
             this.txtJobName.Size = new System.Drawing.Size(252, 20);
-            this.txtJobName.TabIndex = 10;
+            this.txtJobName.TabIndex = 1;
             // 
             // dateTimePicker1
             // 
@@ -132,7 +132,7 @@
             this.checkBoxDataSummary.Location = new System.Drawing.Point(526, 369);
             this.checkBoxDataSummary.Name = "checkBoxDataSummary";
             this.checkBoxDataSummary.Size = new System.Drawing.Size(95, 17);
-            this.checkBoxDataSummary.TabIndex = 20;
+            this.checkBoxDataSummary.TabIndex = 5;
             this.checkBoxDataSummary.Text = "Data Summary";
             this.checkBoxDataSummary.UseVisualStyleBackColor = true;
             this.checkBoxDataSummary.CheckedChanged += new System.EventHandler(this.checkBoxDataSummary_CheckedChanged);
@@ -145,7 +145,7 @@
             this.checkBoxProductionReport.Location = new System.Drawing.Point(526, 392);
             this.checkBoxProductionReport.Name = "checkBoxProductionReport";
             this.checkBoxProductionReport.Size = new System.Drawing.Size(112, 17);
-            this.checkBoxProductionReport.TabIndex = 21;
+            this.checkBoxProductionReport.TabIndex = 6;
             this.checkBoxProductionReport.Text = "Production Report";
             this.checkBoxProductionReport.UseVisualStyleBackColor = true;
             // 
@@ -156,7 +156,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(252, 202);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 368);
-            this.flowLayoutPanel2.TabIndex = 18;
+            this.flowLayoutPanel2.TabIndex = 4;
             // 
             // label6
             // 
@@ -177,7 +177,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(13, 202);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 368);
-            this.flowLayoutPanel1.TabIndex = 17;
+            this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
             this.flowLayoutPanel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
@@ -204,7 +204,8 @@
             this.comboBoxCustomer.Location = new System.Drawing.Point(104, 102);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
             this.comboBoxCustomer.Size = new System.Drawing.Size(252, 21);
-            this.comboBoxCustomer.TabIndex = 24;
+            this.comboBoxCustomer.TabIndex = 2;
+            this.comboBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomer_SelectedIndexChanged);
             // 
             // Form1
             // 

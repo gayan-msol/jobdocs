@@ -30,7 +30,7 @@ namespace JobDocs
         string prodRepPdf = "";
         string dataSummaryTemplate = @"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
         string productioReportTemplate = @"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
-
+        static List<string> clinetsList = new List<string>();
 
         public Form1()
         {
@@ -164,6 +164,14 @@ namespace JobDocs
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string clientDirPath = @"S:\DATABASES";
+            foreach(string d in Directory.GetDirectories(clientDirPath))
+            {
+                clinetsList.Add(Path.GetFileName(d));
+            }
+
+            comboBoxCustomer.DataSource = clinetsList;
+
 
         }
 
@@ -199,6 +207,11 @@ namespace JobDocs
         }
 
         private void checkBoxDataSummary_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
