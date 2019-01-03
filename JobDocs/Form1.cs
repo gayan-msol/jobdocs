@@ -19,8 +19,8 @@ namespace JobDocs
     {
         List<string> columnsList = new List<string>();
         List<string> dtColumnsList = new List<string>
-        {"<Select or Enter DT Field>", "Title", "First Name", "Last Name", "Company Name",
-            "Address Line 1", "Address Line 2", "Address Line 3",
+        {"<Select or Enter DT Field>", "Title", "First Name", "Last Name","Position", "Company Name",
+            "Address Line 1", "Address Line 2", "Address Line 3", "Address Line 4", "Address Line 5",
             "Locality","State","Postcode","Country"
         };
         List<string> outputList = new List<string>();
@@ -165,7 +165,12 @@ namespace JobDocs
         private void Form1_Load(object sender, EventArgs e)
         {
             string clientDirPath = @"S:\DATABASES";
-            foreach(string d in Directory.GetDirectories(clientDirPath))
+            string miscDirpath = @"S:\DATABASES\AAA MISCELLANEOUS";
+            foreach (string d in Directory.GetDirectories(clientDirPath))
+            {
+                clinetsList.Add(Path.GetFileName(d));
+            }
+            foreach (string d in Directory.GetDirectories(miscDirpath))
             {
                 clinetsList.Add(Path.GetFileName(d));
             }
