@@ -17,6 +17,13 @@ namespace JobDocs
 {
     public partial class Form1 : Form
     {
+
+        string customer = "";
+        string jobNo = "";
+        string jobName = "";
+        string clientDirPath = @"S:\DATABASES";
+        string miscDirpath = @"S:\DATABASES\AAA MISCELLANEOUS";
+
         List<string> columnsList = new List<string>();
         List<string> dtColumnsList = new List<string>
         {"<Select or Enter DT Field>", "Title", "First Name", "Last Name","Position", "Company Name",
@@ -218,7 +225,42 @@ namespace JobDocs
 
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
+            jobNo = txtJobNo.Text;
+            txtJobName.ResetText();
+            customer = comboBoxCustomer.SelectedItem.ToString();
+            jobName = "";
+            if (Directory.Exists($"{clientDirPath}\\{customer}"))
+            {
+                string[] jobList = Directory.GetDirectories($"{clientDirPath}\\{customer}");
+                foreach (string s in jobList)
+                {
+                    jobName = Path.GetFileName(s);
 
+                    if (jobName.Contains(jobNo))
+                    {
+
+                        txtJobName.Text = jobName.Replace($"JOB {jobNo}", "");
+                        break;
+                    }
+
+                }
+            }
+            else if (Directory.Exists($"{miscDirpath}\\{customer}"))
+            {
+                string[] jobList = Directory.GetDirectories($"{miscDirpath}\\{customer}");
+                foreach (string s in jobList)
+                {
+                    jobName = Path.GetFileName(s);
+
+                    if (jobName.Contains(jobNo))
+                    {
+
+                        txtJobName.Text = jobName.Replace($"JOB {jobNo}", "");
+                        break;
+                    }
+
+                }
+            }
         }
     }
 }
