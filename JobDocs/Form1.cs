@@ -26,7 +26,7 @@ namespace JobDocs
 
         List<string> columnsList = new List<string>();
         List<string> dtColumnsList = new List<string>
-        {"<Select or Enter DT Field>", "Title", "First Name", "Last Name","Position", "Company Name",
+        {"<Select or Enter DT Field>", "Title", "First Name", "Name Suffix", "Last Name","Position", "Company Name",
             "Address Line 1", "Address Line 2", "Address Line 3", "Address Line 4", "Address Line 5",
             "Locality","State","Postcode","Country"
         };
@@ -50,6 +50,15 @@ namespace JobDocs
 
             try
             {
+
+                if(string.IsNullOrWhiteSpace(path))
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = ".pdf|PDF";
+                    saveFileDialog.ShowDialog();
+                    path = saveFileDialog?.FileName;
+                }
+
                 string jobDirectory = Path.GetDirectoryName(path);
                 string JobNo = txtJobNo.Text != "" ? txtJobNo.Text : "0000";
                 string customer = comboBoxCustomer.SelectedItem == null ? comboBoxCustomer.Text : comboBoxCustomer.SelectedItem.ToString();
@@ -70,12 +79,13 @@ namespace JobDocs
                         pdfStamper.AcroFields.SetField("Original_File", fileName.Substring(fileName.IndexOf('-') + 1));
 
                         int j = 0;
+                        outputList.Clear();
 
                         for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
                         {
 
                             ComboBox c = (ComboBox)flowLayoutPanel2.Controls[i];
-                            if (c.SelectedIndex > 0 || c.Text != "")// index 0 is the displayed value which should be ignored
+                            if (c.SelectedIndex > 0 || (c.Text != ""&& c.Text != "<Select or Enter DT Field>"))// index 0 is the displayed value which should be ignored
                             {
                                 j++;
                                 string column = c.SelectedItem == null ? c.Text : c.SelectedItem.ToString();
@@ -84,22 +94,13 @@ namespace JobDocs
                                 outputList.Add(column);
                             }
                         }
-                        string[] addressArr = new string[9];
-                        for (int k = 0; k < outputList.Count; k++)
+
+                        List<string> addBlockList = BL_JobDocs.addressBlock(outputList);
+                        for(int k=0;k<addBlockList.Count;k++)
                         {
-                            if (outputList[k] == "Title")
-                            {
-                                addressArr[0] += "Title ";
-                            }
-                            if (outputList[k] == "First Name")
-                            {
-                                addressArr[0] += "First Name ";
-                            }
-                            if (outputList[k] == "First Name")
-                            {
-                                addressArr[0] += "Last Name";
-                            }
+                            pdfStamper.AcroFields.SetField($"Out{k+1}", addBlockList[k]);
                         }
+
                     }           
 
                     pdfReader.Close();

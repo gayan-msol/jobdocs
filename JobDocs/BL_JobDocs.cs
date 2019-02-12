@@ -11,6 +11,63 @@ namespace JobDocs
     class BL_JobDocs
     {
 
+        public static List<string> addressBlock(List<string> colList)        
+        {
+            List<string> addressColList = new List<string>();
+            StringBuilder nameLine = new StringBuilder();
+            StringBuilder locStPcLine = new StringBuilder();
+
+            nameLine.Append(colList.Contains("Title") ? "<Title> " : "");
+            nameLine.Append(colList.Contains("First Name") ? "<First Name> " : "");
+            nameLine.Append(colList.Contains("Last Name") ? "<Last Name> " : "");
+            nameLine.Append(colList.Contains("Name Suffix") ? "<Name Suffix>" : "");
+            if(nameLine.ToString() !="")
+            {
+                addressColList.Add(nameLine.ToString());
+            }
+            if(colList.Contains("Position"))
+            {
+                addressColList.Add("<Position>");
+            }
+            if (colList.Contains("Company Name"))
+            {
+                addressColList.Add("<Company Name>");
+            }
+            if (colList.Contains("Address Line 1"))
+            {
+                addressColList.Add("<Address Line 1>");
+            }
+            if (colList.Contains("Address Line 2"))
+            {
+                addressColList.Add("<Address Line 2>");
+            }
+            if (colList.Contains("Address Line 3"))
+            {
+                addressColList.Add("<Address Line 3>");
+            }
+            if (colList.Contains("Address Line 4"))
+            {
+                addressColList.Add("<Address Line 4>");
+            }
+            if (colList.Contains("Address Line 5"))
+            {
+                addressColList.Add("<Address Line 5>");
+            }
+
+            locStPcLine.Append(colList.Contains("Locality") ? "<Locality> " : "");
+            locStPcLine.Append(colList.Contains("State") ? "<State> " : "");
+            locStPcLine.Append(colList.Contains("Postcode") ? "<Postcode>" : "");
+            if (locStPcLine.ToString() != "")
+            {
+                addressColList.Add(locStPcLine.ToString());
+            }
+            if (colList.Contains("Country"))
+            {
+                addressColList.Add("<Country>");
+            }
+            return addressColList;
+        }
+
         public static DataTable readCSV(string fileName)
         {
             DataTable table = new DataTable();
