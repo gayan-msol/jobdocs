@@ -55,6 +55,7 @@ namespace JobDocsLibrary
         {
             List<string> dtFieldList = new List<string>();
             dtFieldList.Add("<Select or Enter DT Field>");
+            dtFieldList.Add("Stream");
             dtFieldList.Add("Title");
             dtFieldList.Add("First Name");
             dtFieldList.Add("Last Name");
