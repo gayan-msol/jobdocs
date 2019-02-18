@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.IO;
 using System.Drawing.Printing;
+using JobDocsLibrary;
 
 namespace JobDocs
 {
@@ -23,20 +24,24 @@ namespace JobDocs
         string jobName = "";
         string clientDirPath = @"S:\DATABASES";
         string miscDirpath = @"S:\DATABASES\AAA MISCELLANEOUS";
-
+        Address address = new Address();
         List<string> columnsList = new List<string>();
-        List<string> dtColumnsList = new List<string>
-        {"<Select or Enter DT Field>", "Title", "First Name", "Name Suffix", "Last Name","Position", "Company Name",
-            "Address Line 1", "Address Line 2", "Address Line 3", "Address Line 4", "Address Line 5",
-            "Locality","State","Postcode","Country"
-        };
+        //List<string> dtColumnsList = new List<string>
+        //{"<Select or Enter DT Field>", "Title", "First Name", "Name Suffix", "Last Name","Position", "Company Name",
+        //    "Address Line 1", "Address Line 2", "Address Line 3", "Address Line 4", "Address Line 5",
+        //    "Locality","State","Postcode","Country"
+        //};
+       // List<string> dtColumnsList =
+
+
+
         List<string> outputList = new List<string>();
         string path = "";
         int columnCount = 0;
         string dataSummaryPdf = "";
         string prodRepPdf = "";
-        string dataSummaryTemplate = @"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
-        string productioReportTemplate = @"S:\ADMIN\FORMS\MS DATA SUMMARY\Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
+        string dataSummaryTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
+        string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
         static List<string> clinetsList = new List<string>();
 
         public Form1()
@@ -209,7 +214,7 @@ namespace JobDocs
                 for(int i=0;i<columnsList.Count;i++)
                 {                  
                     flowLayoutPanel1.Controls.Add(new TextBox { Text = columnsList[i], Size = new System.Drawing.Size(150, 25), Name = $"txtBox{i}" });
-                    flowLayoutPanel2.Controls.Add(new ComboBox { DataSource = new List<string>(dtColumnsList),Size=new System.Drawing.Size(150,25), Name = $"combo{i},", AutoCompleteMode=AutoCompleteMode.SuggestAppend,AutoCompleteSource=AutoCompleteSource.ListItems });
+                    flowLayoutPanel2.Controls.Add(new ComboBox { DataSource = new List<string>(Address.getDtFieldList()),Size=new System.Drawing.Size(150,25), Name = $"combo{i},", AutoCompleteMode=AutoCompleteMode.SuggestAppend,AutoCompleteSource=AutoCompleteSource.ListItems });
                 }
             }
         }

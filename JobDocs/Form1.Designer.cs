@@ -44,6 +44,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
+            this.btnSecondStream = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -207,11 +208,22 @@
             this.comboBoxCustomer.TabIndex = 1;
             this.comboBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomer_SelectedIndexChanged);
             // 
+            // btnSecondStream
+            // 
+            this.btnSecondStream.Enabled = false;
+            this.btnSecondStream.Location = new System.Drawing.Point(330, 164);
+            this.btnSecondStream.Name = "btnSecondStream";
+            this.btnSecondStream.Size = new System.Drawing.Size(122, 32);
+            this.btnSecondStream.TabIndex = 24;
+            this.btnSecondStream.Text = "Add Second Stream";
+            this.btnSecondStream.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 582);
+            this.Controls.Add(this.btnSecondStream);
             this.Controls.Add(this.comboBoxCustomer);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
@@ -253,6 +265,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ComboBox comboBoxCustomer;
+        private System.Windows.Forms.Button btnSecondStream;
     }
 }
 

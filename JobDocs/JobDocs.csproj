@@ -135,5 +135,11 @@
   <ItemGroup>
     <Content Include="jobdocs.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobDocsLibrary\JobDocsLibrary.csproj">
+      <Project>{7180673f-56af-4327-81f7-2d771c876daa}</Project>
+      <Name>JobDocsLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
