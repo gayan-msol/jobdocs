@@ -7,12 +7,12 @@
     <ProjectGuid>{756496AA-05B9-481A-9A9F-126D2DEDD64B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>JobDocs</RootNamespace>
-    <AssemblyName>JobDocs</AssemblyName>
+    <AssemblyName>JobDocs_TEST</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</PublishUrl>
+    <PublishUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\PRINT SPEC SHEET\Test Application\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -22,9 +22,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\PRINT SPEC SHEET\Test Application\</InstallUrl>
     <UpdateUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</UpdateUrl>
     <PublisherName>MSOL</PublisherName>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

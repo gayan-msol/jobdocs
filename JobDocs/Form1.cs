@@ -22,18 +22,14 @@ namespace JobDocs
         string customer = "";
         string jobNo = "";
         string jobName = "";
+        string jobDirectory = "";
         string clientDirPath = @"S:\DATABASES";
         string miscDirpath = @"S:\DATABASES\AAA MISCELLANEOUS";
         Address address = new Address();
         List<string> columnsList = new List<string>();
-        //List<string> dtColumnsList = new List<string>
-        //{"<Select or Enter DT Field>", "Title", "First Name", "Name Suffix", "Last Name","Position", "Company Name",
-        //    "Address Line 1", "Address Line 2", "Address Line 3", "Address Line 4", "Address Line 5",
-        //    "Locality","State","Postcode","Country"
-        //};
-       // List<string> dtColumnsList =
-
-
+        List<PrintInfo> printInfoList = new List<PrintInfo>();
+        Dictionary<string, PrintInfo> printProcessList = new Dictionary<string, PrintInfo>();
+        List<MailPackItem> itemList = new List<MailPackItem>();
 
         List<string> outputList = new List<string>();
         string path = "";
@@ -42,7 +38,7 @@ namespace JobDocs
         string prodRepPdf = "";
         string dataSummaryTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
         string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
-        static List<string> clinetsList = new List<string>();
+        static List<string> clientsList = new List<string>();
 
         public Form1()
         {
@@ -51,6 +47,7 @@ namespace JobDocs
 
         private void createPdf()
         {
+            PDF dsPdf = new PDF(dataSummaryTemplate);
          
 
             try
@@ -163,7 +160,7 @@ namespace JobDocs
         {
             try
             {
-                Process.Start(
+                System.Diagnostics.Process.Start(
                    Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
                         @"SOFTWARE\Microsoft\Windows\CurrentVersion" +
                         @"\App Paths\Acrobat.exe").GetValue("").ToString(),
@@ -179,16 +176,19 @@ namespace JobDocs
         {
             string clientDirPath = @"S:\DATABASES";
             string miscDirpath = @"S:\DATABASES\AAA MISCELLANEOUS";
-            foreach (string d in Directory.GetDirectories(clientDirPath))
-            {
-                clinetsList.Add(Path.GetFileName(d));
-            }
-            foreach (string d in Directory.GetDirectories(miscDirpath))
-            {
-                clinetsList.Add(Path.GetFileName(d));
-            }
 
-            comboBoxCustomer.DataSource = clinetsList;
+            tabControl1.SelectedIndex = 1;
+            txtJobNo.Select();
+            //foreach (string d in Directory.GetDirectories(clientDirPath))
+            //{
+            //    clientsList.Add(Path.GetFileName(d));
+            //}
+            //foreach (string d in Directory.GetDirectories(miscDirpath))
+            //{
+            //    clientsList.Add(Path.GetFileName(d));
+            //}
+
+            //comboBoxCustomer.DataSource = clientsList;
 
 
         }
@@ -230,7 +230,7 @@ namespace JobDocs
         }
 
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {/*
             jobNo = txtJobNo.Text;
             txtJobName.ResetText();
             customer = comboBoxCustomer.SelectedItem.ToString();
@@ -246,6 +246,8 @@ namespace JobDocs
                     {
 
                         txtJobName.Text = jobName.Replace($"JOB {jobNo}", "");
+                        jobDirectory = jobName;
+                        txtJobDirectory.Text = s;
                         break;
                     }
 
@@ -262,11 +264,151 @@ namespace JobDocs
                     {
 
                         txtJobName.Text = jobName.Replace($"JOB {jobNo}", "");
+                        jobDirectory = jobName;
+                        txtJobDirectory.Text = s;
+
+                        break;
+                    }
+
+                }
+            }*/
+        }
+
+        private void getJobDir()
+        {
+            jobNo = txtJobNo.Text;
+            customer = txtCustomer.Text;
+            jobName = "";
+            if (Directory.Exists($"{clientDirPath}\\{customer}"))
+            {
+                string[] jobList = Directory.GetDirectories($"{clientDirPath}\\{customer}");
+                foreach (string s in jobList)
+                {
+                    jobName = Path.GetFileName(s);
+
+                    if (jobName.Contains(jobNo))
+                    {
+                        jobDirectory = jobName;
+                        txtJobDirectory.Text = s;
                         break;
                     }
 
                 }
             }
+            else if (Directory.Exists($"{miscDirpath}\\{customer}"))
+            {
+                string[] jobList = Directory.GetDirectories($"{miscDirpath}\\{customer}");
+                foreach (string s in jobList)
+                {
+                    jobName = Path.GetFileName(s);
+
+                    if (jobName.Contains(jobNo))
+                    {
+
+                        jobDirectory = jobName;
+                        txtJobDirectory.Text = s;
+
+                        break;
+                    }
+
+                }
+            }
+        }
+
+        private void btnSecondStream_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox7100_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBoxColour.Enabled = checkBox7100.Checked;
+        }
+
+        private void btnChangeJobDirectory_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            DialogResult result = folderBrowser.ShowDialog();
+            if (!string.IsNullOrWhiteSpace(folderBrowser.SelectedPath))
+            {
+                txtJobDirectory.Text = folderBrowser.SelectedPath;
+            }
+        }
+
+        private void btnImportFromDolphin_Click(object sender, EventArgs e)
+        {
+            Job importedJob = Job.GetJob(txtJobNo.Text);
+            comboBoxCustomer.SelectedItem = importedJob.Customer;
+            jobName = txtJobName.Text = importedJob.JobName;
+            customer = txtCustomer.Text = importedJob.Customer;
+            getJobDir();
+
+
+            if(importedJob.DocID != null)
+            {
+                List<JobProcess> processList = JobDocsLibrary.JobProcess.GetProcesses(importedJob.DocID);
+                printInfoList = PrintInfo.GetProcesses(importedJob.DocID);
+                itemList = MailPackItem.GetProcesses(importedJob.DocID);
+
+                List<JobProcess> printProcesses = FilterPrintProcesses(processList);
+
+                cmbPrintJobs.DataSource = printProcesses;
+                cmbPrintJobs.DisplayMember = "Name";
+                cmbPrintJobs.Refresh();
+                
+            }
+
+       
+
+           
+
+        }
+
+        private List<JobProcess> FilterPrintProcesses(List<JobProcess> processes)
+        {
+            List<JobProcess> printProcesses = processes.Where(x => x.Name.Contains("Laser - Print")).ToList();
+            return printProcesses;
+        }
+
+
+
+
+
+        private void cmbPrintJobs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            JobProcess selectedProcess =(JobProcess) cmbPrintJobs.SelectedItem;
+            PrintInfo printInfo = printInfoList.Where(x => x.ProcessID == selectedProcess.ID).FirstOrDefault();
+            MailPackItem stockItem = itemList.Where(x => x.LinkedTo == selectedProcess.LinkTo).FirstOrDefault();
+
+            if(stockItem.SuppliedBy=="Mailing Solutions")
+            {
+
+            }
+            selectSize(printInfo);
+            selectPlex(printInfo);
+            selectPrintMachine(printInfo);
+
+            lblPrintDescription.Text = selectedProcess.Description;
+            numericUpDownUp.Value = printInfo.Up;
+        }
+
+
+        private void selectSize(PrintInfo printInfo)
+        {
+            Control size = groupBoxPaper.Controls.Find($"rb{printInfo.PrintSize}", true)[0];
+            size.Select();
+        }
+
+        private void selectPlex(PrintInfo printInfo)
+        {
+            Control plex = groupBoxPlex.Controls.Find($"rb{printInfo.Sides}", true)[0];
+            plex.Select();
+        }
+
+        private void selectPrintMachine(PrintInfo printInfo)
+        {        
+            checkBox8120.Checked = printInfo.Colour == "Black";
+            checkBox7100.Checked = printInfo.Colour == "Colour";            
         }
     }
 }
