@@ -18,7 +18,7 @@ namespace JobDocsLibrary
         public int Pages { get; set; }
         public int  Qty { get; set; }
 
-        public static List<PrintInfo> GetProcesses(string doc_id)
+        public static List<PrintInfo> GetInfo(string doc_id)
         {
             List<PrintInfo> processList = new List<PrintInfo>();
             Dolphin dolphin = new Dolphin();

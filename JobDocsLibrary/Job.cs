@@ -15,6 +15,9 @@ namespace JobDocsLibrary
         public string JobNumber { get; set; }
         public string Owner { get; set; }
         public string DocID { get; set; }
+        public List<JobProcess> ProcessList { get; set; }
+        public List<PrintInfo> PrintInfoList { get; set; }
+        public List<MailPackItem> ItemList { get; set; }
 
         public static Job GetJob(string jobNo)
         {
@@ -30,6 +33,11 @@ namespace JobDocsLibrary
             {
                 job = fastJSON.JSON.ToObject<List<Job>>(response)[0];
             }
+
+            job.ProcessList = JobProcess.GetProcesses(job.DocID);
+            job.PrintInfoList = PrintInfo.GetInfo(job.DocID);
+            job.ItemList = MailPackItem.GetItems(job.DocID);
+
             
 
             return job;

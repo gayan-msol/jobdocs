@@ -29,13 +29,13 @@ namespace JobDocsLibrary
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
 
             using (var webResponse = (HttpWebResponse)request.GetResponse())
-            {
-                using (var reader = new StreamReader(webResponse.GetResponseStream()))
                 {
-                    content = reader.ReadToEnd();
+                    using (var reader = new StreamReader(webResponse.GetResponseStream()))
+                    {
+                        content = reader.ReadToEnd();
+                    }
                 }
-            }
-
+                    
 
             return content;
         }

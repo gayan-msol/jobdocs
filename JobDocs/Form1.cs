@@ -23,8 +23,7 @@ namespace JobDocs
         string jobNo = "";
         string jobName = "";
         string jobDirectory = "";
-        string clientDirPath = @"S:\DATABASES";
-        string miscDirpath = @"S:\DATABASES\AAA MISCELLANEOUS";
+        Job importedJob = new Job();
         Address address = new Address();
         List<string> columnsList = new List<string>();
         List<PrintInfo> printInfoList = new List<PrintInfo>();
@@ -174,8 +173,7 @@ namespace JobDocs
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string clientDirPath = @"S:\DATABASES";
-            string miscDirpath = @"S:\DATABASES\AAA MISCELLANEOUS";
+   
 
             tabControl1.SelectedIndex = 1;
             txtJobNo.Select();
@@ -274,46 +272,7 @@ namespace JobDocs
             }*/
         }
 
-        private void getJobDir()
-        {
-            jobNo = txtJobNo.Text;
-            customer = txtCustomer.Text;
-            jobName = "";
-            if (Directory.Exists($"{clientDirPath}\\{customer}"))
-            {
-                string[] jobList = Directory.GetDirectories($"{clientDirPath}\\{customer}");
-                foreach (string s in jobList)
-                {
-                    jobName = Path.GetFileName(s);
 
-                    if (jobName.Contains(jobNo))
-                    {
-                        jobDirectory = jobName;
-                        txtJobDirectory.Text = s;
-                        break;
-                    }
-
-                }
-            }
-            else if (Directory.Exists($"{miscDirpath}\\{customer}"))
-            {
-                string[] jobList = Directory.GetDirectories($"{miscDirpath}\\{customer}");
-                foreach (string s in jobList)
-                {
-                    jobName = Path.GetFileName(s);
-
-                    if (jobName.Contains(jobNo))
-                    {
-
-                        jobDirectory = jobName;
-                        txtJobDirectory.Text = s;
-
-                        break;
-                    }
-
-                }
-            }
-        }
 
         private void btnSecondStream_Click(object sender, EventArgs e)
         {
@@ -331,84 +290,96 @@ namespace JobDocs
             DialogResult result = folderBrowser.ShowDialog();
             if (!string.IsNullOrWhiteSpace(folderBrowser.SelectedPath))
             {
-                txtJobDirectory.Text = folderBrowser.SelectedPath;
+                richTextJobDirectory.Text = folderBrowser.SelectedPath;
             }
         }
 
+       
+
+
         private void btnImportFromDolphin_Click(object sender, EventArgs e)
         {
-            Job importedJob = Job.GetJob(txtJobNo.Text);
+            importedJob = Job.GetJob(txtJobNo.Text);
             comboBoxCustomer.SelectedItem = importedJob.Customer;
             jobName = txtJobName.Text = importedJob.JobName;
             customer = txtCustomer.Text = importedJob.Customer;
-            getJobDir();
+            jobNo = txtJobNo.Text;
+            jobDirectory= richTextJobDirectory.Text = DirectoryHelper.getJobDir(jobNo,customer,DirectoryHelper.databaseBranch);
+
+            cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(jobDirectory);
 
 
             if(importedJob.DocID != null)
             {
-                List<JobProcess> processList = JobDocsLibrary.JobProcess.GetProcesses(importedJob.DocID);
-                printInfoList = PrintInfo.GetProcesses(importedJob.DocID);
-                itemList = MailPackItem.GetProcesses(importedJob.DocID);
-
-                List<JobProcess> printProcesses = FilterPrintProcesses(processList);
-
+                List<JobProcess> printProcesses = importedJob.ProcessList.Where(x => x.Name.Contains("Laser - Print")).ToList();
                 cmbPrintJobs.DataSource = printProcesses;
                 cmbPrintJobs.DisplayMember = "Name";
-                cmbPrintJobs.Refresh();
-                
+                cmbPrintJobs.Refresh();              
             }
-
-       
-
-           
-
         }
-
-        private List<JobProcess> FilterPrintProcesses(List<JobProcess> processes)
-        {
-            List<JobProcess> printProcesses = processes.Where(x => x.Name.Contains("Laser - Print")).ToList();
-            return printProcesses;
-        }
-
-
-
-
 
         private void cmbPrintJobs_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             JobProcess selectedProcess =(JobProcess) cmbPrintJobs.SelectedItem;
-            PrintInfo printInfo = printInfoList.Where(x => x.ProcessID == selectedProcess.ID).FirstOrDefault();
-            MailPackItem stockItem = itemList.Where(x => x.LinkedTo == selectedProcess.LinkTo).FirstOrDefault();
+            PrintInfo printInfo = importedJob.PrintInfoList.Where(x => x.ProcessID == selectedProcess.ID).FirstOrDefault();
+            MailPackItem stockItem = importedJob.ItemList.Where(x => x.LinkedTo == selectedProcess.LinkTo && !string.IsNullOrWhiteSpace(x.Description) ).FirstOrDefault();
 
-            if(stockItem.SuppliedBy=="Mailing Solutions")
+            if(printInfo != null)
             {
-
+                setPrintSize(printInfo);
+                setPlex(printInfo);
+                setPrintmachine(printInfo);
+                numericUpDownUp.Value = printInfo.Up;
             }
-            selectSize(printInfo);
-            selectPlex(printInfo);
-            selectPrintMachine(printInfo);
+
+            if(stockItem != null)
+            {
+                setStockInfo(stockItem);
+                cmbStream.DataSource = stockItem.Stream.Split(',').ToList();
+            }
 
             lblPrintDescription.Text = selectedProcess.Description;
-            numericUpDownUp.Value = printInfo.Up;
+        
         }
 
+        private void setStockInfo(MailPackItem stockItem)
+        {
+            rbMSOLStock.Checked = stockItem.SuppliedBy == "Mailing Solutions";
+            rbCustomerStock.Checked= stockItem.SuppliedBy == "Customer";
+            txtStockDescription.Text = stockItem.SuppliedBy == "Mailing Solutions" ? stockItem.Name : stockItem.SupplyDescription;
+        }
 
-        private void selectSize(PrintInfo printInfo)
+        private void setPrintSize(PrintInfo printInfo)
         {
             Control size = groupBoxPaper.Controls.Find($"rb{printInfo.PrintSize}", true)[0];
             size.Select();
         }
 
-        private void selectPlex(PrintInfo printInfo)
+        private void setPlex(PrintInfo printInfo)
         {
             Control plex = groupBoxPlex.Controls.Find($"rb{printInfo.Sides}", true)[0];
             plex.Select();
         }
 
-        private void selectPrintMachine(PrintInfo printInfo)
+        private void setPrintmachine(PrintInfo printInfo)
         {        
             checkBox8120.Checked = printInfo.Colour == "Black";
             checkBox7100.Checked = printInfo.Colour == "Colour";            
         }
+
+        private void btnAddStream_Click(object sender, EventArgs e)
+        {
+            listBoxStreams.Items.Add(SetStreamDetails());
+
+        }
+
+        private string SetStreamDetails()
+        {
+            decimal up = numericUpDownUp.Value;
+            decimal recQty = numericUpDownStreamQty.Value;
+            int printQty = (int)Math.Ceiling(recQty/up);
+            return ( $"Stream {cmbStream.SelectedItem} - Record Qty:{numericUpDownStreamQty.Value} - Print Qty:{printQty}");
+        }
     }
-}
+} 

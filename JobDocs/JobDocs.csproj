@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL_JobDocs.cs" />
+    <Compile Include="ErrorHandling.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

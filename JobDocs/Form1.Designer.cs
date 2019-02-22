@@ -48,8 +48,24 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.groupBoxStock = new System.Windows.Forms.GroupBox();
+            this.txtStockDescription = new System.Windows.Forms.TextBox();
+            this.rbMSOLStock = new System.Windows.Forms.RadioButton();
+            this.rbCustomerStock = new System.Windows.Forms.RadioButton();
+            this.lblPrintDescription = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numericUpDownUp = new System.Windows.Forms.NumericUpDown();
+            this.groupBoxPlex = new System.Windows.Forms.GroupBox();
+            this.rbDuplex = new System.Windows.Forms.RadioButton();
+            this.rbSimplex = new System.Windows.Forms.RadioButton();
+            this.groupBoxPaper = new System.Windows.Forms.GroupBox();
+            this.txtCustomPaperSize = new System.Windows.Forms.TextBox();
+            this.rbCustom = new System.Windows.Forms.RadioButton();
+            this.rbA3 = new System.Windows.Forms.RadioButton();
+            this.rbSRA3 = new System.Windows.Forms.RadioButton();
+            this.rbA4 = new System.Windows.Forms.RadioButton();
+            this.cmbPrintJobs = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.btnChangeJobDirectory = new System.Windows.Forms.Button();
             this.groupBoxColour = new System.Windows.Forms.GroupBox();
             this.radioButtonBlack = new System.Windows.Forms.RadioButton();
@@ -68,31 +84,25 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.btnImportFromDolphin = new System.Windows.Forms.Button();
-            this.cmbPrintJobs = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.groupBoxPaper = new System.Windows.Forms.GroupBox();
-            this.rbSRA3 = new System.Windows.Forms.RadioButton();
-            this.rbA4 = new System.Windows.Forms.RadioButton();
-            this.rbA3 = new System.Windows.Forms.RadioButton();
-            this.rbCustom = new System.Windows.Forms.RadioButton();
-            this.txtCustomPaperSize = new System.Windows.Forms.TextBox();
-            this.groupBoxPlex = new System.Windows.Forms.GroupBox();
-            this.rbDuplex = new System.Windows.Forms.RadioButton();
-            this.rbSimplex = new System.Windows.Forms.RadioButton();
-            this.numericUpDownUp = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblPrintDescription = new System.Windows.Forms.Label();
+            this.cmbStream = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.listBoxStreams = new System.Windows.Forms.ListBox();
+            this.numericUpDownStreamQty = new System.Windows.Forms.NumericUpDown();
+            this.btnAddStream = new System.Windows.Forms.Button();
+            this.richTextJobDirectory = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBoxStock.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).BeginInit();
+            this.groupBoxPlex.SuspendLayout();
+            this.groupBoxPaper.SuspendLayout();
             this.groupBoxColour.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBoxPaper.SuspendLayout();
-            this.groupBoxPlex.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -123,7 +133,7 @@
             // 
             // txtJobName
             // 
-            this.txtJobName.Location = new System.Drawing.Point(661, 15);
+            this.txtJobName.Location = new System.Drawing.Point(350, 70);
             this.txtJobName.Name = "txtJobName";
             this.txtJobName.Size = new System.Drawing.Size(252, 20);
             this.txtJobName.TabIndex = 2;
@@ -138,7 +148,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(600, 22);
+            this.label2.Location = new System.Drawing.Point(289, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 13;
@@ -147,7 +157,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(235, 23);
+            this.label3.Location = new System.Drawing.Point(293, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 14;
@@ -278,7 +288,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1073, 663);
+            this.tabControl1.Size = new System.Drawing.Size(858, 605);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPage1
@@ -304,6 +314,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.richTextJobDirectory);
+            this.tabPage2.Controls.Add(this.btnAddStream);
+            this.tabPage2.Controls.Add(this.numericUpDownStreamQty);
+            this.tabPage2.Controls.Add(this.listBoxStreams);
+            this.tabPage2.Controls.Add(this.cmbStream);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.groupBoxStock);
             this.tabPage2.Controls.Add(this.lblPrintDescription);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.numericUpDownUp);
@@ -311,8 +328,6 @@
             this.tabPage2.Controls.Add(this.groupBoxPaper);
             this.tabPage2.Controls.Add(this.cmbPrintJobs);
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.btnChangeJobDirectory);
             this.tabPage2.Controls.Add(this.groupBoxColour);
             this.tabPage2.Controls.Add(this.checkBoxInkJet);
@@ -327,26 +342,194 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1065, 637);
+            this.tabPage2.Size = new System.Drawing.Size(850, 579);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Print Spec Sheet";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // groupBoxStock
             // 
-            this.textBox1.Location = new System.Drawing.Point(89, 506);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(252, 20);
-            this.textBox1.TabIndex = 28;
+            this.groupBoxStock.Controls.Add(this.txtStockDescription);
+            this.groupBoxStock.Controls.Add(this.rbMSOLStock);
+            this.groupBoxStock.Controls.Add(this.rbCustomerStock);
+            this.groupBoxStock.Location = new System.Drawing.Point(22, 471);
+            this.groupBoxStock.Name = "groupBoxStock";
+            this.groupBoxStock.Size = new System.Drawing.Size(424, 71);
+            this.groupBoxStock.TabIndex = 36;
+            this.groupBoxStock.TabStop = false;
+            this.groupBoxStock.Text = "Stock Description";
             // 
-            // label10
+            // txtStockDescription
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(32, 513);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(51, 13);
-            this.label10.TabIndex = 27;
-            this.label10.Text = "Customer";
+            this.txtStockDescription.Location = new System.Drawing.Point(157, 45);
+            this.txtStockDescription.Name = "txtStockDescription";
+            this.txtStockDescription.Size = new System.Drawing.Size(261, 20);
+            this.txtStockDescription.TabIndex = 33;
+            // 
+            // rbMSOLStock
+            // 
+            this.rbMSOLStock.AutoSize = true;
+            this.rbMSOLStock.Location = new System.Drawing.Point(162, 19);
+            this.rbMSOLStock.Name = "rbMSOLStock";
+            this.rbMSOLStock.Size = new System.Drawing.Size(55, 17);
+            this.rbMSOLStock.TabIndex = 23;
+            this.rbMSOLStock.TabStop = true;
+            this.rbMSOLStock.Text = "MSOL";
+            this.rbMSOLStock.UseVisualStyleBackColor = true;
+            // 
+            // rbCustomerStock
+            // 
+            this.rbCustomerStock.AutoSize = true;
+            this.rbCustomerStock.Location = new System.Drawing.Point(263, 19);
+            this.rbCustomerStock.Name = "rbCustomerStock";
+            this.rbCustomerStock.Size = new System.Drawing.Size(69, 17);
+            this.rbCustomerStock.TabIndex = 22;
+            this.rbCustomerStock.TabStop = true;
+            this.rbCustomerStock.Text = "Customer";
+            this.rbCustomerStock.UseVisualStyleBackColor = true;
+            // 
+            // lblPrintDescription
+            // 
+            this.lblPrintDescription.AutoSize = true;
+            this.lblPrintDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrintDescription.Location = new System.Drawing.Point(354, 149);
+            this.lblPrintDescription.Name = "lblPrintDescription";
+            this.lblPrintDescription.Size = new System.Drawing.Size(0, 17);
+            this.lblPrintDescription.TabIndex = 35;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(366, 394);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(22, 13);
+            this.label12.TabIndex = 34;
+            this.label12.Text = "UP";
+            // 
+            // numericUpDownUp
+            // 
+            this.numericUpDownUp.Location = new System.Drawing.Point(314, 390);
+            this.numericUpDownUp.Name = "numericUpDownUp";
+            this.numericUpDownUp.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDownUp.TabIndex = 33;
+            // 
+            // groupBoxPlex
+            // 
+            this.groupBoxPlex.Controls.Add(this.rbDuplex);
+            this.groupBoxPlex.Controls.Add(this.rbSimplex);
+            this.groupBoxPlex.Location = new System.Drawing.Point(22, 375);
+            this.groupBoxPlex.Name = "groupBoxPlex";
+            this.groupBoxPlex.Size = new System.Drawing.Size(224, 71);
+            this.groupBoxPlex.TabIndex = 32;
+            this.groupBoxPlex.TabStop = false;
+            this.groupBoxPlex.Text = "Sides";
+            // 
+            // rbDuplex
+            // 
+            this.rbDuplex.AutoSize = true;
+            this.rbDuplex.Location = new System.Drawing.Point(97, 15);
+            this.rbDuplex.Name = "rbDuplex";
+            this.rbDuplex.Size = new System.Drawing.Size(58, 17);
+            this.rbDuplex.TabIndex = 23;
+            this.rbDuplex.TabStop = true;
+            this.rbDuplex.Text = "Duplex";
+            this.rbDuplex.UseVisualStyleBackColor = true;
+            // 
+            // rbSimplex
+            // 
+            this.rbSimplex.AutoSize = true;
+            this.rbSimplex.Location = new System.Drawing.Point(15, 15);
+            this.rbSimplex.Name = "rbSimplex";
+            this.rbSimplex.Size = new System.Drawing.Size(61, 17);
+            this.rbSimplex.TabIndex = 22;
+            this.rbSimplex.TabStop = true;
+            this.rbSimplex.Text = "Simplex";
+            this.rbSimplex.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxPaper
+            // 
+            this.groupBoxPaper.Controls.Add(this.txtCustomPaperSize);
+            this.groupBoxPaper.Controls.Add(this.rbCustom);
+            this.groupBoxPaper.Controls.Add(this.rbA3);
+            this.groupBoxPaper.Controls.Add(this.rbSRA3);
+            this.groupBoxPaper.Controls.Add(this.rbA4);
+            this.groupBoxPaper.Location = new System.Drawing.Point(22, 285);
+            this.groupBoxPaper.Name = "groupBoxPaper";
+            this.groupBoxPaper.Size = new System.Drawing.Size(480, 71);
+            this.groupBoxPaper.TabIndex = 31;
+            this.groupBoxPaper.TabStop = false;
+            this.groupBoxPaper.Text = "Paper Size";
+            // 
+            // txtCustomPaperSize
+            // 
+            this.txtCustomPaperSize.Location = new System.Drawing.Point(255, 38);
+            this.txtCustomPaperSize.Name = "txtCustomPaperSize";
+            this.txtCustomPaperSize.Size = new System.Drawing.Size(169, 20);
+            this.txtCustomPaperSize.TabIndex = 32;
+            // 
+            // rbCustom
+            // 
+            this.rbCustom.AutoSize = true;
+            this.rbCustom.Location = new System.Drawing.Point(255, 15);
+            this.rbCustom.Name = "rbCustom";
+            this.rbCustom.Size = new System.Drawing.Size(83, 17);
+            this.rbCustom.TabIndex = 25;
+            this.rbCustom.TabStop = true;
+            this.rbCustom.Text = "Custom Size";
+            this.rbCustom.UseVisualStyleBackColor = true;
+            // 
+            // rbA3
+            // 
+            this.rbA3.AutoSize = true;
+            this.rbA3.Location = new System.Drawing.Point(192, 15);
+            this.rbA3.Name = "rbA3";
+            this.rbA3.Size = new System.Drawing.Size(38, 17);
+            this.rbA3.TabIndex = 24;
+            this.rbA3.TabStop = true;
+            this.rbA3.Text = "A3";
+            this.rbA3.UseVisualStyleBackColor = true;
+            // 
+            // rbSRA3
+            // 
+            this.rbSRA3.AutoSize = true;
+            this.rbSRA3.Location = new System.Drawing.Point(97, 15);
+            this.rbSRA3.Name = "rbSRA3";
+            this.rbSRA3.Size = new System.Drawing.Size(53, 17);
+            this.rbSRA3.TabIndex = 23;
+            this.rbSRA3.TabStop = true;
+            this.rbSRA3.Text = "SRA3";
+            this.rbSRA3.UseVisualStyleBackColor = true;
+            // 
+            // rbA4
+            // 
+            this.rbA4.AutoSize = true;
+            this.rbA4.Location = new System.Drawing.Point(15, 15);
+            this.rbA4.Name = "rbA4";
+            this.rbA4.Size = new System.Drawing.Size(38, 17);
+            this.rbA4.TabIndex = 22;
+            this.rbA4.TabStop = true;
+            this.rbA4.Text = "A4";
+            this.rbA4.UseVisualStyleBackColor = true;
+            // 
+            // cmbPrintJobs
+            // 
+            this.cmbPrintJobs.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbPrintJobs.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbPrintJobs.FormattingEnabled = true;
+            this.cmbPrintJobs.Location = new System.Drawing.Point(89, 146);
+            this.cmbPrintJobs.Name = "cmbPrintJobs";
+            this.cmbPrintJobs.Size = new System.Drawing.Size(303, 21);
+            this.cmbPrintJobs.TabIndex = 29;
+            this.cmbPrintJobs.SelectedIndexChanged += new System.EventHandler(this.cmbPrintJobs_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 154);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 13);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Print Jobs";
             // 
             // btnChangeJobDirectory
             // 
@@ -376,13 +559,13 @@
             this.radioButtonBlack.Name = "radioButtonBlack";
             this.radioButtonBlack.Size = new System.Drawing.Size(52, 17);
             this.radioButtonBlack.TabIndex = 23;
-            this.radioButtonBlack.TabStop = true;
             this.radioButtonBlack.Text = "Black";
             this.radioButtonBlack.UseVisualStyleBackColor = true;
             // 
             // rbColour
             // 
             this.rbColour.AutoSize = true;
+            this.rbColour.Checked = true;
             this.rbColour.Location = new System.Drawing.Point(15, 15);
             this.rbColour.Name = "rbColour";
             this.rbColour.Size = new System.Drawing.Size(55, 17);
@@ -448,7 +631,7 @@
             this.cmbFileName.FormattingEnabled = true;
             this.cmbFileName.Location = new System.Drawing.Point(89, 94);
             this.cmbFileName.Name = "cmbFileName";
-            this.cmbFileName.Size = new System.Drawing.Size(252, 21);
+            this.cmbFileName.Size = new System.Drawing.Size(303, 21);
             this.cmbFileName.TabIndex = 15;
             // 
             // label8
@@ -463,7 +646,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 56);
+            this.label7.Location = new System.Drawing.Point(19, 22);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 13);
             this.label7.TabIndex = 3;
@@ -471,7 +654,7 @@
             // 
             // txtJobDirectory
             // 
-            this.txtJobDirectory.Location = new System.Drawing.Point(89, 49);
+            this.txtJobDirectory.Location = new System.Drawing.Point(37, 596);
             this.txtJobDirectory.Name = "txtJobDirectory";
             this.txtJobDirectory.Size = new System.Drawing.Size(303, 20);
             this.txtJobDirectory.TabIndex = 2;
@@ -517,13 +700,13 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(1073, 735);
-            this.splitContainer1.SplitterDistance = 68;
+            this.splitContainer1.Size = new System.Drawing.Size(858, 735);
+            this.splitContainer1.SplitterDistance = 126;
             this.splitContainer1.TabIndex = 26;
             // 
             // txtCustomer
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(292, 16);
+            this.txtCustomer.Location = new System.Drawing.Point(350, 16);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.Size = new System.Drawing.Size(252, 20);
             this.txtCustomer.TabIndex = 26;
@@ -538,155 +721,69 @@
             this.btnImportFromDolphin.UseVisualStyleBackColor = true;
             this.btnImportFromDolphin.Click += new System.EventHandler(this.btnImportFromDolphin_Click);
             // 
-            // cmbPrintJobs
+            // cmbStream
             // 
-            this.cmbPrintJobs.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbPrintJobs.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbPrintJobs.FormattingEnabled = true;
-            this.cmbPrintJobs.Location = new System.Drawing.Point(89, 146);
-            this.cmbPrintJobs.Name = "cmbPrintJobs";
-            this.cmbPrintJobs.Size = new System.Drawing.Size(252, 21);
-            this.cmbPrintJobs.TabIndex = 29;
-            this.cmbPrintJobs.SelectedIndexChanged += new System.EventHandler(this.cmbPrintJobs_SelectedIndexChanged);
+            this.cmbStream.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbStream.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbStream.FormattingEnabled = true;
+            this.cmbStream.Location = new System.Drawing.Point(571, 192);
+            this.cmbStream.Name = "cmbStream";
+            this.cmbStream.Size = new System.Drawing.Size(61, 21);
+            this.cmbStream.TabIndex = 37;
             // 
-            // label11
+            // label10
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 154);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 13);
-            this.label11.TabIndex = 30;
-            this.label11.Text = "Print Jobs";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(565, 159);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "Add Streams";
             // 
-            // groupBoxPaper
+            // listBoxStreams
             // 
-            this.groupBoxPaper.Controls.Add(this.txtCustomPaperSize);
-            this.groupBoxPaper.Controls.Add(this.rbCustom);
-            this.groupBoxPaper.Controls.Add(this.rbA3);
-            this.groupBoxPaper.Controls.Add(this.rbSRA3);
-            this.groupBoxPaper.Controls.Add(this.rbA4);
-            this.groupBoxPaper.Location = new System.Drawing.Point(22, 285);
-            this.groupBoxPaper.Name = "groupBoxPaper";
-            this.groupBoxPaper.Size = new System.Drawing.Size(480, 71);
-            this.groupBoxPaper.TabIndex = 31;
-            this.groupBoxPaper.TabStop = false;
-            this.groupBoxPaper.Text = "Paper Size";
+            this.listBoxStreams.FormattingEnabled = true;
+            this.listBoxStreams.Location = new System.Drawing.Point(571, 261);
+            this.listBoxStreams.Name = "listBoxStreams";
+            this.listBoxStreams.Size = new System.Drawing.Size(234, 95);
+            this.listBoxStreams.TabIndex = 39;
             // 
-            // rbSRA3
+            // numericUpDownStreamQty
             // 
-            this.rbSRA3.AutoSize = true;
-            this.rbSRA3.Location = new System.Drawing.Point(97, 15);
-            this.rbSRA3.Name = "rbSRA3";
-            this.rbSRA3.Size = new System.Drawing.Size(53, 17);
-            this.rbSRA3.TabIndex = 23;
-            this.rbSRA3.TabStop = true;
-            this.rbSRA3.Text = "SRA3";
-            this.rbSRA3.UseVisualStyleBackColor = true;
+            this.numericUpDownStreamQty.Location = new System.Drawing.Point(667, 192);
+            this.numericUpDownStreamQty.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericUpDownStreamQty.Name = "numericUpDownStreamQty";
+            this.numericUpDownStreamQty.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDownStreamQty.TabIndex = 40;
             // 
-            // rbA4
+            // btnAddStream
             // 
-            this.rbA4.AutoSize = true;
-            this.rbA4.Location = new System.Drawing.Point(15, 15);
-            this.rbA4.Name = "rbA4";
-            this.rbA4.Size = new System.Drawing.Size(38, 17);
-            this.rbA4.TabIndex = 22;
-            this.rbA4.TabStop = true;
-            this.rbA4.Text = "A4";
-            this.rbA4.UseVisualStyleBackColor = true;
+            this.btnAddStream.Location = new System.Drawing.Point(740, 189);
+            this.btnAddStream.Name = "btnAddStream";
+            this.btnAddStream.Size = new System.Drawing.Size(75, 23);
+            this.btnAddStream.TabIndex = 41;
+            this.btnAddStream.Text = "Add";
+            this.btnAddStream.UseVisualStyleBackColor = true;
+            this.btnAddStream.Click += new System.EventHandler(this.btnAddStream_Click);
             // 
-            // rbA3
+            // richTextJobDirectory
             // 
-            this.rbA3.AutoSize = true;
-            this.rbA3.Location = new System.Drawing.Point(192, 15);
-            this.rbA3.Name = "rbA3";
-            this.rbA3.Size = new System.Drawing.Size(38, 17);
-            this.rbA3.TabIndex = 24;
-            this.rbA3.TabStop = true;
-            this.rbA3.Text = "A3";
-            this.rbA3.UseVisualStyleBackColor = true;
-            // 
-            // rbCustom
-            // 
-            this.rbCustom.AutoSize = true;
-            this.rbCustom.Location = new System.Drawing.Point(255, 15);
-            this.rbCustom.Name = "rbCustom";
-            this.rbCustom.Size = new System.Drawing.Size(83, 17);
-            this.rbCustom.TabIndex = 25;
-            this.rbCustom.TabStop = true;
-            this.rbCustom.Text = "Custom Size";
-            this.rbCustom.UseVisualStyleBackColor = true;
-            // 
-            // txtCustomPaperSize
-            // 
-            this.txtCustomPaperSize.Location = new System.Drawing.Point(255, 38);
-            this.txtCustomPaperSize.Name = "txtCustomPaperSize";
-            this.txtCustomPaperSize.Size = new System.Drawing.Size(169, 20);
-            this.txtCustomPaperSize.TabIndex = 32;
-            // 
-            // groupBoxPlex
-            // 
-            this.groupBoxPlex.Controls.Add(this.rbDuplex);
-            this.groupBoxPlex.Controls.Add(this.rbSimplex);
-            this.groupBoxPlex.Location = new System.Drawing.Point(22, 375);
-            this.groupBoxPlex.Name = "groupBoxPlex";
-            this.groupBoxPlex.Size = new System.Drawing.Size(224, 71);
-            this.groupBoxPlex.TabIndex = 32;
-            this.groupBoxPlex.TabStop = false;
-            this.groupBoxPlex.Text = "Sides";
-            // 
-            // rbDuplex
-            // 
-            this.rbDuplex.AutoSize = true;
-            this.rbDuplex.Location = new System.Drawing.Point(97, 15);
-            this.rbDuplex.Name = "rbDuplex";
-            this.rbDuplex.Size = new System.Drawing.Size(58, 17);
-            this.rbDuplex.TabIndex = 23;
-            this.rbDuplex.TabStop = true;
-            this.rbDuplex.Text = "Duplex";
-            this.rbDuplex.UseVisualStyleBackColor = true;
-            // 
-            // rbSimplex
-            // 
-            this.rbSimplex.AutoSize = true;
-            this.rbSimplex.Location = new System.Drawing.Point(15, 15);
-            this.rbSimplex.Name = "rbSimplex";
-            this.rbSimplex.Size = new System.Drawing.Size(61, 17);
-            this.rbSimplex.TabIndex = 22;
-            this.rbSimplex.TabStop = true;
-            this.rbSimplex.Text = "Simplex";
-            this.rbSimplex.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDownUp
-            // 
-            this.numericUpDownUp.Location = new System.Drawing.Point(314, 390);
-            this.numericUpDownUp.Name = "numericUpDownUp";
-            this.numericUpDownUp.Size = new System.Drawing.Size(46, 20);
-            this.numericUpDownUp.TabIndex = 33;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(366, 394);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(22, 13);
-            this.label12.TabIndex = 34;
-            this.label12.Text = "UP";
-            // 
-            // lblPrintDescription
-            // 
-            this.lblPrintDescription.AutoSize = true;
-            this.lblPrintDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrintDescription.Location = new System.Drawing.Point(354, 149);
-            this.lblPrintDescription.Name = "lblPrintDescription";
-            this.lblPrintDescription.Size = new System.Drawing.Size(0, 17);
-            this.lblPrintDescription.TabIndex = 35;
+            this.richTextJobDirectory.Location = new System.Drawing.Point(89, 19);
+            this.richTextJobDirectory.Name = "richTextJobDirectory";
+            this.richTextJobDirectory.Size = new System.Drawing.Size(299, 53);
+            this.richTextJobDirectory.TabIndex = 42;
+            this.richTextJobDirectory.Text = "";
             // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 735);
+            this.ClientSize = new System.Drawing.Size(858, 735);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Job Docs";
@@ -696,6 +793,13 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBoxStock.ResumeLayout(false);
+            this.groupBoxStock.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).EndInit();
+            this.groupBoxPlex.ResumeLayout(false);
+            this.groupBoxPlex.PerformLayout();
+            this.groupBoxPaper.ResumeLayout(false);
+            this.groupBoxPaper.PerformLayout();
             this.groupBoxColour.ResumeLayout(false);
             this.groupBoxColour.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -703,11 +807,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBoxPaper.ResumeLayout(false);
-            this.groupBoxPaper.PerformLayout();
-            this.groupBoxPlex.ResumeLayout(false);
-            this.groupBoxPlex.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -751,8 +851,6 @@
         private System.Windows.Forms.Button btnChangeJobDirectory;
         private System.Windows.Forms.Button btnImportFromDolphin;
         private System.Windows.Forms.TextBox txtCustomer;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBoxPaper;
         private System.Windows.Forms.TextBox txtCustomPaperSize;
         private System.Windows.Forms.RadioButton rbCustom;
@@ -767,6 +865,16 @@
         private System.Windows.Forms.RadioButton rbDuplex;
         private System.Windows.Forms.RadioButton rbSimplex;
         private System.Windows.Forms.Label lblPrintDescription;
+        private System.Windows.Forms.GroupBox groupBoxStock;
+        private System.Windows.Forms.TextBox txtStockDescription;
+        private System.Windows.Forms.RadioButton rbMSOLStock;
+        private System.Windows.Forms.RadioButton rbCustomerStock;
+        private System.Windows.Forms.Button btnAddStream;
+        private System.Windows.Forms.NumericUpDown numericUpDownStreamQty;
+        private System.Windows.Forms.ListBox listBoxStreams;
+        private System.Windows.Forms.ComboBox cmbStream;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.RichTextBox richTextJobDirectory;
     }
 }
 

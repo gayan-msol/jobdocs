@@ -18,10 +18,11 @@ namespace JobDocsLibrary
         public string Return { get; set; }
         public string DocID { get; set; }
         public string SuppliedBy { get; set; }
+        public string SupplyDescription { get; set; }
 
 
 
-        public static List<MailPackItem> GetProcesses(string doc_id)
+        public static List<MailPackItem> GetItems(string doc_id)
         {
             List<MailPackItem> itemList = new List<MailPackItem>();
             Dolphin dolphin = new Dolphin();
@@ -32,6 +33,8 @@ namespace JobDocsLibrary
             response = response.Replace("doc_id", "DocID");
             response = response.Replace("Return Stock", "Return");
             response = response.Replace("Supplied By", "SuppliedBy");
+            response = response.Replace("Supply Description", "SupplyDescription");
+
 
             if (response != "[]")
             {

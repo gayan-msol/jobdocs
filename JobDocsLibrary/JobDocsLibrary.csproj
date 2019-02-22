@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="DataSummary.cs" />
+    <Compile Include="DirectoryInfo.cs" />
     <Compile Include="Dolphin.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IJob.cs" />

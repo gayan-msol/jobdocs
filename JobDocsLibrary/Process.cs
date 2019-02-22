@@ -24,7 +24,7 @@ namespace JobDocsLibrary
             response = response.Replace("qr_id", "ID");
             response = response.Replace("Link To", "LinkTo");
 
-            if (response != "[]")
+            //if (response != "[]")
             {
                 processList = fastJSON.JSON.ToObject<List<JobProcess>>(response);
             }
