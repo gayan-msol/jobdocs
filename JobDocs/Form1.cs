@@ -14,6 +14,7 @@ using System.IO;
 using System.Drawing.Printing;
 using JobDocsLibrary;
 
+
 namespace JobDocs
 {
     public partial class Form1 : Form
@@ -22,14 +23,11 @@ namespace JobDocs
         string customer = "";
         string jobNo = "";
         string jobName = "";
-        string jobDirectory = "";
+        public static string jobDirectory = "";
         Job importedJob = new Job();
         Address address = new Address();
         List<string> columnsList = new List<string>();
-        List<PrintInfo> printInfoList = new List<PrintInfo>();
-        Dictionary<string, PrintInfo> printProcessList = new Dictionary<string, PrintInfo>();
-        List<MailPackItem> itemList = new List<MailPackItem>();
-
+        string delimiter = "\t";
         List<string> outputList = new List<string>();
         string path = "";
         int columnCount = 0;
@@ -37,7 +35,6 @@ namespace JobDocs
         string prodRepPdf = "";
         string dataSummaryTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
         string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
-        static List<string> clientsList = new List<string>();
 
         public Form1()
         {
@@ -96,7 +93,7 @@ namespace JobDocs
                             }
                         }
 
-                        List<string> addBlockList = BL_JobDocs.addressBlock(outputList);
+                        List<string> addBlockList = Address.GetAddressBlock(outputList);
                         for(int k=0;k<addBlockList.Count;k++)
                         {
                             pdfStamper.AcroFields.SetField($"Out{k+1}", addBlockList[k]);
@@ -172,23 +169,9 @@ namespace JobDocs
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-   
-
+        {  
             tabControl1.SelectedIndex = 1;
             txtJobNo.Select();
-            //foreach (string d in Directory.GetDirectories(clientDirPath))
-            //{
-            //    clientsList.Add(Path.GetFileName(d));
-            //}
-            //foreach (string d in Directory.GetDirectories(miscDirpath))
-            //{
-            //    clientsList.Add(Path.GetFileName(d));
-            //}
-
-            //comboBoxCustomer.DataSource = clientsList;
-
-
         }
 
         private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
@@ -203,7 +186,7 @@ namespace JobDocs
                 {
                     path = file;
                 }
-                columnsList = BL_JobDocs.getColumns(path);
+                columnsList = JobData.GetColumnList(path, delimiter);
             }
 
             if (columnsList != null)
@@ -272,8 +255,6 @@ namespace JobDocs
             }*/
         }
 
-
-
         private void btnSecondStream_Click(object sender, EventArgs e)
         {
 
@@ -293,10 +274,7 @@ namespace JobDocs
                 richTextJobDirectory.Text = folderBrowser.SelectedPath;
             }
         }
-
-       
-
-
+     
         private void btnImportFromDolphin_Click(object sender, EventArgs e)
         {
             importedJob = Job.GetJob(txtJobNo.Text);
@@ -307,7 +285,6 @@ namespace JobDocs
             jobDirectory= richTextJobDirectory.Text = DirectoryHelper.getJobDir(jobNo,customer,DirectoryHelper.databaseBranch);
 
             cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(jobDirectory);
-
 
             if(importedJob.DocID != null)
             {
@@ -380,6 +357,16 @@ namespace JobDocs
             decimal recQty = numericUpDownStreamQty.Value;
             int printQty = (int)Math.Ceiling(recQty/up);
             return ( $"Stream {cmbStream.SelectedItem} - Record Qty:{numericUpDownStreamQty.Value} - Print Qty:{printQty}");
+        }
+
+        private void btnSampleSheet_Click(object sender, EventArgs e)
+        {
+            Form form = Application.OpenForms["frmSampleSheet"];
+            if(form == null)
+            {
+                Form sampleSheet = new frmSampleSheet();
+                sampleSheet.ShowDialog();
+            }
         }
     }
 } 

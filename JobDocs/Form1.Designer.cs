@@ -48,6 +48,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.richTextJobDirectory = new System.Windows.Forms.RichTextBox();
+            this.btnAddStream = new System.Windows.Forms.Button();
+            this.numericUpDownStreamQty = new System.Windows.Forms.NumericUpDown();
+            this.listBoxStreams = new System.Windows.Forms.ListBox();
+            this.cmbStream = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBoxStock = new System.Windows.Forms.GroupBox();
             this.txtStockDescription = new System.Windows.Forms.TextBox();
             this.rbMSOLStock = new System.Windows.Forms.RadioButton();
@@ -84,15 +90,15 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.btnImportFromDolphin = new System.Windows.Forms.Button();
-            this.cmbStream = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.listBoxStreams = new System.Windows.Forms.ListBox();
-            this.numericUpDownStreamQty = new System.Windows.Forms.NumericUpDown();
-            this.btnAddStream = new System.Windows.Forms.Button();
-            this.richTextJobDirectory = new System.Windows.Forms.RichTextBox();
+            this.btnSampleSheet = new System.Windows.Forms.Button();
+            this.richTexNotes = new System.Windows.Forms.RichTextBox();
+            this.groupBoxBranch = new System.Windows.Forms.GroupBox();
+            this.rbArtwork = new System.Windows.Forms.RadioButton();
+            this.rbDatabase = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).BeginInit();
             this.groupBoxStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).BeginInit();
             this.groupBoxPlex.SuspendLayout();
@@ -102,7 +108,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).BeginInit();
+            this.groupBoxBranch.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -307,13 +313,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1065, 637);
+            this.tabPage1.Size = new System.Drawing.Size(850, 579);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Data Summary";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBoxBranch);
+            this.tabPage2.Controls.Add(this.richTexNotes);
             this.tabPage2.Controls.Add(this.richTextJobDirectory);
             this.tabPage2.Controls.Add(this.btnAddStream);
             this.tabPage2.Controls.Add(this.numericUpDownStreamQty);
@@ -346,6 +354,63 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Print Spec Sheet";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // richTextJobDirectory
+            // 
+            this.richTextJobDirectory.Location = new System.Drawing.Point(89, 19);
+            this.richTextJobDirectory.Name = "richTextJobDirectory";
+            this.richTextJobDirectory.Size = new System.Drawing.Size(299, 53);
+            this.richTextJobDirectory.TabIndex = 42;
+            this.richTextJobDirectory.Text = "";
+            // 
+            // btnAddStream
+            // 
+            this.btnAddStream.Location = new System.Drawing.Point(740, 189);
+            this.btnAddStream.Name = "btnAddStream";
+            this.btnAddStream.Size = new System.Drawing.Size(75, 23);
+            this.btnAddStream.TabIndex = 41;
+            this.btnAddStream.Text = "Add";
+            this.btnAddStream.UseVisualStyleBackColor = true;
+            this.btnAddStream.Click += new System.EventHandler(this.btnAddStream_Click);
+            // 
+            // numericUpDownStreamQty
+            // 
+            this.numericUpDownStreamQty.Location = new System.Drawing.Point(667, 192);
+            this.numericUpDownStreamQty.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericUpDownStreamQty.Name = "numericUpDownStreamQty";
+            this.numericUpDownStreamQty.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDownStreamQty.TabIndex = 40;
+            // 
+            // listBoxStreams
+            // 
+            this.listBoxStreams.FormattingEnabled = true;
+            this.listBoxStreams.Location = new System.Drawing.Point(581, 261);
+            this.listBoxStreams.Name = "listBoxStreams";
+            this.listBoxStreams.Size = new System.Drawing.Size(234, 95);
+            this.listBoxStreams.TabIndex = 39;
+            // 
+            // cmbStream
+            // 
+            this.cmbStream.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbStream.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbStream.FormattingEnabled = true;
+            this.cmbStream.Location = new System.Drawing.Point(571, 192);
+            this.cmbStream.Name = "cmbStream";
+            this.cmbStream.Size = new System.Drawing.Size(61, 21);
+            this.cmbStream.TabIndex = 37;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(565, 159);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "Add Streams";
             // 
             // groupBoxStock
             // 
@@ -455,7 +520,7 @@
             this.groupBoxPaper.Controls.Add(this.rbA4);
             this.groupBoxPaper.Location = new System.Drawing.Point(22, 285);
             this.groupBoxPaper.Name = "groupBoxPaper";
-            this.groupBoxPaper.Size = new System.Drawing.Size(480, 71);
+            this.groupBoxPaper.Size = new System.Drawing.Size(451, 71);
             this.groupBoxPaper.TabIndex = 31;
             this.groupBoxPaper.TabStop = false;
             this.groupBoxPaper.Text = "Paper Size";
@@ -664,7 +729,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1065, 637);
+            this.tabPage3.Size = new System.Drawing.Size(850, 579);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Job Worksheet";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -674,7 +739,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1065, 637);
+            this.tabPage4.Size = new System.Drawing.Size(850, 579);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Production Report";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -688,6 +753,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnSampleSheet);
             this.splitContainer1.Panel1.Controls.Add(this.txtCustomer);
             this.splitContainer1.Panel1.Controls.Add(this.btnImportFromDolphin);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
@@ -721,62 +787,55 @@
             this.btnImportFromDolphin.UseVisualStyleBackColor = true;
             this.btnImportFromDolphin.Click += new System.EventHandler(this.btnImportFromDolphin_Click);
             // 
-            // cmbStream
+            // btnSampleSheet
             // 
-            this.cmbStream.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbStream.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbStream.FormattingEnabled = true;
-            this.cmbStream.Location = new System.Drawing.Point(571, 192);
-            this.cmbStream.Name = "cmbStream";
-            this.cmbStream.Size = new System.Drawing.Size(61, 21);
-            this.cmbStream.TabIndex = 37;
+            this.btnSampleSheet.Location = new System.Drawing.Point(714, 68);
+            this.btnSampleSheet.Name = "btnSampleSheet";
+            this.btnSampleSheet.Size = new System.Drawing.Size(132, 23);
+            this.btnSampleSheet.TabIndex = 27;
+            this.btnSampleSheet.Text = "Sample Sheet";
+            this.btnSampleSheet.UseVisualStyleBackColor = true;
+            this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
-            // label10
+            // richTexNotes
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(565, 159);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 13);
-            this.label10.TabIndex = 38;
-            this.label10.Text = "Add Streams";
+            this.richTexNotes.Location = new System.Drawing.Point(516, 412);
+            this.richTexNotes.Name = "richTexNotes";
+            this.richTexNotes.Size = new System.Drawing.Size(299, 130);
+            this.richTexNotes.TabIndex = 43;
+            this.richTexNotes.Text = "";
             // 
-            // listBoxStreams
+            // groupBoxBranch
             // 
-            this.listBoxStreams.FormattingEnabled = true;
-            this.listBoxStreams.Location = new System.Drawing.Point(571, 261);
-            this.listBoxStreams.Name = "listBoxStreams";
-            this.listBoxStreams.Size = new System.Drawing.Size(234, 95);
-            this.listBoxStreams.TabIndex = 39;
+            this.groupBoxBranch.Controls.Add(this.rbArtwork);
+            this.groupBoxBranch.Controls.Add(this.rbDatabase);
+            this.groupBoxBranch.Location = new System.Drawing.Point(505, 44);
+            this.groupBoxBranch.Name = "groupBoxBranch";
+            this.groupBoxBranch.Size = new System.Drawing.Size(224, 42);
+            this.groupBoxBranch.TabIndex = 44;
+            this.groupBoxBranch.TabStop = false;
             // 
-            // numericUpDownStreamQty
+            // rbArtwork
             // 
-            this.numericUpDownStreamQty.Location = new System.Drawing.Point(667, 192);
-            this.numericUpDownStreamQty.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericUpDownStreamQty.Name = "numericUpDownStreamQty";
-            this.numericUpDownStreamQty.Size = new System.Drawing.Size(46, 20);
-            this.numericUpDownStreamQty.TabIndex = 40;
+            this.rbArtwork.AutoSize = true;
+            this.rbArtwork.Location = new System.Drawing.Point(97, 15);
+            this.rbArtwork.Name = "rbArtwork";
+            this.rbArtwork.Size = new System.Drawing.Size(61, 17);
+            this.rbArtwork.TabIndex = 23;
+            this.rbArtwork.TabStop = true;
+            this.rbArtwork.Text = "Artwork";
+            this.rbArtwork.UseVisualStyleBackColor = true;
             // 
-            // btnAddStream
+            // rbDatabase
             // 
-            this.btnAddStream.Location = new System.Drawing.Point(740, 189);
-            this.btnAddStream.Name = "btnAddStream";
-            this.btnAddStream.Size = new System.Drawing.Size(75, 23);
-            this.btnAddStream.TabIndex = 41;
-            this.btnAddStream.Text = "Add";
-            this.btnAddStream.UseVisualStyleBackColor = true;
-            this.btnAddStream.Click += new System.EventHandler(this.btnAddStream_Click);
-            // 
-            // richTextJobDirectory
-            // 
-            this.richTextJobDirectory.Location = new System.Drawing.Point(89, 19);
-            this.richTextJobDirectory.Name = "richTextJobDirectory";
-            this.richTextJobDirectory.Size = new System.Drawing.Size(299, 53);
-            this.richTextJobDirectory.TabIndex = 42;
-            this.richTextJobDirectory.Text = "";
+            this.rbDatabase.AutoSize = true;
+            this.rbDatabase.Location = new System.Drawing.Point(15, 15);
+            this.rbDatabase.Name = "rbDatabase";
+            this.rbDatabase.Size = new System.Drawing.Size(71, 17);
+            this.rbDatabase.TabIndex = 22;
+            this.rbDatabase.TabStop = true;
+            this.rbDatabase.Text = "Database";
+            this.rbDatabase.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -793,6 +852,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).EndInit();
             this.groupBoxStock.ResumeLayout(false);
             this.groupBoxStock.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).EndInit();
@@ -807,7 +867,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).EndInit();
+            this.groupBoxBranch.ResumeLayout(false);
+            this.groupBoxBranch.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -875,6 +936,11 @@
         private System.Windows.Forms.ComboBox cmbStream;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox richTextJobDirectory;
+        private System.Windows.Forms.Button btnSampleSheet;
+        private System.Windows.Forms.RichTextBox richTexNotes;
+        private System.Windows.Forms.GroupBox groupBoxBranch;
+        private System.Windows.Forms.RadioButton rbArtwork;
+        private System.Windows.Forms.RadioButton rbDatabase;
     }
 }
 
