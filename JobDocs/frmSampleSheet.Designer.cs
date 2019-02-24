@@ -167,14 +167,15 @@
             this.wizardPage3.Name = "wizardPage3";
             this.wizardPage3.Size = new System.Drawing.Size(744, 382);
             this.wizardPage3.TabIndex = 2;
-            this.wizardPage3.Text = "Page Title";
+            this.wizardPage3.Text = "Sample Records";
             // 
             // dataGridViewSample
             // 
             this.dataGridViewSample.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSample.Location = new System.Drawing.Point(45, 47);
+            this.dataGridViewSample.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewSample.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewSample.Name = "dataGridViewSample";
-            this.dataGridViewSample.Size = new System.Drawing.Size(696, 321);
+            this.dataGridViewSample.Size = new System.Drawing.Size(744, 382);
             this.dataGridViewSample.TabIndex = 0;
             // 
             // frmSampleSheet

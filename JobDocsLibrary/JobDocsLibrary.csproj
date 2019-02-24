@@ -55,6 +55,7 @@
     <Compile Include="DirectoryInfo.cs" />
     <Compile Include="Dolphin.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="JobData.cs" />
     <Compile Include="MailPackItem.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="PDF.cs" />

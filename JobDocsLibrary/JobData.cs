@@ -23,5 +23,11 @@ namespace JobDocsLibrary
                 dataTable.Rows[i]["Index"] = i + 1;
             }
         }
+
+
+        public static List<string> GetColumnList(string fileName, string delimiter)
+        {
+            return TextFileRW.getColumns(fileName, delimiter);
+        }
     }
 }

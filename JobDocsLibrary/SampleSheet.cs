@@ -12,10 +12,6 @@ namespace JobDocsLibrary
     {
         public List<string> ColumnList { get; set; }
 
-        public static List<string> GetColumnList(string fileName, string delimiter)
-        {
-            return HelperLibrary.TextFileRW.getColumns(fileName, delimiter);
-        }
 
 
         public static DataTable GetSampleRecords(string fileName, string delimiter)

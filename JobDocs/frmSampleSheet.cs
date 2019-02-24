@@ -48,7 +48,7 @@ namespace JobDocs
 
         private void wizardPage1_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            columnList = SampleSheet.GetColumnList(outputFileName, delimiter);
+            columnList = JobData.GetColumnList(outputFileName, delimiter);
             foreach (var item in columnList)
             {
                 CheckBox checkBox = new CheckBox();
