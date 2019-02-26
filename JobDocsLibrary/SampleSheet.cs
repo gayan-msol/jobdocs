@@ -25,15 +25,15 @@ namespace JobDocsLibrary
             {
                 if(nonEmptyRowIndex +2 <= dataTable.Rows.Count)
                 {
+                    sampleTable.ImportRow(dataTable.Rows[nonEmptyRowIndex -1]);
                     sampleTable.ImportRow(dataTable.Rows[nonEmptyRowIndex]);
                     sampleTable.ImportRow(dataTable.Rows[nonEmptyRowIndex + 1]);
-                    sampleTable.ImportRow(dataTable.Rows[nonEmptyRowIndex + 2]);
                 }
                 else
                 {
+                    sampleTable.ImportRow(dataTable.Rows[nonEmptyRowIndex - 3]);
                     sampleTable.ImportRow(dataTable.Rows[nonEmptyRowIndex - 2]);
                     sampleTable.ImportRow(dataTable.Rows[nonEmptyRowIndex - 1]);
-                    sampleTable.ImportRow(dataTable.Rows[nonEmptyRowIndex]);
                 }
             }
 

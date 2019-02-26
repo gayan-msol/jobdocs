@@ -48,10 +48,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBoxBranch = new System.Windows.Forms.GroupBox();
+            this.rbArtwork = new System.Windows.Forms.RadioButton();
+            this.rbDatabase = new System.Windows.Forms.RadioButton();
+            this.richTexNotes = new System.Windows.Forms.RichTextBox();
             this.richTextJobDirectory = new System.Windows.Forms.RichTextBox();
             this.btnAddStream = new System.Windows.Forms.Button();
             this.numericUpDownStreamQty = new System.Windows.Forms.NumericUpDown();
-            this.listBoxStreams = new System.Windows.Forms.ListBox();
             this.cmbStream = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBoxStock = new System.Windows.Forms.GroupBox();
@@ -80,24 +83,38 @@
             this.checkBoxDuplo = new System.Windows.Forms.CheckBox();
             this.checkBox7100 = new System.Windows.Forms.CheckBox();
             this.checkBox8120 = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.cmbFileName = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtJobDirectory = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnSampleSheet = new System.Windows.Forms.Button();
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.btnImportFromDolphin = new System.Windows.Forms.Button();
-            this.btnSampleSheet = new System.Windows.Forms.Button();
-            this.richTexNotes = new System.Windows.Forms.RichTextBox();
-            this.groupBoxBranch = new System.Windows.Forms.GroupBox();
-            this.rbArtwork = new System.Windows.Forms.RadioButton();
-            this.rbDatabase = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.dataGridViewStreams = new System.Windows.Forms.DataGridView();
+            this.Stream = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecordQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrintQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnPrintSpecSheet = new System.Windows.Forms.Button();
+            this.btnSaveSpecSheet = new System.Windows.Forms.Button();
+            this.groupBoxPrintMachine = new System.Windows.Forms.GroupBox();
+            this.rb8120 = new System.Windows.Forms.RadioButton();
+            this.rb7100 = new System.Windows.Forms.RadioButton();
+            this.rbDuplo = new System.Windows.Forms.RadioButton();
+            this.rbInkjet = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBoxBranch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).BeginInit();
             this.groupBoxStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).BeginInit();
@@ -108,7 +125,9 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBoxBranch.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStreams)).BeginInit();
+            this.groupBoxPrintMachine.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -294,7 +313,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(858, 605);
+            this.tabControl1.Size = new System.Drawing.Size(779, 776);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPage1
@@ -320,52 +339,94 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBoxPrintMachine);
+            this.tabPage2.Controls.Add(this.btnSaveSpecSheet);
+            this.tabPage2.Controls.Add(this.btnPrintSpecSheet);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.dataGridViewStreams);
+            this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.groupBoxBranch);
             this.tabPage2.Controls.Add(this.richTexNotes);
             this.tabPage2.Controls.Add(this.richTextJobDirectory);
             this.tabPage2.Controls.Add(this.btnAddStream);
             this.tabPage2.Controls.Add(this.numericUpDownStreamQty);
-            this.tabPage2.Controls.Add(this.listBoxStreams);
             this.tabPage2.Controls.Add(this.cmbStream);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.groupBoxStock);
             this.tabPage2.Controls.Add(this.lblPrintDescription);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.numericUpDownUp);
             this.tabPage2.Controls.Add(this.groupBoxPlex);
             this.tabPage2.Controls.Add(this.groupBoxPaper);
             this.tabPage2.Controls.Add(this.cmbPrintJobs);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.btnChangeJobDirectory);
-            this.tabPage2.Controls.Add(this.groupBoxColour);
             this.tabPage2.Controls.Add(this.checkBoxInkJet);
             this.tabPage2.Controls.Add(this.checkBoxDuplo);
             this.tabPage2.Controls.Add(this.checkBox7100);
             this.tabPage2.Controls.Add(this.checkBox8120);
-            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.cmbFileName);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.txtJobDirectory);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(850, 579);
+            this.tabPage2.Size = new System.Drawing.Size(771, 750);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Print Spec Sheet";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // groupBoxBranch
+            // 
+            this.groupBoxBranch.Controls.Add(this.rbArtwork);
+            this.groupBoxBranch.Controls.Add(this.rbDatabase);
+            this.groupBoxBranch.Location = new System.Drawing.Point(88, 75);
+            this.groupBoxBranch.Name = "groupBoxBranch";
+            this.groupBoxBranch.Size = new System.Drawing.Size(224, 42);
+            this.groupBoxBranch.TabIndex = 44;
+            this.groupBoxBranch.TabStop = false;
+            // 
+            // rbArtwork
+            // 
+            this.rbArtwork.AutoSize = true;
+            this.rbArtwork.Location = new System.Drawing.Point(97, 15);
+            this.rbArtwork.Name = "rbArtwork";
+            this.rbArtwork.Size = new System.Drawing.Size(61, 17);
+            this.rbArtwork.TabIndex = 23;
+            this.rbArtwork.TabStop = true;
+            this.rbArtwork.Text = "Artwork";
+            this.rbArtwork.UseVisualStyleBackColor = true;
+            // 
+            // rbDatabase
+            // 
+            this.rbDatabase.AutoSize = true;
+            this.rbDatabase.Location = new System.Drawing.Point(15, 15);
+            this.rbDatabase.Name = "rbDatabase";
+            this.rbDatabase.Size = new System.Drawing.Size(71, 17);
+            this.rbDatabase.TabIndex = 22;
+            this.rbDatabase.TabStop = true;
+            this.rbDatabase.Text = "Database";
+            this.rbDatabase.UseVisualStyleBackColor = true;
+            // 
+            // richTexNotes
+            // 
+            this.richTexNotes.Location = new System.Drawing.Point(321, 570);
+            this.richTexNotes.Name = "richTexNotes";
+            this.richTexNotes.Size = new System.Drawing.Size(229, 100);
+            this.richTexNotes.TabIndex = 43;
+            this.richTexNotes.Text = "";
             // 
             // richTextJobDirectory
             // 
             this.richTextJobDirectory.Location = new System.Drawing.Point(89, 19);
             this.richTextJobDirectory.Name = "richTextJobDirectory";
-            this.richTextJobDirectory.Size = new System.Drawing.Size(299, 53);
+            this.richTextJobDirectory.Size = new System.Drawing.Size(461, 53);
             this.richTextJobDirectory.TabIndex = 42;
             this.richTextJobDirectory.Text = "";
             // 
             // btnAddStream
             // 
-            this.btnAddStream.Location = new System.Drawing.Point(740, 189);
+            this.btnAddStream.Location = new System.Drawing.Point(191, 537);
             this.btnAddStream.Name = "btnAddStream";
             this.btnAddStream.Size = new System.Drawing.Size(75, 23);
             this.btnAddStream.TabIndex = 41;
@@ -375,7 +436,7 @@
             // 
             // numericUpDownStreamQty
             // 
-            this.numericUpDownStreamQty.Location = new System.Drawing.Point(667, 192);
+            this.numericUpDownStreamQty.Location = new System.Drawing.Point(118, 540);
             this.numericUpDownStreamQty.Maximum = new decimal(new int[] {
             500000,
             0,
@@ -385,20 +446,12 @@
             this.numericUpDownStreamQty.Size = new System.Drawing.Size(46, 20);
             this.numericUpDownStreamQty.TabIndex = 40;
             // 
-            // listBoxStreams
-            // 
-            this.listBoxStreams.FormattingEnabled = true;
-            this.listBoxStreams.Location = new System.Drawing.Point(581, 261);
-            this.listBoxStreams.Name = "listBoxStreams";
-            this.listBoxStreams.Size = new System.Drawing.Size(234, 95);
-            this.listBoxStreams.TabIndex = 39;
-            // 
             // cmbStream
             // 
             this.cmbStream.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbStream.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbStream.FormattingEnabled = true;
-            this.cmbStream.Location = new System.Drawing.Point(571, 192);
+            this.cmbStream.Location = new System.Drawing.Point(22, 540);
             this.cmbStream.Name = "cmbStream";
             this.cmbStream.Size = new System.Drawing.Size(61, 21);
             this.cmbStream.TabIndex = 37;
@@ -406,35 +459,35 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(565, 159);
+            this.label10.Location = new System.Drawing.Point(23, 524);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.Size = new System.Drawing.Size(40, 13);
             this.label10.TabIndex = 38;
-            this.label10.Text = "Add Streams";
+            this.label10.Text = "Stream";
             // 
             // groupBoxStock
             // 
             this.groupBoxStock.Controls.Add(this.txtStockDescription);
             this.groupBoxStock.Controls.Add(this.rbMSOLStock);
             this.groupBoxStock.Controls.Add(this.rbCustomerStock);
-            this.groupBoxStock.Location = new System.Drawing.Point(22, 471);
+            this.groupBoxStock.Location = new System.Drawing.Point(292, 401);
             this.groupBoxStock.Name = "groupBoxStock";
-            this.groupBoxStock.Size = new System.Drawing.Size(424, 71);
+            this.groupBoxStock.Size = new System.Drawing.Size(258, 71);
             this.groupBoxStock.TabIndex = 36;
             this.groupBoxStock.TabStop = false;
             this.groupBoxStock.Text = "Stock Description";
             // 
             // txtStockDescription
             // 
-            this.txtStockDescription.Location = new System.Drawing.Point(157, 45);
+            this.txtStockDescription.Location = new System.Drawing.Point(16, 45);
             this.txtStockDescription.Name = "txtStockDescription";
-            this.txtStockDescription.Size = new System.Drawing.Size(261, 20);
+            this.txtStockDescription.Size = new System.Drawing.Size(233, 20);
             this.txtStockDescription.TabIndex = 33;
             // 
             // rbMSOLStock
             // 
             this.rbMSOLStock.AutoSize = true;
-            this.rbMSOLStock.Location = new System.Drawing.Point(162, 19);
+            this.rbMSOLStock.Location = new System.Drawing.Point(21, 19);
             this.rbMSOLStock.Name = "rbMSOLStock";
             this.rbMSOLStock.Size = new System.Drawing.Size(55, 17);
             this.rbMSOLStock.TabIndex = 23;
@@ -445,7 +498,7 @@
             // rbCustomerStock
             // 
             this.rbCustomerStock.AutoSize = true;
-            this.rbCustomerStock.Location = new System.Drawing.Point(263, 19);
+            this.rbCustomerStock.Location = new System.Drawing.Point(122, 19);
             this.rbCustomerStock.Name = "rbCustomerStock";
             this.rbCustomerStock.Size = new System.Drawing.Size(69, 17);
             this.rbCustomerStock.TabIndex = 22;
@@ -465,7 +518,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(366, 394);
+            this.label12.Location = new System.Drawing.Point(236, 19);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(22, 13);
             this.label12.TabIndex = 34;
@@ -473,7 +526,7 @@
             // 
             // numericUpDownUp
             // 
-            this.numericUpDownUp.Location = new System.Drawing.Point(314, 390);
+            this.numericUpDownUp.Location = new System.Drawing.Point(184, 15);
             this.numericUpDownUp.Name = "numericUpDownUp";
             this.numericUpDownUp.Size = new System.Drawing.Size(46, 20);
             this.numericUpDownUp.TabIndex = 33;
@@ -482,12 +535,14 @@
             // 
             this.groupBoxPlex.Controls.Add(this.rbDuplex);
             this.groupBoxPlex.Controls.Add(this.rbSimplex);
-            this.groupBoxPlex.Location = new System.Drawing.Point(22, 375);
+            this.groupBoxPlex.Controls.Add(this.numericUpDownUp);
+            this.groupBoxPlex.Controls.Add(this.label12);
+            this.groupBoxPlex.Location = new System.Drawing.Point(28, 401);
             this.groupBoxPlex.Name = "groupBoxPlex";
-            this.groupBoxPlex.Size = new System.Drawing.Size(224, 71);
+            this.groupBoxPlex.Size = new System.Drawing.Size(258, 71);
             this.groupBoxPlex.TabIndex = 32;
             this.groupBoxPlex.TabStop = false;
-            this.groupBoxPlex.Text = "Sides";
+            this.groupBoxPlex.Text = "Layout";
             // 
             // rbDuplex
             // 
@@ -518,24 +573,24 @@
             this.groupBoxPaper.Controls.Add(this.rbA3);
             this.groupBoxPaper.Controls.Add(this.rbSRA3);
             this.groupBoxPaper.Controls.Add(this.rbA4);
-            this.groupBoxPaper.Location = new System.Drawing.Point(22, 285);
+            this.groupBoxPaper.Location = new System.Drawing.Point(22, 324);
             this.groupBoxPaper.Name = "groupBoxPaper";
-            this.groupBoxPaper.Size = new System.Drawing.Size(451, 71);
+            this.groupBoxPaper.Size = new System.Drawing.Size(258, 71);
             this.groupBoxPaper.TabIndex = 31;
             this.groupBoxPaper.TabStop = false;
-            this.groupBoxPaper.Text = "Paper Size";
+            this.groupBoxPaper.Text = "Print Size";
             // 
             // txtCustomPaperSize
             // 
-            this.txtCustomPaperSize.Location = new System.Drawing.Point(255, 38);
+            this.txtCustomPaperSize.Location = new System.Drawing.Point(104, 47);
             this.txtCustomPaperSize.Name = "txtCustomPaperSize";
-            this.txtCustomPaperSize.Size = new System.Drawing.Size(169, 20);
+            this.txtCustomPaperSize.Size = new System.Drawing.Size(136, 20);
             this.txtCustomPaperSize.TabIndex = 32;
             // 
             // rbCustom
             // 
             this.rbCustom.AutoSize = true;
-            this.rbCustom.Location = new System.Drawing.Point(255, 15);
+            this.rbCustom.Location = new System.Drawing.Point(15, 48);
             this.rbCustom.Name = "rbCustom";
             this.rbCustom.Size = new System.Drawing.Size(83, 17);
             this.rbCustom.TabIndex = 25;
@@ -581,16 +636,16 @@
             this.cmbPrintJobs.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbPrintJobs.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbPrintJobs.FormattingEnabled = true;
-            this.cmbPrintJobs.Location = new System.Drawing.Point(89, 146);
+            this.cmbPrintJobs.Location = new System.Drawing.Point(89, 175);
             this.cmbPrintJobs.Name = "cmbPrintJobs";
-            this.cmbPrintJobs.Size = new System.Drawing.Size(303, 21);
+            this.cmbPrintJobs.Size = new System.Drawing.Size(461, 21);
             this.cmbPrintJobs.TabIndex = 29;
             this.cmbPrintJobs.SelectedIndexChanged += new System.EventHandler(this.cmbPrintJobs_SelectedIndexChanged);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 154);
+            this.label11.Location = new System.Drawing.Point(19, 183);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 13);
             this.label11.TabIndex = 30;
@@ -598,7 +653,7 @@
             // 
             // btnChangeJobDirectory
             // 
-            this.btnChangeJobDirectory.Location = new System.Drawing.Point(398, 49);
+            this.btnChangeJobDirectory.Location = new System.Drawing.Point(581, 49);
             this.btnChangeJobDirectory.Name = "btnChangeJobDirectory";
             this.btnChangeJobDirectory.Size = new System.Drawing.Size(75, 23);
             this.btnChangeJobDirectory.TabIndex = 24;
@@ -611,16 +666,16 @@
             this.groupBoxColour.Controls.Add(this.radioButtonBlack);
             this.groupBoxColour.Controls.Add(this.rbColour);
             this.groupBoxColour.Enabled = false;
-            this.groupBoxColour.Location = new System.Drawing.Point(245, 199);
+            this.groupBoxColour.Location = new System.Drawing.Point(174, 19);
             this.groupBoxColour.Name = "groupBoxColour";
-            this.groupBoxColour.Size = new System.Drawing.Size(80, 71);
+            this.groupBoxColour.Size = new System.Drawing.Size(67, 53);
             this.groupBoxColour.TabIndex = 23;
             this.groupBoxColour.TabStop = false;
             // 
             // radioButtonBlack
             // 
             this.radioButtonBlack.AutoSize = true;
-            this.radioButtonBlack.Location = new System.Drawing.Point(15, 41);
+            this.radioButtonBlack.Location = new System.Drawing.Point(8, 31);
             this.radioButtonBlack.Name = "radioButtonBlack";
             this.radioButtonBlack.Size = new System.Drawing.Size(52, 17);
             this.radioButtonBlack.TabIndex = 23;
@@ -631,7 +686,7 @@
             // 
             this.rbColour.AutoSize = true;
             this.rbColour.Checked = true;
-            this.rbColour.Location = new System.Drawing.Point(15, 15);
+            this.rbColour.Location = new System.Drawing.Point(8, 11);
             this.rbColour.Name = "rbColour";
             this.rbColour.Size = new System.Drawing.Size(55, 17);
             this.rbColour.TabIndex = 22;
@@ -642,7 +697,7 @@
             // checkBoxInkJet
             // 
             this.checkBoxInkJet.AutoSize = true;
-            this.checkBoxInkJet.Location = new System.Drawing.Point(413, 213);
+            this.checkBoxInkJet.Location = new System.Drawing.Point(663, 163);
             this.checkBoxInkJet.Name = "checkBoxInkJet";
             this.checkBoxInkJet.Size = new System.Drawing.Size(52, 17);
             this.checkBoxInkJet.TabIndex = 21;
@@ -652,7 +707,7 @@
             // checkBoxDuplo
             // 
             this.checkBoxDuplo.AutoSize = true;
-            this.checkBoxDuplo.Location = new System.Drawing.Point(357, 213);
+            this.checkBoxDuplo.Location = new System.Drawing.Point(607, 163);
             this.checkBoxDuplo.Name = "checkBoxDuplo";
             this.checkBoxDuplo.Size = new System.Drawing.Size(54, 17);
             this.checkBoxDuplo.TabIndex = 20;
@@ -662,7 +717,7 @@
             // checkBox7100
             // 
             this.checkBox7100.AutoSize = true;
-            this.checkBox7100.Location = new System.Drawing.Point(189, 213);
+            this.checkBox7100.Location = new System.Drawing.Point(674, 123);
             this.checkBox7100.Name = "checkBox7100";
             this.checkBox7100.Size = new System.Drawing.Size(50, 17);
             this.checkBox7100.TabIndex = 19;
@@ -673,36 +728,27 @@
             // checkBox8120
             // 
             this.checkBox8120.AutoSize = true;
-            this.checkBox8120.Location = new System.Drawing.Point(121, 214);
+            this.checkBox8120.Location = new System.Drawing.Point(606, 124);
             this.checkBox8120.Name = "checkBox8120";
             this.checkBox8120.Size = new System.Drawing.Size(50, 17);
             this.checkBox8120.TabIndex = 18;
             this.checkBox8120.Text = "8120";
             this.checkBox8120.UseVisualStyleBackColor = true;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 214);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Print Machine";
-            // 
             // cmbFileName
             // 
             this.cmbFileName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbFileName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbFileName.FormattingEnabled = true;
-            this.cmbFileName.Location = new System.Drawing.Point(89, 94);
+            this.cmbFileName.Location = new System.Drawing.Point(89, 123);
             this.cmbFileName.Name = "cmbFileName";
-            this.cmbFileName.Size = new System.Drawing.Size(303, 21);
+            this.cmbFileName.Size = new System.Drawing.Size(461, 21);
             this.cmbFileName.TabIndex = 15;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(19, 102);
+            this.label8.Location = new System.Drawing.Point(19, 131);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 13);
             this.label8.TabIndex = 16;
@@ -716,13 +762,6 @@
             this.label7.Size = new System.Drawing.Size(69, 13);
             this.label7.TabIndex = 3;
             this.label7.Text = "Job Directory";
-            // 
-            // txtJobDirectory
-            // 
-            this.txtJobDirectory.Location = new System.Drawing.Point(37, 596);
-            this.txtJobDirectory.Name = "txtJobDirectory";
-            this.txtJobDirectory.Size = new System.Drawing.Size(303, 20);
-            this.txtJobDirectory.TabIndex = 2;
             // 
             // tabPage3
             // 
@@ -766,9 +805,19 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(858, 735);
-            this.splitContainer1.SplitterDistance = 126;
+            this.splitContainer1.Size = new System.Drawing.Size(779, 941);
+            this.splitContainer1.SplitterDistance = 161;
             this.splitContainer1.TabIndex = 26;
+            // 
+            // btnSampleSheet
+            // 
+            this.btnSampleSheet.Location = new System.Drawing.Point(638, 118);
+            this.btnSampleSheet.Name = "btnSampleSheet";
+            this.btnSampleSheet.Size = new System.Drawing.Size(132, 23);
+            this.btnSampleSheet.TabIndex = 27;
+            this.btnSampleSheet.Text = "Sample Sheet";
+            this.btnSampleSheet.UseVisualStyleBackColor = true;
+            this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
             // txtCustomer
             // 
@@ -787,62 +836,202 @@
             this.btnImportFromDolphin.UseVisualStyleBackColor = true;
             this.btnImportFromDolphin.Click += new System.EventHandler(this.btnImportFromDolphin_Click);
             // 
-            // btnSampleSheet
+            // groupBox1
             // 
-            this.btnSampleSheet.Location = new System.Drawing.Point(714, 68);
-            this.btnSampleSheet.Name = "btnSampleSheet";
-            this.btnSampleSheet.Size = new System.Drawing.Size(132, 23);
-            this.btnSampleSheet.TabIndex = 27;
-            this.btnSampleSheet.Text = "Sample Sheet";
-            this.btnSampleSheet.UseVisualStyleBackColor = true;
-            this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Controls.Add(this.radioButton4);
+            this.groupBox1.Location = new System.Drawing.Point(292, 324);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(258, 71);
+            this.groupBox1.TabIndex = 33;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Print Size";
             // 
-            // richTexNotes
+            // textBox1
             // 
-            this.richTexNotes.Location = new System.Drawing.Point(516, 412);
-            this.richTexNotes.Name = "richTexNotes";
-            this.richTexNotes.Size = new System.Drawing.Size(299, 130);
-            this.richTexNotes.TabIndex = 43;
-            this.richTexNotes.Text = "";
+            this.textBox1.Location = new System.Drawing.Point(104, 47);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(136, 20);
+            this.textBox1.TabIndex = 32;
             // 
-            // groupBoxBranch
+            // radioButton1
             // 
-            this.groupBoxBranch.Controls.Add(this.rbArtwork);
-            this.groupBoxBranch.Controls.Add(this.rbDatabase);
-            this.groupBoxBranch.Location = new System.Drawing.Point(505, 44);
-            this.groupBoxBranch.Name = "groupBoxBranch";
-            this.groupBoxBranch.Size = new System.Drawing.Size(224, 42);
-            this.groupBoxBranch.TabIndex = 44;
-            this.groupBoxBranch.TabStop = false;
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(15, 48);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(83, 17);
+            this.radioButton1.TabIndex = 25;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Custom Size";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // rbArtwork
+            // radioButton2
             // 
-            this.rbArtwork.AutoSize = true;
-            this.rbArtwork.Location = new System.Drawing.Point(97, 15);
-            this.rbArtwork.Name = "rbArtwork";
-            this.rbArtwork.Size = new System.Drawing.Size(61, 17);
-            this.rbArtwork.TabIndex = 23;
-            this.rbArtwork.TabStop = true;
-            this.rbArtwork.Text = "Artwork";
-            this.rbArtwork.UseVisualStyleBackColor = true;
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(192, 15);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(38, 17);
+            this.radioButton2.TabIndex = 24;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "A3";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
-            // rbDatabase
+            // radioButton3
             // 
-            this.rbDatabase.AutoSize = true;
-            this.rbDatabase.Location = new System.Drawing.Point(15, 15);
-            this.rbDatabase.Name = "rbDatabase";
-            this.rbDatabase.Size = new System.Drawing.Size(71, 17);
-            this.rbDatabase.TabIndex = 22;
-            this.rbDatabase.TabStop = true;
-            this.rbDatabase.Text = "Database";
-            this.rbDatabase.UseVisualStyleBackColor = true;
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(97, 15);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(53, 17);
+            this.radioButton3.TabIndex = 23;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "SRA3";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(15, 15);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(38, 17);
+            this.radioButton4.TabIndex = 22;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "A4";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewStreams
+            // 
+            this.dataGridViewStreams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Stream,
+            this.RecordQty,
+            this.PrintQty});
+            this.dataGridViewStreams.Location = new System.Drawing.Point(26, 570);
+            this.dataGridViewStreams.Name = "dataGridViewStreams";
+            this.dataGridViewStreams.Size = new System.Drawing.Size(289, 100);
+            this.dataGridViewStreams.TabIndex = 45;
+            // 
+            // Stream
+            // 
+            this.Stream.HeaderText = "Stream";
+            this.Stream.Name = "Stream";
+            this.Stream.ReadOnly = true;
+            this.Stream.Width = 50;
+            // 
+            // RecordQty
+            // 
+            this.RecordQty.HeaderText = "Record Qty";
+            this.RecordQty.Name = "RecordQty";
+            this.RecordQty.ReadOnly = true;
+            // 
+            // PrintQty
+            // 
+            this.PrintQty.HeaderText = "Print Qty";
+            this.PrintQty.Name = "PrintQty";
+            this.PrintQty.ReadOnly = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(319, 554);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 13);
+            this.label13.TabIndex = 46;
+            this.label13.Text = "Notes";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(115, 524);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(61, 13);
+            this.label14.TabIndex = 47;
+            this.label14.Text = "Record Qty";
+            // 
+            // btnPrintSpecSheet
+            // 
+            this.btnPrintSpecSheet.Location = new System.Drawing.Point(432, 695);
+            this.btnPrintSpecSheet.Name = "btnPrintSpecSheet";
+            this.btnPrintSpecSheet.Size = new System.Drawing.Size(118, 40);
+            this.btnPrintSpecSheet.TabIndex = 48;
+            this.btnPrintSpecSheet.Text = "Print";
+            this.btnPrintSpecSheet.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveSpecSheet
+            // 
+            this.btnSaveSpecSheet.Location = new System.Drawing.Point(307, 695);
+            this.btnSaveSpecSheet.Name = "btnSaveSpecSheet";
+            this.btnSaveSpecSheet.Size = new System.Drawing.Size(118, 40);
+            this.btnSaveSpecSheet.TabIndex = 49;
+            this.btnSaveSpecSheet.Text = "Save";
+            this.btnSaveSpecSheet.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxPrintMachine
+            // 
+            this.groupBoxPrintMachine.Controls.Add(this.rbInkjet);
+            this.groupBoxPrintMachine.Controls.Add(this.rbDuplo);
+            this.groupBoxPrintMachine.Controls.Add(this.rb7100);
+            this.groupBoxPrintMachine.Controls.Add(this.rb8120);
+            this.groupBoxPrintMachine.Controls.Add(this.groupBoxColour);
+            this.groupBoxPrintMachine.Location = new System.Drawing.Point(22, 218);
+            this.groupBoxPrintMachine.Name = "groupBoxPrintMachine";
+            this.groupBoxPrintMachine.Size = new System.Drawing.Size(528, 100);
+            this.groupBoxPrintMachine.TabIndex = 50;
+            this.groupBoxPrintMachine.TabStop = false;
+            this.groupBoxPrintMachine.Text = "Print Machine";
+            // 
+            // rb8120
+            // 
+            this.rb8120.AutoSize = true;
+            this.rb8120.Location = new System.Drawing.Point(13, 30);
+            this.rb8120.Name = "rb8120";
+            this.rb8120.Size = new System.Drawing.Size(49, 17);
+            this.rb8120.TabIndex = 24;
+            this.rb8120.TabStop = true;
+            this.rb8120.Text = "8120";
+            this.rb8120.UseVisualStyleBackColor = true;
+            // 
+            // rb7100
+            // 
+            this.rb7100.AutoSize = true;
+            this.rb7100.Location = new System.Drawing.Point(119, 30);
+            this.rb7100.Name = "rb7100";
+            this.rb7100.Size = new System.Drawing.Size(49, 17);
+            this.rb7100.TabIndex = 25;
+            this.rb7100.TabStop = true;
+            this.rb7100.Text = "7100";
+            this.rb7100.UseVisualStyleBackColor = true;
+            // 
+            // rbDuplo
+            // 
+            this.rbDuplo.AutoSize = true;
+            this.rbDuplo.Location = new System.Drawing.Point(304, 30);
+            this.rbDuplo.Name = "rbDuplo";
+            this.rbDuplo.Size = new System.Drawing.Size(53, 17);
+            this.rbDuplo.TabIndex = 26;
+            this.rbDuplo.TabStop = true;
+            this.rbDuplo.Text = "Duplo";
+            this.rbDuplo.UseVisualStyleBackColor = true;
+            // 
+            // rbInkjet
+            // 
+            this.rbInkjet.AutoSize = true;
+            this.rbInkjet.Location = new System.Drawing.Point(426, 30);
+            this.rbInkjet.Name = "rbInkjet";
+            this.rbInkjet.Size = new System.Drawing.Size(51, 17);
+            this.rbInkjet.TabIndex = 27;
+            this.rbInkjet.TabStop = true;
+            this.rbInkjet.Text = "Inkjet";
+            this.rbInkjet.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 735);
+            this.ClientSize = new System.Drawing.Size(779, 941);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Job Docs";
@@ -852,6 +1041,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBoxBranch.ResumeLayout(false);
+            this.groupBoxBranch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).EndInit();
             this.groupBoxStock.ResumeLayout(false);
             this.groupBoxStock.PerformLayout();
@@ -867,8 +1058,11 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBoxBranch.ResumeLayout(false);
-            this.groupBoxBranch.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStreams)).EndInit();
+            this.groupBoxPrintMachine.ResumeLayout(false);
+            this.groupBoxPrintMachine.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -901,11 +1095,9 @@
         private System.Windows.Forms.CheckBox checkBoxDuplo;
         private System.Windows.Forms.CheckBox checkBox7100;
         private System.Windows.Forms.CheckBox checkBox8120;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cmbFileName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtJobDirectory;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -932,7 +1124,6 @@
         private System.Windows.Forms.RadioButton rbCustomerStock;
         private System.Windows.Forms.Button btnAddStream;
         private System.Windows.Forms.NumericUpDown numericUpDownStreamQty;
-        private System.Windows.Forms.ListBox listBoxStreams;
         private System.Windows.Forms.ComboBox cmbStream;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox richTextJobDirectory;
@@ -941,6 +1132,25 @@
         private System.Windows.Forms.GroupBox groupBoxBranch;
         private System.Windows.Forms.RadioButton rbArtwork;
         private System.Windows.Forms.RadioButton rbDatabase;
+        private System.Windows.Forms.DataGridView dataGridViewStreams;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stream;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecordQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrintQty;
+        private System.Windows.Forms.Button btnSaveSpecSheet;
+        private System.Windows.Forms.Button btnPrintSpecSheet;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.GroupBox groupBoxPrintMachine;
+        private System.Windows.Forms.RadioButton rbInkjet;
+        private System.Windows.Forms.RadioButton rbDuplo;
+        private System.Windows.Forms.RadioButton rb7100;
+        private System.Windows.Forms.RadioButton rb8120;
     }
 }
 

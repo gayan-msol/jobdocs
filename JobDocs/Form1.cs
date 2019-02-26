@@ -341,22 +341,22 @@ namespace JobDocs
 
         private void setPrintmachine(PrintInfo printInfo)
         {        
-            checkBox8120.Checked = printInfo.Colour == "Black";
-            checkBox7100.Checked = printInfo.Colour == "Colour";            
+            rb8120.Checked = ( printInfo.Colour == "Black" );
+            rb7100.Checked = ( printInfo.Colour == "Colour" );            
         }
 
         private void btnAddStream_Click(object sender, EventArgs e)
         {
-            listBoxStreams.Items.Add(SetStreamDetails());
+            dataGridViewStreams.Rows.Add(SetStreamDetails());
 
         }
 
-        private string SetStreamDetails()
+        private string[] SetStreamDetails()
         {
             decimal up = numericUpDownUp.Value;
             decimal recQty = numericUpDownStreamQty.Value;
             int printQty = (int)Math.Ceiling(recQty/up);
-            return ( $"Stream {cmbStream.SelectedItem} - Record Qty:{numericUpDownStreamQty.Value} - Print Qty:{printQty}");
+            return new string[] { cmbStream.SelectedItem.ToString(), numericUpDownStreamQty.Value.ToString(),printQty.ToString()};
         }
 
         private void btnSampleSheet_Click(object sender, EventArgs e)
@@ -367,6 +367,11 @@ namespace JobDocs
                 Form sampleSheet = new frmSampleSheet();
                 sampleSheet.ShowDialog();
             }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 } 
