@@ -48,6 +48,28 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBoxPrintMachine = new System.Windows.Forms.GroupBox();
+            this.rbInkjet = new System.Windows.Forms.RadioButton();
+            this.rbDuplo = new System.Windows.Forms.RadioButton();
+            this.rb7100 = new System.Windows.Forms.RadioButton();
+            this.rb8120 = new System.Windows.Forms.RadioButton();
+            this.groupBoxColour = new System.Windows.Forms.GroupBox();
+            this.radioButtonBlack = new System.Windows.Forms.RadioButton();
+            this.rbColour = new System.Windows.Forms.RadioButton();
+            this.btnSaveSpecSheet = new System.Windows.Forms.Button();
+            this.btnPrintSpecSheet = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dataGridViewStreams = new System.Windows.Forms.DataGridView();
+            this.Stream = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecordQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrintQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.groupBoxBranch = new System.Windows.Forms.GroupBox();
             this.rbArtwork = new System.Windows.Forms.RadioButton();
             this.rbDatabase = new System.Windows.Forms.RadioButton();
@@ -62,11 +84,11 @@
             this.rbMSOLStock = new System.Windows.Forms.RadioButton();
             this.rbCustomerStock = new System.Windows.Forms.RadioButton();
             this.lblPrintDescription = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.numericUpDownUp = new System.Windows.Forms.NumericUpDown();
             this.groupBoxPlex = new System.Windows.Forms.GroupBox();
             this.rbDuplex = new System.Windows.Forms.RadioButton();
             this.rbSimplex = new System.Windows.Forms.RadioButton();
+            this.numericUpDownUp = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBoxPaper = new System.Windows.Forms.GroupBox();
             this.txtCustomPaperSize = new System.Windows.Forms.TextBox();
             this.rbCustom = new System.Windows.Forms.RadioButton();
@@ -76,13 +98,6 @@
             this.cmbPrintJobs = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnChangeJobDirectory = new System.Windows.Forms.Button();
-            this.groupBoxColour = new System.Windows.Forms.GroupBox();
-            this.radioButtonBlack = new System.Windows.Forms.RadioButton();
-            this.rbColour = new System.Windows.Forms.RadioButton();
-            this.checkBoxInkJet = new System.Windows.Forms.CheckBox();
-            this.checkBoxDuplo = new System.Windows.Forms.CheckBox();
-            this.checkBox7100 = new System.Windows.Forms.CheckBox();
-            this.checkBox8120 = new System.Windows.Forms.CheckBox();
             this.cmbFileName = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -92,42 +107,23 @@
             this.btnSampleSheet = new System.Windows.Forms.Button();
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.btnImportFromDolphin = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.dataGridViewStreams = new System.Windows.Forms.DataGridView();
-            this.Stream = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrintQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnPrintSpecSheet = new System.Windows.Forms.Button();
-            this.btnSaveSpecSheet = new System.Windows.Forms.Button();
-            this.groupBoxPrintMachine = new System.Windows.Forms.GroupBox();
-            this.rb8120 = new System.Windows.Forms.RadioButton();
-            this.rb7100 = new System.Windows.Forms.RadioButton();
-            this.rbDuplo = new System.Windows.Forms.RadioButton();
-            this.rbInkjet = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBoxPrintMachine.SuspendLayout();
+            this.groupBoxColour.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStreams)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.groupBoxBranch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).BeginInit();
             this.groupBoxStock.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).BeginInit();
             this.groupBoxPlex.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).BeginInit();
             this.groupBoxPaper.SuspendLayout();
-            this.groupBoxColour.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStreams)).BeginInit();
-            this.groupBoxPrintMachine.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -332,7 +328,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(850, 579);
+            this.tabPage1.Size = new System.Drawing.Size(771, 750);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Data Summary";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -360,10 +356,6 @@
             this.tabPage2.Controls.Add(this.cmbPrintJobs);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.btnChangeJobDirectory);
-            this.tabPage2.Controls.Add(this.checkBoxInkJet);
-            this.tabPage2.Controls.Add(this.checkBoxDuplo);
-            this.tabPage2.Controls.Add(this.checkBox7100);
-            this.tabPage2.Controls.Add(this.checkBox8120);
             this.tabPage2.Controls.Add(this.cmbFileName);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
@@ -375,6 +367,232 @@
             this.tabPage2.Text = "Print Spec Sheet";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // groupBoxPrintMachine
+            // 
+            this.groupBoxPrintMachine.Controls.Add(this.rbInkjet);
+            this.groupBoxPrintMachine.Controls.Add(this.rbDuplo);
+            this.groupBoxPrintMachine.Controls.Add(this.rb7100);
+            this.groupBoxPrintMachine.Controls.Add(this.rb8120);
+            this.groupBoxPrintMachine.Controls.Add(this.groupBoxColour);
+            this.groupBoxPrintMachine.Location = new System.Drawing.Point(22, 227);
+            this.groupBoxPrintMachine.Name = "groupBoxPrintMachine";
+            this.groupBoxPrintMachine.Size = new System.Drawing.Size(528, 100);
+            this.groupBoxPrintMachine.TabIndex = 50;
+            this.groupBoxPrintMachine.TabStop = false;
+            this.groupBoxPrintMachine.Text = "Print Machine";
+            // 
+            // rbInkjet
+            // 
+            this.rbInkjet.AutoSize = true;
+            this.rbInkjet.Location = new System.Drawing.Point(426, 30);
+            this.rbInkjet.Name = "rbInkjet";
+            this.rbInkjet.Size = new System.Drawing.Size(51, 17);
+            this.rbInkjet.TabIndex = 27;
+            this.rbInkjet.TabStop = true;
+            this.rbInkjet.Text = "Inkjet";
+            this.rbInkjet.UseVisualStyleBackColor = true;
+            // 
+            // rbDuplo
+            // 
+            this.rbDuplo.AutoSize = true;
+            this.rbDuplo.Location = new System.Drawing.Point(304, 30);
+            this.rbDuplo.Name = "rbDuplo";
+            this.rbDuplo.Size = new System.Drawing.Size(53, 17);
+            this.rbDuplo.TabIndex = 26;
+            this.rbDuplo.TabStop = true;
+            this.rbDuplo.Text = "Duplo";
+            this.rbDuplo.UseVisualStyleBackColor = true;
+            // 
+            // rb7100
+            // 
+            this.rb7100.AutoSize = true;
+            this.rb7100.Location = new System.Drawing.Point(119, 30);
+            this.rb7100.Name = "rb7100";
+            this.rb7100.Size = new System.Drawing.Size(49, 17);
+            this.rb7100.TabIndex = 25;
+            this.rb7100.TabStop = true;
+            this.rb7100.Text = "7100";
+            this.rb7100.UseVisualStyleBackColor = true;
+            this.rb7100.CheckedChanged += new System.EventHandler(this.rb7100_CheckedChanged);
+            // 
+            // rb8120
+            // 
+            this.rb8120.AutoSize = true;
+            this.rb8120.Location = new System.Drawing.Point(13, 30);
+            this.rb8120.Name = "rb8120";
+            this.rb8120.Size = new System.Drawing.Size(49, 17);
+            this.rb8120.TabIndex = 24;
+            this.rb8120.TabStop = true;
+            this.rb8120.Text = "8120";
+            this.rb8120.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxColour
+            // 
+            this.groupBoxColour.Controls.Add(this.radioButtonBlack);
+            this.groupBoxColour.Controls.Add(this.rbColour);
+            this.groupBoxColour.Enabled = false;
+            this.groupBoxColour.Location = new System.Drawing.Point(174, 19);
+            this.groupBoxColour.Name = "groupBoxColour";
+            this.groupBoxColour.Size = new System.Drawing.Size(67, 53);
+            this.groupBoxColour.TabIndex = 23;
+            this.groupBoxColour.TabStop = false;
+            // 
+            // radioButtonBlack
+            // 
+            this.radioButtonBlack.AutoSize = true;
+            this.radioButtonBlack.Location = new System.Drawing.Point(8, 31);
+            this.radioButtonBlack.Name = "radioButtonBlack";
+            this.radioButtonBlack.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonBlack.TabIndex = 23;
+            this.radioButtonBlack.Text = "Black";
+            this.radioButtonBlack.UseVisualStyleBackColor = true;
+            // 
+            // rbColour
+            // 
+            this.rbColour.AutoSize = true;
+            this.rbColour.Checked = true;
+            this.rbColour.Location = new System.Drawing.Point(8, 11);
+            this.rbColour.Name = "rbColour";
+            this.rbColour.Size = new System.Drawing.Size(55, 17);
+            this.rbColour.TabIndex = 22;
+            this.rbColour.TabStop = true;
+            this.rbColour.Text = "Colour";
+            this.rbColour.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveSpecSheet
+            // 
+            this.btnSaveSpecSheet.Enabled = false;
+            this.btnSaveSpecSheet.Location = new System.Drawing.Point(307, 695);
+            this.btnSaveSpecSheet.Name = "btnSaveSpecSheet";
+            this.btnSaveSpecSheet.Size = new System.Drawing.Size(118, 40);
+            this.btnSaveSpecSheet.TabIndex = 49;
+            this.btnSaveSpecSheet.Text = "Save";
+            this.btnSaveSpecSheet.UseVisualStyleBackColor = true;
+            // 
+            // btnPrintSpecSheet
+            // 
+            this.btnPrintSpecSheet.Location = new System.Drawing.Point(432, 695);
+            this.btnPrintSpecSheet.Name = "btnPrintSpecSheet";
+            this.btnPrintSpecSheet.Size = new System.Drawing.Size(118, 40);
+            this.btnPrintSpecSheet.TabIndex = 48;
+            this.btnPrintSpecSheet.Text = "Print";
+            this.btnPrintSpecSheet.UseVisualStyleBackColor = true;
+            this.btnPrintSpecSheet.Click += new System.EventHandler(this.btnPrintSpecSheet_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(115, 524);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(61, 13);
+            this.label14.TabIndex = 47;
+            this.label14.Text = "Record Qty";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(319, 554);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 13);
+            this.label13.TabIndex = 46;
+            this.label13.Text = "Notes";
+            // 
+            // dataGridViewStreams
+            // 
+            this.dataGridViewStreams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Stream,
+            this.RecordQty,
+            this.PrintQty});
+            this.dataGridViewStreams.Location = new System.Drawing.Point(26, 570);
+            this.dataGridViewStreams.Name = "dataGridViewStreams";
+            this.dataGridViewStreams.Size = new System.Drawing.Size(289, 100);
+            this.dataGridViewStreams.TabIndex = 45;
+            // 
+            // Stream
+            // 
+            this.Stream.HeaderText = "Stream";
+            this.Stream.Name = "Stream";
+            this.Stream.ReadOnly = true;
+            this.Stream.Width = 50;
+            // 
+            // RecordQty
+            // 
+            this.RecordQty.HeaderText = "Record Qty";
+            this.RecordQty.Name = "RecordQty";
+            this.RecordQty.ReadOnly = true;
+            // 
+            // PrintQty
+            // 
+            this.PrintQty.HeaderText = "Print Qty";
+            this.PrintQty.Name = "PrintQty";
+            this.PrintQty.ReadOnly = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Controls.Add(this.radioButton4);
+            this.groupBox1.Location = new System.Drawing.Point(292, 333);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(258, 71);
+            this.groupBox1.TabIndex = 33;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Print Size";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(104, 47);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(136, 20);
+            this.textBox1.TabIndex = 32;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(15, 48);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(83, 17);
+            this.radioButton1.TabIndex = 25;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Custom Size";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(192, 15);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(38, 17);
+            this.radioButton2.TabIndex = 24;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "A3";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(97, 15);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(53, 17);
+            this.radioButton3.TabIndex = 23;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "SRA3";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(15, 15);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(38, 17);
+            this.radioButton4.TabIndex = 22;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "A4";
+            this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // groupBoxBranch
             // 
@@ -470,7 +688,7 @@
             this.groupBoxStock.Controls.Add(this.txtStockDescription);
             this.groupBoxStock.Controls.Add(this.rbMSOLStock);
             this.groupBoxStock.Controls.Add(this.rbCustomerStock);
-            this.groupBoxStock.Location = new System.Drawing.Point(292, 401);
+            this.groupBoxStock.Location = new System.Drawing.Point(292, 410);
             this.groupBoxStock.Name = "groupBoxStock";
             this.groupBoxStock.Size = new System.Drawing.Size(258, 71);
             this.groupBoxStock.TabIndex = 36;
@@ -515,29 +733,13 @@
             this.lblPrintDescription.Size = new System.Drawing.Size(0, 17);
             this.lblPrintDescription.TabIndex = 35;
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(236, 19);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(22, 13);
-            this.label12.TabIndex = 34;
-            this.label12.Text = "UP";
-            // 
-            // numericUpDownUp
-            // 
-            this.numericUpDownUp.Location = new System.Drawing.Point(184, 15);
-            this.numericUpDownUp.Name = "numericUpDownUp";
-            this.numericUpDownUp.Size = new System.Drawing.Size(46, 20);
-            this.numericUpDownUp.TabIndex = 33;
-            // 
             // groupBoxPlex
             // 
             this.groupBoxPlex.Controls.Add(this.rbDuplex);
             this.groupBoxPlex.Controls.Add(this.rbSimplex);
             this.groupBoxPlex.Controls.Add(this.numericUpDownUp);
             this.groupBoxPlex.Controls.Add(this.label12);
-            this.groupBoxPlex.Location = new System.Drawing.Point(28, 401);
+            this.groupBoxPlex.Location = new System.Drawing.Point(28, 410);
             this.groupBoxPlex.Name = "groupBoxPlex";
             this.groupBoxPlex.Size = new System.Drawing.Size(258, 71);
             this.groupBoxPlex.TabIndex = 32;
@@ -566,6 +768,22 @@
             this.rbSimplex.Text = "Simplex";
             this.rbSimplex.UseVisualStyleBackColor = true;
             // 
+            // numericUpDownUp
+            // 
+            this.numericUpDownUp.Location = new System.Drawing.Point(184, 15);
+            this.numericUpDownUp.Name = "numericUpDownUp";
+            this.numericUpDownUp.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDownUp.TabIndex = 33;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(236, 19);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(22, 13);
+            this.label12.TabIndex = 34;
+            this.label12.Text = "UP";
+            // 
             // groupBoxPaper
             // 
             this.groupBoxPaper.Controls.Add(this.txtCustomPaperSize);
@@ -573,7 +791,7 @@
             this.groupBoxPaper.Controls.Add(this.rbA3);
             this.groupBoxPaper.Controls.Add(this.rbSRA3);
             this.groupBoxPaper.Controls.Add(this.rbA4);
-            this.groupBoxPaper.Location = new System.Drawing.Point(22, 324);
+            this.groupBoxPaper.Location = new System.Drawing.Point(22, 333);
             this.groupBoxPaper.Name = "groupBoxPaper";
             this.groupBoxPaper.Size = new System.Drawing.Size(258, 71);
             this.groupBoxPaper.TabIndex = 31;
@@ -653,87 +871,13 @@
             // 
             // btnChangeJobDirectory
             // 
-            this.btnChangeJobDirectory.Location = new System.Drawing.Point(581, 49);
+            this.btnChangeJobDirectory.Location = new System.Drawing.Point(475, 71);
             this.btnChangeJobDirectory.Name = "btnChangeJobDirectory";
-            this.btnChangeJobDirectory.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeJobDirectory.Size = new System.Drawing.Size(75, 36);
             this.btnChangeJobDirectory.TabIndex = 24;
-            this.btnChangeJobDirectory.Text = "Change";
+            this.btnChangeJobDirectory.Text = "Browse";
             this.btnChangeJobDirectory.UseVisualStyleBackColor = true;
             this.btnChangeJobDirectory.Click += new System.EventHandler(this.btnChangeJobDirectory_Click);
-            // 
-            // groupBoxColour
-            // 
-            this.groupBoxColour.Controls.Add(this.radioButtonBlack);
-            this.groupBoxColour.Controls.Add(this.rbColour);
-            this.groupBoxColour.Enabled = false;
-            this.groupBoxColour.Location = new System.Drawing.Point(174, 19);
-            this.groupBoxColour.Name = "groupBoxColour";
-            this.groupBoxColour.Size = new System.Drawing.Size(67, 53);
-            this.groupBoxColour.TabIndex = 23;
-            this.groupBoxColour.TabStop = false;
-            // 
-            // radioButtonBlack
-            // 
-            this.radioButtonBlack.AutoSize = true;
-            this.radioButtonBlack.Location = new System.Drawing.Point(8, 31);
-            this.radioButtonBlack.Name = "radioButtonBlack";
-            this.radioButtonBlack.Size = new System.Drawing.Size(52, 17);
-            this.radioButtonBlack.TabIndex = 23;
-            this.radioButtonBlack.Text = "Black";
-            this.radioButtonBlack.UseVisualStyleBackColor = true;
-            // 
-            // rbColour
-            // 
-            this.rbColour.AutoSize = true;
-            this.rbColour.Checked = true;
-            this.rbColour.Location = new System.Drawing.Point(8, 11);
-            this.rbColour.Name = "rbColour";
-            this.rbColour.Size = new System.Drawing.Size(55, 17);
-            this.rbColour.TabIndex = 22;
-            this.rbColour.TabStop = true;
-            this.rbColour.Text = "Colour";
-            this.rbColour.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxInkJet
-            // 
-            this.checkBoxInkJet.AutoSize = true;
-            this.checkBoxInkJet.Location = new System.Drawing.Point(663, 163);
-            this.checkBoxInkJet.Name = "checkBoxInkJet";
-            this.checkBoxInkJet.Size = new System.Drawing.Size(52, 17);
-            this.checkBoxInkJet.TabIndex = 21;
-            this.checkBoxInkJet.Text = "Inkjet";
-            this.checkBoxInkJet.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxDuplo
-            // 
-            this.checkBoxDuplo.AutoSize = true;
-            this.checkBoxDuplo.Location = new System.Drawing.Point(607, 163);
-            this.checkBoxDuplo.Name = "checkBoxDuplo";
-            this.checkBoxDuplo.Size = new System.Drawing.Size(54, 17);
-            this.checkBoxDuplo.TabIndex = 20;
-            this.checkBoxDuplo.Text = "Duplo";
-            this.checkBoxDuplo.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7100
-            // 
-            this.checkBox7100.AutoSize = true;
-            this.checkBox7100.Location = new System.Drawing.Point(674, 123);
-            this.checkBox7100.Name = "checkBox7100";
-            this.checkBox7100.Size = new System.Drawing.Size(50, 17);
-            this.checkBox7100.TabIndex = 19;
-            this.checkBox7100.Text = "7100";
-            this.checkBox7100.UseVisualStyleBackColor = true;
-            this.checkBox7100.CheckedChanged += new System.EventHandler(this.checkBox7100_CheckedChanged);
-            // 
-            // checkBox8120
-            // 
-            this.checkBox8120.AutoSize = true;
-            this.checkBox8120.Location = new System.Drawing.Point(606, 124);
-            this.checkBox8120.Name = "checkBox8120";
-            this.checkBox8120.Size = new System.Drawing.Size(50, 17);
-            this.checkBox8120.TabIndex = 18;
-            this.checkBox8120.Text = "8120";
-            this.checkBox8120.UseVisualStyleBackColor = true;
             // 
             // cmbFileName
             // 
@@ -768,7 +912,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(850, 579);
+            this.tabPage3.Size = new System.Drawing.Size(771, 750);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Job Worksheet";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -778,7 +922,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(850, 579);
+            this.tabPage4.Size = new System.Drawing.Size(771, 750);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Production Report";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -836,196 +980,6 @@
             this.btnImportFromDolphin.UseVisualStyleBackColor = true;
             this.btnImportFromDolphin.Click += new System.EventHandler(this.btnImportFromDolphin_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Location = new System.Drawing.Point(292, 324);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(258, 71);
-            this.groupBox1.TabIndex = 33;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Print Size";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(104, 47);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 32;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(15, 48);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(83, 17);
-            this.radioButton1.TabIndex = 25;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Custom Size";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(192, 15);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(38, 17);
-            this.radioButton2.TabIndex = 24;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "A3";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(97, 15);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(53, 17);
-            this.radioButton3.TabIndex = 23;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "SRA3";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(15, 15);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(38, 17);
-            this.radioButton4.TabIndex = 22;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "A4";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewStreams
-            // 
-            this.dataGridViewStreams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Stream,
-            this.RecordQty,
-            this.PrintQty});
-            this.dataGridViewStreams.Location = new System.Drawing.Point(26, 570);
-            this.dataGridViewStreams.Name = "dataGridViewStreams";
-            this.dataGridViewStreams.Size = new System.Drawing.Size(289, 100);
-            this.dataGridViewStreams.TabIndex = 45;
-            // 
-            // Stream
-            // 
-            this.Stream.HeaderText = "Stream";
-            this.Stream.Name = "Stream";
-            this.Stream.ReadOnly = true;
-            this.Stream.Width = 50;
-            // 
-            // RecordQty
-            // 
-            this.RecordQty.HeaderText = "Record Qty";
-            this.RecordQty.Name = "RecordQty";
-            this.RecordQty.ReadOnly = true;
-            // 
-            // PrintQty
-            // 
-            this.PrintQty.HeaderText = "Print Qty";
-            this.PrintQty.Name = "PrintQty";
-            this.PrintQty.ReadOnly = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(319, 554);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(35, 13);
-            this.label13.TabIndex = 46;
-            this.label13.Text = "Notes";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(115, 524);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(61, 13);
-            this.label14.TabIndex = 47;
-            this.label14.Text = "Record Qty";
-            // 
-            // btnPrintSpecSheet
-            // 
-            this.btnPrintSpecSheet.Location = new System.Drawing.Point(432, 695);
-            this.btnPrintSpecSheet.Name = "btnPrintSpecSheet";
-            this.btnPrintSpecSheet.Size = new System.Drawing.Size(118, 40);
-            this.btnPrintSpecSheet.TabIndex = 48;
-            this.btnPrintSpecSheet.Text = "Print";
-            this.btnPrintSpecSheet.UseVisualStyleBackColor = true;
-            // 
-            // btnSaveSpecSheet
-            // 
-            this.btnSaveSpecSheet.Location = new System.Drawing.Point(307, 695);
-            this.btnSaveSpecSheet.Name = "btnSaveSpecSheet";
-            this.btnSaveSpecSheet.Size = new System.Drawing.Size(118, 40);
-            this.btnSaveSpecSheet.TabIndex = 49;
-            this.btnSaveSpecSheet.Text = "Save";
-            this.btnSaveSpecSheet.UseVisualStyleBackColor = true;
-            // 
-            // groupBoxPrintMachine
-            // 
-            this.groupBoxPrintMachine.Controls.Add(this.rbInkjet);
-            this.groupBoxPrintMachine.Controls.Add(this.rbDuplo);
-            this.groupBoxPrintMachine.Controls.Add(this.rb7100);
-            this.groupBoxPrintMachine.Controls.Add(this.rb8120);
-            this.groupBoxPrintMachine.Controls.Add(this.groupBoxColour);
-            this.groupBoxPrintMachine.Location = new System.Drawing.Point(22, 218);
-            this.groupBoxPrintMachine.Name = "groupBoxPrintMachine";
-            this.groupBoxPrintMachine.Size = new System.Drawing.Size(528, 100);
-            this.groupBoxPrintMachine.TabIndex = 50;
-            this.groupBoxPrintMachine.TabStop = false;
-            this.groupBoxPrintMachine.Text = "Print Machine";
-            // 
-            // rb8120
-            // 
-            this.rb8120.AutoSize = true;
-            this.rb8120.Location = new System.Drawing.Point(13, 30);
-            this.rb8120.Name = "rb8120";
-            this.rb8120.Size = new System.Drawing.Size(49, 17);
-            this.rb8120.TabIndex = 24;
-            this.rb8120.TabStop = true;
-            this.rb8120.Text = "8120";
-            this.rb8120.UseVisualStyleBackColor = true;
-            // 
-            // rb7100
-            // 
-            this.rb7100.AutoSize = true;
-            this.rb7100.Location = new System.Drawing.Point(119, 30);
-            this.rb7100.Name = "rb7100";
-            this.rb7100.Size = new System.Drawing.Size(49, 17);
-            this.rb7100.TabIndex = 25;
-            this.rb7100.TabStop = true;
-            this.rb7100.Text = "7100";
-            this.rb7100.UseVisualStyleBackColor = true;
-            // 
-            // rbDuplo
-            // 
-            this.rbDuplo.AutoSize = true;
-            this.rbDuplo.Location = new System.Drawing.Point(304, 30);
-            this.rbDuplo.Name = "rbDuplo";
-            this.rbDuplo.Size = new System.Drawing.Size(53, 17);
-            this.rbDuplo.TabIndex = 26;
-            this.rbDuplo.TabStop = true;
-            this.rbDuplo.Text = "Duplo";
-            this.rbDuplo.UseVisualStyleBackColor = true;
-            // 
-            // rbInkjet
-            // 
-            this.rbInkjet.AutoSize = true;
-            this.rbInkjet.Location = new System.Drawing.Point(426, 30);
-            this.rbInkjet.Name = "rbInkjet";
-            this.rbInkjet.Size = new System.Drawing.Size(51, 17);
-            this.rbInkjet.TabIndex = 27;
-            this.rbInkjet.TabStop = true;
-            this.rbInkjet.Text = "Inkjet";
-            this.rbInkjet.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
@@ -1041,28 +995,28 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBoxPrintMachine.ResumeLayout(false);
+            this.groupBoxPrintMachine.PerformLayout();
+            this.groupBoxColour.ResumeLayout(false);
+            this.groupBoxColour.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStreams)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBoxBranch.ResumeLayout(false);
             this.groupBoxBranch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStreamQty)).EndInit();
             this.groupBoxStock.ResumeLayout(false);
             this.groupBoxStock.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).EndInit();
             this.groupBoxPlex.ResumeLayout(false);
             this.groupBoxPlex.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).EndInit();
             this.groupBoxPaper.ResumeLayout(false);
             this.groupBoxPaper.PerformLayout();
-            this.groupBoxColour.ResumeLayout(false);
-            this.groupBoxColour.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStreams)).EndInit();
-            this.groupBoxPrintMachine.ResumeLayout(false);
-            this.groupBoxPrintMachine.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1091,10 +1045,6 @@
         private System.Windows.Forms.GroupBox groupBoxColour;
         private System.Windows.Forms.RadioButton radioButtonBlack;
         private System.Windows.Forms.RadioButton rbColour;
-        private System.Windows.Forms.CheckBox checkBoxInkJet;
-        private System.Windows.Forms.CheckBox checkBoxDuplo;
-        private System.Windows.Forms.CheckBox checkBox7100;
-        private System.Windows.Forms.CheckBox checkBox8120;
         private System.Windows.Forms.ComboBox cmbFileName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;

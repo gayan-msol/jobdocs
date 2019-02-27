@@ -35,6 +35,14 @@ namespace JobDocs
         string prodRepPdf = "";
         string dataSummaryTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
         string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
+        string printMachine = "";
+        string printSize = "";
+        string finishedSize = "";
+        string plex = "";
+        int up = 1;
+        string stockSaupplier = "";
+        string stockDescription = "";
+
 
         public Form1()
         {
@@ -262,7 +270,7 @@ namespace JobDocs
 
         private void checkBox7100_CheckedChanged(object sender, EventArgs e)
         {
-            groupBoxColour.Enabled = checkBox7100.Checked;
+           // groupBoxColour.Enabled = checkBox7100.Checked;
         }
 
         private void btnChangeJobDirectory_Click(object sender, EventArgs e)
@@ -355,8 +363,12 @@ namespace JobDocs
         {
             decimal up = numericUpDownUp.Value;
             decimal recQty = numericUpDownStreamQty.Value;
-            int printQty = (int)Math.Ceiling(recQty/up);
-            return new string[] { cmbStream.SelectedItem.ToString(), numericUpDownStreamQty.Value.ToString(),printQty.ToString()};
+            int printQty = 0;
+            if (up >0 && recQty >0)
+            {
+                 printQty = (int)Math.Ceiling(recQty / up);
+            }
+            return new string[] {/* cmbStream?.SelectedItem?.ToString() + */cmbStream?.Text, numericUpDownStreamQty.Value.ToString(),printQty.ToString()};
         }
 
         private void btnSampleSheet_Click(object sender, EventArgs e)
@@ -372,6 +384,63 @@ namespace JobDocs
         private void tabPage2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPrintSpecSheet_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF|*.pdf";
+            saveFileDialog.ShowDialog();
+            if(saveFileDialog.FileName != null)
+            {
+
+                getPrintMachine();
+
+                PrintSpecSheet printSpecSheet = new PrintSpecSheet();
+
+                List<string> streamList = new List<string>();
+                foreach (DataGridViewRow row in dataGridViewStreams.Rows)
+                {
+                    if(row.Cells[0].Value != null)
+                    {
+                        streamList.Add($"Stream {row.Cells["Stream"]?.Value} : Record Qty = {row.Cells["RecordQty"]?.Value}  : Print Qty = {row.Cells["PrintQty"]?.Value}");
+
+                    }
+                }
+
+                printSpecSheet.StreamList = streamList;
+                printSpecSheet.JobNo = txtJobNo.Text;
+                printSpecSheet.JobDirectory = richTextJobDirectory.Text;
+                printSpecSheet.FileName = /*cmbFileName?.SelectedItem?.ToString() + */cmbFileName?.Text;
+                printSpecSheet.PrintMachine = printMachine;
+                printSpecSheet.Notes = richTexNotes.Text;
+                printSpecSheet.createPdf(@"S:\SCRIPTS\DotNetProgrammes\PRINT SPEC SHEET\Spec Sheet.pdf", saveFileDialog.FileName, printSpecSheet);
+            }
+
+
+        }
+
+        private void getPrintMachine()
+        {
+           // List<RadioButton> rbList = groupBoxPrintMachine.Controls.OfType<RadioButton>();
+
+            foreach (Control item in groupBoxPrintMachine.Controls)
+            {
+                if(item.GetType()==typeof(RadioButton) )
+                {
+                    RadioButton radioButton = (RadioButton)item;
+                    if(radioButton.Checked)
+                    {
+                        printMachine = item.Name.Substring(2);
+                    }
+                    
+                }
+            }
+        }
+
+        private void rb7100_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBoxColour.Enabled = rb7100.Checked;
         }
     }
 } 
