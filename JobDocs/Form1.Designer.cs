@@ -79,7 +79,7 @@
             this.rbM7100 = new System.Windows.Forms.RadioButton();
             this.rbMDuplo = new System.Windows.Forms.RadioButton();
             this.rbMInkjet = new System.Windows.Forms.RadioButton();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownSheetsPerRec = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.tbnClearStreams = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
@@ -114,7 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStreams)).BeginInit();
             this.groupBoxPrintMachine.SuspendLayout();
             this.groupBoxColour.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSheetsPerRec)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -243,7 +243,7 @@
             this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.tbnClearStreams);
             this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.numericUpDown1);
+            this.tabPage2.Controls.Add(this.numericUpDownSheetsPerRec);
             this.tabPage2.Controls.Add(this.groupBoxPrintMachine);
             this.tabPage2.Controls.Add(this.btnPrintSpecSheet);
             this.tabPage2.Controls.Add(this.label14);
@@ -674,18 +674,18 @@
             this.rbMInkjet.Text = "Inkjet";
             this.rbMInkjet.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // numericUpDownSheetsPerRec
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(183, 540);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.numericUpDownSheetsPerRec.Location = new System.Drawing.Point(183, 540);
+            this.numericUpDownSheetsPerRec.Maximum = new decimal(new int[] {
             500000,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(46, 20);
-            this.numericUpDown1.TabIndex = 51;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.numericUpDownSheetsPerRec.Name = "numericUpDownSheetsPerRec";
+            this.numericUpDownSheetsPerRec.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDownSheetsPerRec.TabIndex = 51;
+            this.numericUpDownSheetsPerRec.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -935,7 +935,7 @@
             this.groupBoxPrintMachine.PerformLayout();
             this.groupBoxColour.ResumeLayout(false);
             this.groupBoxColour.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSheetsPerRec)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -978,7 +978,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button tbnClearStreams;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownSheetsPerRec;
         private System.Windows.Forms.GroupBox groupBoxPrintMachine;
         private System.Windows.Forms.RadioButton rbMInkjet;
         private System.Windows.Forms.RadioButton rbMDuplo;

@@ -439,12 +439,23 @@ namespace JobDocs
         {
             decimal up = numericUpDownUp.Value;
             decimal recQty = numericUpDownStreamQty.Value;
+            decimal sheetsPerRec = numericUpDownSheetsPerRec.Value;
             int printQty = 0;
-            if (up >0 && recQty >0)
-            {
-                 printQty = (int)Math.Ceiling(recQty / up);
-            }
+            printQty = calculatePrintQty(recQty, up, sheetsPerRec);
+            
             return new string[] {/* cmbStream?.SelectedItem?.ToString() + */cmbStream?.Text, numericUpDownStreamQty.Value.ToString(),printQty.ToString()};
+        }
+
+        private int calculatePrintQty(decimal recQty, decimal recsPerPage, decimal sheetsPerRec)
+        {
+            if(recsPerPage > 0)
+            {
+                return (int)Math.Ceiling(recQty * sheetsPerRec / recsPerPage);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private void btnSampleSheet_Click(object sender, EventArgs e)
@@ -466,6 +477,7 @@ namespace JobDocs
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
+            saveFileDialog.FileName = $"{txtJobNo.Text} - Print Spec Sheet";
             saveFileDialog.Filter = "PDF|*.pdf";
             saveFileDialog.ShowDialog();
             if(saveFileDialog.FileName != null)
