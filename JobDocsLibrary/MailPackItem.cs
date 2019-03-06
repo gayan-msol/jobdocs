@@ -15,7 +15,7 @@ namespace JobDocsLibrary
         public string Category { get; set; }
         public string LinkedTo { get; set; }
         public string Weight { get; set; }
-        public string Return { get; set; }
+        public bool Return { get; set; }
         public string DocID { get; set; }
         public string SuppliedBy { get; set; }
         public string SupplyDescription { get; set; }

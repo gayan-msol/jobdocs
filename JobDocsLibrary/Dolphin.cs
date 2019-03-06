@@ -27,14 +27,21 @@ namespace JobDocsLibrary
             string url = $"http://msol-p1:3000/{paramArr[0]}?{paramArr[1]}=eq.{queryValue}";
             string content = "";
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-
-            using (var webResponse = (HttpWebResponse)request.GetResponse())
+            try
+            {
+                using (var webResponse = (HttpWebResponse)request.GetResponse())
                 {
                     using (var reader = new StreamReader(webResponse.GetResponseStream()))
                     {
                         content = reader.ReadToEnd();
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+       
                     
 
             return content;

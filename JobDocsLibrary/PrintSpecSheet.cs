@@ -21,18 +21,14 @@ namespace JobDocsLibrary
         public List<string> StreamList { get; set; }
         public string Notes { get; set; }
 
+        private string pdfTemplatePath = @"S:\SCRIPTS\DotNetProgrammes\PRINT SPEC SHEET\Spec Sheet Template.pdf";
 
-
-
-
-        public void createPdf(string templatePath,string fileName, PrintSpecSheet specSheet)
+        public void createPdf(string fileName, PrintSpecSheet specSheet)
         {
-          //  PDF dsPdf = new PDF(dataSummaryTemplate);
-
 
             try
             {
-                    PdfReader pdfReader = new PdfReader(templatePath);
+                    PdfReader pdfReader = new PdfReader(pdfTemplatePath);
 
                     using (PdfStamper pdfStamper = new PdfStamper(pdfReader, new System.IO.FileStream(fileName, System.IO.FileMode.OpenOrCreate)))
                     {

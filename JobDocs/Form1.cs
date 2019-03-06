@@ -13,6 +13,7 @@ using System.Threading;
 using System.IO;
 using System.Drawing.Printing;
 using JobDocsLibrary;
+using System.Reflection;
 
 
 namespace JobDocs
@@ -35,7 +36,7 @@ namespace JobDocs
         string prodRepPdf = "";
         string dataSummaryTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
         string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
-        string printMachine = "";
+        string directoryBranch = "";
         string printSize = "";
         string finishedSize = "";
         string plex = "";
@@ -49,8 +50,36 @@ namespace JobDocs
             InitializeComponent();
         }
 
+
+        private void createProductionReport(Job job,string fileName)
+        {
+            ProductionReport productionReport = new ProductionReport();
+
+            productionReport.Customer = job.Customer;
+            productionReport.JobName = job.JobName;
+            productionReport.JobNo = job.JobNumber;
+            productionReport.Qty = job.Qty;
+
+            List<MailPackItem> returnItems = MailPackItem.GetItems(job.DocID).Where(x => x.Return).ToList();
+
+            string[] items = returnItems.Select(y => y.SupplyDescription).ToArray();
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                PropertyInfo property = productionReport.GetType().GetProperties().Single(z => z.Name == $"Item{i + 1}");
+                property.SetValue(productionReport, items[i]);
+            }
+
+            productionReport.createPdf(fileName, productionReport);
+        }
+
         private void createPdf()
         {
+
+
+      
+         
+            
             PDF dsPdf = new PDF(dataSummaryTemplate);
          
 
@@ -180,6 +209,13 @@ namespace JobDocs
         {  
             tabControl1.SelectedIndex = 1;
             txtJobNo.Select();
+            rbDatabase.Checked = true;
+            rbLSimplex.Checked = true;
+
+            cmbFinishedSize.DataSource = StockItem.finishSizeList;
+            cmbPrintSize.DataSource = StockItem.printSizeList;
+            txtCustomFinishedSize.Enabled = txtCustomPrintSize.Enabled = false;
+
         }
 
         private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
@@ -275,32 +311,41 @@ namespace JobDocs
 
         private void btnChangeJobDirectory_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-            DialogResult result = folderBrowser.ShowDialog();
-            if (!string.IsNullOrWhiteSpace(folderBrowser.SelectedPath))
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = richTextJobDirectory.Text;
+            DialogResult result = openFileDialog.ShowDialog();
+            if (!string.IsNullOrWhiteSpace(openFileDialog.FileName))
             {
-                richTextJobDirectory.Text = folderBrowser.SelectedPath;
+                richTextJobDirectory.Text =Path.GetDirectoryName(openFileDialog.FileName);
             }
         }
      
         private void btnImportFromDolphin_Click(object sender, EventArgs e)
         {
             importedJob = Job.GetJob(txtJobNo.Text);
-            comboBoxCustomer.SelectedItem = importedJob.Customer;
-            jobName = txtJobName.Text = importedJob.JobName;
-            customer = txtCustomer.Text = importedJob.Customer;
-            jobNo = txtJobNo.Text;
-            jobDirectory= richTextJobDirectory.Text = DirectoryHelper.getJobDir(jobNo,customer,DirectoryHelper.databaseBranch);
-
-            cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(jobDirectory);
-
-            if(importedJob.DocID != null)
+            if(importedJob != null)
             {
-                List<JobProcess> printProcesses = importedJob.ProcessList.Where(x => x.Name.Contains("Laser - Print")).ToList();
-                cmbPrintJobs.DataSource = printProcesses;
-                cmbPrintJobs.DisplayMember = "Name";
-                cmbPrintJobs.Refresh();              
+                comboBoxCustomer.SelectedItem = importedJob.Customer;
+                jobName = txtJobName.Text = importedJob.JobName;
+                customer = txtCustomer.Text = importedJob.Customer;
+                jobNo = txtJobNo.Text;
+                jobDirectory = richTextJobDirectory.Text = DirectoryHelper.getJobDir(jobNo, customer, directoryBranch);
+
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(jobDirectory);
+
+                if (importedJob.DocID != null)
+                {
+                    List<JobProcess> printProcesses = importedJob.ProcessList.Where(x => x.Name.Contains("Laser - Print") || x.Name.Contains("Print Envelopes") || x.Name.Contains("Ink Jet")).ToList();
+                    cmbPrintJobs.DataSource = printProcesses;
+                    cmbPrintJobs.DisplayMember = "Name";
+                    cmbPrintJobs.Refresh();
+                }
             }
+            else
+            {
+                ErrorHandling.ShowMessage(null, "Could not import the job.");
+            }
+  
         }
 
         private void cmbPrintJobs_SelectedIndexChanged(object sender, EventArgs e)
@@ -310,15 +355,14 @@ namespace JobDocs
             PrintInfo printInfo = importedJob.PrintInfoList.Where(x => x.ProcessID == selectedProcess.ID).FirstOrDefault();
             MailPackItem stockItem = importedJob.ItemList.Where(x => x.LinkedTo == selectedProcess.LinkTo && !string.IsNullOrWhiteSpace(x.Description) ).FirstOrDefault();
 
-            if(printInfo != null)
-            {
+
                 setPrintSize(printInfo);
                 setPlex(printInfo);
-                setPrintmachine(printInfo);
-                numericUpDownUp.Value = printInfo.Up;
-            }
+                setPrintmachine(selectedProcess, printInfo);
+                numericUpDownUp.Value = printInfo?.Up ?? 1;
+            
 
-            if(stockItem != null)
+            if (stockItem != null)
             {
                 setStockInfo(stockItem);
                 cmbStream.DataSource = stockItem.Stream.Split(',').ToList();
@@ -330,27 +374,59 @@ namespace JobDocs
 
         private void setStockInfo(MailPackItem stockItem)
         {
-            rbMSOLStock.Checked = stockItem.SuppliedBy == "Mailing Solutions";
-            rbCustomerStock.Checked= stockItem.SuppliedBy == "Customer";
+            rbSMSOL.Checked = stockItem.SuppliedBy == "Mailing Solutions";
+            rbSCustomer.Checked= stockItem.SuppliedBy == "Customer";
             txtStockDescription.Text = stockItem.SuppliedBy == "Mailing Solutions" ? stockItem.Name : stockItem.SupplyDescription;
         }
 
         private void setPrintSize(PrintInfo printInfo)
         {
-            Control size = groupBoxPaper.Controls.Find($"rb{printInfo.PrintSize}", true)[0];
-            size.Select();
+            if(printInfo!= null)
+            {
+                cmbPrintSize.SelectedItem = printInfo?.PrintSize;
+            }
+            else
+            {
+
+            }
+
+            //Control[] controls = groupBoxPaper.Controls.Find($"rb{printInfo?.PrintSize}", true);
+            //if(controls.Length >0)
+            //{
+            //    Control size = controls[0];
+            //    size.Select();
+            //}
+
         }
 
         private void setPlex(PrintInfo printInfo)
         {
-            Control plex = groupBoxPlex.Controls.Find($"rb{printInfo.Sides}", true)[0];
-            plex.Select();
+            //cmbFinishedSize.SelectedItem = printInfo?.FinishedSize;
+
+            Control[] controls = groupBoxLayout.Controls.Find($"rbL{printInfo?.Sides}", true);
+            if (controls.Length > 0)
+            {
+                Control plex = controls[0];
+                plex.Select();
+            }
         }
 
-        private void setPrintmachine(PrintInfo printInfo)
-        {        
-            rb8120.Checked = ( printInfo.Colour == "Black" );
-            rb7100.Checked = ( printInfo.Colour == "Colour" );            
+        private void setPrintmachine(JobProcess selectedProcess, PrintInfo printInfo)
+        {
+            if (selectedProcess.Name.Contains("Laser"))
+            {
+                rbM8120.Checked = (printInfo.Colour == "Black");
+                rbM7100.Checked = (printInfo.Colour == "Colour");
+            }
+            else if(selectedProcess.Name.Contains("Ink Jet"))
+            {
+                rbMInkjet.Checked = true;
+            }
+            else if (selectedProcess.Name.Contains("Envelopes"))
+            {
+                rbMDuplo.Checked = true;
+            }
+
         }
 
         private void btnAddStream_Click(object sender, EventArgs e)
@@ -389,6 +465,7 @@ namespace JobDocs
         private void btnPrintSpecSheet_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
             saveFileDialog.Filter = "PDF|*.pdf";
             saveFileDialog.ShowDialog();
             if(saveFileDialog.FileName != null)
@@ -411,36 +488,109 @@ namespace JobDocs
                 printSpecSheet.StreamList = streamList;
                 printSpecSheet.JobNo = txtJobNo.Text;
                 printSpecSheet.JobDirectory = richTextJobDirectory.Text;
-                printSpecSheet.FileName = /*cmbFileName?.SelectedItem?.ToString() + */cmbFileName?.Text;
-                printSpecSheet.PrintMachine = printMachine;
+                printSpecSheet.FileName = cmbFileName?.Text;
+                printSpecSheet.PrintMachine = getPrintMachine();
+                printSpecSheet.PrintSize = getPrintSize();
                 printSpecSheet.Notes = richTexNotes.Text;
-                printSpecSheet.createPdf(@"S:\SCRIPTS\DotNetProgrammes\PRINT SPEC SHEET\Spec Sheet.pdf", saveFileDialog.FileName, printSpecSheet);
+                printSpecSheet.Stock = getStockDetails();
+                printSpecSheet.Layout = getLayoutInfo();
+                printSpecSheet.Notes = richTexNotes.Text;
+                printSpecSheet.createPdf( saveFileDialog.FileName, printSpecSheet);
+
+                createProductionReport( importedJob,$"{Path.GetDirectoryName(saveFileDialog.FileName)}\\{txtJobNo.Text} - Production Report.pdf" );
             }
 
 
         }
 
-        private void getPrintMachine()
+        private string getPrintMachine()
         {
            // List<RadioButton> rbList = groupBoxPrintMachine.Controls.OfType<RadioButton>();
 
             foreach (Control item in groupBoxPrintMachine.Controls)
             {
-                if(item.GetType()==typeof(RadioButton) )
+                if(item is RadioButton radioButton && radioButton.Checked)
                 {
-                    RadioButton radioButton = (RadioButton)item;
-                    if(radioButton.Checked)
-                    {
-                        printMachine = item.Name.Substring(2);
-                    }
-                    
+                    return item.Name.Substring(3);
                 }
             }
+            return null;
+        }
+
+        private string getCheckedRadioButtonValue(GroupBox groupBox)
+        {
+            foreach (Control item in groupBox.Controls)
+            {
+                if (item is RadioButton radioButton && radioButton.Checked)
+                {
+                    return item.Name.Substring(3);
+                }
+            }
+
+            return null;
+        }
+
+        private string getPrintSize()
+        {
+            // string printSize = getCheckedRadioButtonValue(groupBoxPaper);
+            string printSize = cmbPrintSize?.SelectedItem.ToString();
+            if (printSize == "Custom")
+            {
+                printSize = txtCustomPrintSize.Text;
+            }
+
+            return printSize;
+        }
+
+        private string getFinishedSize()
+        {
+            // string finishedSize = getCheckedRadioButtonValue(groupBoxFinishedSize);
+            string finishedSize = cmbFinishedSize?.SelectedItem.ToString();
+            if (finishedSize == "Custom")
+            {
+                finishedSize = txtCustomPrintSize.Text;
+            }
+
+            return finishedSize;
+        }
+
+        private string getStockDetails()
+        {
+            if (rbSMSOL.Checked)
+            {
+                return $"MSOL Stock: {txtStockDescription.Text}";
+            }
+            else
+            {
+                return $"Customer Supplied Stock: {txtStockDescription.Text}";
+            }
+        }
+
+        private string getLayoutInfo()
+        {
+            string plex = getCheckedRadioButtonValue(groupBoxLayout) ?? "Simplex";
+            return $"{plex} - {numericUpDownUp.Value.ToString()} UP";
         }
 
         private void rb7100_CheckedChanged(object sender, EventArgs e)
         {
-            groupBoxColour.Enabled = rb7100.Checked;
+            groupBoxColour.Enabled = rbM7100.Checked;
+        }
+
+        private void rbDatabase_CheckedChanged(object sender, EventArgs e)
+        {
+            directoryBranch = rbDatabase.Checked ? DirectoryHelper.databaseBranch : DirectoryHelper.artworkBranch;
+            richTextJobDirectory.Text = DirectoryHelper.getJobDir(txtJobNo.Text, txtCustomer.Text, directoryBranch);
+        }
+
+        private void cmbPrintSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCustomPrintSize.Enabled = (cmbPrintSize.SelectedItem?.ToString() == "Custom");
+        }
+
+        private void cmbFinishedSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCustomFinishedSize.Enabled = (cmbFinishedSize?.SelectedItem?.ToString() == "Custom");
         }
     }
 } 

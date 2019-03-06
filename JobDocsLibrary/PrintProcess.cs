@@ -27,7 +27,7 @@ namespace JobDocsLibrary
             response = response.Replace("Finished Size", "FinishedSize");
             response = response.Replace("parent_qr_id", "ProcessID");
             response = response.Replace("qr_id", "ID");
-            if(response != "[]")
+            if (response != "[]")
             {
                 processList = fastJSON.JSON.ToObject<List<PrintInfo>>(response);
 
