@@ -73,45 +73,41 @@ namespace JobDocs
             productionReport.createPdf(fileName, productionReport);
         }
 
-        private void createPdf()
+        private void createPdf(string fileName)
         {
-
-
-      
-         
-            
+                           
             PDF dsPdf = new PDF(dataSummaryTemplate);
          
 
             try
             {
 
-                if(string.IsNullOrWhiteSpace(path))
-                {
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = ".pdf|PDF";
-                    saveFileDialog.ShowDialog();
-                    path = saveFileDialog?.FileName;
-                }
+                //if(string.IsNullOrWhiteSpace(path))
+                //{
+                //    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                //    saveFileDialog.Filter = ".pdf|PDF";
+                //    saveFileDialog.ShowDialog();
+                //    path = saveFileDialog?.FileName;
+                //}
 
-                string jobDirectory = Path.GetDirectoryName(path);
+               // string jobDirectory = Path.GetDirectoryName(path);
                 string JobNo = txtJobNo.Text != "" ? txtJobNo.Text : "0000";
                 string customer = comboBoxCustomer.SelectedItem == null ? comboBoxCustomer.Text : comboBoxCustomer.SelectedItem.ToString();
 
                 if (checkBoxDataSummary.Checked)
                 {
-                    string fileName = Path.GetFileName(path);
-                    dataSummaryPdf = $"{jobDirectory}\\{JobNo} - Data Summary.pdf";
+                    string drFileName = Path.GetFileName(path);
+                    //dataSummaryPdf = $"{jobDirectory}\\{JobNo} - Data Summary.pdf";
                     PdfReader pdfReader = new PdfReader(dataSummaryTemplate);
                     //PdfReader pdfReader = new PdfReader(@"C:\Users\Gayan\Documents\MSOL\test data\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf");
 
-                    using (PdfStamper pdfStamper = new PdfStamper(pdfReader, new System.IO.FileStream(dataSummaryPdf, System.IO.FileMode.OpenOrCreate)))
+                    using (PdfStamper pdfStamper = new PdfStamper(pdfReader, new System.IO.FileStream(fileName, System.IO.FileMode.OpenOrCreate)))
                     {
                         pdfStamper.AcroFields.SetField("Date", DateTime.Today.ToShortDateString());
                         pdfStamper.AcroFields.SetField("Job No", JobNo);
                         pdfStamper.AcroFields.SetField("Job Name", txtJobName.Text);
                         pdfStamper.AcroFields.SetField("Customer", customer);
-                        pdfStamper.AcroFields.SetField("Original_File", fileName.Substring(fileName.IndexOf('-') + 1));
+                        pdfStamper.AcroFields.SetField("Original_File", drFileName.Substring(drFileName.IndexOf('-') + 1));
 
                         int j = 0;
                         outputList.Clear();
@@ -140,7 +136,7 @@ namespace JobDocs
 
                     pdfReader.Close();
                 }
-
+                /*
                 if (checkBoxProductionReport.Checked)
                 {
                     PdfReader pdfReader2 = new PdfReader(productioReportTemplate);
@@ -156,6 +152,7 @@ namespace JobDocs
                    
                     pdfReader2.Close();
                 }
+                */
             }
             catch(Exception e)
             {
@@ -169,7 +166,18 @@ namespace JobDocs
 
         private void button1_Click(object sender, EventArgs e)
         {
-            createPdf();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
+            saveFileDialog.FileName = $"{txtJobNo.Text} - Data Summary Sheet.pdf";
+            saveFileDialog.Filter = "PDF|*.pdf";
+            saveFileDialog.ShowDialog();
+            if(saveFileDialog.FileName != null)
+            {
+                createProductionReport(importedJob, $"{Path.GetDirectoryName(saveFileDialog.FileName)}\\{txtJobNo.Text} - Production Report.pdf");
+                createPdf(saveFileDialog.FileName);
+            }
+
+          
 
            // button2.Enabled = true;
         }
@@ -477,13 +485,13 @@ namespace JobDocs
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
-            saveFileDialog.FileName = $"{txtJobNo.Text} - Print Spec Sheet";
+            saveFileDialog.FileName = $"{txtJobNo.Text} - Print Spec Sheet - {getPrintMachine()}";
             saveFileDialog.Filter = "PDF|*.pdf";
             saveFileDialog.ShowDialog();
             if(saveFileDialog.FileName != null)
             {
 
-                getPrintMachine();
+             
 
                 PrintSpecSheet printSpecSheet = new PrintSpecSheet();
 
@@ -503,13 +511,12 @@ namespace JobDocs
                 printSpecSheet.FileName = cmbFileName?.Text;
                 printSpecSheet.PrintMachine = getPrintMachine();
                 printSpecSheet.PrintSize = getPrintSize();
+                printSpecSheet.FinishedSize = getFinishedSize();
                 printSpecSheet.Notes = richTexNotes.Text;
                 printSpecSheet.Stock = getStockDetails();
                 printSpecSheet.Layout = getLayoutInfo();
-                printSpecSheet.Notes = richTexNotes.Text;
                 printSpecSheet.createPdf( saveFileDialog.FileName, printSpecSheet);
 
-                createProductionReport( importedJob,$"{Path.GetDirectoryName(saveFileDialog.FileName)}\\{txtJobNo.Text} - Production Report.pdf" );
             }
 
 
@@ -560,7 +567,7 @@ namespace JobDocs
             string finishedSize = cmbFinishedSize?.SelectedItem.ToString();
             if (finishedSize == "Custom")
             {
-                finishedSize = txtCustomPrintSize.Text;
+                finishedSize = txtCustomFinishedSize.Text;
             }
 
             return finishedSize;
