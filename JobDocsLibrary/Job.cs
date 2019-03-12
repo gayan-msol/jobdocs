@@ -24,17 +24,16 @@ namespace JobDocsLibrary
             Job job = new Job();
             Dolphin dolphin = new Dolphin();
             string response=dolphin.getInfo(dolphin.JobInfo, jobNo);
-            if( response != null)
+            if( response != null && response != "[]")
             {
                 response = response.Replace("note", "JobName");
                 response = response.Replace("ent", "Customer");
                 response = response.Replace("usr", "Owner");
                 response = response.Replace("doc_no", "JobNumber");
                 response = response.Replace("doc_id", "DocID");
-                if (response != "[]")
-                {
+               
                     job = fastJSON.JSON.ToObject<List<Job>>(response)[0];
-                }
+              
 
                 job.ProcessList = JobProcess.GetProcesses(job.DocID);
                 job.PrintInfoList = PrintInfo.GetInfo(job.DocID);

@@ -20,11 +20,11 @@ namespace JobDocsLibrary
             List<JobProcess> processList = new List<JobProcess>();
             Dolphin dolphin = new Dolphin();
             string response = dolphin.getInfo(dolphin.ProcessInfo, doc_id);
-            response = response.Replace("doc_id", "DocID");
-            response = response.Replace("qr_id", "ID");
-            response = response.Replace("Link To", "LinkTo");
+            response = response?.Replace("doc_id", "DocID");
+            response = response?.Replace("qr_id", "ID");
+            response = response?.Replace("Link To", "LinkTo");
 
-            //if (response != "[]")
+            if (response != null && response != "[]")
             {
                 processList = fastJSON.JSON.ToObject<List<JobProcess>>(response);
             }

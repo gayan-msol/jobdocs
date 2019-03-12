@@ -94,8 +94,6 @@ namespace JobDocs
                 string JobNo = txtJobNo.Text != "" ? txtJobNo.Text : "0000";
                 string customer = comboBoxCustomer.SelectedItem == null ? comboBoxCustomer.Text : comboBoxCustomer.SelectedItem.ToString();
 
-                if (checkBoxDataSummary.Checked)
-                {
                     string drFileName = Path.GetFileName(path);
                     //dataSummaryPdf = $"{jobDirectory}\\{JobNo} - Data Summary.pdf";
                     PdfReader pdfReader = new PdfReader(dataSummaryTemplate);
@@ -135,24 +133,7 @@ namespace JobDocs
                     }           
 
                     pdfReader.Close();
-                }
-                /*
-                if (checkBoxProductionReport.Checked)
-                {
-                    PdfReader pdfReader2 = new PdfReader(productioReportTemplate);
-                    //PdfReader pdfReader2 = new PdfReader(@"C:\Users\Gayan\Documents\MSOL\test data\PRODUCTION REPORT SEP17 - TEMPLATE.pdf");
 
-                    using (PdfStamper pdfStamper2 = new PdfStamper(pdfReader2, new System.IO.FileStream($"{jobDirectory}\\{JobNo} - Production Report.pdf", System.IO.FileMode.OpenOrCreate)))
-                    {
-                        pdfStamper2.AcroFields.SetField("Job No", JobNo);
-                        pdfStamper2.AcroFields.SetField("Job Name", txtJobName.Text);
-                        pdfStamper2.AcroFields.SetField("Customer", customer);
-                        pdfStamper2.Close();
-                    }
-                   
-                    pdfReader2.Close();
-                }
-                */
             }
             catch(Exception e)
             {
@@ -173,7 +154,6 @@ namespace JobDocs
             saveFileDialog.ShowDialog();
             if(saveFileDialog.FileName != null)
             {
-                createProductionReport(importedJob, $"{Path.GetDirectoryName(saveFileDialog.FileName)}\\{txtJobNo.Text} - Production Report.pdf");
                 createPdf(saveFileDialog.FileName);
             }
 
@@ -325,6 +305,8 @@ namespace JobDocs
             if (!string.IsNullOrWhiteSpace(openFileDialog.FileName))
             {
                 richTextJobDirectory.Text =Path.GetDirectoryName(openFileDialog.FileName);
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
+
             }
         }
      
@@ -516,7 +498,7 @@ namespace JobDocs
                 printSpecSheet.Stock = getStockDetails();
                 printSpecSheet.Layout = getLayoutInfo();
                 printSpecSheet.createPdf( saveFileDialog.FileName, printSpecSheet);
-
+              //  Print(saveFileDialog.FileName, "RICOH MP C5503 PCL 6");
             }
 
 
@@ -588,7 +570,13 @@ namespace JobDocs
         private string getLayoutInfo()
         {
             string plex = getCheckedRadioButtonValue(groupBoxLayout) ?? "Simplex";
-            return $"{plex} - {numericUpDownUp.Value.ToString()} UP";
+            int sheetsPerSet = (int)numericUpDownSheetsPerRec.Value;
+            if(sheetsPerSet>1)
+            {
+                return $"{plex} - {numericUpDownUp.Value.ToString()} UP - {sheetsPerSet} Sheets Per Set";
+
+            }
+            return $"{plex} - {numericUpDownUp.Value.ToString()} UP ";
         }
 
         private void rb7100_CheckedChanged(object sender, EventArgs e)
@@ -599,7 +587,12 @@ namespace JobDocs
         private void rbDatabase_CheckedChanged(object sender, EventArgs e)
         {
             directoryBranch = rbDatabase.Checked ? DirectoryHelper.databaseBranch : DirectoryHelper.artworkBranch;
-            richTextJobDirectory.Text = DirectoryHelper.getJobDir(txtJobNo.Text, txtCustomer.Text, directoryBranch);
+            if(!string.IsNullOrWhiteSpace( txtJobNo.Text))
+            {
+                richTextJobDirectory.Text = DirectoryHelper.getJobDir(txtJobNo.Text, txtCustomer.Text, directoryBranch);
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
+
+            }
         }
 
         private void cmbPrintSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -610,6 +603,29 @@ namespace JobDocs
         private void cmbFinishedSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtCustomFinishedSize.Enabled = (cmbFinishedSize?.SelectedItem?.ToString() == "Custom");
+        }
+
+        private void tbnClearStreams_Click(object sender, EventArgs e)
+        {
+            dataGridViewStreams.Rows.Clear();
+        }
+
+        private void btnProductionReport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
+            saveFileDialog.FileName = $"{txtJobNo.Text} - Production Report.pdf";
+            saveFileDialog.Filter = "PDF|*.pdf";
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.FileName != null)
+            {
+                createProductionReport(importedJob, saveFileDialog.FileName);
+            }
+        }
+
+        private void rbArtwork_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 } 

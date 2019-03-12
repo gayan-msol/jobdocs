@@ -23,11 +23,11 @@ namespace JobDocsLibrary
             List<PrintInfo> processList = new List<PrintInfo>();
             Dolphin dolphin = new Dolphin();
             string response = dolphin.getInfo(dolphin.PrintProcessInfo, doc_id);
-            response = response.Replace("Print Size", "PrintSize");
-            response = response.Replace("Finished Size", "FinishedSize");
-            response = response.Replace("parent_qr_id", "ProcessID");
-            response = response.Replace("qr_id", "ID");
-            if (response != "[]")
+            response = response?.Replace("Print Size", "PrintSize");
+            response = response?.Replace("Finished Size", "FinishedSize");
+            response = response?.Replace("parent_qr_id", "ProcessID");
+            response = response?.Replace("qr_id", "ID");
+            if (response != null && response != "[]")
             {
                 processList = fastJSON.JSON.ToObject<List<PrintInfo>>(response);
 
