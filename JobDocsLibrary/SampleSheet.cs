@@ -14,13 +14,13 @@ namespace JobDocsLibrary
 
 
 
-        public static DataTable GetSampleRecords(string fileName, string delimiter)
+        public static DataTable GetSampleRecords(string fileName, string delimiter, List<string> selectedColList)
         {
             DataTable dataTable = JobData.GetSourceTable(fileName,delimiter);
             JobData.addIndexColumn(dataTable);
             DataTable sampleTable = dataTable.Clone();
 
-            int nonEmptyRowIndex = getNonEmptyRowIndex(dataTable);
+            int nonEmptyRowIndex = getNonEmptyRowIndex(dataTable, selectedColList);
             if(nonEmptyRowIndex > 0)
             {
                 if(nonEmptyRowIndex +2 <= dataTable.Rows.Count)
@@ -42,15 +42,16 @@ namespace JobDocsLibrary
 
         }
 
-        private static int getNonEmptyRowIndex(DataTable dataTable)
+        private static int getNonEmptyRowIndex(DataTable dataTable, List<string> selectedColList)
         {
             int nonEmptyIndex = 0;
             foreach (DataRow row in dataTable.Rows)
             {
                 bool isEmpty = false;
-                foreach (DataColumn col in dataTable.Columns)
+                //foreach (DataColumn col in dataTable.Columns)
+                foreach(string col in selectedColList)
                 {
-                    if (row[col.ColumnName].ToString() == "")
+                    if (row[col].ToString() == "")
                     {
                         isEmpty = true;
                     }

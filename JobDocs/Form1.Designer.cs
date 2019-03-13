@@ -100,9 +100,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dataGridViewReturnItems = new System.Windows.Forms.DataGridView();
-            this.btnProductionReport = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
+            this.btnProductionReport = new System.Windows.Forms.Button();
+            this.dataGridViewReturnItems = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -121,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -191,7 +193,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.btnSampleSheet);
             this.splitContainer1.Panel1.Controls.Add(this.txtCustomer);
             this.splitContainer1.Panel1.Controls.Add(this.btnImportFromDolphin);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
@@ -204,17 +205,17 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(779, 941);
+            this.splitContainer1.Size = new System.Drawing.Size(631, 941);
             this.splitContainer1.SplitterDistance = 115;
             this.splitContainer1.TabIndex = 26;
             // 
             // btnSampleSheet
             // 
-            this.btnSampleSheet.Location = new System.Drawing.Point(638, 80);
+            this.btnSampleSheet.Location = new System.Drawing.Point(161, 210);
             this.btnSampleSheet.Name = "btnSampleSheet";
-            this.btnSampleSheet.Size = new System.Drawing.Size(132, 23);
+            this.btnSampleSheet.Size = new System.Drawing.Size(145, 52);
             this.btnSampleSheet.TabIndex = 27;
-            this.btnSampleSheet.Text = "Sample Sheet";
+            this.btnSampleSheet.Text = "Sample Sheet Wizard";
             this.btnSampleSheet.UseVisualStyleBackColor = true;
             this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
@@ -240,11 +241,12 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(779, 822);
+            this.tabControl1.Size = new System.Drawing.Size(631, 822);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPage1
@@ -261,14 +263,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(771, 796);
+            this.tabPage1.Size = new System.Drawing.Size(623, 796);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Data Summary";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(515, 469);
+            this.button1.Location = new System.Drawing.Point(484, 469);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 56);
             this.button1.TabIndex = 7;
@@ -298,7 +300,7 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(515, 531);
+            this.button2.Location = new System.Drawing.Point(484, 531);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(122, 56);
             this.button2.TabIndex = 15;
@@ -312,7 +314,7 @@
             this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(257, 230);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 368);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 544);
             this.flowLayoutPanel2.TabIndex = 4;
             // 
             // dateTimePicker1
@@ -347,7 +349,7 @@
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 230);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 368);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 544);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
             this.flowLayoutPanel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
@@ -387,7 +389,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(771, 796);
+            this.tabPage2.Size = new System.Drawing.Size(623, 796);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Print Spec Sheet";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -699,7 +701,7 @@
             0,
             0});
             this.numericUpDownStreamQty.Name = "numericUpDownStreamQty";
-            this.numericUpDownStreamQty.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDownStreamQty.Size = new System.Drawing.Size(55, 20);
             this.numericUpDownStreamQty.TabIndex = 40;
             // 
             // cmbStream
@@ -898,13 +900,14 @@
             this.tabPage3.Text = "Production Report";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewReturnItems
+            // label17
             // 
-            this.dataGridViewReturnItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReturnItems.Location = new System.Drawing.Point(37, 70);
-            this.dataGridViewReturnItems.Name = "dataGridViewReturnItems";
-            this.dataGridViewReturnItems.Size = new System.Drawing.Size(392, 220);
-            this.dataGridViewReturnItems.TabIndex = 0;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(37, 51);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(51, 13);
+            this.label17.TabIndex = 9;
+            this.label17.Text = "Items List";
             // 
             // btnProductionReport
             // 
@@ -916,21 +919,31 @@
             this.btnProductionReport.UseVisualStyleBackColor = true;
             this.btnProductionReport.Click += new System.EventHandler(this.btnProductionReport_Click);
             // 
-            // label17
+            // dataGridViewReturnItems
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(37, 51);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(51, 13);
-            this.label17.TabIndex = 9;
-            this.label17.Text = "Items List";
+            this.dataGridViewReturnItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewReturnItems.Location = new System.Drawing.Point(37, 70);
+            this.dataGridViewReturnItems.Name = "dataGridViewReturnItems";
+            this.dataGridViewReturnItems.Size = new System.Drawing.Size(392, 220);
+            this.dataGridViewReturnItems.TabIndex = 0;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.btnSampleSheet);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(771, 796);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Sample Sheet";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 941);
+            this.ClientSize = new System.Drawing.Size(631, 941);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Job Docs";
@@ -962,6 +975,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).EndInit();
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1042,6 +1056,7 @@
         private System.Windows.Forms.Button btnProductionReport;
         private System.Windows.Forms.DataGridView dataGridViewReturnItems;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TabPage tabPage4;
     }
 }
 

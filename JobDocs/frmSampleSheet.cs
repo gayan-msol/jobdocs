@@ -43,7 +43,17 @@ namespace JobDocs
 
         private void wizardPage2_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            dataGridViewSample.DataSource = SampleSheet.GetSampleRecords(outputFileName, delimiter);
+            List<string> selectedColumnList = new List<string>();
+            foreach (CheckBox c in flowLayoutPanelColumns.Controls)
+            {
+                if(c.Checked)
+                {
+                    selectedColumnList.Add(c.Name.Substring(2).Replace("_"," ")); 
+                }
+            }
+
+
+            dataGridViewSample.DataSource = SampleSheet.GetSampleRecords(outputFileName, delimiter, selectedColumnList);
         }
 
         private void wizardPage1_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -69,6 +79,8 @@ namespace JobDocs
         private void uncheckDTFileds()
         {
             List<string> dtFieldList = columnList.Where(x => !string.IsNullOrWhiteSpace(x) && x.Substring(0,2)=="Dt").ToList();
+            dtFieldList.Add("Source");
+            dtFieldList.Add("MediaSelect");
 
             foreach (var item in dtFieldList)
             {
@@ -80,6 +92,11 @@ namespace JobDocs
         private void rbTab_CheckedChanged(object sender, EventArgs e)
         {
             delimiter = rbTab.Checked ? "\t" : ",";
+        }
+
+        private void wizardPage3_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+        {
+          
         }
     }
 }

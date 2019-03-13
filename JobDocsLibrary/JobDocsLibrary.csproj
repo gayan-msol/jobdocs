@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleSheet.cs" />
     <Compile Include="StockItem.cs" />
+    <Compile Include="StringProcessing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

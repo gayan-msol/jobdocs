@@ -195,7 +195,7 @@ namespace JobDocs
 
         private void Form1_Load(object sender, EventArgs e)
         {  
-            tabControl1.SelectedIndex = 1;
+          //  tabControl1.SelectedIndex = 1;
             txtJobNo.Select();
             rbDatabase.Checked = true;
             rbLSimplex.Checked = true;
@@ -212,6 +212,8 @@ namespace JobDocs
             columnsList.Clear();
             flowLayoutPanel1.Controls.Clear();
             flowLayoutPanel2.Controls.Clear();
+            List<string> itemsList = Address.getDtFieldList();
+
             foreach (string file in files)
             {
                 if (file.Substring(file.Length - 4, 4) == ".txt")
@@ -227,7 +229,16 @@ namespace JobDocs
                 for(int i=0;i<columnsList.Count;i++)
                 {                  
                     flowLayoutPanel1.Controls.Add(new TextBox { Text = columnsList[i], Size = new System.Drawing.Size(150, 25), Name = $"txtBox{i}" });
-                    flowLayoutPanel2.Controls.Add(new ComboBox { DataSource = new List<string>(Address.getDtFieldList()),Size=new System.Drawing.Size(150,25), Name = $"combo{i},", AutoCompleteMode=AutoCompleteMode.SuggestAppend,AutoCompleteSource=AutoCompleteSource.ListItems });
+                    ComboBox comboBox = new ComboBox { Size = new System.Drawing.Size(150, 25) };
+                    flowLayoutPanel2.Controls.Add(comboBox);
+                    comboBox.DataSource = new List<string>(itemsList);
+                    comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    string selection = itemsList.Where(x =>StringProcessing.MatchStrings(x, columnsList[i]) < 2).FirstOrDefault();
+                    if (selection != null)
+                    {
+                        comboBox.SelectedItem = selection;
+                    }
                 }
             }
         }
@@ -347,9 +358,11 @@ namespace JobDocs
 
 
                 setPrintSize(printInfo);
+            cmbFinishedSize.SelectedItem = printInfo.FinishedSize;
                 setPlex(printInfo);
                 setPrintmachine(selectedProcess, printInfo);
                 numericUpDownUp.Value = printInfo?.Up ?? 1;
+            numericUpDownStreamQty.Value = printInfo.Qty;
             
 
             if (stockItem != null)

@@ -103,7 +103,7 @@
             this.rbTab.Checked = true;
             this.rbTab.Location = new System.Drawing.Point(7, 23);
             this.rbTab.Name = "rbTab";
-            this.rbTab.Size = new System.Drawing.Size(44, 19);
+            this.rbTab.Size = new System.Drawing.Size(45, 19);
             this.rbTab.TabIndex = 0;
             this.rbTab.TabStop = true;
             this.rbTab.Text = "Tab";
@@ -145,7 +145,7 @@
             this.checkBoxExcludeDTFields.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxExcludeDTFields.Location = new System.Drawing.Point(87, 31);
             this.checkBoxExcludeDTFields.Name = "checkBoxExcludeDTFields";
-            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(116, 19);
+            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(117, 19);
             this.checkBoxExcludeDTFields.TabIndex = 1;
             this.checkBoxExcludeDTFields.Text = "Exclude DT Fileds";
             this.checkBoxExcludeDTFields.UseVisualStyleBackColor = true;
@@ -153,12 +153,14 @@
             // 
             // flowLayoutPanelColumns
             // 
-            this.flowLayoutPanelColumns.AutoSize = true;
+            this.flowLayoutPanelColumns.AutoScroll = true;
+            this.flowLayoutPanelColumns.AutoScrollMargin = new System.Drawing.Size(5, 5);
+            this.flowLayoutPanelColumns.AutoScrollMinSize = new System.Drawing.Size(5, 5);
             this.flowLayoutPanelColumns.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanelColumns.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelColumns.Location = new System.Drawing.Point(249, 31);
             this.flowLayoutPanelColumns.Name = "flowLayoutPanelColumns";
-            this.flowLayoutPanelColumns.Size = new System.Drawing.Size(164, 329);
+            this.flowLayoutPanelColumns.Size = new System.Drawing.Size(384, 325);
             this.flowLayoutPanelColumns.TabIndex = 0;
             // 
             // wizardPage3
@@ -168,6 +170,7 @@
             this.wizardPage3.Size = new System.Drawing.Size(744, 382);
             this.wizardPage3.TabIndex = 2;
             this.wizardPage3.Text = "Sample Records";
+            this.wizardPage3.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage3_Commit);
             // 
             // dataGridViewSample
             // 
