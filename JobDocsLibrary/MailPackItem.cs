@@ -27,13 +27,13 @@ namespace JobDocsLibrary
             List<MailPackItem> itemList = new List<MailPackItem>();
             Dolphin dolphin = new Dolphin();
             string response = dolphin.getInfo(dolphin.MailPackItemInfo, doc_id);
-            response = response?.Replace("Linked To", "LinkedTo");
-            response = response?.Replace("MP Weight", "Weight");
-            response = response?.Replace("qr_id", "ID");
-            response = response?.Replace("doc_id", "DocID");
-            response = response?.Replace("Return Stock", "Return");
-            response = response?.Replace("Supplied By", "SuppliedBy");
-            response = response?.Replace("Supply Description", "SupplyDescription");
+            response = response?.Replace("\"Linked To\":", "\"LinkedTo\":");
+            response = response?.Replace("\"MP Weight\":", "\"Weight\":");
+            response = response?.Replace("\"qr_id\":", "\"ID\":");
+            response = response?.Replace("\"doc_id\":", "\"DocID\":");
+            response = response?.Replace("\"Return Stock\":", "\"Return\":");
+            response = response?.Replace("\"Supplied By\":", "\"SuppliedBy\":");
+            response = response?.Replace("\"Supply Description\":", "\"SupplyDescription\":");
 
 
             if (response != null && response != "[]")

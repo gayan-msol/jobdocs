@@ -137,8 +137,8 @@ namespace JobDocs
             }
             catch(Exception e)
             {
-         
-                MessageBox.Show(e.Message);
+
+                ErrorHandling.ShowMessage(e);
             }
 
        
@@ -147,15 +147,23 @@ namespace JobDocs
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
-            saveFileDialog.FileName = $"{txtJobNo.Text} - Data Summary Sheet.pdf";
-            saveFileDialog.Filter = "PDF|*.pdf";
-            saveFileDialog.ShowDialog();
-            if(saveFileDialog.FileName != null)
+            try
             {
-                createPdf(saveFileDialog.FileName);
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
+                saveFileDialog.FileName = $"{txtJobNo.Text} - Data Summary Sheet.pdf";
+                saveFileDialog.Filter = "PDF|*.pdf";
+                saveFileDialog.ShowDialog();
+                if (saveFileDialog.FileName != null)
+                {
+                    createPdf(saveFileDialog.FileName);
+                }
             }
+            catch (Exception ex)
+            {
+                ErrorHandling.ShowMessage(ex);
+            }
+  
 
           
 
@@ -172,7 +180,7 @@ namespace JobDocs
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                ErrorHandling.ShowMessage(ex);
             }
 
         }
@@ -189,7 +197,7 @@ namespace JobDocs
                 return true;
             }
             catch (Exception ex)
-            { MessageBox.Show($"An error occurred: '{ex.Message}'"); }
+            { ErrorHandling.ShowMessage(ex); }
             return false;
         }
 
@@ -234,7 +242,11 @@ namespace JobDocs
                     comboBox.DataSource = new List<string>(itemsList);
                     comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                     comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-                    string selection = itemsList.Where(x =>StringProcessing.MatchStrings(x, columnsList[i]) < 2).FirstOrDefault();
+                    string selection = itemsList.Where(x => x == columnsList[i]).FirstOrDefault();
+                    if(selection == null)
+                    {
+                        selection = itemsList.Where(x => StringProcessing.MatchStrings(x, columnsList[i]) < 2).FirstOrDefault();
+                    }
                     if (selection != null)
                     {
                         comboBox.SelectedItem = selection;
@@ -358,11 +370,11 @@ namespace JobDocs
 
 
                 setPrintSize(printInfo);
-            cmbFinishedSize.SelectedItem = printInfo.FinishedSize;
+            cmbFinishedSize.SelectedItem = printInfo?.FinishedSize;
                 setPlex(printInfo);
                 setPrintmachine(selectedProcess, printInfo);
                 numericUpDownUp.Value = printInfo?.Up ?? 1;
-            numericUpDownStreamQty.Value = printInfo.Qty;
+            numericUpDownStreamQty.Value = printInfo?.Qty ?? 0;
             
 
             if (stockItem != null)
@@ -446,7 +458,7 @@ namespace JobDocs
             int printQty = 0;
             printQty = calculatePrintQty(recQty, up, sheetsPerRec);
             
-            return new string[] {/* cmbStream?.SelectedItem?.ToString() + */cmbStream?.Text, numericUpDownStreamQty.Value.ToString(),printQty.ToString()};
+            return new string[] {cmbStream?.Text, numericUpDownStreamQty.Value.ToString(),printQty.ToString()};
         }
 
         private int calculatePrintQty(decimal recQty, decimal recsPerPage, decimal sheetsPerRec)
@@ -478,40 +490,45 @@ namespace JobDocs
 
         private void btnPrintSpecSheet_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
-            saveFileDialog.FileName = $"{txtJobNo.Text} - Print Spec Sheet - {getPrintMachine()}";
-            saveFileDialog.Filter = "PDF|*.pdf";
-            saveFileDialog.ShowDialog();
-            if(saveFileDialog.FileName != null)
+            try
             {
-
-             
-
-                PrintSpecSheet printSpecSheet = new PrintSpecSheet();
-
-                List<string> streamList = new List<string>();
-                foreach (DataGridViewRow row in dataGridViewStreams.Rows)
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
+                saveFileDialog.FileName = $"{txtJobNo.Text} - Print Spec Sheet - {getPrintMachine()}";
+                saveFileDialog.Filter = "PDF|*.pdf";
+                saveFileDialog.ShowDialog();
+                if (saveFileDialog.FileName != null)
                 {
-                    if(row.Cells[0].Value != null)
-                    {
-                        streamList.Add($"Stream {row.Cells["Stream"]?.Value} : Record Qty = {row.Cells["RecordQty"]?.Value}  : Print Qty = {row.Cells["PrintQty"]?.Value}");
+                    PrintSpecSheet printSpecSheet = new PrintSpecSheet();
 
+                    List<string> streamList = new List<string>();
+                    foreach (DataGridViewRow row in dataGridViewStreams.Rows)
+                    {
+                        if (row.Cells[0].Value != null)
+                        {
+                            streamList.Add($"Stream {row.Cells["Stream"]?.Value} : Record Qty = {row.Cells["RecordQty"]?.Value}  : Print Qty = {row.Cells["PrintQty"]?.Value}");
+
+                        }
                     }
+
+                    printSpecSheet.StreamList = streamList;
+                    printSpecSheet.JobNo = txtJobNo.Text;
+                    printSpecSheet.JobDirectory = richTextJobDirectory.Text;
+                    printSpecSheet.FileName = cmbFileName?.Text;
+                    printSpecSheet.PrintMachine = getPrintMachine();
+                    printSpecSheet.PrintSize = getPrintSize();
+                    printSpecSheet.FinishedSize = getFinishedSize();
+                    printSpecSheet.Notes = richTexNotes.Text;
+                    printSpecSheet.Stock = getStockDetails();
+                    printSpecSheet.Layout = getLayoutInfo();
+                    printSpecSheet.createPdf(saveFileDialog.FileName, printSpecSheet);
+                    //  Print(saveFileDialog.FileName, "RICOH MP C5503 PCL 6");
                 }
 
-                printSpecSheet.StreamList = streamList;
-                printSpecSheet.JobNo = txtJobNo.Text;
-                printSpecSheet.JobDirectory = richTextJobDirectory.Text;
-                printSpecSheet.FileName = cmbFileName?.Text;
-                printSpecSheet.PrintMachine = getPrintMachine();
-                printSpecSheet.PrintSize = getPrintSize();
-                printSpecSheet.FinishedSize = getFinishedSize();
-                printSpecSheet.Notes = richTexNotes.Text;
-                printSpecSheet.Stock = getStockDetails();
-                printSpecSheet.Layout = getLayoutInfo();
-                printSpecSheet.createPdf( saveFileDialog.FileName, printSpecSheet);
-              //  Print(saveFileDialog.FileName, "RICOH MP C5503 PCL 6");
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.ShowMessage(ex);
             }
 
 
@@ -519,8 +536,6 @@ namespace JobDocs
 
         private string getPrintMachine()
         {
-           // List<RadioButton> rbList = groupBoxPrintMachine.Controls.OfType<RadioButton>();
-
             foreach (Control item in groupBoxPrintMachine.Controls)
             {
                 if(item is RadioButton radioButton && radioButton.Checked)
@@ -546,8 +561,7 @@ namespace JobDocs
 
         private string getPrintSize()
         {
-            // string printSize = getCheckedRadioButtonValue(groupBoxPaper);
-            string printSize = cmbPrintSize?.SelectedItem.ToString();
+            string printSize = cmbPrintSize?.Text;
             if (printSize == "Custom")
             {
                 printSize = txtCustomPrintSize.Text;
@@ -558,8 +572,7 @@ namespace JobDocs
 
         private string getFinishedSize()
         {
-            // string finishedSize = getCheckedRadioButtonValue(groupBoxFinishedSize);
-            string finishedSize = cmbFinishedSize?.SelectedItem.ToString();
+            string finishedSize = cmbFinishedSize?.Text;
             if (finishedSize == "Custom")
             {
                 finishedSize = txtCustomFinishedSize.Text;
@@ -610,12 +623,12 @@ namespace JobDocs
 
         private void cmbPrintSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtCustomPrintSize.Enabled = (cmbPrintSize.SelectedItem?.ToString() == "Custom");
+            txtCustomPrintSize.Enabled = (cmbPrintSize?.Text == "Custom");
         }
 
         private void cmbFinishedSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtCustomFinishedSize.Enabled = (cmbFinishedSize?.SelectedItem?.ToString() == "Custom");
+            txtCustomFinishedSize.Enabled = (cmbFinishedSize?.Text == "Custom");
         }
 
         private void tbnClearStreams_Click(object sender, EventArgs e)
@@ -638,7 +651,13 @@ namespace JobDocs
 
         private void rbArtwork_CheckedChanged(object sender, EventArgs e)
         {
+            directoryBranch = rbDatabase.Checked ? DirectoryHelper.databaseBranch : DirectoryHelper.artworkBranch;
+            if (!string.IsNullOrWhiteSpace(txtJobNo.Text))
+            {
+                richTextJobDirectory.Text = DirectoryHelper.getJobDir(txtJobNo.Text, txtCustomer.Text, directoryBranch);
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
 
+            }
         }
     }
 } 

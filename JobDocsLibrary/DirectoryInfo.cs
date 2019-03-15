@@ -19,7 +19,7 @@ namespace JobDocsLibrary
           
             if(jobDirectory != null)
             {
-                return Directory.GetFiles(jobDirectory).Select(x => Path.GetFileName(x)).Where( file => validExtensions.Contains(  Path.GetExtension(file)) ).ToList();
+                return Directory.GetFiles(jobDirectory).Select(x => Path.GetFileName(x)).Where( file => validExtensions.Contains(  Path.GetExtension(file).ToLower()) ).ToList();
             }
             else
             {

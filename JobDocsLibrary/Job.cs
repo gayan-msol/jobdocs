@@ -26,11 +26,11 @@ namespace JobDocsLibrary
             string response=dolphin.getInfo(dolphin.JobInfo, jobNo);
             if( response != null && response != "[]")
             {
-                response = response.Replace("note", "JobName");
-                response = response.Replace("ent", "Customer");
-                response = response.Replace("usr", "Owner");
-                response = response.Replace("doc_no", "JobNumber");
-                response = response.Replace("doc_id", "DocID");
+                response = response.Replace("\"note\":", "\"JobName\":");
+                response = response.Replace("\"ent\":", "\"Customer\":");
+                response = response.Replace("\"usr\":", "\"Owner\":");
+                response = response.Replace("\"doc_no\":", "\"JobNumber\":");
+                response = response.Replace("\"doc_id\":", "\"DocID\":");
                
                     job = fastJSON.JSON.ToObject<List<Job>>(response)[0];
               
