@@ -60,11 +60,16 @@ namespace JobDocs
             productionReport.JobNo = job.JobNumber;
             productionReport.Qty = job.Qty;
 
-            List<MailPackItem> returnItems = MailPackItem.GetItems(job.DocID).Where(x => x.Return).ToList();
+           
+            List<string> items = new List<string>();
+            foreach (DataGridViewRow row in dataGridViewReturnItems.Rows)
+            {
+                items.Add(row?.Cells[0]?.Value?.ToString());
+            }
 
-            string[] items = returnItems.Select(y => y.SupplyDescription).ToArray();
+          
 
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < items.Count; i++)
             {
                 PropertyInfo property = productionReport.GetType().GetProperties().Single(z => z.Name == $"Item{i + 1}");
                 property.SetValue(productionReport, items[i]);
@@ -92,7 +97,7 @@ namespace JobDocs
 
                // string jobDirectory = Path.GetDirectoryName(path);
                 string JobNo = txtJobNo.Text != "" ? txtJobNo.Text : "0000";
-                string customer = comboBoxCustomer.SelectedItem == null ? comboBoxCustomer.Text : comboBoxCustomer.SelectedItem.ToString();
+                string customer = txtCustomer.Text;
 
                     string drFileName = Path.GetFileName(path);
                     //dataSummaryPdf = $"{jobDirectory}\\{JobNo} - Data Summary.pdf";
@@ -265,50 +270,7 @@ namespace JobDocs
 
         }
 
-        private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
-        {/*
-            jobNo = txtJobNo.Text;
-            txtJobName.ResetText();
-            customer = comboBoxCustomer.SelectedItem.ToString();
-            jobName = "";
-            if (Directory.Exists($"{clientDirPath}\\{customer}"))
-            {
-                string[] jobList = Directory.GetDirectories($"{clientDirPath}\\{customer}");
-                foreach (string s in jobList)
-                {
-                    jobName = Path.GetFileName(s);
 
-                    if (jobName.Contains(jobNo))
-                    {
-
-                        txtJobName.Text = jobName.Replace($"JOB {jobNo}", "");
-                        jobDirectory = jobName;
-                        txtJobDirectory.Text = s;
-                        break;
-                    }
-
-                }
-            }
-            else if (Directory.Exists($"{miscDirpath}\\{customer}"))
-            {
-                string[] jobList = Directory.GetDirectories($"{miscDirpath}\\{customer}");
-                foreach (string s in jobList)
-                {
-                    jobName = Path.GetFileName(s);
-
-                    if (jobName.Contains(jobNo))
-                    {
-
-                        txtJobName.Text = jobName.Replace($"JOB {jobNo}", "");
-                        jobDirectory = jobName;
-                        txtJobDirectory.Text = s;
-
-                        break;
-                    }
-
-                }
-            }*/
-        }
 
         private void btnSecondStream_Click(object sender, EventArgs e)
         {
@@ -338,7 +300,6 @@ namespace JobDocs
             importedJob = Job.GetJob(txtJobNo.Text);
             if(importedJob != null)
             {
-                comboBoxCustomer.SelectedItem = importedJob.Customer;
                 jobName = txtJobName.Text = importedJob.JobName;
                 customer = txtCustomer.Text = importedJob.Customer;
                 jobNo = txtJobNo.Text;
@@ -352,7 +313,19 @@ namespace JobDocs
                     cmbPrintJobs.DataSource = printProcesses;
                     cmbPrintJobs.DisplayMember = "Name";
                     cmbPrintJobs.Refresh();
+
+                    List<MailPackItem> returnItems = MailPackItem.GetItems(importedJob.DocID).Where(x => x.Return).ToList();
+                    string[] items = returnItems.Select(y => y.SupplyDescription).ToArray();
+
+                    foreach (string item in items)
+                    {
+                        dataGridViewReturnItems.Rows.Add(item);
+                    }
+                   
+
                 }
+
+
             }
             else
             {
@@ -368,13 +341,14 @@ namespace JobDocs
             PrintInfo printInfo = importedJob.PrintInfoList.Where(x => x.ProcessID == selectedProcess.ID).FirstOrDefault();
             MailPackItem stockItem = importedJob.ItemList.Where(x => x.LinkedTo == selectedProcess.LinkTo && !string.IsNullOrWhiteSpace(x.Description) ).FirstOrDefault();
 
+            numericUpDownStreamQty.Value = selectedProcess?.Qty ?? 0;
 
-                setPrintSize(printInfo);
+            setPrintSize(printInfo);
             cmbFinishedSize.SelectedItem = printInfo?.FinishedSize;
                 setPlex(printInfo);
                 setPrintmachine(selectedProcess, printInfo);
                 numericUpDownUp.Value = printInfo?.Up ?? 1;
-            numericUpDownStreamQty.Value = printInfo?.Qty ?? 0;
+          
             
 
             if (stockItem != null)

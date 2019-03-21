@@ -84,8 +84,9 @@ namespace JobDocs
 
             foreach (var item in dtFieldList)
             {
-                CheckBox c = (CheckBox)flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "_")}", true)[0];
-                c.Checked = !checkBoxExcludeDTFields.Checked;
+                Control[] cArr =flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "_")}", true);
+                if(cArr.Length >0 && cArr[0] is CheckBox checkBox)
+                    checkBox.Checked = !checkBoxExcludeDTFields.Checked;
             }
         }
 

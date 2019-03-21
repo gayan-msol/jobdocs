@@ -33,9 +33,7 @@
             this.txtJobName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnSampleSheet = new System.Windows.Forms.Button();
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.btnImportFromDolphin = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -100,10 +98,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
             this.btnProductionReport = new System.Windows.Forms.Button();
             this.dataGridViewReturnItems = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btnSampleSheet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -166,24 +165,6 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Customer";
             // 
-            // comboBoxCustomer
-            // 
-            this.comboBoxCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxCustomer.FormattingEnabled = true;
-            this.comboBoxCustomer.Items.AddRange(new object[] {
-            " ",
-            "SCOTT PRINT",
-            "HYDRAULIC SUPERMARKET",
-            "ADVANCE PRESS",
-            "QUALITY PRESS"});
-            this.comboBoxCustomer.Location = new System.Drawing.Point(938, 14);
-            this.comboBoxCustomer.Name = "comboBoxCustomer";
-            this.comboBoxCustomer.Size = new System.Drawing.Size(85, 21);
-            this.comboBoxCustomer.TabIndex = 1;
-            this.comboBoxCustomer.Visible = false;
-            this.comboBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomer_SelectedIndexChanged);
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -196,7 +177,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.txtCustomer);
             this.splitContainer1.Panel1.Controls.Add(this.btnImportFromDolphin);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBoxCustomer);
             this.splitContainer1.Panel1.Controls.Add(this.txtJobName);
             this.splitContainer1.Panel1.Controls.Add(this.txtJobNo);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
@@ -209,16 +189,6 @@
             this.splitContainer1.SplitterDistance = 115;
             this.splitContainer1.TabIndex = 26;
             // 
-            // btnSampleSheet
-            // 
-            this.btnSampleSheet.Location = new System.Drawing.Point(161, 210);
-            this.btnSampleSheet.Name = "btnSampleSheet";
-            this.btnSampleSheet.Size = new System.Drawing.Size(145, 52);
-            this.btnSampleSheet.TabIndex = 27;
-            this.btnSampleSheet.Text = "Sample Sheet Wizard";
-            this.btnSampleSheet.UseVisualStyleBackColor = true;
-            this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
-            // 
             // txtCustomer
             // 
             this.txtCustomer.Location = new System.Drawing.Point(350, 16);
@@ -228,9 +198,9 @@
             // 
             // btnImportFromDolphin
             // 
-            this.btnImportFromDolphin.Location = new System.Drawing.Point(118, 42);
+            this.btnImportFromDolphin.Location = new System.Drawing.Point(93, 42);
             this.btnImportFromDolphin.Name = "btnImportFromDolphin";
-            this.btnImportFromDolphin.Size = new System.Drawing.Size(75, 23);
+            this.btnImportFromDolphin.Size = new System.Drawing.Size(100, 36);
             this.btnImportFromDolphin.TabIndex = 25;
             this.btnImportFromDolphin.Text = "Import Data";
             this.btnImportFromDolphin.UseVisualStyleBackColor = true;
@@ -889,25 +859,15 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label17);
             this.tabPage3.Controls.Add(this.btnProductionReport);
             this.tabPage3.Controls.Add(this.dataGridViewReturnItems);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(771, 796);
+            this.tabPage3.Size = new System.Drawing.Size(623, 796);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Production Report";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(37, 51);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(51, 13);
-            this.label17.TabIndex = 9;
-            this.label17.Text = "Items List";
             // 
             // btnProductionReport
             // 
@@ -922,10 +882,19 @@
             // dataGridViewReturnItems
             // 
             this.dataGridViewReturnItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewReturnItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1});
             this.dataGridViewReturnItems.Location = new System.Drawing.Point(37, 70);
             this.dataGridViewReturnItems.Name = "dataGridViewReturnItems";
             this.dataGridViewReturnItems.Size = new System.Drawing.Size(392, 220);
             this.dataGridViewReturnItems.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column1.HeaderText = "Return Items";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 92;
             // 
             // tabPage4
             // 
@@ -933,10 +902,20 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(771, 796);
+            this.tabPage4.Size = new System.Drawing.Size(623, 796);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Sample Sheet";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btnSampleSheet
+            // 
+            this.btnSampleSheet.Location = new System.Drawing.Point(161, 210);
+            this.btnSampleSheet.Name = "btnSampleSheet";
+            this.btnSampleSheet.Size = new System.Drawing.Size(145, 52);
+            this.btnSampleSheet.TabIndex = 27;
+            this.btnSampleSheet.Text = "Sample Sheet Wizard";
+            this.btnSampleSheet.UseVisualStyleBackColor = true;
+            this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
             // Form1
             // 
@@ -973,7 +952,6 @@
             this.groupBoxLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -986,7 +964,6 @@
         private System.Windows.Forms.TextBox txtJobName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxCustomer;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btnImportFromDolphin;
         private System.Windows.Forms.TextBox txtCustomer;
@@ -1055,8 +1032,8 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button btnProductionReport;
         private System.Windows.Forms.DataGridView dataGridViewReturnItems;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }
 
