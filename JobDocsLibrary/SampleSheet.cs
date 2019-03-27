@@ -18,9 +18,38 @@ namespace JobDocsLibrary
         {
             DataTable dataTable = JobData.GetSourceTable(fileName,delimiter);
             JobData.addIndexColumn(dataTable);
+            List<string> colList = new List<string>();
+            foreach (DataColumn col in dataTable.Columns)                
+            {
+                colList.Add(col.ColumnName);
+
+                //bool selected = false;
+                //foreach (string colName in selectedColList)
+                //{
+                //    if(col.ColumnName==colName)
+                //    {
+                //        selected = true;
+                //        break;
+                //    }
+                //}
+
+                //if(!selected)
+                //{
+                //    sampleTable.Columns.Remove(col);
+                //}
+            }
+
+            List<string> colsToRemove = colList.Where(x => !selectedColList.Contains(x) && x != "Index").ToList();
+
+            foreach (string item in colsToRemove)
+            {
+                dataTable.Columns.Remove(item);
+            }
+
             DataTable sampleTable = dataTable.Clone();
 
-            int nonEmptyRowIndex = getNonEmptyRowIndex(dataTable, selectedColList);
+
+            int nonEmptyRowIndex = getNonEmptyRowIndex(dataTable);
             if(nonEmptyRowIndex > 0)
             {
                 if(nonEmptyRowIndex +2 <= dataTable.Rows.Count)
@@ -42,14 +71,14 @@ namespace JobDocsLibrary
 
         }
 
-        private static int getNonEmptyRowIndex(DataTable dataTable, List<string> selectedColList)
+        private static int getNonEmptyRowIndex(DataTable dataTable)
         {
             int nonEmptyIndex = 0;
             foreach (DataRow row in dataTable.Rows)
             {
                 bool isEmpty = false;
                 //foreach (DataColumn col in dataTable.Columns)
-                foreach(string col in selectedColList)
+                foreach(DataColumn col in dataTable.Columns)
                 {
                     if (row[col].ToString() == "")
                     {

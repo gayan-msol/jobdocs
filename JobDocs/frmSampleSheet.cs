@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,5 +100,62 @@ namespace JobDocs
         {
           
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+           
+                //Open the print dialog
+                PrintDialog printDialog = new PrintDialog();
+                printDialog.Document = printDocument1;
+                printDialog.UseEXDialog = true;
+                //Get the document
+                if (DialogResult.OK == printDialog.ShowDialog())
+                {
+                    printDocument1.DocumentName = "Test Page Print";
+                    printDocument1.Print();
+                }
+                /*
+                Note: In case you want to show the Print Preview Dialog instead of 
+                Print Dialog then comment the above code and uncomment the following code
+                */
+
+                //Open the print preview dialog
+                //PrintPreviewDialog objPPdialog = new PrintPreviewDialog();
+                //objPPdialog.Document = printDocument1;
+                //objPPdialog.ShowDialog();
+            
+        }
+
+        private void printDocument1_BeginPrint(object sender,
+    System.Drawing.Printing.PrintEventArgs e)
+        {
+            try
+            {
+                strFormat = new StringFormat();
+                strFormat.Alignment = StringAlignment.Near;
+                strFormat.LineAlignment = StringAlignment.Center;
+                strFormat.Trimming = StringTrimming.EllipsisCharacter;
+
+                arrColumnLefts.Clear();
+                arrColumnWidths.Clear();
+                iCellHeight = 0;
+                iCount = 0;
+                bFirstPage = true;
+                bNewPage = true;
+
+                // Calculating Total Widths
+                iTotalWidth = 0;
+                foreach (DataGridViewColumn dgvGridCol in dataGridView1.Columns)
+                {
+                    iTotalWidth += dgvGridCol.Width;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 }

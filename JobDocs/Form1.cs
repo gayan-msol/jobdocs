@@ -65,9 +65,7 @@ namespace JobDocs
             foreach (DataGridViewRow row in dataGridViewReturnItems.Rows)
             {
                 items.Add(row?.Cells[0]?.Value?.ToString());
-            }
-
-          
+            }          
 
             for (int i = 0; i < items.Count; i++)
             {
@@ -87,15 +85,6 @@ namespace JobDocs
             try
             {
 
-                //if(string.IsNullOrWhiteSpace(path))
-                //{
-                //    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                //    saveFileDialog.Filter = ".pdf|PDF";
-                //    saveFileDialog.ShowDialog();
-                //    path = saveFileDialog?.FileName;
-                //}
-
-               // string jobDirectory = Path.GetDirectoryName(path);
                 string JobNo = txtJobNo.Text != "" ? txtJobNo.Text : "0000";
                 string customer = txtCustomer.Text;
 

@@ -41,12 +41,18 @@
             this.flowLayoutPanelColumns = new System.Windows.Forms.FlowLayoutPanel();
             this.wizardPage3 = new AeroWizard.WizardPage();
             this.dataGridViewSample = new System.Windows.Forms.DataGridView();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.wizardPage2.SuspendLayout();
             this.wizardPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSample)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -59,7 +65,7 @@
             this.wizardControl1.Pages.Add(this.wizardPage1);
             this.wizardControl1.Pages.Add(this.wizardPage2);
             this.wizardControl1.Pages.Add(this.wizardPage3);
-            this.wizardControl1.Size = new System.Drawing.Size(791, 536);
+            this.wizardControl1.Size = new System.Drawing.Size(806, 552);
             this.wizardControl1.TabIndex = 0;
             this.wizardControl1.Text = "Sample Sheet Creation Wizard";
             this.wizardControl1.Title = "Sample Sheet Creation Wizard";
@@ -165,9 +171,9 @@
             // 
             // wizardPage3
             // 
-            this.wizardPage3.Controls.Add(this.dataGridViewSample);
+            this.wizardPage3.Controls.Add(this.splitContainer1);
             this.wizardPage3.Name = "wizardPage3";
-            this.wizardPage3.Size = new System.Drawing.Size(744, 382);
+            this.wizardPage3.Size = new System.Drawing.Size(759, 398);
             this.wizardPage3.TabIndex = 2;
             this.wizardPage3.Text = "Sample Records";
             this.wizardPage3.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage3_Commit);
@@ -178,14 +184,42 @@
             this.dataGridViewSample.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSample.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewSample.Name = "dataGridViewSample";
-            this.dataGridViewSample.Size = new System.Drawing.Size(744, 382);
+            this.dataGridViewSample.Size = new System.Drawing.Size(759, 350);
             this.dataGridViewSample.TabIndex = 0;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(646, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(110, 38);
+            this.btnPrint.TabIndex = 1;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewSample);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
+            this.splitContainer1.Size = new System.Drawing.Size(759, 398);
+            this.splitContainer1.SplitterDistance = 350;
+            this.splitContainer1.TabIndex = 2;
             // 
             // frmSampleSheet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(791, 536);
+            this.ClientSize = new System.Drawing.Size(806, 552);
             this.Controls.Add(this.wizardControl1);
             this.Name = "frmSampleSheet";
             this.Text = "SampleSheet";
@@ -197,6 +231,10 @@
             this.wizardPage2.PerformLayout();
             this.wizardPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSample)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -215,5 +253,7 @@
         private System.Windows.Forms.RadioButton rbTab;
         private AeroWizard.WizardPage wizardPage3;
         private System.Windows.Forms.DataGridView dataGridViewSample;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
