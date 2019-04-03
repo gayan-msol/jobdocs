@@ -18,13 +18,16 @@ namespace JobDocs
         string outputFileName = "";
         List<string> columnList = new List<string>();
         string delimiter = "\t";
+        DataTable sampleTable = new DataTable();
 
+        private DataGridPrinter dataGridPrinter1 = null;
 
         public frmSampleSheet()
         {
             InitializeComponent();
             wizardPage1.AllowNext = false;
             rbTab.Checked = true;
+           
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -54,7 +57,9 @@ namespace JobDocs
             }
 
 
-            dataGridViewSample.DataSource = SampleSheet.GetSampleRecords(outputFileName, delimiter, selectedColumnList);
+            dataGridViewSample.DataSource =sampleTable= SampleSheet.GetSampleRecords(outputFileName, delimiter, selectedColumnList);
+
+            SetupGridPrinter();
         }
 
         private void wizardPage1_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -100,60 +105,60 @@ namespace JobDocs
         {
           
         }
-
+        
         private void btnPrint_Click(object sender, EventArgs e)
         {
-           
-                //Open the print dialog
-                PrintDialog printDialog = new PrintDialog();
-                printDialog.Document = printDocument1;
-                printDialog.UseEXDialog = true;
-                //Get the document
-                if (DialogResult.OK == printDialog.ShowDialog())
-                {
-                    printDocument1.DocumentName = "Test Page Print";
-                    printDocument1.Print();
-                }
-                /*
-                Note: In case you want to show the Print Preview Dialog instead of 
-                Print Dialog then comment the above code and uncomment the following code
-                */
+            dataGridPrinter1.PageNumber = 1;
+            dataGridPrinter1.RowCount = 0;
+            if (printDialog1.ShowDialog() == DialogResult.OK)
+            {
+                printDocument1.Print();
+            }
 
-                //Open the print preview dialog
-                //PrintPreviewDialog objPPdialog = new PrintPreviewDialog();
-                //objPPdialog.Document = printDocument1;
-                //objPPdialog.ShowDialog();
-            
+            ////Open the print dialog
+            //PrintDialog printDialog = new PrintDialog();
+            //printDialog.Document = printDocument1;
+            //printDialog.UseEXDialog = true;
+            ////Get the document
+            //if (DialogResult.OK == printDialog.ShowDialog())
+            //{
+            //    printDocument1.DocumentName = "Test Page Print";
+            //    printDocument1.Print();
+            //}
+
+            // Note: In case you want to show the Print Preview Dialog instead of 
+            //  Print Dialog then comment the above code and uncomment the following code
+
+
+            //Open the print preview dialog
+            //PrintPreviewDialog objPPdialog = new PrintPreviewDialog();
+            //objPPdialog.Document = printDocument1;
+            //objPPdialog.ShowDialog();
+
+        }
+        //void DrawTopLabel(Graphics g)
+        //{
+        //    int TopMargin = printDocument1.DefaultPageSettings.Margins.Top;
+
+        //    g.FillRectangle(new SolidBrush(label1.BackColor), label1.Location.X, label1.Location.Y + TopMargin, label1.Size.Width, label1.Size.Height);
+        //    g.DrawString(label1.Text, label1.Font, new SolidBrush(label1.ForeColor), label1.Location.X + 50, label1.Location.Y + TopMargin, new StringFormat());
+        //}
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Graphics g = e.Graphics;
+           // DrawTopLabel(g);
+            bool more = dataGridPrinter1.DrawDataGrid(g);
+            if (more == true)
+            {
+                e.HasMorePages = true;
+                dataGridPrinter1.PageNumber++;
+            }
         }
 
-        private void printDocument1_BeginPrint(object sender,
-    System.Drawing.Printing.PrintEventArgs e)
+        void SetupGridPrinter()
         {
-            try
-            {
-                strFormat = new StringFormat();
-                strFormat.Alignment = StringAlignment.Near;
-                strFormat.LineAlignment = StringAlignment.Center;
-                strFormat.Trimming = StringTrimming.EllipsisCharacter;
-
-                arrColumnLefts.Clear();
-                arrColumnWidths.Clear();
-                iCellHeight = 0;
-                iCount = 0;
-                bFirstPage = true;
-                bNewPage = true;
-
-                // Calculating Total Widths
-                iTotalWidth = 0;
-                foreach (DataGridViewColumn dgvGridCol in dataGridView1.Columns)
-                {
-                    iTotalWidth += dgvGridCol.Width;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            dataGridPrinter1 = new DataGridPrinter(dataGridViewSample, printDocument1,sampleTable);
         }
 
 

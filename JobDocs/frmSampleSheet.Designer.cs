@@ -40,19 +40,21 @@
             this.checkBoxExcludeDTFields = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanelColumns = new System.Windows.Forms.FlowLayoutPanel();
             this.wizardPage3 = new AeroWizard.WizardPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewSample = new System.Windows.Forms.DataGridView();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.wizardPage2.SuspendLayout();
             this.wizardPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSample)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSample)).BeginInit();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -77,7 +79,7 @@
             this.wizardPage1.Controls.Add(this.richTextOutputFilePath);
             this.wizardPage1.Controls.Add(this.btnBrowse);
             this.wizardPage1.Name = "wizardPage1";
-            this.wizardPage1.Size = new System.Drawing.Size(744, 382);
+            this.wizardPage1.Size = new System.Drawing.Size(759, 398);
             this.wizardPage1.TabIndex = 0;
             this.wizardPage1.Text = "Import Output File";
             this.wizardPage1.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage1_Commit);
@@ -109,7 +111,7 @@
             this.rbTab.Checked = true;
             this.rbTab.Location = new System.Drawing.Point(7, 23);
             this.rbTab.Name = "rbTab";
-            this.rbTab.Size = new System.Drawing.Size(45, 19);
+            this.rbTab.Size = new System.Drawing.Size(44, 19);
             this.rbTab.TabIndex = 0;
             this.rbTab.TabStop = true;
             this.rbTab.Text = "Tab";
@@ -139,7 +141,7 @@
             this.wizardPage2.Controls.Add(this.checkBoxExcludeDTFields);
             this.wizardPage2.Controls.Add(this.flowLayoutPanelColumns);
             this.wizardPage2.Name = "wizardPage2";
-            this.wizardPage2.Size = new System.Drawing.Size(744, 382);
+            this.wizardPage2.Size = new System.Drawing.Size(759, 398);
             this.wizardPage2.TabIndex = 1;
             this.wizardPage2.Text = "Select Columns";
             this.wizardPage2.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage2_Commit);
@@ -151,7 +153,7 @@
             this.checkBoxExcludeDTFields.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxExcludeDTFields.Location = new System.Drawing.Point(87, 31);
             this.checkBoxExcludeDTFields.Name = "checkBoxExcludeDTFields";
-            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(117, 19);
+            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(116, 19);
             this.checkBoxExcludeDTFields.TabIndex = 1;
             this.checkBoxExcludeDTFields.Text = "Exclude DT Fileds";
             this.checkBoxExcludeDTFields.UseVisualStyleBackColor = true;
@@ -178,6 +180,24 @@
             this.wizardPage3.Text = "Sample Records";
             this.wizardPage3.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage3_Commit);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewSample);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
+            this.splitContainer1.Size = new System.Drawing.Size(759, 398);
+            this.splitContainer1.SplitterDistance = 350;
+            this.splitContainer1.TabIndex = 2;
+            // 
             // dataGridViewSample
             // 
             this.dataGridViewSample.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -197,23 +217,14 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // splitContainer1
+            // printDocument1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
-            // splitContainer1.Panel1
+            // printDialog1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewSample);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
-            this.splitContainer1.Size = new System.Drawing.Size(759, 398);
-            this.splitContainer1.SplitterDistance = 350;
-            this.splitContainer1.TabIndex = 2;
+            this.printDialog1.Document = this.printDocument1;
+            this.printDialog1.UseEXDialog = true;
             // 
             // frmSampleSheet
             // 
@@ -230,11 +241,11 @@
             this.wizardPage2.ResumeLayout(false);
             this.wizardPage2.PerformLayout();
             this.wizardPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSample)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSample)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -255,5 +266,7 @@
         private System.Windows.Forms.DataGridView dataGridViewSample;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintDialog printDialog1;
     }
 }

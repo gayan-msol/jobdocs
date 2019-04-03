@@ -958,4 +958,10 @@
         QMADAADAAwAAwAMAAMADAADAAwAAwAOf/8AD5f/AA5n/wAOZ/8ADmP/AA5T/wAOO/8AD+P/AB/j/
 </value>
   </data>
+  <metadata name="printDocument1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="printDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>158, 17</value>
+  </metadata>
 </root>
