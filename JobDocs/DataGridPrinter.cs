@@ -8,15 +8,6 @@ using System.Collections;
 namespace JobDocs
 {
 
-	/// ************************ DataGridPrinter ********************
-	/// By Michael Gold
-	/// Copyright 2002.  All Rights Reserved
-	/// *********************************************************
-
-
-	/// <summary>
-	/// Summary description for DataGridPrinter.
-	/// </summary>
 	public class DataGridPrinter
 	{
 
@@ -39,9 +30,7 @@ namespace JobDocs
 
 		public DataGridPrinter(DataGridView aGrid, PrintDocument aPrintDocument, DataTable aTable)
 		{
-			//
-			// TODO: Add constructor logic here
-			//
+		
 			TheDataGrid = aGrid;
 			ThePrintDocument = aPrintDocument;
 			TheTable = aTable;
@@ -57,11 +46,11 @@ namespace JobDocs
 		{
 			SolidBrush ForeBrush = new SolidBrush(SystemColors.InfoText);
 			SolidBrush BackBrush = new SolidBrush(SystemColors.Window);
-			Pen TheLinePen = new Pen(SystemColors.WindowText, 1);
+			Pen TheLinePen = new Pen(SystemColors.WindowText, 2);
 			StringFormat cellformat = new StringFormat();
 			cellformat.Trimming = StringTrimming.EllipsisCharacter;
 			cellformat.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.LineLimit;
-
+            Font headerFont = new Font("Calibri", 10, FontStyle.Bold);
 
 
 			int columnwidth = PageWidth/TheTable.Columns.Count;
@@ -91,7 +80,7 @@ namespace JobDocs
 
 				if (startxposition + TheDataGrid.Columns[k].Width <= PageWidth)
 				{
-					g.DrawString(nextcolumn, SystemFonts.DefaultFont, ForeBrush, cellbounds, cellformat);
+					g.DrawString(nextcolumn, headerFont, ForeBrush, cellbounds, cellformat);
 				}
 
 				startxposition = startxposition + TheDataGrid.Columns[k].Width;
@@ -99,7 +88,7 @@ namespace JobDocs
 			}
 	
 			//if (TheDataGrid.GridLineStyle != DataGridLineStyle.None)
-				g.DrawLine(TheLinePen, TheDataGrid.Location.X, nextcellbounds.Bottom, PageWidth, nextcellbounds.Bottom);
+				g.DrawLine(TheLinePen, TheDataGrid.Location.X + leftMargin, nextcellbounds.Bottom, PageWidth, nextcellbounds.Bottom);
 		}
 
 		public bool DrawRows(Graphics g)
@@ -109,14 +98,14 @@ namespace JobDocs
 			try
 			{
 				SolidBrush ForeBrush = new SolidBrush(TheDataGrid.ForeColor);
-				SolidBrush BackBrush = new SolidBrush(TheDataGrid.BackColor);
-				SolidBrush AlternatingBackBrush = new SolidBrush(TheDataGrid.BackgroundColor);
+				SolidBrush BackBrush = new SolidBrush(SystemColors.Window);
+				SolidBrush AlternatingBackBrush = new SolidBrush(SystemColors.ControlLight);
 				Pen TheLinePen = new Pen(TheDataGrid.ForeColor, 1);
 				StringFormat cellformat = new StringFormat();
 				cellformat.Trimming = StringTrimming.EllipsisCharacter;
 				cellformat.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.LineLimit;
 				int columnwidth = PageWidth/TheTable.Columns.Count;
-
+                columnwidth = 0;
 				int initialRowCount = RowCount;
 
 				RectangleF RowBounds  = new RectangleF(0, 0, 0, 0);
@@ -150,7 +139,11 @@ namespace JobDocs
 
 					for (int j = 0; j < TheDataGrid.Columns.Count; j++)
 					{
-						RectangleF cellbounds = new RectangleF(startxposition, 
+
+                        columnwidth = TheDataGrid.Columns[j].Width;
+
+
+                        RectangleF cellbounds = new RectangleF(startxposition, 
 							TheDataGrid.Location.Y + TopMargin + ((RowCount - initialRowCount) + 1) * (TheDataGrid.Font.SizeInPoints  + kVerticalCellLeeway),
 							columnwidth, 
 							TheDataGrid.Font.SizeInPoints + kVerticalCellLeeway);
@@ -164,7 +157,7 @@ namespace JobDocs
 
 						startxposition = startxposition + columnwidth;
 
-                        DrawVerticalGridLines(g, TheLinePen, TheDataGrid.Columns[j].Width, lastRowBottom);
+                        g.DrawLine(TheLinePen, startxposition, TheDataGrid.Location.Y + TopMargin,startxposition,lastRowBottom);
 
                     }
 
@@ -173,7 +166,7 @@ namespace JobDocs
 					if (RowCount * (TheDataGrid.Font.SizeInPoints  + kVerticalCellLeeway) > (PageHeight * PageNumber) - (BottomMargin+TopMargin))
 					{
 						DrawHorizontalLines(g, Lines);
-					//	DrawVerticalGridLines(g, TheLinePen, columnwidth, lastRowBottom);
+						//DrawVerticalGridLines(g, TheLinePen, columnwidth, lastRowBottom);
 						return true;
 					}
 
@@ -181,8 +174,8 @@ namespace JobDocs
 				}
 
 				DrawHorizontalLines(g, Lines);
-				//DrawVerticalGridLines(g, TheLinePen, columnwidth, lastRowBottom);
-				return false;
+               // DrawVerticalGridLines(g, TheLinePen, columnwidth, lastRowBottom);
+                return false;
 
 			}
 			catch (Exception ex)

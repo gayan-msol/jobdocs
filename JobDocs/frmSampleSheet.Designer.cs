@@ -175,6 +175,7 @@
             // 
             this.wizardPage3.Controls.Add(this.splitContainer1);
             this.wizardPage3.Name = "wizardPage3";
+            this.wizardPage3.ShowNext = false;
             this.wizardPage3.Size = new System.Drawing.Size(759, 398);
             this.wizardPage3.TabIndex = 2;
             this.wizardPage3.Text = "Sample Records";

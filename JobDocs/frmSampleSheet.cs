@@ -115,34 +115,8 @@ namespace JobDocs
                 printDocument1.Print();
             }
 
-            ////Open the print dialog
-            //PrintDialog printDialog = new PrintDialog();
-            //printDialog.Document = printDocument1;
-            //printDialog.UseEXDialog = true;
-            ////Get the document
-            //if (DialogResult.OK == printDialog.ShowDialog())
-            //{
-            //    printDocument1.DocumentName = "Test Page Print";
-            //    printDocument1.Print();
-            //}
-
-            // Note: In case you want to show the Print Preview Dialog instead of 
-            //  Print Dialog then comment the above code and uncomment the following code
-
-
-            //Open the print preview dialog
-            //PrintPreviewDialog objPPdialog = new PrintPreviewDialog();
-            //objPPdialog.Document = printDocument1;
-            //objPPdialog.ShowDialog();
-
         }
-        //void DrawTopLabel(Graphics g)
-        //{
-        //    int TopMargin = printDocument1.DefaultPageSettings.Margins.Top;
 
-        //    g.FillRectangle(new SolidBrush(label1.BackColor), label1.Location.X, label1.Location.Y + TopMargin, label1.Size.Width, label1.Size.Height);
-        //    g.DrawString(label1.Text, label1.Font, new SolidBrush(label1.ForeColor), label1.Location.X + 50, label1.Location.Y + TopMargin, new StringFormat());
-        //}
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
@@ -158,6 +132,9 @@ namespace JobDocs
 
         void SetupGridPrinter()
         {
+            printDocument1.DefaultPageSettings.PaperSize = new PaperSize("A4", 1170, 830);
+            printDocument1.DefaultPageSettings.Landscape = true;
+
             dataGridPrinter1 = new DataGridPrinter(dataGridViewSample, printDocument1,sampleTable);
         }
 
