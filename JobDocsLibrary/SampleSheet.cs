@@ -39,7 +39,7 @@ namespace JobDocsLibrary
                 //}
             }
 
-            List<string> colsToRemove = colList.Where(x => !selectedColList.Contains(x) && x != "Index").ToList();
+            List<string> colsToRemove = colList.Where(x => !selectedColList.Contains(x) && x != "RowIndex").ToList();
 
             foreach (string item in colsToRemove)
             {
@@ -87,7 +87,7 @@ namespace JobDocsLibrary
                 }
                 if (!isEmpty)
                 {
-                    nonEmptyIndex = int.Parse(row["Index"].ToString());
+                    nonEmptyIndex = int.Parse(row["RowIndex"].ToString());
                     return nonEmptyIndex;
                 }
             }

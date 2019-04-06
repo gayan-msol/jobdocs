@@ -17,10 +17,10 @@ namespace JobDocsLibrary
 
         public static void addIndexColumn(DataTable dataTable)
         {
-            dataTable.Columns.Add("Index");
+            dataTable.Columns.Add("RowIndex");
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
-                dataTable.Rows[i]["Index"] = i + 1;
+                dataTable.Rows[i]["RowIndex"] = i + 1;
             }
         }
 

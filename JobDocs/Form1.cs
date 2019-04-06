@@ -622,5 +622,10 @@ namespace JobDocs
 
             }
         }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 } 

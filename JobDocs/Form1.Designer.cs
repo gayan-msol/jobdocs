@@ -185,8 +185,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(631, 941);
-            this.splitContainer1.SplitterDistance = 115;
+            this.splitContainer1.Size = new System.Drawing.Size(631, 749);
+            this.splitContainer1.SplitterDistance = 91;
             this.splitContainer1.TabIndex = 26;
             // 
             // txtCustomer
@@ -216,7 +216,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(631, 822);
+            this.tabControl1.Size = new System.Drawing.Size(631, 654);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPage1
@@ -233,7 +233,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(623, 796);
+            this.tabPage1.Size = new System.Drawing.Size(623, 628);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Data Summary";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -902,14 +902,15 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(623, 796);
+            this.tabPage4.Size = new System.Drawing.Size(623, 628);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Sample Sheet";
             this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
             // btnSampleSheet
             // 
-            this.btnSampleSheet.Location = new System.Drawing.Point(161, 210);
+            this.btnSampleSheet.Location = new System.Drawing.Point(22, 18);
             this.btnSampleSheet.Name = "btnSampleSheet";
             this.btnSampleSheet.Size = new System.Drawing.Size(145, 52);
             this.btnSampleSheet.TabIndex = 27;
@@ -922,7 +923,7 @@
             this.AcceptButton = this.btnImportFromDolphin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 941);
+            this.ClientSize = new System.Drawing.Size(631, 749);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Job Docs";
