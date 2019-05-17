@@ -185,8 +185,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(631, 749);
-            this.splitContainer1.SplitterDistance = 91;
+            this.splitContainer1.Size = new System.Drawing.Size(631, 879);
+            this.splitContainer1.SplitterDistance = 106;
             this.splitContainer1.TabIndex = 26;
             // 
             // txtCustomer
@@ -216,7 +216,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(631, 654);
+            this.tabControl1.Size = new System.Drawing.Size(631, 769);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPage1
@@ -233,7 +233,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(623, 628);
+            this.tabPage1.Size = new System.Drawing.Size(623, 743);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Data Summary";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -359,7 +359,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(623, 796);
+            this.tabPage2.Size = new System.Drawing.Size(623, 743);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Print Spec Sheet";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -533,12 +533,12 @@
             // 
             this.groupBoxColour.Controls.Add(this.rbCBlack);
             this.groupBoxColour.Controls.Add(this.rbCColour);
-            this.groupBoxColour.Enabled = false;
             this.groupBoxColour.Location = new System.Drawing.Point(174, 10);
             this.groupBoxColour.Name = "groupBoxColour";
             this.groupBoxColour.Size = new System.Drawing.Size(67, 53);
             this.groupBoxColour.TabIndex = 23;
             this.groupBoxColour.TabStop = false;
+            this.groupBoxColour.Visible = false;
             // 
             // rbCBlack
             // 
@@ -864,7 +864,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(623, 796);
+            this.tabPage3.Size = new System.Drawing.Size(623, 743);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Production Report";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -902,7 +902,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(623, 628);
+            this.tabPage4.Size = new System.Drawing.Size(623, 743);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Sample Sheet";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -923,7 +923,7 @@
             this.AcceptButton = this.btnImportFromDolphin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 749);
+            this.ClientSize = new System.Drawing.Size(631, 879);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Job Docs";

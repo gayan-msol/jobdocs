@@ -66,6 +66,7 @@
     <Compile Include="PrintSpecSheet.cs" />
     <Compile Include="ProductionReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleRecord.cs" />
     <Compile Include="SampleSheet.cs" />
     <Compile Include="StockItem.cs" />
     <Compile Include="StringProcessing.cs" />

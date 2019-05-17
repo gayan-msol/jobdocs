@@ -96,6 +96,30 @@ namespace JobDocs
             }
         }
 
+        private void uncheckAllFileds()
+        {
+            List<string> dtFieldList = columnList.Where(x => !string.IsNullOrWhiteSpace(x) && x.Substring(0, 2) == "Dt").ToList();
+            dtFieldList.Add("Source");
+            dtFieldList.Add("MediaSelect");
+
+            foreach (var item in dtFieldList)
+            {
+                Control[] cArr = flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "_")}", true);
+                if (cArr.Length > 0 && cArr[0] is CheckBox checkBox)
+                    checkBox.Checked = !checkBoxExcludeDTFields.Checked;
+            }
+
+            foreach (Control c in flowLayoutPanelColumns.Controls)
+            {
+                if(c is CheckBox cb)
+                {
+                    cb.Checked = !checkBoxUncheckAll.Checked;
+                }
+            }
+        }
+
+
+
         private void rbTab_CheckedChanged(object sender, EventArgs e)
         {
             delimiter = rbTab.Checked ? "\t" : ",";
@@ -138,6 +162,9 @@ namespace JobDocs
             dataGridPrinter1 = new DataGridPrinter(dataGridViewSample, printDocument1,sampleTable);
         }
 
-
+        private void checkBoxUncheckAll_CheckedChanged(object sender, EventArgs e)
+        {
+            uncheckAllFileds();
+        }
     }
 }

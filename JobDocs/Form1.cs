@@ -305,7 +305,7 @@ namespace JobDocs
 
                     List<MailPackItem> returnItems = MailPackItem.GetItems(importedJob.DocID).Where(x => x.Return).ToList();
                     string[] items = returnItems.Select(y => y.SupplyDescription).ToArray();
-
+                    dataGridViewReturnItems.Rows.Clear();
                     foreach (string item in items)
                     {
                         dataGridViewReturnItems.Rows.Add(item);
@@ -570,7 +570,7 @@ namespace JobDocs
 
         private void rb7100_CheckedChanged(object sender, EventArgs e)
         {
-            groupBoxColour.Enabled = rbM7100.Checked;
+            groupBoxColour.Visible = rbM7100.Checked;
         }
 
         private void rbDatabase_CheckedChanged(object sender, EventArgs e)
@@ -601,6 +601,8 @@ namespace JobDocs
 
         private void btnProductionReport_Click(object sender, EventArgs e)
         {
+
+
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
             saveFileDialog.FileName = $"{txtJobNo.Text} - Production Report.pdf";
