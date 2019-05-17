@@ -24,7 +24,6 @@ namespace JobDocsLibrary
             }
         }
 
-
         public static List<string> GetColumnList(string fileName, string delimiter)
         {
             return TextFileRW.getColumns(fileName, delimiter);

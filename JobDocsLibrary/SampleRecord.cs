@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JobDocsLibrary
 {
-    public class SampleRecord
+    public class Record
     {
         public int Index { get; set; }
         public int EmptyColCount { get; set; }

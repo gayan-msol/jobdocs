@@ -19,6 +19,7 @@ namespace JobDocs
         List<string> columnList = new List<string>();
         string delimiter = "\t";
         DataTable sampleTable = new DataTable();
+        DataTable sourceTable = new DataTable();
 
         private DataGridPrinter dataGridPrinter1 = null;
 
@@ -40,6 +41,7 @@ namespace JobDocs
             {
                 outputFileName = openFileDialog.FileName;
                 richTextOutputFilePath.Text = outputFileName;
+                sourceTable = JobData.GetSourceTable(outputFileName, delimiter);
                 wizardPage1.AllowNext = true ;
 
             }
@@ -57,7 +59,7 @@ namespace JobDocs
             }
 
 
-            dataGridViewSample.DataSource =sampleTable= SampleSheet.GetSampleRecords(outputFileName, delimiter, selectedColumnList);
+            dataGridViewSample.DataSource =sampleTable= SampleSheet.GetSampleTable(sourceTable, selectedColumnList);
 
             SetupGridPrinter();
         }

@@ -112,7 +112,7 @@
             this.rbTab.Checked = true;
             this.rbTab.Location = new System.Drawing.Point(7, 23);
             this.rbTab.Name = "rbTab";
-            this.rbTab.Size = new System.Drawing.Size(45, 19);
+            this.rbTab.Size = new System.Drawing.Size(44, 19);
             this.rbTab.TabIndex = 0;
             this.rbTab.TabStop = true;
             this.rbTab.Text = "Tab";
@@ -166,7 +166,7 @@
             this.checkBoxExcludeDTFields.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxExcludeDTFields.Location = new System.Drawing.Point(87, 31);
             this.checkBoxExcludeDTFields.Name = "checkBoxExcludeDTFields";
-            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(117, 19);
+            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(116, 19);
             this.checkBoxExcludeDTFields.TabIndex = 1;
             this.checkBoxExcludeDTFields.Text = "Exclude DT Fileds";
             this.checkBoxExcludeDTFields.UseVisualStyleBackColor = true;
@@ -187,6 +187,7 @@
             // wizardPage3
             // 
             this.wizardPage3.Controls.Add(this.splitContainer1);
+            this.wizardPage3.IsFinishPage = true;
             this.wizardPage3.Name = "wizardPage3";
             this.wizardPage3.ShowNext = false;
             this.wizardPage3.Size = new System.Drawing.Size(759, 398);
