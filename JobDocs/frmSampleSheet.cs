@@ -54,7 +54,7 @@ namespace JobDocs
             {
                 if(c.Checked)
                 {
-                    selectedColumnList.Add(c.Name.Substring(2).Replace("_"," ")); 
+                    selectedColumnList.Add(c.Name.Substring(2).Replace("%"," ")); 
                 }
             }
 
@@ -66,11 +66,12 @@ namespace JobDocs
 
         private void wizardPage1_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
+            columnList.Clear();
             columnList = JobData.GetColumnList(outputFileName, delimiter);
             foreach (var item in columnList)
             {
                 CheckBox checkBox = new CheckBox();
-                checkBox.Name = $"cb{item.Replace(" ","_")}";
+                checkBox.Name = $"cb{item.Replace(" ","%")}";
                 checkBox.Text = item;
                 checkBox.AutoSize = true;
                 checkBox.Checked = true;
