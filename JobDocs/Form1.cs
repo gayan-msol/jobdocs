@@ -13,6 +13,7 @@ using System.Threading;
 using System.IO;
 using System.Drawing.Printing;
 using JobDocsLibrary;
+using DolphinLibrary;
 using System.Reflection;
 
 
@@ -51,7 +52,7 @@ namespace JobDocs
         }
 
 
-        private void createProductionReport(Job job,string fileName)
+        private void createProductionReport(DolphinLibrary.Job job,string fileName)
         {
             ProductionReport productionReport = new ProductionReport();
 
@@ -197,7 +198,7 @@ namespace JobDocs
 
         private void Form1_Load(object sender, EventArgs e)
         {  
-          //  tabControl1.SelectedIndex = 1;
+            tabControl1.SelectedIndex = 1;
             txtJobNo.Select();
             rbDatabase.Checked = true;
             rbLSimplex.Checked = true;
@@ -292,12 +293,19 @@ namespace JobDocs
                 jobName = txtJobName.Text = importedJob.JobName;
                 customer = txtCustomer.Text = importedJob.Customer;
                 jobNo = txtJobNo.Text;
-                jobDirectory = richTextJobDirectory.Text = DirectoryHelper.getJobDir(jobNo, customer, directoryBranch);
+               // jobDirectory = richTextJobDirectory.Text = DirectoryHelper.getJobDir(jobNo, customer, directoryBranch);
+                jobDirectory = richTextJobDirectory.Text = importedJob.DataFolder;
 
                 cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(jobDirectory);
 
                 if (importedJob.DocID != null)
                 {
+                    // temp
+                    var test = Lodgement.GetLodgementDetails(importedJob.DocID);
+
+                    //temp
+
+
                     List<JobProcess> printProcesses = importedJob.ProcessList.Where(x => x.Name.Contains("Laser - Print") || x.Name.Contains("Print Envelopes") || x.Name.Contains("Ink Jet")).ToList();
                     cmbPrintJobs.DataSource = printProcesses;
                     cmbPrintJobs.DisplayMember = "Name";
@@ -575,13 +583,24 @@ namespace JobDocs
 
         private void rbDatabase_CheckedChanged(object sender, EventArgs e)
         {
-            directoryBranch = rbDatabase.Checked ? DirectoryHelper.databaseBranch : DirectoryHelper.artworkBranch;
-            if(!string.IsNullOrWhiteSpace( txtJobNo.Text))
-            {
-                richTextJobDirectory.Text = DirectoryHelper.getJobDir(txtJobNo.Text, txtCustomer.Text, directoryBranch);
-                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
+            //directoryBranch = rbDatabase.Checked ? DirectoryHelper.databaseBranch : DirectoryHelper.artworkBranch;
+            //if(!string.IsNullOrWhiteSpace( txtJobNo.Text))
+            //{
+            //    richTextJobDirectory.Text = DirectoryHelper.getJobDir(txtJobNo.Text, txtCustomer.Text, directoryBranch);
+            //    cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
 
+            //}
+            if(rbDatabase.Checked)
+            {
+                richTextJobDirectory.Text = importedJob.DataFolder;
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
             }
+            else
+            {
+                richTextJobDirectory.Text = importedJob.ArtworkFolder;
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
+            }
+
         }
 
         private void cmbPrintSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -616,13 +635,13 @@ namespace JobDocs
 
         private void rbArtwork_CheckedChanged(object sender, EventArgs e)
         {
-            directoryBranch = rbDatabase.Checked ? DirectoryHelper.databaseBranch : DirectoryHelper.artworkBranch;
-            if (!string.IsNullOrWhiteSpace(txtJobNo.Text))
-            {
-                richTextJobDirectory.Text = DirectoryHelper.getJobDir(txtJobNo.Text, txtCustomer.Text, directoryBranch);
-                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
+            //directoryBranch = rbDatabase.Checked ? DirectoryHelper.databaseBranch : DirectoryHelper.artworkBranch;
+            //if (!string.IsNullOrWhiteSpace(txtJobNo.Text))
+            //{
+            //    richTextJobDirectory.Text = DirectoryHelper.getJobDir(txtJobNo.Text, txtCustomer.Text, directoryBranch);
+            //    cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
 
-            }
+            //}
         }
 
         private void tabPage4_Click(object sender, EventArgs e)

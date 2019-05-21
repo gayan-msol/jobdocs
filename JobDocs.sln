@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobDocsLibrary", "JobDocsLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobDocsTests", "JobDocsTests\JobDocsTests.csproj", "{8205EDE2-AB49-4B13-9341-859CAFACA1A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DolphinLibrary", "DolphinClassLibrary\DolphinLibrary.csproj", "{9147DA54-64D9-4E41-AB04-0597623E4F69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8205EDE2-AB49-4B13-9341-859CAFACA1A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8205EDE2-AB49-4B13-9341-859CAFACA1A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8205EDE2-AB49-4B13-9341-859CAFACA1A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9147DA54-64D9-4E41-AB04-0597623E4F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9147DA54-64D9-4E41-AB04-0597623E4F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9147DA54-64D9-4E41-AB04-0597623E4F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9147DA54-64D9-4E41-AB04-0597623E4F69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

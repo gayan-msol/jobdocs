@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 
-namespace JobDocsLibrary
+namespace DolphinLibrary
 {
     public class Dolphin
     {
         public string[] JobInfo = { "jobs", "doc_no" };
         public string[] QuoteInfo = { "quotes", "doc_id" };
         public string[] ProcessInfo = { "process", "doc_id" };
-        public string[] LodgemntInfo = { "lodgment", "doc_id" };
+        public string[] LodgemntInfo = { "lodgement", "doc_id" };
         public string[] MailPackItemInfo = { "outwork", "doc_id" };
         public string[] PrintProcessInfo = { "laser_print_options", "doc_id" };
 

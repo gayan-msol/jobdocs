@@ -9,7 +9,7 @@ namespace JobDocsLibrary
     public class DataSummary
     {
 
-        public Job JobInfo { get; set; }
+        //public Job JobInfo { get; set; }
 
 
 

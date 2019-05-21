@@ -12,12 +12,12 @@ namespace JobDocsLibrary
         private static string miscBranch = "AAA MISCELLANEOUS";
         public static string databaseBranch = @"S:\DATABASES";
         public static string artworkBranch = @"S:\ART WORK TEMPLATES";
-        static List<string> validExtensions = new List<string> { ".txt",".pdf",".ps",".zip" };
+        static List<string> validExtensions = new List<string> { ".txt",".pdf",".ps",".zip",".csv" };
 
         public static List<string> GetOutPutFiles(string jobDirectory)
         {
           
-            if(jobDirectory != null)
+            if(!string.IsNullOrWhiteSpace(jobDirectory))
             {
                 return Directory.GetFiles(jobDirectory).Select(x => Path.GetFileName(x)).Where( file => validExtensions.Contains(  Path.GetExtension(file).ToLower()) ).ToList();
             }
