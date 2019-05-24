@@ -1,53 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Printing;
+using System.Drawing;
+using System.Windows.Forms;
 
-namespace JobDocsLibrary
+namespace JobDocs
 {
-    public class Print
+    public class PrintSpecSheet_
     {
-        public PrintDocument CreatePrintDocument(string page, int count, bool unknownTotal, string type, int startPage = 1)
+        public string JobNo { get; set; }
+        public string JobDirectory { get; set; }
+        public string FileName { get; set; }
+        public string PrintMachine { get; set; }
+        public string PrintSize { get; set; }
+        public string FinishedSize { get; set; }
+        public string Stock { get; set; }
+        public string Layout { get; set; }
+        public List<string> StreamList { get; set; }
+        public string Notes { get; set; }
+
+
+        private void Print(string jobNo, int PrintMachine, string jobDirectory, string fileName, string PrintSize, string FinishedSize, string Stock, string layout, List<string> streamList, string notes)
         {
 
-            int total = count + startPage - 1;
+      
 
             PrintDocument printDoc = new PrintDocument();
-            printDoc.DefaultPageSettings.Landscape = true;
-      
-             if (type == "Box")
-            {
-                printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, 1170);
-                printDoc.DocumentName = $"Box Lables - {"job no"}";
-                printDoc.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";
+  
 
-            }
+            
+                printDoc.DefaultPageSettings.Landscape = false;
+                printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, 1170);
+                printDoc.DocumentName = $"{jobNo} - Print Spec - {PrintMachine}";
+                printDoc.PrinterSettings.PrinterName = "Adobe PDF";
+            
+
             printDoc.DefaultPageSettings.Margins.Left = 10;
             printDoc.DefaultPageSettings.Margins.Right = 10;//100 = 1 inch = 2.54 cm
             printDoc.DefaultPageSettings.Margins.Top = 10;
             printDoc.DefaultPageSettings.Margins.Bottom = 10;
-            int i = startPage - 1;
+     
 
 
             printDoc.PrintPage += new PrintPageEventHandler(printDoc_PrintPage);
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDoc; //Document property must be set before ShowDialog()
 
-            return printDoc;
+            DialogResult dialogResult = printDialog.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                printDoc.Print();
+            }
 
             void printDoc_PrintPage(object senderp, PrintPageEventArgs ev)
             {
                 Graphics g = ev.Graphics;
-                string jobNo = "testJobNo";
-                string customer = "testCustomer";
-                string stream = "testStream";
-                string eLMS = "";
-                string notes = "";
-                Font fontHeader = new Font("Calibri", 32, FontStyle.Bold);
-                string jobName = "testJobName";
+     
+                Font font1 = new Font("Calibri", 32, FontStyle.Bold);
                 Font font2 = new Font("Calibri", 22);
-                string tot = unknownTotal ? "" : $"of {total}";
                 Font font3 = new Font("Calibri", 12);
                 Font font4 = new Font("Calibri", 18, FontStyle.Bold);
 
@@ -63,13 +76,15 @@ namespace JobDocsLibrary
                 StringFormat formatCenter = new StringFormat(formatLeft);
                 formatCenter.Alignment = StringAlignment.Center;
 
+                g.DrawString("PRINT SPECIFICATION SHEET", font1, Brushes.Black, x1 + 200, y1 + 100);
+                /*
                 if (type == "Tray")
                 {
                     string trayNo = $"Tray {i + 1} {tot}";
                     RectangleF rectF1 = new RectangleF(x1, y2, 450, 70);
                     Rectangle rect2 = new Rectangle(310, y2 + 80, 150, 50);
 
-                    g.DrawString(jobNo, fontHeader, Brushes.Black, x1, y1);
+                    g.DrawString(jobNo, font1, Brushes.Black, x1, y1);
                     g.DrawString(jobName, font2, Brushes.Black, rectF1, formatCenter);
                     g.DrawString(customer, font3, Brushes.Black, x1, y3);
                     g.DrawRectangle(Pens.Black, x1, y2, 450, 70);
@@ -80,7 +95,7 @@ namespace JobDocsLibrary
                     }
                     else if (i == total)
                     {
-                        g.DrawString("- Spoils", fontHeader, Brushes.Black, 160, y1);
+                        g.DrawString("- Spoils", font1, Brushes.Black, 160, y1);
                         g.DrawString($"eLMS No:  {eLMS}", font4, Brushes.Black, x1, y4);
                     }
                     else
@@ -97,14 +112,14 @@ namespace JobDocsLibrary
                 {
                     RectangleF rectF1 = new RectangleF(x1, y2, 450, 70);
 
-                    g.DrawString(jobNo, fontHeader, Brushes.Black, x1, y1);
+                    g.DrawString(jobNo, font1, Brushes.Black, x1, y1);
                     g.DrawString(jobName, font2, Brushes.Black, rectF1, formatCenter);
                     g.DrawString(customer, font3, Brushes.Black, x1, y3);
                     g.DrawRectangle(Pens.Black, x1, y2, 450, 70);
-                    g.DrawString("- Spoils", fontHeader, Brushes.Black, 160, y1);
+                    g.DrawString("- Spoils", font1, Brushes.Black, 160, y1);
                     g.DrawString($"eLMS No:  {eLMS}", font4, Brushes.Black, x1, y4);
                 }
-                else if (type == "Box")
+                else if (type == "Box-A5")
                 {
                     Font font5 = new Font("Calibri", 18);
                     Font font6 = new Font("Calibri", 18);
@@ -160,10 +175,46 @@ namespace JobDocsLibrary
                     ev.HasMorePages = i >= total ? false : true;
 
                 }
+                else if (type == "Box-A4")
+                {
+                    Font font5 = new Font("Calibri", 18);
+                    Font font6 = new Font("Calibri", 24);
+                    string boxNo1 = $"{i + 1} {tot}";
+                    string boxNo2 = $"{i + 2} {tot}";
+                    int yMiddle = 585;
+                    int xMiddle = 415;
+                    int yLine1 = 625;
+                    int yLine2 = 725;
+                    int yLine3 = 800;
+                    int yLine4 = 875;
+                    int yLine5 = 950;
 
+
+                    Rectangle rect1 = new Rectangle(175, yLine1, 650, 100);
+                    Rectangle rect2 = new Rectangle(175, yLine2, 410, 50);
+                    Rectangle rect3 = new Rectangle(x1, yLine5, 810, 210);
+                    Rectangle rect4 = new Rectangle(x1 + xMiddle, yLine5, 560, 300);
+
+
+                    g.DrawLine(Pens.Black, 0, yMiddle, 830, yMiddle);
+                    g.DrawString($"Job Name : ", font5, Brushes.Black, x1, yLine1);
+                    g.DrawString(jobName, font6, Brushes.Black, rect1);
+                    g.DrawString($"Job Number :", font5, Brushes.Black, x1, yLine2);
+                    g.DrawString(jobNo, font6, Brushes.Black, rect2);
+                    g.DrawString($"Stream : {stream}", font5, Brushes.Black, x1, yLine3);
+                    g.DrawString($"Customer   : {customer}", font5, Brushes.Black, x1, yLine4);
+
+                    g.DrawString($"Box : {boxNo1}", font5, Brushes.Black, 620, yLine3);
+                    g.DrawRectangle(Pens.Black, rect3);
+                    g.DrawString(notes, font5, Brushes.Black, rect3);
+
+                    i++;
+
+                    ev.HasMorePages = i >= total ? false : true;
+
+                }*/
             }
-
-       
         }
+
     }
 }

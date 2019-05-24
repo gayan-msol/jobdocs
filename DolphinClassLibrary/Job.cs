@@ -38,7 +38,7 @@ namespace DolphinLibrary
 
                 job = fastJSON.JSON.ToObject<List<Job>>(response)[0];
               
-
+            
                 job.ProcessList = JobProcess.GetProcesses(job.DocID);
                 job.PrintInfoList = PrintInfo.GetInfo(job.DocID);
                 job.ItemList = MailPackItem.GetItems(job.DocID);

@@ -107,12 +107,17 @@ namespace JobDocsLibrary
 
                 for (int i = 0; i < emptyCols.Count; i++)
                 {
-                    int rec = sampleRecords.Where(x => !x.EmptyColIndexes.Contains(emptyCols[i])).FirstOrDefault().Index;
+                    int rec = sampleRecords.Where(x => !x.EmptyColIndexes.Contains(emptyCols[i])).FirstOrDefault()?.Index ?? -1;
                     selectedRecords.Add(rec);
                 }
 
                 foreach(int rec in selectedRecords.Distinct())
-             indexList.Add( rec  );
+                {
+                    if(rec >-1)
+                    {
+                        indexList.Add(rec);
+                    }
+                }
             }
 
             return indexList;
@@ -125,9 +130,9 @@ namespace JobDocsLibrary
             int c = 0;
             while (sampleRecords.Count < 3)
             {
-                if (sampleRecords[c] - 1 >= 0 && !sampleRecords.Contains(sampleRecords[c] - 1))
+                if (sampleRecords[c] + 1 >= 0 && !sampleRecords.Contains(sampleRecords[c] + 1))
                 {
-                    sampleRecords.Add(sampleRecords[c] - 1);
+                    sampleRecords.Add(sampleRecords[c] + 1);
                 }
                 c++;
             }

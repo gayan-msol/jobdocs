@@ -16,6 +16,7 @@ namespace JobDocsLibrary
         public string PrintMachine { get; set; }
         public string PrintSize { get; set; }
         public string FinishedSize { get; set; }
+        public string Guillotine { get; set; }
         public string Stock { get; set; }
         public string Layout { get; set; }
         public List<string> StreamList { get; set; }

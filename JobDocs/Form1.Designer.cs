@@ -103,6 +103,8 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.btnSampleSheet = new System.Windows.Forms.Button();
+            this.cmbGuillo = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -326,6 +328,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.cmbGuillo);
+            this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.cmbFinishedSize);
             this.tabPage2.Controls.Add(this.label16);
             this.tabPage2.Controls.Add(this.cmbPrintSize);
@@ -698,7 +702,7 @@
             this.groupBoxStock.Controls.Add(this.txtStockDescription);
             this.groupBoxStock.Controls.Add(this.rbSMSOL);
             this.groupBoxStock.Controls.Add(this.rbSCustomer);
-            this.groupBoxStock.Location = new System.Drawing.Point(22, 407);
+            this.groupBoxStock.Location = new System.Drawing.Point(22, 439);
             this.groupBoxStock.Name = "groupBoxStock";
             this.groupBoxStock.Size = new System.Drawing.Size(528, 48);
             this.groupBoxStock.TabIndex = 36;
@@ -918,6 +922,28 @@
             this.btnSampleSheet.UseVisualStyleBackColor = true;
             this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
+            // cmbGuillo
+            // 
+            this.cmbGuillo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbGuillo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbGuillo.FormattingEnabled = true;
+            this.cmbGuillo.Items.AddRange(new object[] {
+            "YES",
+            "NO"});
+            this.cmbGuillo.Location = new System.Drawing.Point(78, 391);
+            this.cmbGuillo.Name = "cmbGuillo";
+            this.cmbGuillo.Size = new System.Drawing.Size(85, 21);
+            this.cmbGuillo.TabIndex = 58;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(23, 397);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(50, 13);
+            this.label17.TabIndex = 59;
+            this.label17.Text = "Guillotine";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
@@ -1035,6 +1061,8 @@
         private System.Windows.Forms.DataGridView dataGridViewReturnItems;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.ComboBox cmbGuillo;
+        private System.Windows.Forms.Label label17;
     }
 }
 

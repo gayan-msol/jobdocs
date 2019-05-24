@@ -17,7 +17,7 @@ namespace JobDocs
     {
         string outputFileName = "";
         List<string> columnList = new List<string>();
-        string delimiter = "\t";
+     //   string delimiter = "\t";
         DataTable sampleTable = new DataTable();
         DataTable sourceTable = new DataTable();
 
@@ -31,6 +31,19 @@ namespace JobDocs
            
         }
 
+        private string getDelimeter()
+        {
+            string delimeter = "";
+            if(rbComma.Checked)
+            {
+                return ",";
+            }
+            else
+            {
+                return "\t";
+            }
+        }
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -41,7 +54,6 @@ namespace JobDocs
             {
                 outputFileName = openFileDialog.FileName;
                 richTextOutputFilePath.Text = outputFileName;
-                sourceTable = JobData.GetSourceTable(outputFileName, delimiter);
                 wizardPage1.AllowNext = true ;
 
             }
@@ -66,8 +78,10 @@ namespace JobDocs
 
         private void wizardPage1_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
+            sourceTable = JobData.GetSourceTable(outputFileName, getDelimeter());
+
             columnList.Clear();
-            columnList = JobData.GetColumnList(outputFileName, delimiter);
+            columnList = JobData.GetColumnList(outputFileName, getDelimeter());
             foreach (var item in columnList)
             {
                 CheckBox checkBox = new CheckBox();
@@ -125,7 +139,7 @@ namespace JobDocs
 
         private void rbTab_CheckedChanged(object sender, EventArgs e)
         {
-            delimiter = rbTab.Checked ? "\t" : ",";
+           // delimiter = rbTab.Checked ? "\t" : ",";
         }
 
         private void wizardPage3_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -161,6 +175,8 @@ namespace JobDocs
         {
             printDocument1.DefaultPageSettings.PaperSize = new PaperSize("A4", 1170, 830);
             printDocument1.DefaultPageSettings.Landscape = true;
+            printDocument1.DocumentName = $"{Form1.jobNo} - Sample Records";
+
 
             dataGridPrinter1 = new DataGridPrinter(dataGridViewSample, printDocument1,sampleTable);
         }
@@ -168,6 +184,11 @@ namespace JobDocs
         private void checkBoxUncheckAll_CheckedChanged(object sender, EventArgs e)
         {
             uncheckAllFileds();
+        }
+
+        private void rbComma_CheckedChanged(object sender, EventArgs e)
+        {
+           // delimiter = rbTab.Checked ? "," : "\t";
         }
     }
 }

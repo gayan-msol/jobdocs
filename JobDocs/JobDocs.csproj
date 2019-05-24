@@ -25,7 +25,7 @@
     <InstallUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</InstallUrl>
     <UpdateUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</UpdateUrl>
     <PublisherName>MSOL</PublisherName>
-    <ApplicationRevision>31</ApplicationRevision>
+    <ApplicationRevision>33</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -96,6 +96,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintSpecSheet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frmSampleSheet.cs">

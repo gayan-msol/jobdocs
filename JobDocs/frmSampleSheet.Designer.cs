@@ -105,6 +105,7 @@
             this.rbComma.TabIndex = 1;
             this.rbComma.Text = "Comma";
             this.rbComma.UseVisualStyleBackColor = true;
+            this.rbComma.CheckedChanged += new System.EventHandler(this.rbComma_CheckedChanged);
             // 
             // rbTab
             // 
@@ -112,7 +113,7 @@
             this.rbTab.Checked = true;
             this.rbTab.Location = new System.Drawing.Point(7, 23);
             this.rbTab.Name = "rbTab";
-            this.rbTab.Size = new System.Drawing.Size(44, 19);
+            this.rbTab.Size = new System.Drawing.Size(45, 19);
             this.rbTab.TabIndex = 0;
             this.rbTab.TabStop = true;
             this.rbTab.Text = "Tab";
@@ -166,7 +167,7 @@
             this.checkBoxExcludeDTFields.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxExcludeDTFields.Location = new System.Drawing.Point(87, 31);
             this.checkBoxExcludeDTFields.Name = "checkBoxExcludeDTFields";
-            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(116, 19);
+            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(117, 19);
             this.checkBoxExcludeDTFields.TabIndex = 1;
             this.checkBoxExcludeDTFields.Text = "Exclude DT Fileds";
             this.checkBoxExcludeDTFields.UseVisualStyleBackColor = true;
