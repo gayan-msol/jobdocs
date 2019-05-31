@@ -21,7 +21,10 @@ namespace JobDocsLibrary
 
             List<int> sampleRecords = SelectSampleRecords(GenerateRecordList(sourceTable));
 
-            PopulateSampleTable(sourceTable, sampleTable , sampleRecords);
+            if(sampleRecords.Count >0)
+            {
+                PopulateSampleTable(sourceTable, sampleTable, sampleRecords);
+            }
 
             return sampleTable;
         }
@@ -126,15 +129,30 @@ namespace JobDocsLibrary
 
         private static void PopulateSampleTable(DataTable sourceTable, DataTable sampleTable, List<int> sampleRecords)
         {
+            int total = sourceTable.Rows.Count;
+            int c = 1;
 
-            int c = 0;
-            while (sampleRecords.Count < 3)
+            int s1 = sampleRecords[0];
+
+            while(sampleRecords.Count <3 && (s1 + c < total) )
             {
-                if (sampleRecords[c] + 1 >= 0 && !sampleRecords.Contains(sampleRecords[c] + 1))
-                {
-                    sampleRecords.Add(sampleRecords[c] + 1);
-                }
+             
+                    if(!sampleRecords.Contains(s1 + c))
+                    {
+                        sampleRecords.Add(s1 + c);
+                    }
                 c++;
+            }
+
+            c = 1;
+            while (sampleRecords.Count < 3 && (s1 - c > 0))
+            {
+
+                if (!sampleRecords.Contains(s1 - c))
+                {
+                    sampleRecords.Add(s1 - c);
+                }
+                c--;
             }
 
             sampleRecords.Sort();

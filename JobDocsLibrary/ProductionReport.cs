@@ -20,6 +20,7 @@ namespace JobDocsLibrary
         public string Item3 { get; set; }
         public string Item4 { get; set; }
         public string Item5 { get; set; }
+        public string Item6 { get; set; }
         private string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
 
 

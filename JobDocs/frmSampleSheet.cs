@@ -47,7 +47,7 @@ namespace JobDocs
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text | *.txt";
+            openFileDialog.Filter = "Text | *.txt| CSV | *.csv";
             openFileDialog.InitialDirectory = Form1.jobDirectory;
             openFileDialog.ShowDialog();
             if(!string.IsNullOrEmpty(openFileDialog.FileName))
@@ -102,12 +102,12 @@ namespace JobDocs
         private void uncheckDTFileds()
         {
             List<string> dtFieldList = columnList.Where(x => !string.IsNullOrWhiteSpace(x) && x.Substring(0,2)=="Dt").ToList();
-            dtFieldList.Add("Source");
+          //  dtFieldList.Add("Source");
             dtFieldList.Add("MediaSelect");
 
             foreach (var item in dtFieldList)
             {
-                Control[] cArr =flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "_")}", true);
+                Control[] cArr =flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "%")}", true);
                 if(cArr.Length >0 && cArr[0] is CheckBox checkBox)
                     checkBox.Checked = !checkBoxExcludeDTFields.Checked;
             }
@@ -115,16 +115,16 @@ namespace JobDocs
 
         private void uncheckAllFileds()
         {
-            List<string> dtFieldList = columnList.Where(x => !string.IsNullOrWhiteSpace(x) && x.Substring(0, 2) == "Dt").ToList();
-            dtFieldList.Add("Source");
-            dtFieldList.Add("MediaSelect");
+            //List<string> dtFieldList = columnList.Where(x => !string.IsNullOrWhiteSpace(x) && x.Substring(0, 2) == "Dt").ToList();
+            //dtFieldList.Add("Source");
+            //dtFieldList.Add("MediaSelect");
 
-            foreach (var item in dtFieldList)
-            {
-                Control[] cArr = flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "_")}", true);
-                if (cArr.Length > 0 && cArr[0] is CheckBox checkBox)
-                    checkBox.Checked = !checkBoxExcludeDTFields.Checked;
-            }
+            //foreach (var item in dtFieldList)
+            //{
+            //    Control[] cArr = flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "_")}", true);
+            //    if (cArr.Length > 0 && cArr[0] is CheckBox checkBox)
+            //        checkBox.Checked = !checkBoxExcludeDTFields.Checked;
+            //}
 
             foreach (Control c in flowLayoutPanelColumns.Controls)
             {

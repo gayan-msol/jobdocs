@@ -65,13 +65,20 @@ namespace JobDocs
             List<string> items = new List<string>();
             foreach (DataGridViewRow row in dataGridViewReturnItems.Rows)
             {
-                items.Add(row?.Cells[0]?.Value?.ToString());
-            }          
+                if (!string.IsNullOrEmpty(row?.Cells[0]?.Value?.ToString()))
+                {
+                    items.Add(row?.Cells[0]?.Value?.ToString());
+                }
+            }
 
             for (int i = 0; i < items.Count; i++)
             {
-                PropertyInfo property = productionReport.GetType().GetProperties().Single(z => z.Name == $"Item{i + 1}");
-                property.SetValue(productionReport, items[i]);
+                PropertyInfo property = productionReport.GetType().GetProperties().SingleOrDefault(z => z.Name == $"Item{i+1}");
+                if(property != null)
+                {
+                    property.SetValue(productionReport, items[i]);
+                }
+          
             }
 
             productionReport.createPdf(fileName, productionReport);
@@ -674,8 +681,8 @@ namespace JobDocs
 
             printDoc.DefaultPageSettings.Landscape = false;
             printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, 1170);
-            printDoc.DocumentName = $"{jobDirectory}\\{printSpecSheet.JobNo} - Print Spec - {printSpecSheet.PrintMachine}";
-            printDoc.PrinterSettings.PrinterName = "Adobe PDF";
+            printDoc.DocumentName = $"{jobDirectory}\\{printSpecSheet.JobNo} - Print Spec Sheet - {printSpecSheet.PrintMachine}";
+            printDoc.PrinterSettings.PrinterName = "RICOH MP C5503 PCL 6";
 
 
             printDoc.DefaultPageSettings.Margins.Left = 10;

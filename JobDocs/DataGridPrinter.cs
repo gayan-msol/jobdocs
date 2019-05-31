@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Data;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace JobDocs
 {
@@ -72,9 +73,13 @@ namespace JobDocs
 
 			for (int k = 0; k < TheDataGrid.Columns.Count; k++)
 			{
-				string nextcolumn = TheTable.Columns[k].ToString();
+                //float colWidth = GetColumnWidth(TheDataGrid,k, g, headerFont);
+                var w = TheDataGrid.Columns[k].Width;
+
+
+                string nextcolumn = TheTable.Columns[k].ToString();
 				RectangleF cellbounds = new RectangleF(startxposition, TheDataGrid.Location.Y + TopMargin + (RowCount - initialRowCount) * (TheDataGrid.Font.SizeInPoints  + kVerticalCellLeeway),
-					TheDataGrid.Columns[k].Width,
+                    TheDataGrid.Columns[k].Width,
                     SystemFonts.DefaultFont.SizeInPoints + kVerticalCellLeeway);
 				nextcellbounds = cellbounds;
 
@@ -185,6 +190,25 @@ namespace JobDocs
 			}
 
 		}
+
+        float GetColumnWidth(DataGridView dataGridView,int colIndex, Graphics g, Font font)
+        {
+            float l = 0;
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                string s = row.Cells[colIndex].Value.ToString();
+                var a = g.MeasureString(row.Cells[colIndex].Value.ToString(), font);
+
+                if (g.MeasureString(row.Cells[colIndex].Value.ToString(),font).Width > l)
+                {
+                    l = g.MeasureString(row.Cells[colIndex].Value.ToString(), font).Width;
+                }
+            }
+
+            return l;
+         
+
+        }
 
 		void DrawHorizontalLines(Graphics g, ArrayList lines)
 		{

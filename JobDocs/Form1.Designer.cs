@@ -48,6 +48,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cmbGuillo = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.cmbFinishedSize = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.cmbPrintSize = new System.Windows.Forms.ComboBox();
@@ -103,8 +105,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.btnSampleSheet = new System.Windows.Forms.Button();
-            this.cmbGuillo = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -368,6 +369,28 @@
             this.tabPage2.Text = "Print Spec Sheet";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // cmbGuillo
+            // 
+            this.cmbGuillo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbGuillo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbGuillo.FormattingEnabled = true;
+            this.cmbGuillo.Items.AddRange(new object[] {
+            "YES",
+            "NO"});
+            this.cmbGuillo.Location = new System.Drawing.Point(78, 391);
+            this.cmbGuillo.Name = "cmbGuillo";
+            this.cmbGuillo.Size = new System.Drawing.Size(85, 21);
+            this.cmbGuillo.TabIndex = 58;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(23, 397);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(50, 13);
+            this.label17.TabIndex = 59;
+            this.label17.Text = "Guillotine";
             // 
             // cmbFinishedSize
             // 
@@ -863,6 +886,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label18);
             this.tabPage3.Controls.Add(this.btnProductionReport);
             this.tabPage3.Controls.Add(this.dataGridViewReturnItems);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -922,27 +946,15 @@
             this.btnSampleSheet.UseVisualStyleBackColor = true;
             this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
-            // cmbGuillo
+            // label18
             // 
-            this.cmbGuillo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGuillo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbGuillo.FormattingEnabled = true;
-            this.cmbGuillo.Items.AddRange(new object[] {
-            "YES",
-            "NO"});
-            this.cmbGuillo.Location = new System.Drawing.Point(78, 391);
-            this.cmbGuillo.Name = "cmbGuillo";
-            this.cmbGuillo.Size = new System.Drawing.Size(85, 21);
-            this.cmbGuillo.TabIndex = 58;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(23, 397);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(50, 13);
-            this.label17.TabIndex = 59;
-            this.label17.Text = "Guillotine";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(37, 39);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(472, 13);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Only 6 items can be printed on the production report. You can combine items to re" +
+    "duce no. of lines.";
             // 
             // Form1
             // 
@@ -979,6 +991,7 @@
             this.groupBoxLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1063,6 +1076,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.ComboBox cmbGuillo;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }
 
