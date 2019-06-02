@@ -73,8 +73,8 @@ namespace JobDocs
 
 			for (int k = 0; k < TheDataGrid.Columns.Count; k++)
 			{
-                float colWidth = GetColumnWidth(TheDataGrid,k, g, headerFont);
-             //   float colWidth = TheDataGrid.Columns[k].Width;
+                //float colWidth = GetColumnWidth(TheDataGrid,k, g, headerFont);
+                float colWidth = TheDataGrid.Columns[k].Width;
                 var w = TheDataGrid.Columns[k].Width;
 
 
