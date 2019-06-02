@@ -73,24 +73,25 @@ namespace JobDocs
 
 			for (int k = 0; k < TheDataGrid.Columns.Count; k++)
 			{
-                //float colWidth = GetColumnWidth(TheDataGrid,k, g, headerFont);
+                float colWidth = GetColumnWidth(TheDataGrid,k, g, headerFont);
+             //   float colWidth = TheDataGrid.Columns[k].Width;
                 var w = TheDataGrid.Columns[k].Width;
 
 
                 string nextcolumn = TheTable.Columns[k].ToString();
 				RectangleF cellbounds = new RectangleF(startxposition, TheDataGrid.Location.Y + TopMargin + (RowCount - initialRowCount) * (TheDataGrid.Font.SizeInPoints  + kVerticalCellLeeway),
-                    TheDataGrid.Columns[k].Width,
+                   colWidth,
                     SystemFonts.DefaultFont.SizeInPoints + kVerticalCellLeeway);
 				nextcellbounds = cellbounds;
 
-				if (startxposition + TheDataGrid.Columns[k].Width <= PageWidth)
+				if (startxposition + colWidth <= PageWidth)
 				{
 					g.DrawString(nextcolumn, headerFont, ForeBrush, cellbounds, cellformat);
 				}
 
-				startxposition = startxposition + TheDataGrid.Columns[k].Width;
+                startxposition = startxposition + colWidth;
 
-			}
+            }
 	
 			//if (TheDataGrid.GridLineStyle != DataGridLineStyle.None)
 				g.DrawLine(TheLinePen, TheDataGrid.Location.X + leftMargin, nextcellbounds.Bottom, PageWidth, nextcellbounds.Bottom);
@@ -194,16 +195,22 @@ namespace JobDocs
         float GetColumnWidth(DataGridView dataGridView,int colIndex, Graphics g, Font font)
         {
             float l = 0;
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            try
             {
-                string s = row.Cells[colIndex].Value.ToString();
-                var a = g.MeasureString(row.Cells[colIndex].Value.ToString(), font);
-
-                if (g.MeasureString(row.Cells[colIndex].Value.ToString(),font).Width > l)
+                foreach (DataGridViewRow row in dataGridView.Rows)
                 {
-                    l = g.MeasureString(row.Cells[colIndex].Value.ToString(), font).Width;
+                    string s = row.Cells[colIndex].Value?.ToString() ?? "";
+                    float width = g.MeasureString(s, font).Width;
+
+                    l = width > l ? width : l;
+
                 }
             }
+            catch (Exception ex)
+            {
+                ErrorHandling.ShowMessage(ex);
+            }
+          
 
             return l;
          
