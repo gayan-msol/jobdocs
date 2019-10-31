@@ -71,7 +71,7 @@ namespace JobDocs
 
 			g.FillRectangle(BackBrush, HeaderBounds);
 
-			for (int k = 0; k < TheDataGrid.Columns.Count; k++)
+			for (int k = 0; k < TheDataGrid.Rows.Count; k++)
 			{
                 //float colWidth = GetColumnWidth(TheDataGrid,k, g, headerFont);
                 float colWidth = TheDataGrid.Columns[k].Width;
@@ -122,7 +122,7 @@ namespace JobDocs
 
 
 				// draw the rows of the table
-				for (int i = initialRowCount; i < TheTable.Rows.Count; i++)
+				for (int i = initialRowCount; i < TheTable.Columns.Count; i++)
 				{
 					DataRow dr = TheTable.Rows[i];
 					int startxposition = TheDataGrid.Location.X + leftMargin;

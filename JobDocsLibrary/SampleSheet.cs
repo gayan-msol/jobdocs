@@ -87,6 +87,9 @@ namespace JobDocsLibrary
             int currentColCount = sampleRecords[0].EmptyColCount;
             for (int i = 0; i < sampleRecords.Count; i++)
             {
+                if (i == 4289)
+                { }
+
                 if(sampleRecords[i].EmptyColCount == 0)
                 {
                     indexList.Add(i);
@@ -152,7 +155,7 @@ namespace JobDocsLibrary
                 {
                     sampleRecords.Add(s1 - c);
                 }
-                c--;
+                c++;
             }
 
             sampleRecords.Sort();

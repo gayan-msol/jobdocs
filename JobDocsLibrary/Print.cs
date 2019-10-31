@@ -20,6 +20,7 @@ namespace JobDocsLibrary
       
              if (type == "Box")
             {
+                printDoc.DefaultPageSettings.Landscape = true;
                 printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, 1170);
                 printDoc.DocumentName = $"Box Lables - {"job no"}";
                 printDoc.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";

@@ -383,7 +383,10 @@ namespace JobDocs
             }
             else
             {
-
+                if(txtStockDescription.Text.Length > 3)
+                {
+                    cmbPrintSize.Text = txtStockDescription.Text.Substring(0, 3);
+                }
             }
 
             //Control[] controls = groupBoxPaper.Controls.Find($"rb{printInfo?.PrintSize}", true);
@@ -568,11 +571,11 @@ namespace JobDocs
         {
             if (rbSMSOL.Checked)
             {
-                return $"MSOL Stock: {txtStockDescription.Text}";
+                return $"MSOL: {txtStockDescription.Text}";
             }
             else
             {
-                return $"Customer Supplied Stock: {txtStockDescription.Text}";
+                return $"Customer: {txtStockDescription.Text}";
             }
         }
 
@@ -618,6 +621,9 @@ namespace JobDocs
         private void cmbPrintSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtCustomPrintSize.Enabled = (cmbPrintSize?.Text == "Custom");
+
+            cmbFinishedSize.Text = cmbPrintSize.Text;
+
         }
 
         private void cmbFinishedSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -709,7 +715,8 @@ namespace JobDocs
                 Font fontHeader = new Font("Calibri", 32, FontStyle.Bold);
                 Font fontFieldName = new Font("Calibri", 22);
                 Font fontFieldNameSmall = new Font("Calibri", 14);
-                Font fontValueLarge = new Font("Calibri", 22, FontStyle.Bold);
+                Font fontValueLargeBold = new Font("Calibri", 22, FontStyle.Bold);
+                Font fontValueLarge = new Font("Calibri", 22);
                 Font fontValueSmall = new Font("Calibri", 14, FontStyle.Bold);
 
                 Font font4 = new Font("Calibri", 18, FontStyle.Bold);
@@ -729,7 +736,7 @@ namespace JobDocs
                 int y3 = 140;
                 int y4 = 160;
 
-                int lineCount = 0;
+                float lineCount = 0;
 
                 StringFormat formatLeft = new StringFormat(StringFormatFlags.NoClip);
                 StringFormat formatCenter = new StringFormat(formatLeft);
@@ -738,10 +745,10 @@ namespace JobDocs
                 g.DrawString("PRINT SPECIFICATION SHEET", fontHeader, Brushes.Black, xHeader, yHeader);
 
                 g.DrawString("Job No:", fontFieldName, Brushes.Black, xLeft, yLine1+20);
-                g.DrawString(printSpecSheet.JobNo, fontValueLarge, Brushes.Black, xLeft + 100, yLine1+20);
+                g.DrawString(printSpecSheet.JobNo, fontValueLargeBold, Brushes.Black, xLeft + 100, yLine1+20);
 
                 g.DrawString("Print Machine:", fontFieldName, Brushes.Black, xLeft + 400, yLine1+20 );
-                g.DrawString(printSpecSheet.PrintMachine, fontValueLarge, Brushes.Black, xLeft + 600, yLine1+20);
+                g.DrawString(printSpecSheet.PrintMachine, fontValueLargeBold, Brushes.Black, xLeft + 600, yLine1+20);
 
                 lineCount = 1;
                 g.DrawString("Job Directory:", fontFieldName, Brushes.Black, xLeft , yLine1 + yLineHeight + yLineGap);
@@ -750,31 +757,36 @@ namespace JobDocs
 
                 lineCount = 2;
                 g.DrawString("File Name:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight*lineCount + yLineGap*lineCount);
-                RectangleF rectFileName = new RectangleF(xLeft + 200, yLine1 + yLineHeight*lineCount + yLineGap*lineCount +10, 550, 75);
+                RectangleF rectFileName = new RectangleF(xLeft + 200, yLine1 + yLineHeight*lineCount + yLineGap*lineCount, 550, 75);
                 g.DrawString(printSpecSheet.FileName, fontValueSmall, Brushes.Black, rectFileName);
 
                 lineCount = 3;
                 g.DrawString("Print Size:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectPrintSize = new RectangleF(xLeft + 125, yLine1 + yLineHeight * lineCount + yLineGap * lineCount, 100, 44);
+                RectangleF rectPrintSize = new RectangleF(xLeft + 130, yLine1 + yLineHeight * lineCount + yLineGap * lineCount , 200, 44);
                 g.DrawString(printSpecSheet.PrintSize, fontValueLarge, Brushes.Black, rectPrintSize);
 
-                g.DrawString("Guillo:", fontFieldName, Brushes.Black, xLeft +225, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectGuillo = new RectangleF(xLeft + 305, yLine1 + yLineHeight * lineCount + yLineGap * lineCount, 100, 44);
+                //g.DrawString("Guillo:", fontFieldName, Brushes.Black, xLeft +225, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
+                //RectangleF rectGuillo = new RectangleF(xLeft + 305, yLine1 + yLineHeight * lineCount + yLineGap * lineCount , 100, 44);
+                //g.DrawString(printSpecSheet.Guillotine, fontValueLarge, Brushes.Black, rectGuillo);
+          
+                g.DrawString("Finished Size:", fontFieldName, Brushes.Black, xLeft + 375, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
+                RectangleF rectFinishSize = new RectangleF(xLeft + 550, yLine1 + yLineHeight * lineCount + yLineGap * lineCount , 200, 44);
+                g.DrawString(printSpecSheet.FinishedSize, fontValueLarge, Brushes.Black, rectFinishSize);
+
+                lineCount = 3.75F;
+                g.DrawString("Guillotine:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
+                RectangleF rectGuillo = new RectangleF(xLeft + 135, yLine1 + yLineHeight * lineCount + yLineGap * lineCount, 100, 44);
                 g.DrawString(printSpecSheet.Guillotine, fontValueLarge, Brushes.Black, rectGuillo);
 
-                g.DrawString("Finished Size:", fontFieldName, Brushes.Black, xLeft + 375, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectFinishSize = new RectangleF(xLeft + 545, yLine1 + yLineHeight * lineCount + yLineGap * lineCount, 100, 44);
-                g.DrawString(printSpecSheet.PrintSize, fontValueLarge, Brushes.Black, rectFinishSize);
-
-                lineCount = 4;
+                lineCount = 4.5F;
                 g.DrawString("Stock:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectStock = new RectangleF(xLeft + 125, yLine1 + yLineHeight * lineCount + yLineGap * lineCount, 500, 44);
-                g.DrawString(printSpecSheet.Stock, fontValueLarge, Brushes.Black, rectStock);
+                RectangleF rectStock = new RectangleF(xLeft + 125, yLine1 + yLineHeight * lineCount + yLineGap * lineCount + 10, 500, 44);
+                g.DrawString(printSpecSheet.Stock, fontValueSmall, Brushes.Black, rectStock);
 
-                lineCount = 5;
+                lineCount = 5.25F;
                 g.DrawString("Layout:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
                 RectangleF rectLayout = new RectangleF(xLeft + 125, yLine1 + yLineHeight * lineCount + yLineGap * lineCount, 500, 44);
-                g.DrawString(printSpecSheet.Layout, fontValueLarge, Brushes.Black, rectLayout);
+                g.DrawString(printSpecSheet.Layout, fontValueLargeBold, Brushes.Black, rectLayout);
 
                 lineCount = 6;
                 Rectangle rectStreams = new Rectangle(xLeft, 530, xRight - xLeft, 300);
