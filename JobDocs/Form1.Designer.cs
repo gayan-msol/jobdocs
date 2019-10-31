@@ -100,12 +100,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
             this.btnProductionReport = new System.Windows.Forms.Button();
             this.dataGridViewReturnItems = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.btnSampleSheet = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbComma = new System.Windows.Forms.RadioButton();
+            this.rbTab = new System.Windows.Forms.RadioButton();
+            this.richTextOutputFilePath = new System.Windows.Forms.RichTextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -125,6 +130,7 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -897,6 +903,16 @@
             this.tabPage3.Text = "Production Report";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(37, 39);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(472, 13);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Only 6 items can be printed on the production report. You can combine items to re" +
+    "duce no. of lines.";
+            // 
             // btnProductionReport
             // 
             this.btnProductionReport.Location = new System.Drawing.Point(288, 343);
@@ -926,6 +942,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.groupBox1);
+            this.tabPage4.Controls.Add(this.richTextOutputFilePath);
+            this.tabPage4.Controls.Add(this.btnBrowse);
             this.tabPage4.Controls.Add(this.btnSampleSheet);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -938,23 +957,64 @@
             // 
             // btnSampleSheet
             // 
-            this.btnSampleSheet.Location = new System.Drawing.Point(22, 18);
+            this.btnSampleSheet.Location = new System.Drawing.Point(350, 218);
             this.btnSampleSheet.Name = "btnSampleSheet";
-            this.btnSampleSheet.Size = new System.Drawing.Size(145, 52);
+            this.btnSampleSheet.Size = new System.Drawing.Size(159, 52);
             this.btnSampleSheet.TabIndex = 27;
             this.btnSampleSheet.Text = "Sample Sheet Wizard";
             this.btnSampleSheet.UseVisualStyleBackColor = true;
             this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
-            // label18
+            // groupBox1
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(37, 39);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(472, 13);
-            this.label18.TabIndex = 9;
-            this.label18.Text = "Only 6 items can be printed on the production report. You can combine items to re" +
-    "duce no. of lines.";
+            this.groupBox1.Controls.Add(this.rbComma);
+            this.groupBox1.Controls.Add(this.rbTab);
+            this.groupBox1.Location = new System.Drawing.Point(350, 146);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(159, 48);
+            this.groupBox1.TabIndex = 30;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Delimiter";
+            // 
+            // rbComma
+            // 
+            this.rbComma.AutoSize = true;
+            this.rbComma.Location = new System.Drawing.Point(73, 22);
+            this.rbComma.Name = "rbComma";
+            this.rbComma.Size = new System.Drawing.Size(60, 17);
+            this.rbComma.TabIndex = 1;
+            this.rbComma.Text = "Comma";
+            this.rbComma.UseVisualStyleBackColor = true;
+            // 
+            // rbTab
+            // 
+            this.rbTab.AutoSize = true;
+            this.rbTab.Checked = true;
+            this.rbTab.Location = new System.Drawing.Point(7, 23);
+            this.rbTab.Name = "rbTab";
+            this.rbTab.Size = new System.Drawing.Size(44, 17);
+            this.rbTab.TabIndex = 0;
+            this.rbTab.TabStop = true;
+            this.rbTab.Text = "Tab";
+            this.rbTab.UseVisualStyleBackColor = true;
+            // 
+            // richTextOutputFilePath
+            // 
+            this.richTextOutputFilePath.Location = new System.Drawing.Point(22, 43);
+            this.richTextOutputFilePath.Name = "richTextOutputFilePath";
+            this.richTextOutputFilePath.Size = new System.Drawing.Size(487, 53);
+            this.richTextOutputFilePath.TabIndex = 29;
+            this.richTextOutputFilePath.Text = "";
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(515, 43);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 53);
+            this.btnBrowse.TabIndex = 28;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // Form1
             // 
@@ -994,6 +1054,8 @@
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).EndInit();
             this.tabPage4.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1077,6 +1139,11 @@
         private System.Windows.Forms.ComboBox cmbGuillo;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbComma;
+        private System.Windows.Forms.RadioButton rbTab;
+        private System.Windows.Forms.RichTextBox richTextOutputFilePath;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }
 

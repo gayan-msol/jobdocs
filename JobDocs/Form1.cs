@@ -44,6 +44,7 @@ namespace JobDocs
         int up = 1;
         string stockSaupplier = "";
         string stockDescription = "";
+        string outputFileName = "";
 
 
         public Form1()
@@ -462,7 +463,7 @@ namespace JobDocs
             Form form = Application.OpenForms["frmSampleSheet"];
             if(form == null)
             {
-                Form sampleSheet = new frmSampleSheet();
+                Form sampleSheet = new frmSampleSheet(outputFileName, getDelimeter());
                 sampleSheet.ShowDialog();
             }
         }
@@ -965,5 +966,32 @@ namespace JobDocs
             }
         }
 
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text | *.txt| CSV | *.csv";
+            openFileDialog.InitialDirectory = Form1.jobDirectory;
+            openFileDialog.ShowDialog();
+            if (!string.IsNullOrEmpty(openFileDialog.FileName))
+            {
+           
+                richTextOutputFilePath.Text =outputFileName = openFileDialog.FileName;
+                //  wizardPage1.AllowNext = true;
+
+            }
+        }
+
+        private string getDelimeter()
+        {
+            string delimeter = "";
+            if (rbComma.Checked)
+            {
+                return ",";
+            }
+            else
+            {
+                return "\t";
+            }
+        }
     }
 } 

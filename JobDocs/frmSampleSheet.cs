@@ -16,6 +16,7 @@ namespace JobDocs
     public partial class frmSampleSheet : Form
     {
         string outputFileName = "";
+        string delimiter = "";
         List<string> columnList = new List<string>();
      //   string delimiter = "\t";
         DataTable sampleTable = new DataTable();
@@ -23,88 +24,44 @@ namespace JobDocs
 
         private DataGridPrinter dataGridPrinter1 = null;
 
-        public frmSampleSheet()
+        public frmSampleSheet(string outputFile, string delim)
         {
             InitializeComponent();
-            wizardPage1.AllowNext = false;
-            rbTab.Checked = true;
+            wizardPage1.AllowNext = true;
+           // rbTab.Checked = true;
+            outputFileName = outputFile;
+            delimiter = delim;
            
         }
 
-        private string getDelimeter()
-        {
-            string delimeter = "";
-            if(rbComma.Checked)
-            {
-                return ",";
-            }
-            else
-            {
-                return "\t";
-            }
-        }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text | *.txt| CSV | *.csv";
-            openFileDialog.InitialDirectory = Form1.jobDirectory;
-            openFileDialog.ShowDialog();
-            if(!string.IsNullOrEmpty(openFileDialog.FileName))
-            {
-                outputFileName = openFileDialog.FileName;
-                richTextOutputFilePath.Text = outputFileName;
-                wizardPage1.AllowNext = true ;
 
-            }
-        }
 
         private void wizardPage2_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            List<string> selectedColumnList = new List<string>();
-            foreach (CheckBox c in flowLayoutPanelColumns.Controls)
-            {
-                if(c.Checked)
-                {
-                    selectedColumnList.Add(c.Name.Substring(2).Replace("%"," ")); 
-                }
-            }
 
-
-            dataGridViewSample.DataSource =sampleTable= SampleSheet.GetSampleTable(sourceTable, selectedColumnList);
 
          //   SetupGridPrinter();
         }
 
         private void wizardPage1_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            try
+
+
+            List<string> selectedColumnList = new List<string>();
+            foreach (CheckBox c in flowLayoutPanelColumns.Controls)
             {
-                sourceTable = JobData.GetSourceTable(outputFileName, getDelimeter());
-                columnList.Clear();
-                columnList = JobData.GetColumnList(outputFileName, getDelimeter());
-                foreach (var item in columnList)
+                if (c.Checked)
                 {
-                    CheckBox checkBox = new CheckBox();
-                    checkBox.Name = $"cb{item.Replace(" ", "%")}";
-                    checkBox.Text = item;
-                    checkBox.AutoSize = true;
-                    checkBox.Checked = true;
-                    flowLayoutPanelColumns.Controls.Add(checkBox);
+                    selectedColumnList.Add(c.Name.Substring(2).Replace("%", " "));
                 }
-                uncheckDTFileds();
             }
-            catch(Exception ex)
-            {
-                
-                ErrorHandling.ShowMessage(ex);
-                this.Close();
-            }
-       
 
-           
 
-     
+            dataGridViewSample.DataSource = sampleTable = SampleSheet.GetSampleTable(sourceTable, selectedColumnList);
+
+
+
         }
 
         private void checkBoxExcludeDTFields_CheckedChanged(object sender, EventArgs e)
@@ -323,6 +280,38 @@ namespace JobDocs
         private void rbComma_CheckedChanged(object sender, EventArgs e)
         {
            // delimiter = rbTab.Checked ? "," : "\t";       
+        }
+
+        private void frmSampleSheet_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void wizardPage1_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                sourceTable.Clear();
+                sourceTable = JobData.GetSourceTable(outputFileName, delimiter);
+                columnList.Clear();
+                columnList = JobData.GetColumnList(outputFileName, delimiter);
+                foreach (var item in columnList)
+                {
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.Name = $"cb{item.Replace(" ", "%")}";
+                    checkBox.Text = item;
+                    checkBox.AutoSize = true;
+                    checkBox.Checked = true;
+                    flowLayoutPanelColumns.Controls.Add(checkBox);
+                }
+                uncheckDTFileds();
+            }
+            catch (Exception ex)
+            {
+
+                ErrorHandling.ShowMessage(ex);
+                this.Close();
+            }
         }
     }
 }
