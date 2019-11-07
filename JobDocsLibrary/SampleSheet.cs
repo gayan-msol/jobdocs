@@ -13,6 +13,7 @@ namespace JobDocsLibrary
  
         public static DataTable GetSampleTable(DataTable sourceTable, List<string> selectedColList)
         {
+            bool slipSheet = sourceTable.Columns.Contains("MediaSelect");
             RemoveUnselectedColumns(sourceTable, selectedColList);
 
             JobData.addIndexColumn(sourceTable);
@@ -25,6 +26,12 @@ namespace JobDocsLibrary
             {
                 PopulateSampleTable(sourceTable, sampleTable, sampleRecords);
             }
+
+            if (slipSheet)
+            {
+                addRowIndex(sampleTable);
+            }
+            sampleTable.Columns.Remove("RowIndex");
 
             return sampleTable;
         }
@@ -47,6 +54,15 @@ namespace JobDocsLibrary
             }
         }
 
+        private static void addRowIndex(DataTable table)
+        {
+          
+                foreach (DataRow row in table.Rows)
+                {
+                    row["Sort Order"] = $"{row["Sort Order"]}   ({row["RowIndex"]})";
+                }
+            
+        }
 
         private static List<Record> GenerateRecordList(DataTable dataTable)
         {

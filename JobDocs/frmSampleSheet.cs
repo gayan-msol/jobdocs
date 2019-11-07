@@ -177,9 +177,13 @@ namespace JobDocs
                 int y1 = ev.MarginBounds.Top;
                 int w = ev.MarginBounds.Width;
                 int h = ev.MarginBounds.Height;
-                int yTable = y1 + 100;
+                int yTable = y1 + 50;
                 int yLine = yTable;
-                int lineHeight = 35;
+                int lineHeight = 20;
+                int headerColWidth = 0;
+                int col1Width = 0;
+                int col2Width = 0;
+                int col3Width = 0;
 
                 StringFormat formatLeft = new StringFormat(StringFormatFlags.NoClip);
                 StringFormat formatCenter = new StringFormat(formatLeft);
@@ -191,7 +195,66 @@ namespace JobDocs
                     string boxNo1 = $"{i + 1} {tot}";
                     string boxNo2 = $"{i + 2} {tot}";
 
-                int tableHeight = sampleTable.Columns.Contains("Source") ? ((sampleTable.Columns.Count -1) * 35) : (sampleTable.Columns.Count * 35);
+                int tableHeight = sampleTable.Columns.Contains("Source") ? ((sampleTable.Columns.Count -1) * lineHeight) : (sampleTable.Columns.Count * lineHeight);
+
+             
+
+                g.DrawString("Job No  :", headerFont, Brushes.Black, x1 + 5, y1 + 5);
+                g.DrawString(Form1.jobNo, bodyFont, Brushes.Black, x1 + 5 + 60, y1 + 5);
+                g.DrawString("Job Name:", headerFont, Brushes.Black, x1 + 5 +160, y1 + 5);
+                g.DrawString(Form1.jobName, bodyFont, Brushes.Black, x1 + 5 + 240, y1 + 5 );
+                g.DrawString("Source  :", headerFont, Brushes.Black, x1 + 5, y1 + 5 + 20);
+              
+               
+                if (sampleTable.Columns.Contains("Source"))
+                {
+                    g.DrawString(sampleTable.Rows[0]["Source"].ToString(), bodyFont, Brushes.Black, x1 + 5 + 60, y1 + 5 + 20);
+                }
+
+
+                 for (int c = 0; c < sampleTable.Columns.Count; c++)
+                    {
+                        if (c > 0)
+                        {
+                            yLine += lineHeight;
+
+                        }
+
+
+                        if (sampleTable.Columns[c].ColumnName == "Source")
+                        {
+                            yLine -= lineHeight;
+                            continue;
+                        }
+                        g.DrawString(sampleTable.Columns[c].ColumnName, headerFont, Brushes.Black, x1 + 5, yLine);
+
+                        for (int r = 0; r < sampleTable.Rows.Count; r++)
+                        {
+                            RectangleF rectangleF = new RectangleF(x1 + 5 + 225 + r * 300, yLine, 300, 30);
+
+                            g.DrawString(sampleTable.Rows[r][c].ToString(), bodyFont, Brushes.Black, rectangleF);
+                        if(g.MeasureString(sampleTable.Rows[r][c].ToString(),bodyFont).Width >290)
+                        {
+                            yLine += 15;
+                        }
+                            g.DrawLine(Pens.Black, x1, yLine + lineHeight, x1 + 1125, yLine + lineHeight);
+                        }
+
+                    if (c == sampleTable.Columns.Count - 1)
+                    {
+                        tableHeight = yLine + lineHeight - yTable;
+                    }
+
+                        //if(c== sampleTable.Columns.Count -1)
+                        //{
+                        //    ev.HasMorePages = false;
+                        //}
+                        //else
+                        //{
+                        //    ev.HasMorePages = true;
+                        //}
+
+                }
 
                 Rectangle borderRect = new Rectangle(x1, yTable, 1130, tableHeight);
                 Rectangle headerCol = new Rectangle(x1, yTable, 225, tableHeight);
@@ -204,49 +267,15 @@ namespace JobDocs
                 g.DrawRectangle(Pens.Black, col2);
                 g.DrawRectangle(Pens.Black, col3);
 
-                g.DrawString("Job No  :", headerFont, Brushes.Black, x1 + 5, y1 + 5);
-                g.DrawString("Job Name:", headerFont, Brushes.Black, x1 + 5 , y1 + 5 + 30);
-                g.DrawString("Source  :", headerFont, Brushes.Black, x1 + 5, y1 + 5 + 60);
-                g.DrawString(Form1.jobNo, bodyFont, Brushes.Black, x1 + 5 + 100, y1 + 5);
-                g.DrawString(Form1.jobName, bodyFont, Brushes.Black, x1 + 5 + 100, y1 + 5 + 30);
-                if (sampleTable.Columns.Contains("Source"))
-                {
-                    g.DrawString(sampleTable.Rows[0]["Source"].ToString(), bodyFont, Brushes.Black, x1 + 5 + 100, y1 + 5 + 60);
-                }
 
 
 
-                for (int c= 0; c< sampleTable.Columns.Count; c++)
-                {
-                    if(c > 0)
-                    {
-                        yLine += lineHeight;
 
-                    }
-                    if (sampleTable.Columns[c].ColumnName == "Source")
-                    {
-                       yLine -= lineHeight;
-                        continue;
-                    }
-                    g.DrawString(sampleTable.Columns[c].ColumnName, headerFont, Brushes.Black, x1 + 5, yLine);
+                //i++;
+                //    i++;
+                //    ev.HasMorePages = i >= total ? false : true;
 
-                    for (int r = 0; r < sampleTable.Rows.Count; r++)
-                    {
-                        RectangleF rectangleF = new RectangleF(x1 + 5 + 225 + r * 300, yLine, 300, 30);
 
-                        g.DrawString(sampleTable.Rows[r][c].ToString(), bodyFont, Brushes.Black,rectangleF);
-
-                        g.DrawLine(Pens.Black, x1, yLine + lineHeight, x1 + 1125, yLine + lineHeight);
-                    }
-
-                   
-                }
-
-                i++;
-                    i++;
-                    ev.HasMorePages = i >= total ? false : true;
-
-    
             }
         }
 
