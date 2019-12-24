@@ -15,7 +15,8 @@ using System.Drawing.Printing;
 using JobDocsLibrary;
 using DolphinLibrary;
 using System.Reflection;
-
+using System.Security;
+using System.Globalization;
 
 namespace JobDocs
 {
@@ -25,9 +26,10 @@ namespace JobDocs
         string customer = "";
         public static string jobNo = "";
         public static string jobName = "";
-        public static string jobDirectory = "";
+        public static string jobDirectoryData = "";
+        public static string jobDirectoryArt = "";
         Job importedJob = new Job();
-        Address address = new Address();
+        Address address = new Address(); 
         List<string> columnsList = new List<string>();
         string delimiter = "\t";
         List<string> outputList = new List<string>();
@@ -36,22 +38,31 @@ namespace JobDocs
         string dataSummaryPdf = "";
         string prodRepPdf = "";
         string dataSummaryTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
-        string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
-        string directoryBranch = "";
-        string printSize = "";
-        string finishedSize = "";
-        string plex = "";
-        int up = 1;
-        string stockSaupplier = "";
-        string stockDescription = "";
+        //string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
+        //string directoryBranch = "";
+        //string printSize = "";
+        //string finishedSize = "";
+        //string plex = "";
+        //int up = 1;
+        //string stockSaupplier = "";
+        //string stockDescription = "";
         string outputFileName = "";
+        public static string userName;
 
 
         public Form1()
         {
             InitializeComponent();
+            userName = getCurrentUser();
         }
 
+        private string getCurrentUser()
+        {
+            string un = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Replace("MSOL\\", "");
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+            return textInfo.ToTitleCase(un.Replace(".", " "));
+        }
 
         private void createProductionReport(DolphinLibrary.Job job,string fileName)
         {
@@ -215,7 +226,7 @@ namespace JobDocs
 
             cmbFinishedSize.DataSource = StockItem.finishSizeList;
             cmbPrintSize.DataSource = StockItem.printSizeList;
-            txtCustomFinishedSize.Enabled = txtCustomPrintSize.Enabled = false;
+        //    txtCustomFinishedSize.Enabled = txtCustomPrintSize.Enabled = false;
             cmbGuillo.Text = "NO";
 
         }
@@ -305,9 +316,12 @@ namespace JobDocs
                 customer = txtCustomer.Text = importedJob.Customer;
                 jobNo = txtJobNo.Text;
                // jobDirectory = richTextJobDirectory.Text = DirectoryHelper.getJobDir(jobNo, customer, directoryBranch);
-                jobDirectory = richTextJobDirectory.Text = importedJob.DataFolder;
+                jobDirectoryData = richTextJobDirectory.Text = importedJob.DataFolder;
+                jobDirectoryArt = importedJob.ArtworkFolder;
+                txtCompany.Text = customer;
+                txtContact.Text = importedJob.Contact;
 
-                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(jobDirectory);
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(jobDirectoryData);
 
                 if (importedJob.DocID != null)
                 {
@@ -443,7 +457,7 @@ namespace JobDocs
             int printQty = 0;
             printQty = calculatePrintQty(recQty, up, sheetsPerRec);
             
-            return new string[] {cmbStream?.Text, numericUpDownStreamQty.Value.ToString(),printQty.ToString()};
+            return new string[] {cmbStream?.Text, numericUpDownStreamQty.Value.ToString(),numericUpDownSheetsPerRec.Value.ToString(), printQty.ToString()};
         }
 
         private int calculatePrintQty(decimal recQty, decimal recsPerPage, decimal sheetsPerRec)
@@ -476,13 +490,7 @@ namespace JobDocs
         private void btnPrintSpecSheet_Click(object sender, EventArgs e)
         {
             try
-            {/*
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
-                saveFileDialog.FileName = $"{txtJobNo.Text} - Print Spec Sheet - {getPrintMachine()}";
-                saveFileDialog.Filter = "PDF|*.pdf";
-                saveFileDialog.ShowDialog();*/
-                //if (saveFileDialog.FileName != null)
+            {
                 {
                     PrintSpecSheet printSpecSheet = new PrintSpecSheet();
 
@@ -491,15 +499,16 @@ namespace JobDocs
                     {
                         if (row.Cells[0].Value != null)
                         {
-                            streamList.Add($"Stream {row.Cells["Stream"]?.Value} : Record Qty = {row.Cells["RecordQty"]?.Value}  : Print Qty = {row.Cells["PrintQty"]?.Value}");
+                            streamList.Add($"Stream {row.Cells["Stream"]?.Value} : Record Qty = {row.Cells["RecordQty"]?.Value}  : {row.Cells["Sheets"]?.Value} Sheets : Print Qty = {row.Cells["PrintQty"]?.Value}");
 
                         }
                     }
 
                     printSpecSheet.StreamList = streamList;
                     printSpecSheet.JobNo = txtJobNo.Text;
+                    printSpecSheet.JobName = txtJobName.Text;
                     printSpecSheet.JobDirectory = richTextJobDirectory.Text;
-                    printSpecSheet.FileName = cmbFileName?.Text;
+                    printSpecSheet.FileNames = getFileNames();
                     printSpecSheet.PrintMachine = getPrintMachine();
                     printSpecSheet.PrintSize = getPrintSize();
                     printSpecSheet.FinishedSize = getFinishedSize();
@@ -507,9 +516,12 @@ namespace JobDocs
                     printSpecSheet.Stock = getStockDetails();
                     printSpecSheet.Layout = getLayoutInfo();
                     printSpecSheet.Guillotine = cmbGuillo?.Text;
-                   // printSpecSheet.createPdf(saveFileDialog.FileName, printSpecSheet);
+                    printSpecSheet.Customer = importedJob.Customer;
+                    printSpecSheet.Contact = txtContact.Text;
+                    printSpecSheet.Approved = checkBoxApproval.Checked;
+                    printSpecSheet.AddInkJet = checkBoxAddInkJet.Checked;
 
-                    Print(printSpecSheet);
+                    print(printSpecSheet);
                 }
 
             }
@@ -520,6 +532,14 @@ namespace JobDocs
 
 
         }
+
+        private async Task print(PrintSpecSheet printSpecSheet)
+        {
+            Printing p = new Printing();
+
+           var result =   await p.PrintPSS(printSpecSheet);
+        }
+        
 
         private string getPrintMachine()
         {
@@ -549,10 +569,10 @@ namespace JobDocs
         private string getPrintSize()
         {
             string printSize = cmbPrintSize?.Text;
-            if (printSize == "Custom")
-            {
-                printSize = txtCustomPrintSize.Text;
-            }
+            //if (printSize == "Custom")
+            //{
+            //    printSize = txtCustomPrintSize.Text;
+            //}
 
             return printSize;
         }
@@ -560,24 +580,50 @@ namespace JobDocs
         private string getFinishedSize()
         {
             string finishedSize = cmbFinishedSize?.Text;
-            if (finishedSize == "Custom")
-            {
-                finishedSize = txtCustomFinishedSize.Text;
-            }
+            //if (finishedSize == "Custom")
+            //{
+            //    finishedSize = txtCustomFinishedSize.Text;
+            //}
 
             return finishedSize;
         }
 
-        private string getStockDetails()
+        private string getStockPrefix()
         {
-            if (rbSMSOL.Checked)
+            string stockPrefix = rbSMSOL.Checked ? "MSOL" : "";
+            stockPrefix = rbSCustomer.Checked ? "Customer" : stockPrefix;
+            return stockPrefix;
+        }
+
+        private List<string> getStockDetails()
+        {
+            List<string> stockLines = new List<string>();
+
+            if (listBoxStock.Items.Count == 0)
             {
-                return $"MSOL: {txtStockDescription.Text}";
+                stockLines.Add(txtStockDescription.Text);
             }
-            else
+            foreach (string s in listBoxStock.Items)
             {
-                return $"Customer: {txtStockDescription.Text}";
+                stockLines.Add(s);
             }
+
+            return stockLines;
+        }
+
+        private List<string> getFileNames()
+        {
+            List<string> fileNames = new List<string>();
+          if(listBoxFileNames.Items.Count == 0)
+            {
+                fileNames.Add(cmbFileName?.Text);
+            }
+            foreach (string s in listBoxFileNames.Items)
+            {
+                fileNames.Add(s);
+            }
+                                
+            return fileNames;
         }
 
         private string getLayoutInfo()
@@ -621,7 +667,7 @@ namespace JobDocs
 
         private void cmbPrintSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtCustomPrintSize.Enabled = (cmbPrintSize?.Text == "Custom");
+          //  txtCustomPrintSize.Enabled = (cmbPrintSize?.Text == "Custom");
 
             cmbFinishedSize.Text = cmbPrintSize.Text;
 
@@ -629,7 +675,7 @@ namespace JobDocs
 
         private void cmbFinishedSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtCustomFinishedSize.Enabled = (cmbFinishedSize?.Text == "Custom");
+        //    txtCustomFinishedSize.Enabled = (cmbFinishedSize?.Text == "Custom");
             if(cmbFinishedSize?.Text != cmbPrintSize?.Text)
             {
                 cmbGuillo.Text = "YES";
@@ -676,8 +722,8 @@ namespace JobDocs
 
         }
 
-
-        private void Print(PrintSpecSheet printSpecSheet)
+        /*
+        private void  Print(PrintSpecSheet printSpecSheet)
         {
 
 
@@ -688,7 +734,7 @@ namespace JobDocs
 
             printDoc.DefaultPageSettings.Landscape = false;
             printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, 1170);
-            printDoc.DocumentName = $"{jobDirectory}\\{printSpecSheet.JobNo} - Print Spec Sheet - {printSpecSheet.PrintMachine}";
+            printDoc.DocumentName = $"{jobDirectoryData}\\{printSpecSheet.JobNo} - Print Spec Sheet - {printSpecSheet.PrintMachine}";
             printDoc.PrinterSettings.PrinterName = "RICOH MP C5503 PCL 6";
 
 
@@ -706,19 +752,19 @@ namespace JobDocs
             DialogResult dialogResult = printDialog.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
-                printDoc.Print();
+              printDoc.Print();
             }
 
-            void printDoc_PrintPage(object senderp, PrintPageEventArgs ev)
+            void   printDoc_PrintPage(object senderp, PrintPageEventArgs ev)
             {
                 Graphics g = ev.Graphics;
 
                 Font fontHeader = new Font("Calibri", 32, FontStyle.Bold);
                 Font fontFieldName = new Font("Calibri", 22);
-                Font fontFieldNameSmall = new Font("Calibri", 14);
+                Font fontMedium = new Font("Calibri", 14);
                 Font fontValueLargeBold = new Font("Calibri", 22, FontStyle.Bold);
                 Font fontValueLarge = new Font("Calibri", 22);
-                Font fontValueSmall = new Font("Calibri", 14, FontStyle.Bold);
+                Font fontValueSmall = new Font("Calibri", 12);
 
                 Font font4 = new Font("Calibri", 18, FontStyle.Bold);
 
@@ -731,13 +777,15 @@ namespace JobDocs
                 int xHeader = 148;
                 int yHeader = 30;
                 int yLine1 = 80;
-                int yLineHeight = 22;
-                int yLineGap = 55;
+                int yLineHeightL = 22;
+                int yLineHeightS = 10;
+                int yLineGap = 25;
                 int y2 = 65;
                 int y3 = 140;
                 int y4 = 160;
 
                 float lineCount = 0;
+                float yCurrent = 0;
 
                 StringFormat formatLeft = new StringFormat(StringFormatFlags.NoClip);
                 StringFormat formatCenter = new StringFormat(formatLeft);
@@ -745,232 +793,129 @@ namespace JobDocs
 
                 g.DrawString("PRINT SPECIFICATION SHEET", fontHeader, Brushes.Black, xHeader, yHeader);
 
-                g.DrawString("Job No:", fontFieldName, Brushes.Black, xLeft, yLine1+20);
-                g.DrawString(printSpecSheet.JobNo, fontValueLargeBold, Brushes.Black, xLeft + 100, yLine1+20);
+                yCurrent = yLine1 + 20;
+                g.DrawString("Job No:", fontFieldName, Brushes.Black, xLeft,yCurrent);
+                g.DrawString(printSpecSheet.JobNo, fontValueLargeBold, Brushes.Black, xLeft + 100, yCurrent);
 
-                g.DrawString("Print Machine:", fontFieldName, Brushes.Black, xLeft + 400, yLine1+20 );
-                g.DrawString(printSpecSheet.PrintMachine, fontValueLargeBold, Brushes.Black, xLeft + 600, yLine1+20);
+                g.DrawString("Print Machine:", fontFieldName, Brushes.Black, xLeft + 400, yCurrent );
+                g.DrawString(printSpecSheet.PrintMachine, fontValueLargeBold, Brushes.Black, xLeft + 600, yCurrent);
 
-                lineCount = 1;
-                g.DrawString("Job Directory:", fontFieldName, Brushes.Black, xLeft , yLine1 + yLineHeight + yLineGap);
-                RectangleF rectJobDir = new RectangleF(xLeft + 200, yLine1 + yLineHeight + yLineGap +10, 550, 50);
-                g.DrawString(printSpecSheet.JobDirectory, fontValueSmall, Brushes.Black, rectJobDir);
+                lineCount ++;
+                yCurrent += yLineHeightL + yLineGap;
+                g.DrawString("Job Name:", fontFieldName, Brushes.Black, xLeft ,yCurrent );
+                RectangleF rectJobDir = new RectangleF(xLeft + 150, yCurrent , 550, 50);
+                g.DrawString(printSpecSheet.JobName, fontFieldName, Brushes.Black, rectJobDir);
 
-                lineCount = 2;
-                g.DrawString("File Name:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight*lineCount + yLineGap*lineCount);
-                RectangleF rectFileName = new RectangleF(xLeft + 200, yLine1 + yLineHeight*lineCount + yLineGap*lineCount, 550, 75);
-                g.DrawString(printSpecSheet.FileName, fontValueSmall, Brushes.Black, rectFileName);
+                lineCount++;
+                yCurrent += yLineHeightL + yLineGap;
+                g.DrawString("Customer:", fontFieldName, Brushes.Black, xLeft,yCurrent);
+                RectangleF rectCust = new RectangleF(xLeft + 150, yCurrent, 550, 50);
+                g.DrawString(printSpecSheet.Customer, fontFieldName, Brushes.Black, rectCust);
 
-                lineCount = 3;
-                g.DrawString("Print Size:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectPrintSize = new RectangleF(xLeft + 130, yLine1 + yLineHeight * lineCount + yLineGap * lineCount , 200, 44);
-                g.DrawString(printSpecSheet.PrintSize, fontValueLarge, Brushes.Black, rectPrintSize);
+                lineCount += 2;
+                yCurrent += yLineHeightL + yLineGap;
+                g.DrawString("File Name:", fontFieldName, Brushes.Black, xLeft,yCurrent);
+                RectangleF rectFileName = new RectangleF(xLeft + 150, yCurrent +10, 600, 150);
+                string fileNames = "";
+                foreach (string s in printSpecSheet.FileNames)
+                { fileNames += $"{s}\n"; }
+                g.DrawString(fileNames, fontValueSmall, Brushes.Black, rectFileName);
+
+                lineCount ++;
+                yCurrent += 150 + yLineGap;
+                g.DrawString("Print Size:", fontMedium, Brushes.Black, xLeft, yCurrent);
+                RectangleF rectPrintSize = new RectangleF(xLeft + 100, yCurrent , 230, 44);
+                g.DrawString(printSpecSheet.PrintSize, fontMedium, Brushes.Black, rectPrintSize);
 
                 //g.DrawString("Guillo:", fontFieldName, Brushes.Black, xLeft +225, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
                 //RectangleF rectGuillo = new RectangleF(xLeft + 305, yLine1 + yLineHeight * lineCount + yLineGap * lineCount , 100, 44);
                 //g.DrawString(printSpecSheet.Guillotine, fontValueLarge, Brushes.Black, rectGuillo);
-          
-                g.DrawString("Finished Size:", fontFieldName, Brushes.Black, xLeft + 375, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectFinishSize = new RectangleF(xLeft + 550, yLine1 + yLineHeight * lineCount + yLineGap * lineCount , 200, 44);
-                g.DrawString(printSpecSheet.FinishedSize, fontValueLarge, Brushes.Black, rectFinishSize);
+                g.DrawString("Finished Size:", fontMedium, Brushes.Black, xLeft + 375,yCurrent);
+                RectangleF rectFinishSize = new RectangleF(xLeft + 520, yCurrent , 230, 44);
+                g.DrawString(printSpecSheet.FinishedSize, fontMedium, Brushes.Black, rectFinishSize);
 
-                lineCount = 3.75F;
-                g.DrawString("Guillotine:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectGuillo = new RectangleF(xLeft + 135, yLine1 + yLineHeight * lineCount + yLineGap * lineCount, 100, 44);
-                g.DrawString(printSpecSheet.Guillotine, fontValueLarge, Brushes.Black, rectGuillo);
+                lineCount += 0.75F;
+                yCurrent += yLineHeightS + yLineGap;
+                g.DrawString("Layout:", fontMedium, Brushes.Black, xLeft, yCurrent);
+                RectangleF rectLayout = new RectangleF(xLeft + 100, yCurrent, 400, 44);
+                g.DrawString(printSpecSheet.Layout, fontMedium, Brushes.Black, rectLayout);
 
-                lineCount = 4.5F;
-                g.DrawString("Stock:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectStock = new RectangleF(xLeft + 125, yLine1 + yLineHeight * lineCount + yLineGap * lineCount + 10, 500, 44);
-                g.DrawString(printSpecSheet.Stock, fontValueSmall, Brushes.Black, rectStock);
+                g.DrawString("Guillotine:", fontMedium, Brushes.Black, xLeft + 375, yCurrent);
+                RectangleF rectGuillo = new RectangleF(xLeft + 550, yCurrent, 100, 44);
+                g.DrawString(printSpecSheet.Guillotine, fontMedium, Brushes.Black, rectGuillo);
 
-                lineCount = 5.25F;
-                g.DrawString("Layout:", fontFieldName, Brushes.Black, xLeft, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                RectangleF rectLayout = new RectangleF(xLeft + 125, yLine1 + yLineHeight * lineCount + yLineGap * lineCount, 500, 44);
-                g.DrawString(printSpecSheet.Layout, fontValueLargeBold, Brushes.Black, rectLayout);
+                lineCount += 0.75F;
+               // yCurrent += yLineHeightS + yLineGap;
+            
 
-                lineCount = 6;
-                Rectangle rectStreams = new Rectangle(xLeft, 530, xRight - xLeft, 300);
+                lineCount += 0.75F;
+                yCurrent += yLineHeightS + yLineGap;
+                g.DrawString("Stock:", fontMedium, Brushes.Black, xLeft,yCurrent );
+                RectangleF rectStock = new RectangleF(xLeft + 100, yCurrent + 10, 500, 100);
+
+                string stock = "";
+                foreach (string s in printSpecSheet.Stock)
+                { stock += $"{s}\n"; }
+                g.DrawString(stock, fontValueSmall, Brushes.Black, rectStock);
+
+               
+
+                lineCount += 0.75F;
+                yCurrent += 130;
+                Rectangle rectStreams = new Rectangle(xLeft,(int)yCurrent, xRight - xLeft, 250);
                 g.DrawRectangle(Pens.Black, rectStreams);
                 string streams="";
                 foreach (string s in printSpecSheet.StreamList)
                 { streams += $"{s}\n"; }
                 g.DrawString(streams,fontValueSmall, Brushes.Black, rectStreams);
 
-                lineCount = 7;
-                Rectangle rectNotes = new Rectangle(xLeft, 835, xRight - xLeft, 150);
+                lineCount ++;
+                yCurrent += 255;
+                Rectangle rectNotes = new Rectangle(xLeft, (int)yCurrent, xRight - xLeft, 120);
                 g.DrawRectangle(Pens.Black, rectNotes);
                 g.DrawString(printSpecSheet.Notes, fontValueSmall, Brushes.Black, rectNotes);
 
-                lineCount = 8;
-                Rectangle rectClientApproval = new Rectangle(xLeft, 990, xRight - xLeft, 60);
+                lineCount ++;
+                yCurrent += 125;
+                Rectangle rectClientApproval = new Rectangle(xLeft, (int)yCurrent, xRight - xLeft, 60);
                 g.DrawRectangle(Pens.Black, rectClientApproval);
-                g.DrawLine(Pens.Black, xLeft + 223, 990, xLeft + 223, 1050);
-                g.DrawString("Approved By:", fontValueSmall, Brushes.Black, xLeft,990);
+                g.DrawLine(Pens.Black, xLeft + 223, (int)yCurrent, xLeft + 223, (int)yCurrent + 60);
+                g.DrawString("Approved By:", fontValueSmall, Brushes.Black, xLeft, (int)yCurrent);
 
-                g.DrawLine(Pens.Black, xLeft + 446, 990, xLeft + 446, 1050);
-                g.DrawString("From Company:", fontValueSmall, Brushes.Black, xLeft+223, 990);
+                g.DrawLine(Pens.Black, xLeft + 446, (int)yCurrent, xLeft + 446, (int)yCurrent + 60);
+                g.DrawString("From Company:", fontValueSmall, Brushes.Black, xLeft + 223, (int)yCurrent);
 
-                g.DrawString("Approved to at MSOL:", fontValueSmall, Brushes.Black, xLeft + 446, 990);
+                if (printSpecSheet.Approved)
+                {
+                    g.DrawString(printSpecSheet.Contact, fontValueSmall, Brushes.Black, xLeft, (int)yCurrent +30);
+                    g.DrawString(printSpecSheet.Customer, fontValueSmall, Brushes.Black, xLeft + 223, (int)yCurrent + 30);
+                    g.DrawString(System.Security.Principal.WindowsIdentity.GetCurrent().Name.Replace("MSOL\\",""), fontValueSmall, Brushes.Black, xLeft + 446, (int)yCurrent +30);
+                }
+
+                g.DrawString("Approved to at MSOL:", fontValueSmall, Brushes.Black, xLeft + 446, (int)yCurrent);
 
 
-
-
-                lineCount = 9;
-                Rectangle rectSignOff = new Rectangle(xLeft, 1055, xRight - xLeft, 60);
+                lineCount ++;
+                yCurrent += 60;
+                Rectangle rectSignOff = new Rectangle(xLeft, (int)yCurrent, xRight - xLeft, 60);
                 g.DrawRectangle(Pens.Black, rectSignOff);
-                g.DrawLine(Pens.Black, xLeft + 223, 1055, xLeft + 223, 1115);
-                g.DrawString("Printed By:", fontValueSmall, Brushes.Black, xLeft, 1055);
+                g.DrawLine(Pens.Black, xLeft + 223, (int)yCurrent, xLeft + 223, (int)yCurrent + 60);
+                g.DrawString("Printed By:", fontValueSmall, Brushes.Black, xLeft, (int)yCurrent);
 
-                g.DrawLine(Pens.Black, xLeft + 446, 1055, xLeft + 446, 1115);
-                g.DrawString("Date:\n              /       /", fontValueSmall, Brushes.Black, xLeft + 223, 1055);
+                g.DrawLine(Pens.Black, xLeft + 446, (int)yCurrent, xLeft + 446, (int)yCurrent+60);
+                g.DrawString("Date:\n              /       /", fontValueSmall, Brushes.Black, xLeft + 223, (int)yCurrent);
 
-                g.DrawString("Sign Off:", fontValueSmall, Brushes.Black, xLeft + 446, 1055);
-
-                /*
-                if (type == "Tray")
-                {
-                    string trayNo = $"Tray {i + 1} {tot}";
-                    RectangleF rectF1 = new RectangleF(x1, y2, 450, 70);
-                    Rectangle rect2 = new Rectangle(310, y2 + 80, 150, 50);
-
-                    g.DrawString(jobNo, font1, Brushes.Black, x1, y1);
-                    g.DrawString(jobName, font2, Brushes.Black, rectF1, formatCenter);
-                    g.DrawString(customer, font3, Brushes.Black, x1, y3);
-                    g.DrawRectangle(Pens.Black, x1, y2, 450, 70);
-
-                    if (i == total + 1)
-                    {
-                        g.DrawString("Printed Date :                  Time:       ", font4, Brushes.Black, x1, y4);
-                    }
-                    else if (i == total)
-                    {
-                        g.DrawString("- Spoils", font1, Brushes.Black, 160, y1);
-                        g.DrawString($"eLMS No:  {eLMS}", font4, Brushes.Black, x1, y4);
-                    }
-                    else
-                    {
-                        g.DrawString(trayNo, font4, Brushes.Black, x1, y4);
-                        string streamLine = stream != "" ? $"Stream : {stream}" : stream;
-                        g.DrawString($"{streamLine} \n{notes}", font3, Brushes.Black, rect2);
-                    }
-
-                    i++;
-                    ev.HasMorePages = i >= total + 2 ? false : true;
-                }
-                else if (type == "Spoils")
-                {
-                    RectangleF rectF1 = new RectangleF(x1, y2, 450, 70);
-
-                    g.DrawString(jobNo, font1, Brushes.Black, x1, y1);
-                    g.DrawString(jobName, font2, Brushes.Black, rectF1, formatCenter);
-                    g.DrawString(customer, font3, Brushes.Black, x1, y3);
-                    g.DrawRectangle(Pens.Black, x1, y2, 450, 70);
-                    g.DrawString("- Spoils", font1, Brushes.Black, 160, y1);
-                    g.DrawString($"eLMS No:  {eLMS}", font4, Brushes.Black, x1, y4);
-                }
-                else if (type == "Box-A5")
-                {
-                    Font font5 = new Font("Calibri", 18);
-                    Font font6 = new Font("Calibri", 18);
-                    string boxNo1 = $"{i + 1} {tot}";
-                    string boxNo2 = $"{i + 2} {tot}";
-                    int xMiddle = 585;
-                    int yMiddle = 415;
-                    int yLine1 = 450;
-                    int yLine2 = 525;
-                    int yLine3 = 575;
-                    int yLine4 = 625;
-                    int yLine5 = 675;
-
-
-                    Rectangle rect1 = new Rectangle(175, yLine1, 410, 75);
-                    Rectangle rect2 = new Rectangle(175 + xMiddle, yLine1, 410, 75);
-                    Rectangle rect3 = new Rectangle(x1, yLine5, 560, 120);
-                    Rectangle rect4 = new Rectangle(x1 + xMiddle, yLine5, 560, 120);
-
-
-                    g.DrawLine(Pens.Black, xMiddle, y1, xMiddle, y1 + 820);
-                    g.DrawLine(Pens.Black, x1, yMiddle, x1 + 1150, yMiddle);
-                    g.DrawString($"Job Name : ", font5, Brushes.Black, x1, yLine1);
-                    g.DrawString(jobName, font6, Brushes.Black, rect1);
-                    g.DrawString($"Job Number : {jobNo}", font5, Brushes.Black, x1, yLine2);
-                    g.DrawString($"Stream : {stream}", font5, Brushes.Black, x1, yLine3);
-                    g.DrawString($"Customer   : {customer}", font5, Brushes.Black, x1, yLine4);
-
-                    g.DrawString($"Box : {boxNo1}", font5, Brushes.Black, 375, yLine3);
-                    g.DrawRectangle(Pens.Black, rect3);
-                    g.DrawString(notes, font5, Brushes.Black, rect3);
-                    if (i + 1 == total)
-                    {
-
-                        jobName = "..........................................................................................";
-                        jobNo = "....................";
-                        stream = "......";
-                        boxNo2 = "...... of ......";
-                        notes = "";
-                    }
-
-                    g.DrawString($"Job Name : ", font5, Brushes.Black, x1 + xMiddle, yLine1);
-                    g.DrawString(jobName, font5, Brushes.Black, rect2);
-                    g.DrawString($"Job Number : {jobNo}", font5, Brushes.Black, x1 + xMiddle, yLine2);
-                    g.DrawString($"Stream : {stream}", font5, Brushes.Black, x1 + xMiddle, yLine3);
-                    g.DrawString($"Box : {boxNo2}", font5, Brushes.Black, 375 + xMiddle, yLine3);
-                    g.DrawRectangle(Pens.Black, rect4);
-                    g.DrawString(notes, font5, Brushes.Black, rect4);
-
-
-                    i++;
-                    i++;
-                    ev.HasMorePages = i >= total ? false : true;
-
-                }
-                else if (type == "Box-A4")
-                {
-                    Font font5 = new Font("Calibri", 18);
-                    Font font6 = new Font("Calibri", 24);
-                    string boxNo1 = $"{i + 1} {tot}";
-                    string boxNo2 = $"{i + 2} {tot}";
-                    int yMiddle = 585;
-                    int xMiddle = 415;
-                    int yLine1 = 625;
-                    int yLine2 = 725;
-                    int yLine3 = 800;
-                    int yLine4 = 875;
-                    int yLine5 = 950;
-
-
-                    Rectangle rect1 = new Rectangle(175, yLine1, 650, 100);
-                    Rectangle rect2 = new Rectangle(175, yLine2, 410, 50);
-                    Rectangle rect3 = new Rectangle(x1, yLine5, 810, 210);
-                    Rectangle rect4 = new Rectangle(x1 + xMiddle, yLine5, 560, 300);
-
-
-                    g.DrawLine(Pens.Black, 0, yMiddle, 830, yMiddle);
-                    g.DrawString($"Job Name : ", font5, Brushes.Black, x1, yLine1);
-                    g.DrawString(jobName, font6, Brushes.Black, rect1);
-                    g.DrawString($"Job Number :", font5, Brushes.Black, x1, yLine2);
-                    g.DrawString(jobNo, font6, Brushes.Black, rect2);
-                    g.DrawString($"Stream : {stream}", font5, Brushes.Black, x1, yLine3);
-                    g.DrawString($"Customer   : {customer}", font5, Brushes.Black, x1, yLine4);
-
-                    g.DrawString($"Box : {boxNo1}", font5, Brushes.Black, 620, yLine3);
-                    g.DrawRectangle(Pens.Black, rect3);
-                    g.DrawString(notes, font5, Brushes.Black, rect3);
-
-                    i++;
-
-                    ev.HasMorePages = i >= total ? false : true;
-
-                }*/
+                g.DrawString("Sign Off:", fontValueSmall, Brushes.Black, xLeft + 446, (int)yCurrent);
+           
+ 
             }
         }
-
+        */
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Text | *.txt| CSV | *.csv";
-            openFileDialog.InitialDirectory = Form1.jobDirectory;
+            openFileDialog.InitialDirectory = Form1.jobDirectoryData;
             openFileDialog.ShowDialog();
             if (!string.IsNullOrEmpty(openFileDialog.FileName))
             {
@@ -992,6 +937,74 @@ namespace JobDocs
             {
                 return "\t";
             }
+        }
+
+        private void btnAddFileName_Click(object sender, EventArgs e)
+        {
+            if(listBoxFileNames.Items.Count == 7)
+            {
+                MessageBox.Show("You cannot add anymore lines.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                listBoxFileNames.Items.Add($"Stream {cmbStreamFN?.Text.ToUpper()} - {cmbFileName?.Text}");
+            }
+        }
+
+        private void btnRemoveFileName_Click(object sender, EventArgs e)
+        {
+            ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(listBoxFileNames);
+            selectedItems = listBoxFileNames.SelectedItems;
+            if(listBoxFileNames.SelectedIndex > -1)
+            {
+                for(int i=selectedItems.Count-1; i >=0; i--)
+                {
+                    listBoxFileNames.Items.Remove(selectedItems[i]);
+                }
+            }
+
+           
+        }
+
+        private void btnRemoveStock_Click(object sender, EventArgs e)
+        {
+            ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(listBoxStock);
+            selectedItems = listBoxStock.SelectedItems;
+            if (listBoxStock.SelectedIndex > -1)
+            {
+                for (int i = selectedItems.Count - 1; i >= 0; i--)
+                {
+                    listBoxStock.Items.Remove(selectedItems[i]);
+                }
+            }
+        }
+
+        private void btnAddStock_Click(object sender, EventArgs e)
+        {
+            if (listBoxStock.Items.Count == 5)
+            {
+                MessageBox.Show("You cannot add anymore lines.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                listBoxStock.Items.Add($"Stream {cmbStreamStock?.Text.ToUpper()}: {getStockPrefix()} - {txtStockDescription.Text}");
+            }
+        }
+
+        private void rbMDuplo_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxAddInkJet.Enabled = rbMDuplo.Checked;
+
+            if (!rbMDuplo.Checked)
+            {
+                checkBoxAddInkJet.Checked = false;
+            }
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            LodgePanel.Visible = false;
+            LoginPanel.Visible = true;
         }
     }
 } 

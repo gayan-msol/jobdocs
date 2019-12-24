@@ -11,6 +11,7 @@ namespace DolphinLibrary
     {
         public string JobName { get; set; }
         public string Customer { get; set; }
+        public string Contact { get; set; } 
         public int Qty { get; set; }
         public string JobNumber { get; set; }
         public string Owner { get; set; }
@@ -30,6 +31,7 @@ namespace DolphinLibrary
             {
                 response = response.Replace("\"note\":", "\"JobName\":");
                 response = response.Replace("\"ent\":", "\"Customer\":");
+                response = response.Replace("\"contact\":", "\"Contact\":");
                 response = response.Replace("\"usr\":", "\"Owner\":");
                 response = response.Replace("\"doc_no\":", "\"JobNumber\":");
                 response = response.Replace("\"doc_id\":", "\"DocID\":");

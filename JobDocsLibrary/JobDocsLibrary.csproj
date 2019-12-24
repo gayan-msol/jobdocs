@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="fastJSON, Version=2.2.0.0, Culture=neutral, PublicKeyToken=6b75a806b86095cd, processorArchitecture=MSIL">
       <HintPath>..\packages\fastJSON.2.2.0.1\lib\net40\fastJSON.dll</HintPath>
     </Reference>
@@ -52,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="DataAccess.cs" />
     <Compile Include="DataSummary.cs" />
     <Compile Include="DirectoryInfo.cs" />
     <Compile Include="Enums.cs" />
@@ -65,6 +69,7 @@
     <Compile Include="SampleSheet.cs" />
     <Compile Include="StockItem.cs" />
     <Compile Include="StringProcessing.cs" />
+    <Compile Include="ElmsUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

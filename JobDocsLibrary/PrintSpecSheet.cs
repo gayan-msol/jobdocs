@@ -11,16 +11,21 @@ namespace JobDocsLibrary
     public class PrintSpecSheet
     {
         public string JobNo { get; set; }
+        public string JobName { get; set; }
+        public string Customer { get; set; }
+        public string Contact { get; set; }
         public string JobDirectory { get; set; }
-        public string FileName { get; set; }
+        public List<string> FileNames { get; set; }
         public string PrintMachine { get; set; }
         public string PrintSize { get; set; }
         public string FinishedSize { get; set; }
         public string Guillotine { get; set; }
-        public string Stock { get; set; }
+        public List<string >Stock { get; set; }
         public string Layout { get; set; }
         public List<string> StreamList { get; set; }
         public string Notes { get; set; }
+        public bool Approved { get; set; }
+        public bool AddInkJet { get; set; }
 
         private string pdfTemplatePath = @"S:\SCRIPTS\DotNetProgrammes\PRINT SPEC SHEET\Spec Sheet Template.pdf";
 

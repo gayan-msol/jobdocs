@@ -48,13 +48,26 @@
             this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxApproval = new System.Windows.Forms.CheckBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtCompany = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtContact = new System.Windows.Forms.TextBox();
+            this.cmbStreamStock = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cmbStreamFN = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.btnRemoveStock = new System.Windows.Forms.Button();
+            this.btnRemoveFileName = new System.Windows.Forms.Button();
+            this.listBoxStock = new System.Windows.Forms.ListBox();
+            this.listBoxFileNames = new System.Windows.Forms.ListBox();
+            this.btnAddStock = new System.Windows.Forms.Button();
+            this.btnAddFileName = new System.Windows.Forms.Button();
             this.cmbGuillo = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.cmbFinishedSize = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.cmbPrintSize = new System.Windows.Forms.ComboBox();
-            this.txtCustomFinishedSize = new System.Windows.Forms.TextBox();
-            this.txtCustomPrintSize = new System.Windows.Forms.TextBox();
             this.richTexNotes = new System.Windows.Forms.RichTextBox();
             this.richTextJobDirectory = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -62,6 +75,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.numericUpDownSheetsPerRec = new System.Windows.Forms.NumericUpDown();
             this.groupBoxPrintMachine = new System.Windows.Forms.GroupBox();
+            this.checkBoxAddInkJet = new System.Windows.Forms.CheckBox();
             this.rbMInkjet = new System.Windows.Forms.RadioButton();
             this.rbMDuplo = new System.Windows.Forms.RadioButton();
             this.rbM7100 = new System.Windows.Forms.RadioButton();
@@ -75,6 +89,7 @@
             this.dataGridViewStreams = new System.Windows.Forms.DataGridView();
             this.Stream = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sheets = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrintQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxBranch = new System.Windows.Forms.GroupBox();
             this.rbArtwork = new System.Windows.Forms.RadioButton();
@@ -95,7 +110,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.cmbPrintJobs = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.btnChangeJobDirectory = new System.Windows.Forms.Button();
             this.cmbFileName = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -105,12 +119,33 @@
             this.dataGridViewReturnItems = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.btnSampleSheet = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbComma = new System.Windows.Forms.RadioButton();
             this.rbTab = new System.Windows.Forms.RadioButton();
             this.richTextOutputFilePath = new System.Windows.Forms.RichTextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnSampleSheet = new System.Windows.Forms.Button();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.LoginPanel = new System.Windows.Forms.Panel();
+            this.txtElmsUN = new System.Windows.Forms.TextBox();
+            this.UN = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txtElmsPWD = new System.Windows.Forms.TextBox();
+            this.btnSaveElmsLogin = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnBrowseManifest = new System.Windows.Forms.Button();
+            this.groupBoxLodgeCat = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnLodge = new System.Windows.Forms.Button();
+            this.LodgePanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -131,6 +166,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.LoginPanel.SuspendLayout();
+            this.groupBoxLodgeCat.SuspendLayout();
+            this.LodgePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -194,8 +233,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(631, 879);
-            this.splitContainer1.SplitterDistance = 106;
+            this.splitContainer1.Size = new System.Drawing.Size(685, 909);
+            this.splitContainer1.SplitterDistance = 109;
             this.splitContainer1.TabIndex = 26;
             // 
             // txtCustomer
@@ -221,12 +260,14 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(631, 769);
+            this.tabControl1.Size = new System.Drawing.Size(685, 796);
             this.tabControl1.TabIndex = 25;
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
             // tabPage1
             // 
@@ -242,7 +283,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(623, 743);
+            this.tabPage1.Size = new System.Drawing.Size(677, 770);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Data Summary";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -335,13 +376,26 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBoxApproval);
+            this.tabPage2.Controls.Add(this.label22);
+            this.tabPage2.Controls.Add(this.txtCompany);
+            this.tabPage2.Controls.Add(this.label21);
+            this.tabPage2.Controls.Add(this.txtContact);
+            this.tabPage2.Controls.Add(this.cmbStreamStock);
+            this.tabPage2.Controls.Add(this.label20);
+            this.tabPage2.Controls.Add(this.cmbStreamFN);
+            this.tabPage2.Controls.Add(this.label19);
+            this.tabPage2.Controls.Add(this.btnRemoveStock);
+            this.tabPage2.Controls.Add(this.btnRemoveFileName);
+            this.tabPage2.Controls.Add(this.listBoxStock);
+            this.tabPage2.Controls.Add(this.listBoxFileNames);
+            this.tabPage2.Controls.Add(this.btnAddStock);
+            this.tabPage2.Controls.Add(this.btnAddFileName);
             this.tabPage2.Controls.Add(this.cmbGuillo);
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.cmbFinishedSize);
             this.tabPage2.Controls.Add(this.label16);
             this.tabPage2.Controls.Add(this.cmbPrintSize);
-            this.tabPage2.Controls.Add(this.txtCustomFinishedSize);
-            this.tabPage2.Controls.Add(this.txtCustomPrintSize);
             this.tabPage2.Controls.Add(this.richTexNotes);
             this.tabPage2.Controls.Add(this.richTextJobDirectory);
             this.tabPage2.Controls.Add(this.label15);
@@ -363,18 +417,155 @@
             this.tabPage2.Controls.Add(this.groupBoxLayout);
             this.tabPage2.Controls.Add(this.cmbPrintJobs);
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.btnChangeJobDirectory);
             this.tabPage2.Controls.Add(this.cmbFileName);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(623, 743);
+            this.tabPage2.Size = new System.Drawing.Size(677, 770);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Print Spec Sheet";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // checkBoxApproval
+            // 
+            this.checkBoxApproval.AutoSize = true;
+            this.checkBoxApproval.Checked = true;
+            this.checkBoxApproval.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxApproval.Location = new System.Drawing.Point(382, 724);
+            this.checkBoxApproval.Name = "checkBoxApproval";
+            this.checkBoxApproval.Size = new System.Drawing.Size(105, 17);
+            this.checkBoxApproval.TabIndex = 74;
+            this.checkBoxApproval.Text = "Proofs Approved";
+            this.checkBoxApproval.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(201, 708);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(100, 13);
+            this.label22.TabIndex = 73;
+            this.label22.Text = "Approved Company";
+            // 
+            // txtCompany
+            // 
+            this.txtCompany.Location = new System.Drawing.Point(204, 724);
+            this.txtCompany.Name = "txtCompany";
+            this.txtCompany.Size = new System.Drawing.Size(148, 20);
+            this.txtCompany.TabIndex = 72;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(23, 708);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(84, 13);
+            this.label21.TabIndex = 71;
+            this.label21.Text = "Approved Name";
+            // 
+            // txtContact
+            // 
+            this.txtContact.Location = new System.Drawing.Point(26, 724);
+            this.txtContact.Name = "txtContact";
+            this.txtContact.Size = new System.Drawing.Size(133, 20);
+            this.txtContact.TabIndex = 70;
+            // 
+            // cmbStreamStock
+            // 
+            this.cmbStreamStock.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbStreamStock.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbStreamStock.FormattingEnabled = true;
+            this.cmbStreamStock.Location = new System.Drawing.Point(556, 425);
+            this.cmbStreamStock.Name = "cmbStreamStock";
+            this.cmbStreamStock.Size = new System.Drawing.Size(61, 21);
+            this.cmbStreamStock.TabIndex = 68;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(557, 409);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(40, 13);
+            this.label20.TabIndex = 69;
+            this.label20.Text = "Stream";
+            // 
+            // cmbStreamFN
+            // 
+            this.cmbStreamFN.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbStreamFN.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbStreamFN.FormattingEnabled = true;
+            this.cmbStreamFN.Location = new System.Drawing.Point(557, 87);
+            this.cmbStreamFN.Name = "cmbStreamFN";
+            this.cmbStreamFN.Size = new System.Drawing.Size(61, 21);
+            this.cmbStreamFN.TabIndex = 66;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(558, 71);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(40, 13);
+            this.label19.TabIndex = 67;
+            this.label19.Text = "Stream";
+            // 
+            // btnRemoveStock
+            // 
+            this.btnRemoveStock.Location = new System.Drawing.Point(555, 491);
+            this.btnRemoveStock.Name = "btnRemoveStock";
+            this.btnRemoveStock.Size = new System.Drawing.Size(81, 21);
+            this.btnRemoveStock.TabIndex = 65;
+            this.btnRemoveStock.Text = "Remove Selected";
+            this.btnRemoveStock.UseVisualStyleBackColor = true;
+            this.btnRemoveStock.Click += new System.EventHandler(this.btnRemoveStock_Click);
+            // 
+            // btnRemoveFileName
+            // 
+            this.btnRemoveFileName.Location = new System.Drawing.Point(556, 150);
+            this.btnRemoveFileName.Name = "btnRemoveFileName";
+            this.btnRemoveFileName.Size = new System.Drawing.Size(81, 21);
+            this.btnRemoveFileName.TabIndex = 64;
+            this.btnRemoveFileName.Text = "Remove Selected";
+            this.btnRemoveFileName.UseVisualStyleBackColor = true;
+            this.btnRemoveFileName.Click += new System.EventHandler(this.btnRemoveFileName_Click);
+            // 
+            // listBoxStock
+            // 
+            this.listBoxStock.FormattingEnabled = true;
+            this.listBoxStock.Location = new System.Drawing.Point(314, 456);
+            this.listBoxStock.Name = "listBoxStock";
+            this.listBoxStock.Size = new System.Drawing.Size(236, 56);
+            this.listBoxStock.TabIndex = 63;
+            // 
+            // listBoxFileNames
+            // 
+            this.listBoxFileNames.FormattingEnabled = true;
+            this.listBoxFileNames.Location = new System.Drawing.Point(88, 115);
+            this.listBoxFileNames.Name = "listBoxFileNames";
+            this.listBoxFileNames.Size = new System.Drawing.Size(462, 56);
+            this.listBoxFileNames.TabIndex = 62;
+            // 
+            // btnAddStock
+            // 
+            this.btnAddStock.Location = new System.Drawing.Point(555, 454);
+            this.btnAddStock.Name = "btnAddStock";
+            this.btnAddStock.Size = new System.Drawing.Size(81, 21);
+            this.btnAddStock.TabIndex = 61;
+            this.btnAddStock.Text = "Add More";
+            this.btnAddStock.UseVisualStyleBackColor = true;
+            this.btnAddStock.Click += new System.EventHandler(this.btnAddStock_Click);
+            // 
+            // btnAddFileName
+            // 
+            this.btnAddFileName.Location = new System.Drawing.Point(556, 109);
+            this.btnAddFileName.Name = "btnAddFileName";
+            this.btnAddFileName.Size = new System.Drawing.Size(81, 21);
+            this.btnAddFileName.TabIndex = 60;
+            this.btnAddFileName.Text = "Add More";
+            this.btnAddFileName.UseVisualStyleBackColor = true;
+            this.btnAddFileName.Click += new System.EventHandler(this.btnAddFileName_Click);
             // 
             // cmbGuillo
             // 
@@ -384,7 +575,7 @@
             this.cmbGuillo.Items.AddRange(new object[] {
             "YES",
             "NO"});
-            this.cmbGuillo.Location = new System.Drawing.Point(78, 391);
+            this.cmbGuillo.Location = new System.Drawing.Point(74, 365);
             this.cmbGuillo.Name = "cmbGuillo";
             this.cmbGuillo.Size = new System.Drawing.Size(85, 21);
             this.cmbGuillo.TabIndex = 58;
@@ -392,7 +583,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(23, 397);
+            this.label17.Location = new System.Drawing.Point(19, 371);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(50, 13);
             this.label17.TabIndex = 59;
@@ -429,33 +620,19 @@
             this.cmbPrintSize.TabIndex = 54;
             this.cmbPrintSize.SelectedIndexChanged += new System.EventHandler(this.cmbPrintSize_SelectedIndexChanged);
             // 
-            // txtCustomFinishedSize
-            // 
-            this.txtCustomFinishedSize.Location = new System.Drawing.Point(204, 357);
-            this.txtCustomFinishedSize.Name = "txtCustomFinishedSize";
-            this.txtCustomFinishedSize.Size = new System.Drawing.Size(136, 20);
-            this.txtCustomFinishedSize.TabIndex = 32;
-            // 
-            // txtCustomPrintSize
-            // 
-            this.txtCustomPrintSize.Location = new System.Drawing.Point(23, 357);
-            this.txtCustomPrintSize.Name = "txtCustomPrintSize";
-            this.txtCustomPrintSize.Size = new System.Drawing.Size(136, 20);
-            this.txtCustomPrintSize.TabIndex = 32;
-            // 
             // richTexNotes
             // 
-            this.richTexNotes.Location = new System.Drawing.Point(321, 570);
+            this.richTexNotes.Location = new System.Drawing.Point(321, 561);
             this.richTexNotes.Name = "richTexNotes";
-            this.richTexNotes.Size = new System.Drawing.Size(229, 100);
+            this.richTexNotes.Size = new System.Drawing.Size(315, 99);
             this.richTexNotes.TabIndex = 43;
             this.richTexNotes.Text = "";
             // 
             // richTextJobDirectory
             // 
-            this.richTextJobDirectory.Location = new System.Drawing.Point(89, 19);
+            this.richTextJobDirectory.Location = new System.Drawing.Point(89, 14);
             this.richTextJobDirectory.Name = "richTextJobDirectory";
-            this.richTextJobDirectory.Size = new System.Drawing.Size(461, 53);
+            this.richTextJobDirectory.Size = new System.Drawing.Size(548, 22);
             this.richTextJobDirectory.TabIndex = 42;
             this.richTextJobDirectory.Text = "";
             // 
@@ -470,7 +647,7 @@
             // 
             // tbnClearStreams
             // 
-            this.tbnClearStreams.Location = new System.Drawing.Point(240, 672);
+            this.tbnClearStreams.Location = new System.Drawing.Point(240, 663);
             this.tbnClearStreams.Name = "tbnClearStreams";
             this.tbnClearStreams.Size = new System.Drawing.Size(75, 30);
             this.tbnClearStreams.TabIndex = 53;
@@ -480,7 +657,7 @@
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(180, 511);
+            this.label9.Location = new System.Drawing.Point(180, 502);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(54, 26);
             this.label9.TabIndex = 52;
@@ -488,7 +665,7 @@
             // 
             // numericUpDownSheetsPerRec
             // 
-            this.numericUpDownSheetsPerRec.Location = new System.Drawing.Point(183, 540);
+            this.numericUpDownSheetsPerRec.Location = new System.Drawing.Point(183, 531);
             this.numericUpDownSheetsPerRec.Maximum = new decimal(new int[] {
             500000,
             0,
@@ -505,22 +682,34 @@
             // 
             // groupBoxPrintMachine
             // 
+            this.groupBoxPrintMachine.Controls.Add(this.checkBoxAddInkJet);
             this.groupBoxPrintMachine.Controls.Add(this.rbMInkjet);
             this.groupBoxPrintMachine.Controls.Add(this.rbMDuplo);
             this.groupBoxPrintMachine.Controls.Add(this.rbM7100);
             this.groupBoxPrintMachine.Controls.Add(this.rbM8120);
             this.groupBoxPrintMachine.Controls.Add(this.groupBoxColour);
-            this.groupBoxPrintMachine.Location = new System.Drawing.Point(22, 231);
+            this.groupBoxPrintMachine.Location = new System.Drawing.Point(88, 231);
             this.groupBoxPrintMachine.Name = "groupBoxPrintMachine";
-            this.groupBoxPrintMachine.Size = new System.Drawing.Size(528, 66);
+            this.groupBoxPrintMachine.Size = new System.Drawing.Size(462, 66);
             this.groupBoxPrintMachine.TabIndex = 50;
             this.groupBoxPrintMachine.TabStop = false;
             this.groupBoxPrintMachine.Text = "Print Machine";
             // 
+            // checkBoxAddInkJet
+            // 
+            this.checkBoxAddInkJet.AutoSize = true;
+            this.checkBoxAddInkJet.Enabled = false;
+            this.checkBoxAddInkJet.Location = new System.Drawing.Point(269, 43);
+            this.checkBoxAddInkJet.Name = "checkBoxAddInkJet";
+            this.checkBoxAddInkJet.Size = new System.Drawing.Size(77, 17);
+            this.checkBoxAddInkJet.TabIndex = 75;
+            this.checkBoxAddInkJet.Text = "Add InkJet";
+            this.checkBoxAddInkJet.UseVisualStyleBackColor = true;
+            // 
             // rbMInkjet
             // 
             this.rbMInkjet.AutoSize = true;
-            this.rbMInkjet.Location = new System.Drawing.Point(426, 21);
+            this.rbMInkjet.Location = new System.Drawing.Point(388, 24);
             this.rbMInkjet.Name = "rbMInkjet";
             this.rbMInkjet.Size = new System.Drawing.Size(51, 17);
             this.rbMInkjet.TabIndex = 27;
@@ -531,18 +720,19 @@
             // rbMDuplo
             // 
             this.rbMDuplo.AutoSize = true;
-            this.rbMDuplo.Location = new System.Drawing.Point(304, 21);
+            this.rbMDuplo.Location = new System.Drawing.Point(269, 24);
             this.rbMDuplo.Name = "rbMDuplo";
             this.rbMDuplo.Size = new System.Drawing.Size(53, 17);
             this.rbMDuplo.TabIndex = 26;
             this.rbMDuplo.TabStop = true;
             this.rbMDuplo.Text = "Duplo";
             this.rbMDuplo.UseVisualStyleBackColor = true;
+            this.rbMDuplo.CheckedChanged += new System.EventHandler(this.rbMDuplo_CheckedChanged);
             // 
             // rbM7100
             // 
             this.rbM7100.AutoSize = true;
-            this.rbM7100.Location = new System.Drawing.Point(119, 21);
+            this.rbM7100.Location = new System.Drawing.Point(110, 24);
             this.rbM7100.Name = "rbM7100";
             this.rbM7100.Size = new System.Drawing.Size(49, 17);
             this.rbM7100.TabIndex = 25;
@@ -554,7 +744,7 @@
             // rbM8120
             // 
             this.rbM8120.AutoSize = true;
-            this.rbM8120.Location = new System.Drawing.Point(13, 21);
+            this.rbM8120.Location = new System.Drawing.Point(16, 24);
             this.rbM8120.Name = "rbM8120";
             this.rbM8120.Size = new System.Drawing.Size(49, 17);
             this.rbM8120.TabIndex = 24;
@@ -566,7 +756,7 @@
             // 
             this.groupBoxColour.Controls.Add(this.rbCBlack);
             this.groupBoxColour.Controls.Add(this.rbCColour);
-            this.groupBoxColour.Location = new System.Drawing.Point(174, 10);
+            this.groupBoxColour.Location = new System.Drawing.Point(165, 9);
             this.groupBoxColour.Name = "groupBoxColour";
             this.groupBoxColour.Size = new System.Drawing.Size(67, 53);
             this.groupBoxColour.TabIndex = 23;
@@ -597,7 +787,7 @@
             // 
             // btnPrintSpecSheet
             // 
-            this.btnPrintSpecSheet.Location = new System.Drawing.Point(432, 695);
+            this.btnPrintSpecSheet.Location = new System.Drawing.Point(519, 704);
             this.btnPrintSpecSheet.Name = "btnPrintSpecSheet";
             this.btnPrintSpecSheet.Size = new System.Drawing.Size(118, 40);
             this.btnPrintSpecSheet.TabIndex = 48;
@@ -607,7 +797,7 @@
             // 
             // label14
             // 
-            this.label14.Location = new System.Drawing.Point(101, 511);
+            this.label14.Location = new System.Drawing.Point(101, 502);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(49, 26);
             this.label14.TabIndex = 47;
@@ -616,7 +806,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(319, 554);
+            this.label13.Location = new System.Drawing.Point(323, 545);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 13);
             this.label13.TabIndex = 46;
@@ -628,8 +818,9 @@
             this.dataGridViewStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Stream,
             this.RecordQty,
+            this.Sheets,
             this.PrintQty});
-            this.dataGridViewStreams.Location = new System.Drawing.Point(26, 570);
+            this.dataGridViewStreams.Location = new System.Drawing.Point(26, 561);
             this.dataGridViewStreams.Name = "dataGridViewStreams";
             this.dataGridViewStreams.Size = new System.Drawing.Size(289, 100);
             this.dataGridViewStreams.TabIndex = 45;
@@ -647,6 +838,11 @@
             this.RecordQty.Name = "RecordQty";
             this.RecordQty.ReadOnly = true;
             // 
+            // Sheets
+            // 
+            this.Sheets.HeaderText = "Sheets";
+            this.Sheets.Name = "Sheets";
+            // 
             // PrintQty
             // 
             this.PrintQty.HeaderText = "Print Qty";
@@ -657,16 +853,16 @@
             // 
             this.groupBoxBranch.Controls.Add(this.rbArtwork);
             this.groupBoxBranch.Controls.Add(this.rbDatabase);
-            this.groupBoxBranch.Location = new System.Drawing.Point(88, 75);
+            this.groupBoxBranch.Location = new System.Drawing.Point(88, 37);
             this.groupBoxBranch.Name = "groupBoxBranch";
-            this.groupBoxBranch.Size = new System.Drawing.Size(224, 42);
+            this.groupBoxBranch.Size = new System.Drawing.Size(224, 31);
             this.groupBoxBranch.TabIndex = 44;
             this.groupBoxBranch.TabStop = false;
             // 
             // rbArtwork
             // 
             this.rbArtwork.AutoSize = true;
-            this.rbArtwork.Location = new System.Drawing.Point(97, 15);
+            this.rbArtwork.Location = new System.Drawing.Point(97, 9);
             this.rbArtwork.Name = "rbArtwork";
             this.rbArtwork.Size = new System.Drawing.Size(61, 17);
             this.rbArtwork.TabIndex = 23;
@@ -677,7 +873,7 @@
             // rbDatabase
             // 
             this.rbDatabase.AutoSize = true;
-            this.rbDatabase.Location = new System.Drawing.Point(15, 15);
+            this.rbDatabase.Location = new System.Drawing.Point(15, 9);
             this.rbDatabase.Name = "rbDatabase";
             this.rbDatabase.Size = new System.Drawing.Size(71, 17);
             this.rbDatabase.TabIndex = 22;
@@ -687,9 +883,9 @@
             // 
             // btnAddStream
             // 
-            this.btnAddStream.Location = new System.Drawing.Point(240, 537);
+            this.btnAddStream.Location = new System.Drawing.Point(240, 531);
             this.btnAddStream.Name = "btnAddStream";
-            this.btnAddStream.Size = new System.Drawing.Size(75, 30);
+            this.btnAddStream.Size = new System.Drawing.Size(75, 24);
             this.btnAddStream.TabIndex = 41;
             this.btnAddStream.Text = "Add";
             this.btnAddStream.UseVisualStyleBackColor = true;
@@ -697,7 +893,7 @@
             // 
             // numericUpDownStreamQty
             // 
-            this.numericUpDownStreamQty.Location = new System.Drawing.Point(104, 540);
+            this.numericUpDownStreamQty.Location = new System.Drawing.Point(104, 531);
             this.numericUpDownStreamQty.Maximum = new decimal(new int[] {
             500000,
             0,
@@ -712,7 +908,7 @@
             this.cmbStream.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbStream.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbStream.FormattingEnabled = true;
-            this.cmbStream.Location = new System.Drawing.Point(22, 540);
+            this.cmbStream.Location = new System.Drawing.Point(22, 531);
             this.cmbStream.Name = "cmbStream";
             this.cmbStream.Size = new System.Drawing.Size(61, 21);
             this.cmbStream.TabIndex = 37;
@@ -720,7 +916,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(23, 524);
+            this.label10.Location = new System.Drawing.Point(23, 515);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(40, 13);
             this.label10.TabIndex = 38;
@@ -731,7 +927,7 @@
             this.groupBoxStock.Controls.Add(this.txtStockDescription);
             this.groupBoxStock.Controls.Add(this.rbSMSOL);
             this.groupBoxStock.Controls.Add(this.rbSCustomer);
-            this.groupBoxStock.Location = new System.Drawing.Point(22, 439);
+            this.groupBoxStock.Location = new System.Drawing.Point(22, 404);
             this.groupBoxStock.Name = "groupBoxStock";
             this.groupBoxStock.Size = new System.Drawing.Size(528, 48);
             this.groupBoxStock.TabIndex = 36;
@@ -740,7 +936,7 @@
             // 
             // txtStockDescription
             // 
-            this.txtStockDescription.Location = new System.Drawing.Point(272, 19);
+            this.txtStockDescription.Location = new System.Drawing.Point(292, 19);
             this.txtStockDescription.Name = "txtStockDescription";
             this.txtStockDescription.Size = new System.Drawing.Size(233, 20);
             this.txtStockDescription.TabIndex = 33;
@@ -770,10 +966,10 @@
             // lblPrintDescription
             // 
             this.lblPrintDescription.AutoSize = true;
-            this.lblPrintDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrintDescription.Location = new System.Drawing.Point(354, 149);
+            this.lblPrintDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrintDescription.Location = new System.Drawing.Point(91, 217);
             this.lblPrintDescription.Name = "lblPrintDescription";
-            this.lblPrintDescription.Size = new System.Drawing.Size(0, 17);
+            this.lblPrintDescription.Size = new System.Drawing.Size(0, 13);
             this.lblPrintDescription.TabIndex = 35;
             // 
             // groupBoxLayout
@@ -837,7 +1033,7 @@
             this.cmbPrintJobs.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbPrintJobs.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbPrintJobs.FormattingEnabled = true;
-            this.cmbPrintJobs.Location = new System.Drawing.Point(89, 175);
+            this.cmbPrintJobs.Location = new System.Drawing.Point(89, 192);
             this.cmbPrintJobs.Name = "cmbPrintJobs";
             this.cmbPrintJobs.Size = new System.Drawing.Size(461, 21);
             this.cmbPrintJobs.TabIndex = 29;
@@ -846,28 +1042,18 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 183);
+            this.label11.Location = new System.Drawing.Point(21, 195);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 13);
             this.label11.TabIndex = 30;
             this.label11.Text = "Print Jobs";
-            // 
-            // btnChangeJobDirectory
-            // 
-            this.btnChangeJobDirectory.Location = new System.Drawing.Point(475, 71);
-            this.btnChangeJobDirectory.Name = "btnChangeJobDirectory";
-            this.btnChangeJobDirectory.Size = new System.Drawing.Size(75, 36);
-            this.btnChangeJobDirectory.TabIndex = 24;
-            this.btnChangeJobDirectory.Text = "Browse";
-            this.btnChangeJobDirectory.UseVisualStyleBackColor = true;
-            this.btnChangeJobDirectory.Click += new System.EventHandler(this.btnChangeJobDirectory_Click);
             // 
             // cmbFileName
             // 
             this.cmbFileName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbFileName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbFileName.FormattingEnabled = true;
-            this.cmbFileName.Location = new System.Drawing.Point(89, 123);
+            this.cmbFileName.Location = new System.Drawing.Point(89, 87);
             this.cmbFileName.Name = "cmbFileName";
             this.cmbFileName.Size = new System.Drawing.Size(461, 21);
             this.cmbFileName.TabIndex = 15;
@@ -875,7 +1061,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(19, 131);
+            this.label8.Location = new System.Drawing.Point(20, 91);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 13);
             this.label8.TabIndex = 16;
@@ -884,7 +1070,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 22);
+            this.label7.Location = new System.Drawing.Point(19, 17);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 13);
             this.label7.TabIndex = 3;
@@ -898,7 +1084,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(623, 743);
+            this.tabPage3.Size = new System.Drawing.Size(677, 770);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Production Report";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -949,21 +1135,11 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(623, 743);
+            this.tabPage4.Size = new System.Drawing.Size(677, 770);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Sample Sheet";
             this.tabPage4.UseVisualStyleBackColor = true;
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
-            // 
-            // btnSampleSheet
-            // 
-            this.btnSampleSheet.Location = new System.Drawing.Point(350, 218);
-            this.btnSampleSheet.Name = "btnSampleSheet";
-            this.btnSampleSheet.Size = new System.Drawing.Size(159, 52);
-            this.btnSampleSheet.TabIndex = 27;
-            this.btnSampleSheet.Text = "Sample Sheet Wizard";
-            this.btnSampleSheet.UseVisualStyleBackColor = true;
-            this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
             // groupBox1
             // 
@@ -1016,12 +1192,230 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // btnSampleSheet
+            // 
+            this.btnSampleSheet.Location = new System.Drawing.Point(350, 218);
+            this.btnSampleSheet.Name = "btnSampleSheet";
+            this.btnSampleSheet.Size = new System.Drawing.Size(159, 52);
+            this.btnSampleSheet.TabIndex = 27;
+            this.btnSampleSheet.Text = "Sample Sheet Wizard";
+            this.btnSampleSheet.UseVisualStyleBackColor = true;
+            this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.LodgePanel);
+            this.tabPage5.Controls.Add(this.LoginPanel);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(677, 770);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "eLMS";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            // 
+            // LoginPanel
+            // 
+            this.LoginPanel.Controls.Add(this.label25);
+            this.LoginPanel.Controls.Add(this.btnSaveElmsLogin);
+            this.LoginPanel.Controls.Add(this.label24);
+            this.LoginPanel.Controls.Add(this.txtElmsPWD);
+            this.LoginPanel.Controls.Add(this.UN);
+            this.LoginPanel.Controls.Add(this.txtElmsUN);
+            this.LoginPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LoginPanel.Location = new System.Drawing.Point(3, 3);
+            this.LoginPanel.Name = "LoginPanel";
+            this.LoginPanel.Size = new System.Drawing.Size(671, 764);
+            this.LoginPanel.TabIndex = 0;
+            // 
+            // txtElmsUN
+            // 
+            this.txtElmsUN.Location = new System.Drawing.Point(218, 77);
+            this.txtElmsUN.Name = "txtElmsUN";
+            this.txtElmsUN.Size = new System.Drawing.Size(100, 20);
+            this.txtElmsUN.TabIndex = 0;
+            // 
+            // UN
+            // 
+            this.UN.AutoSize = true;
+            this.UN.Location = new System.Drawing.Point(152, 80);
+            this.UN.Name = "UN";
+            this.UN.Size = new System.Drawing.Size(60, 13);
+            this.UN.TabIndex = 1;
+            this.UN.Text = "User Name";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(159, 121);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(53, 13);
+            this.label24.TabIndex = 3;
+            this.label24.Text = "Password";
+            // 
+            // txtElmsPWD
+            // 
+            this.txtElmsPWD.Location = new System.Drawing.Point(218, 114);
+            this.txtElmsPWD.Name = "txtElmsPWD";
+            this.txtElmsPWD.PasswordChar = '*';
+            this.txtElmsPWD.Size = new System.Drawing.Size(100, 20);
+            this.txtElmsPWD.TabIndex = 2;
+            this.txtElmsPWD.UseSystemPasswordChar = true;
+            // 
+            // btnSaveElmsLogin
+            // 
+            this.btnSaveElmsLogin.Location = new System.Drawing.Point(243, 159);
+            this.btnSaveElmsLogin.Name = "btnSaveElmsLogin";
+            this.btnSaveElmsLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveElmsLogin.TabIndex = 4;
+            this.btnSaveElmsLogin.Text = "Save";
+            this.btnSaveElmsLogin.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(171, 43);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(178, 13);
+            this.label25.TabIndex = 5;
+            this.label25.Text = "Please enter your eLMS login details";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(14, 18);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(93, 13);
+            this.label23.TabIndex = 1;
+            this.label23.Text = "Manifest Summary";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(113, 15);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(461, 42);
+            this.textBox1.TabIndex = 2;
+            // 
+            // btnBrowseManifest
+            // 
+            this.btnBrowseManifest.Location = new System.Drawing.Point(580, 34);
+            this.btnBrowseManifest.Name = "btnBrowseManifest";
+            this.btnBrowseManifest.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseManifest.TabIndex = 3;
+            this.btnBrowseManifest.Text = "Browse";
+            this.btnBrowseManifest.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxLodgeCat
+            // 
+            this.groupBoxLodgeCat.Controls.Add(this.radioButton5);
+            this.groupBoxLodgeCat.Controls.Add(this.radioButton4);
+            this.groupBoxLodgeCat.Controls.Add(this.radioButton3);
+            this.groupBoxLodgeCat.Controls.Add(this.radioButton2);
+            this.groupBoxLodgeCat.Controls.Add(this.radioButton1);
+            this.groupBoxLodgeCat.Location = new System.Drawing.Point(113, 72);
+            this.groupBoxLodgeCat.Name = "groupBoxLodgeCat";
+            this.groupBoxLodgeCat.Size = new System.Drawing.Size(462, 46);
+            this.groupBoxLodgeCat.TabIndex = 4;
+            this.groupBoxLodgeCat.TabStop = false;
+            this.groupBoxLodgeCat.Text = "Lodgement Category";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(7, 20);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(63, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Pre-Sort";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(90, 20);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(70, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Print Post";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(180, 19);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(42, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "UM";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(251, 19);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(55, 17);
+            this.radioButton4.TabIndex = 3;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Parcel";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(346, 19);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(83, 17);
+            this.radioButton5.TabIndex = 4;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "International";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(113, 140);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 5;
+            // 
+            // btnLodge
+            // 
+            this.btnLodge.Location = new System.Drawing.Point(500, 215);
+            this.btnLodge.Name = "btnLodge";
+            this.btnLodge.Size = new System.Drawing.Size(75, 23);
+            this.btnLodge.TabIndex = 6;
+            this.btnLodge.Text = "Lodge";
+            this.btnLodge.UseVisualStyleBackColor = true;
+            // 
+            // LodgePanel
+            // 
+            this.LodgePanel.Controls.Add(this.btnBrowseManifest);
+            this.LodgePanel.Controls.Add(this.btnLodge);
+            this.LodgePanel.Controls.Add(this.label23);
+            this.LodgePanel.Controls.Add(this.comboBox1);
+            this.LodgePanel.Controls.Add(this.textBox1);
+            this.LodgePanel.Controls.Add(this.groupBoxLodgeCat);
+            this.LodgePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LodgePanel.Location = new System.Drawing.Point(3, 3);
+            this.LodgePanel.Name = "LodgePanel";
+            this.LodgePanel.Size = new System.Drawing.Size(671, 764);
+            this.LodgePanel.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 879);
+            this.ClientSize = new System.Drawing.Size(685, 909);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Job Docs";
@@ -1056,6 +1450,13 @@
             this.tabPage4.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.LoginPanel.ResumeLayout(false);
+            this.LoginPanel.PerformLayout();
+            this.groupBoxLodgeCat.ResumeLayout(false);
+            this.groupBoxLodgeCat.PerformLayout();
+            this.LodgePanel.ResumeLayout(false);
+            this.LodgePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1085,8 +1486,6 @@
         private System.Windows.Forms.ComboBox cmbFinishedSize;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox cmbPrintSize;
-        private System.Windows.Forms.TextBox txtCustomFinishedSize;
-        private System.Windows.Forms.TextBox txtCustomPrintSize;
         private System.Windows.Forms.RichTextBox richTexNotes;
         private System.Windows.Forms.RichTextBox richTextJobDirectory;
         private System.Windows.Forms.Label label15;
@@ -1105,9 +1504,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DataGridView dataGridViewStreams;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Stream;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RecordQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrintQty;
         private System.Windows.Forms.GroupBox groupBoxBranch;
         private System.Windows.Forms.RadioButton rbArtwork;
         private System.Windows.Forms.RadioButton rbDatabase;
@@ -1127,7 +1523,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbPrintJobs;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnChangeJobDirectory;
         private System.Windows.Forms.ComboBox cmbFileName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -1144,6 +1539,47 @@
         private System.Windows.Forms.RadioButton rbTab;
         private System.Windows.Forms.RichTextBox richTextOutputFilePath;
         private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button btnAddStock;
+        private System.Windows.Forms.Button btnAddFileName;
+        private System.Windows.Forms.ListBox listBoxStock;
+        private System.Windows.Forms.ListBox listBoxFileNames;
+        private System.Windows.Forms.Button btnRemoveFileName;
+        private System.Windows.Forms.Button btnRemoveStock;
+        private System.Windows.Forms.ComboBox cmbStreamStock;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox cmbStreamFN;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stream;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecordQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sheets;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrintQty;
+        private System.Windows.Forms.CheckBox checkBoxApproval;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtCompany;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtContact;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.CheckBox checkBoxAddInkJet;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button btnLodge;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBoxLodgeCat;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button btnBrowseManifest;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Panel LoginPanel;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button btnSaveElmsLogin;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox txtElmsPWD;
+        private System.Windows.Forms.Label UN;
+        private System.Windows.Forms.TextBox txtElmsUN;
+        private System.Windows.Forms.Panel LodgePanel;
     }
 }
 
