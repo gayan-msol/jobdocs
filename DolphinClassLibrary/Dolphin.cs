@@ -16,6 +16,8 @@ namespace DolphinLibrary
         public string[] LodgemntInfo = { "lodgement", "doc_id" };
         public string[] MailPackItemInfo = { "outwork", "doc_id" };
         public string[] PrintProcessInfo = { "laser_print_options", "doc_id" };
+        public string[] PostAccount = { "post_account", "doc_id" };
+        public string[] StockRequest = { "stock_request", "doc_id" };
 
         public Dolphin()
         {

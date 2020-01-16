@@ -210,7 +210,12 @@ namespace JobDocs
                     g.DrawLine(Pens.Black, xLeft + 446, (int)yCurrent, xLeft + 446, (int)yCurrent + 60);
                     g.DrawString("Date:\n              /       /", fontValueSmall, Brushes.Black, xLeft + 223, (int)yCurrent);
 
-                    g.DrawString("Sign Off:", fontValueSmall, Brushes.Black, xLeft + 446, (int)yCurrent);                 
+                    string signoff = "";
+                    if (printSpecSheet.PrintMachine == "DUPLO -> INKJET")
+                    {
+                        signoff = "  Duplo    |    Inkjet";
+                    }
+                    g.DrawString($"Sign Off:{signoff}", fontValueSmall, Brushes.Black, xLeft + 446, (int)yCurrent);                 
                 }
 
                 return 1;

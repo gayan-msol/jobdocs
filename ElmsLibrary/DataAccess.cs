@@ -7,7 +7,7 @@ using Dapper;
 using System.Data;
 using System.IO;
 
-namespace _JobDocsLibrary
+namespace ElmsLibrary
 {
     public static class DataAccess
     {
@@ -39,6 +39,79 @@ namespace _JobDocsLibrary
         //    //  return count;
         //}
 
+        public static int saveElmsLogin(ElmsUser user)
+        {
+            string query = "IF NOT EXISTS (SELECT * FROM Logins WHERE WindowsUser=@WindowsUser) INSERT INTO Logins ([UserName],[Password],[WindowsUser])  VALUES (@UserName,@Password,@WindowsUser) " +
+                "ELSE UPDATE Logins SET UserName=@UserName, Password=@Password WHERE WindowsUser=@WindowsUser  ";
+            int count = 0;
+
+            using (IDbConnection conn = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                count = conn.Execute(query, user);
+            }
+            return count;
+        }
+
+        public static ElmsUser GetElmsUser(string windowsUser)
+        {
+            string query = "SELECT * FROM Logins WHERE [WindowsUser] =@windowsUser";
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<ElmsUser>(query, new { windowsUser}).ToList();
+
+                if(output.Count >0 )
+                {
+                    return output[0];
+                }
+                else
+                {
+                    return null;
+                }
+              
+
+               
+
+            }
+
+        }
+
+        public static List<SortCategory> GetSortCategories(string sortType)
+        {
+            string query = "SELECT * FROM SortCategories WHERE [SortType] =@CategoryCode";
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<SortCategory>(query).ToList();
+
+                return output;
+
+            }
+
+        }
+
+
+        public static Article GetArticleInfo(string SortType, string size, string serviceType)
+        {
+            string query = "SELECT ProductGroup, ArticleType FROM ArticleSelections INNER JOIN GroupSelections ON ArticleSelections.ParentID=GroupSelections.ID WHERE [Name] =@name AND  [Size] =@size AND  [ServiceType] =@serviceType";
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<Article>(query, new { SortType, size, serviceType }).ToList()[0];
+
+                return output;
+
+            }
+
+        }
+
+        public static List<string> GetSizes(string SortType)
+        {
+            string query = "SELECT DISTINCT(Size) FROM ArticleSelections WHERE [Name] =@SortType";
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<string>(query, new { SortType }).ToList();
+
+                return output;
+            }
+        }
 
         /*
         public static void UpdateGeneratedStatus(Letter letter)
@@ -168,20 +241,7 @@ namespace _JobDocsLibrary
             }
         }
 
-        public static Letter getLettersByID(string letterID, bool pioneerDaily = false)
-        {
-            string query = "SELECT * FROM Letters WHERE [LetterID] =@letterID";
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
-            {
-                var output = connection.Query<Letter>(query, new { letterID }).ToList();
-                if (output.Count > 0)
-                { return output[0]; }
-                else
-                { return null; }
-
-            }
-
-        }
+ 
 
         public static void archiveReturnedLetters(string LetterID)
         {

@@ -158,6 +158,10 @@
       <Project>{9147da54-64d9-4e41-ab04-0597623e4f69}</Project>
       <Name>DolphinLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ElmsLibrary\ElmsLibrary.csproj">
+      <Project>{9299a69f-f4a3-406a-9d57-1ea675604567}</Project>
+      <Name>ElmsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JobDocsLibrary\JobDocsLibrary.csproj">
       <Project>{7180673f-56af-4327-81f7-2d771c876daa}</Project>
       <Name>JobDocsLibrary</Name>

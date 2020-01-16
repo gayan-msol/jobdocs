@@ -15,6 +15,8 @@ namespace DolphinLibrary
         public string SortType { get; set; }
         public int eLMS { get; set; }
 
+
+
         //public static void GetLodgementDetails(string docID)
         //{
         //    Dolphin dolphin = new Dolphin();
@@ -38,6 +40,19 @@ namespace DolphinLibrary
             {
                 itemList = fastJSON.JSON.ToObject<List<Lodgement>>(response);
             }
+
+            string postInfo = dolphin.getInfo(dolphin.PostAccount, doc_id);
+            postInfo = postInfo?.Replace("\"Note\":", "\"AccType\":");
+            postInfo = postInfo?.Replace("\"post Account\":", "\"AccNo\":");
+     
+
+            if (response != null && response != "[]")
+            {
+                itemList = fastJSON.JSON.ToObject<List<Lodgement>>(response);
+            }
+
+
+
             return itemList;
         }
     }

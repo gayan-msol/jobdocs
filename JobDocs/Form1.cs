@@ -17,6 +17,8 @@ using DolphinLibrary;
 using System.Reflection;
 using System.Security;
 using System.Globalization;
+using ElmsLibrary;
+using Lodgement = DolphinLibrary.Lodgement;
 
 namespace JobDocs
 {
@@ -28,6 +30,7 @@ namespace JobDocs
         public static string jobName = "";
         public static string jobDirectoryData = "";
         public static string jobDirectoryArt = "";
+        string manifestFile = "";
         Job importedJob = new Job();
         Address address = new Address(); 
         List<string> columnsList = new List<string>();
@@ -58,7 +61,10 @@ namespace JobDocs
 
         private string getCurrentUser()
         {
-            string un = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Replace("MSOL\\", "");
+            string winuser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+           string[] temp = winuser.Split('\\');
+
+            string un = temp[temp.Length - 1];
             TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
 
             return textInfo.ToTitleCase(un.Replace(".", " "));
@@ -543,13 +549,22 @@ namespace JobDocs
 
         private string getPrintMachine()
         {
-            foreach (Control item in groupBoxPrintMachine.Controls)
+            if (checkBoxAddInkJet.Checked)
             {
-                if(item is RadioButton radioButton && radioButton.Checked)
+                return "DUPLO -> INKJET";
+            }
+            else
+            {
+                foreach (Control item in groupBoxPrintMachine.Controls)
                 {
-                    return item.Name.Substring(3);
+                    if (item is RadioButton radioButton && radioButton.Checked)
+                    {
+                        return item.Name.Substring(3);
+                    }
                 }
             }
+
+        
             return null;
         }
 
@@ -722,195 +737,7 @@ namespace JobDocs
 
         }
 
-        /*
-        private void  Print(PrintSpecSheet printSpecSheet)
-        {
-
-
-
-            PrintDocument printDoc = new PrintDocument();
-
-
-
-            printDoc.DefaultPageSettings.Landscape = false;
-            printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, 1170);
-            printDoc.DocumentName = $"{jobDirectoryData}\\{printSpecSheet.JobNo} - Print Spec Sheet - {printSpecSheet.PrintMachine}";
-            printDoc.PrinterSettings.PrinterName = "RICOH MP C5503 PCL 6";
-
-
-            printDoc.DefaultPageSettings.Margins.Left = 10;
-            printDoc.DefaultPageSettings.Margins.Right = 10;//100 = 1 inch = 2.54 cm
-            printDoc.DefaultPageSettings.Margins.Top = 10;
-            printDoc.DefaultPageSettings.Margins.Bottom = 10;
-
-
-
-            printDoc.PrintPage += new PrintPageEventHandler(printDoc_PrintPage);
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.Document = printDoc; //Document property must be set before ShowDialog()
-
-            DialogResult dialogResult = printDialog.ShowDialog();
-            if (dialogResult == DialogResult.OK)
-            {
-              printDoc.Print();
-            }
-
-            void   printDoc_PrintPage(object senderp, PrintPageEventArgs ev)
-            {
-                Graphics g = ev.Graphics;
-
-                Font fontHeader = new Font("Calibri", 32, FontStyle.Bold);
-                Font fontFieldName = new Font("Calibri", 22);
-                Font fontMedium = new Font("Calibri", 14);
-                Font fontValueLargeBold = new Font("Calibri", 22, FontStyle.Bold);
-                Font fontValueLarge = new Font("Calibri", 22);
-                Font fontValueSmall = new Font("Calibri", 12);
-
-                Font font4 = new Font("Calibri", 18, FontStyle.Bold);
-
-                int x1 = ev.MarginBounds.Left;
-                int y1 = ev.MarginBounds.Top;
-                int w = ev.MarginBounds.Width;
-                int h = ev.MarginBounds.Height;
-                int xLeft = 70;
-                int xRight = w - xLeft;
-                int xHeader = 148;
-                int yHeader = 30;
-                int yLine1 = 80;
-                int yLineHeightL = 22;
-                int yLineHeightS = 10;
-                int yLineGap = 25;
-                int y2 = 65;
-                int y3 = 140;
-                int y4 = 160;
-
-                float lineCount = 0;
-                float yCurrent = 0;
-
-                StringFormat formatLeft = new StringFormat(StringFormatFlags.NoClip);
-                StringFormat formatCenter = new StringFormat(formatLeft);
-                formatCenter.Alignment = StringAlignment.Center;
-
-                g.DrawString("PRINT SPECIFICATION SHEET", fontHeader, Brushes.Black, xHeader, yHeader);
-
-                yCurrent = yLine1 + 20;
-                g.DrawString("Job No:", fontFieldName, Brushes.Black, xLeft,yCurrent);
-                g.DrawString(printSpecSheet.JobNo, fontValueLargeBold, Brushes.Black, xLeft + 100, yCurrent);
-
-                g.DrawString("Print Machine:", fontFieldName, Brushes.Black, xLeft + 400, yCurrent );
-                g.DrawString(printSpecSheet.PrintMachine, fontValueLargeBold, Brushes.Black, xLeft + 600, yCurrent);
-
-                lineCount ++;
-                yCurrent += yLineHeightL + yLineGap;
-                g.DrawString("Job Name:", fontFieldName, Brushes.Black, xLeft ,yCurrent );
-                RectangleF rectJobDir = new RectangleF(xLeft + 150, yCurrent , 550, 50);
-                g.DrawString(printSpecSheet.JobName, fontFieldName, Brushes.Black, rectJobDir);
-
-                lineCount++;
-                yCurrent += yLineHeightL + yLineGap;
-                g.DrawString("Customer:", fontFieldName, Brushes.Black, xLeft,yCurrent);
-                RectangleF rectCust = new RectangleF(xLeft + 150, yCurrent, 550, 50);
-                g.DrawString(printSpecSheet.Customer, fontFieldName, Brushes.Black, rectCust);
-
-                lineCount += 2;
-                yCurrent += yLineHeightL + yLineGap;
-                g.DrawString("File Name:", fontFieldName, Brushes.Black, xLeft,yCurrent);
-                RectangleF rectFileName = new RectangleF(xLeft + 150, yCurrent +10, 600, 150);
-                string fileNames = "";
-                foreach (string s in printSpecSheet.FileNames)
-                { fileNames += $"{s}\n"; }
-                g.DrawString(fileNames, fontValueSmall, Brushes.Black, rectFileName);
-
-                lineCount ++;
-                yCurrent += 150 + yLineGap;
-                g.DrawString("Print Size:", fontMedium, Brushes.Black, xLeft, yCurrent);
-                RectangleF rectPrintSize = new RectangleF(xLeft + 100, yCurrent , 230, 44);
-                g.DrawString(printSpecSheet.PrintSize, fontMedium, Brushes.Black, rectPrintSize);
-
-                //g.DrawString("Guillo:", fontFieldName, Brushes.Black, xLeft +225, yLine1 + yLineHeight * lineCount + yLineGap * lineCount);
-                //RectangleF rectGuillo = new RectangleF(xLeft + 305, yLine1 + yLineHeight * lineCount + yLineGap * lineCount , 100, 44);
-                //g.DrawString(printSpecSheet.Guillotine, fontValueLarge, Brushes.Black, rectGuillo);
-                g.DrawString("Finished Size:", fontMedium, Brushes.Black, xLeft + 375,yCurrent);
-                RectangleF rectFinishSize = new RectangleF(xLeft + 520, yCurrent , 230, 44);
-                g.DrawString(printSpecSheet.FinishedSize, fontMedium, Brushes.Black, rectFinishSize);
-
-                lineCount += 0.75F;
-                yCurrent += yLineHeightS + yLineGap;
-                g.DrawString("Layout:", fontMedium, Brushes.Black, xLeft, yCurrent);
-                RectangleF rectLayout = new RectangleF(xLeft + 100, yCurrent, 400, 44);
-                g.DrawString(printSpecSheet.Layout, fontMedium, Brushes.Black, rectLayout);
-
-                g.DrawString("Guillotine:", fontMedium, Brushes.Black, xLeft + 375, yCurrent);
-                RectangleF rectGuillo = new RectangleF(xLeft + 550, yCurrent, 100, 44);
-                g.DrawString(printSpecSheet.Guillotine, fontMedium, Brushes.Black, rectGuillo);
-
-                lineCount += 0.75F;
-               // yCurrent += yLineHeightS + yLineGap;
-            
-
-                lineCount += 0.75F;
-                yCurrent += yLineHeightS + yLineGap;
-                g.DrawString("Stock:", fontMedium, Brushes.Black, xLeft,yCurrent );
-                RectangleF rectStock = new RectangleF(xLeft + 100, yCurrent + 10, 500, 100);
-
-                string stock = "";
-                foreach (string s in printSpecSheet.Stock)
-                { stock += $"{s}\n"; }
-                g.DrawString(stock, fontValueSmall, Brushes.Black, rectStock);
-
-               
-
-                lineCount += 0.75F;
-                yCurrent += 130;
-                Rectangle rectStreams = new Rectangle(xLeft,(int)yCurrent, xRight - xLeft, 250);
-                g.DrawRectangle(Pens.Black, rectStreams);
-                string streams="";
-                foreach (string s in printSpecSheet.StreamList)
-                { streams += $"{s}\n"; }
-                g.DrawString(streams,fontValueSmall, Brushes.Black, rectStreams);
-
-                lineCount ++;
-                yCurrent += 255;
-                Rectangle rectNotes = new Rectangle(xLeft, (int)yCurrent, xRight - xLeft, 120);
-                g.DrawRectangle(Pens.Black, rectNotes);
-                g.DrawString(printSpecSheet.Notes, fontValueSmall, Brushes.Black, rectNotes);
-
-                lineCount ++;
-                yCurrent += 125;
-                Rectangle rectClientApproval = new Rectangle(xLeft, (int)yCurrent, xRight - xLeft, 60);
-                g.DrawRectangle(Pens.Black, rectClientApproval);
-                g.DrawLine(Pens.Black, xLeft + 223, (int)yCurrent, xLeft + 223, (int)yCurrent + 60);
-                g.DrawString("Approved By:", fontValueSmall, Brushes.Black, xLeft, (int)yCurrent);
-
-                g.DrawLine(Pens.Black, xLeft + 446, (int)yCurrent, xLeft + 446, (int)yCurrent + 60);
-                g.DrawString("From Company:", fontValueSmall, Brushes.Black, xLeft + 223, (int)yCurrent);
-
-                if (printSpecSheet.Approved)
-                {
-                    g.DrawString(printSpecSheet.Contact, fontValueSmall, Brushes.Black, xLeft, (int)yCurrent +30);
-                    g.DrawString(printSpecSheet.Customer, fontValueSmall, Brushes.Black, xLeft + 223, (int)yCurrent + 30);
-                    g.DrawString(System.Security.Principal.WindowsIdentity.GetCurrent().Name.Replace("MSOL\\",""), fontValueSmall, Brushes.Black, xLeft + 446, (int)yCurrent +30);
-                }
-
-                g.DrawString("Approved to at MSOL:", fontValueSmall, Brushes.Black, xLeft + 446, (int)yCurrent);
-
-
-                lineCount ++;
-                yCurrent += 60;
-                Rectangle rectSignOff = new Rectangle(xLeft, (int)yCurrent, xRight - xLeft, 60);
-                g.DrawRectangle(Pens.Black, rectSignOff);
-                g.DrawLine(Pens.Black, xLeft + 223, (int)yCurrent, xLeft + 223, (int)yCurrent + 60);
-                g.DrawString("Printed By:", fontValueSmall, Brushes.Black, xLeft, (int)yCurrent);
-
-                g.DrawLine(Pens.Black, xLeft + 446, (int)yCurrent, xLeft + 446, (int)yCurrent+60);
-                g.DrawString("Date:\n              /       /", fontValueSmall, Brushes.Black, xLeft + 223, (int)yCurrent);
-
-                g.DrawString("Sign Off:", fontValueSmall, Brushes.Black, xLeft + 446, (int)yCurrent);
-           
  
-            }
-        }
-        */
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -1003,8 +830,104 @@ namespace JobDocs
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            LodgePanel.Visible = false;
-            LoginPanel.Visible = true;
+
+        }
+
+        private void checkBoxAddInkJet_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxAddInkJet.Checked)
+            {
+                if (!cmbStreamFN.Items.Contains("DUPLO"))
+                {
+                    cmbStreamFN.Items.Add("DUPLO");
+                }
+                if (!cmbStreamFN.Items.Contains("INKJET"))
+                {
+                    cmbStreamFN.Items.Add("INKJET");
+                }
+            }
+            else
+            {
+                if (cmbStreamFN.Items.Contains("DUPLO"))
+                {
+                    cmbStreamFN.Items.Remove("DUPLO");
+                }
+                if (cmbStreamFN.Items.Contains("INKJET"))
+                {
+                    cmbStreamFN.Items.Remove("INKJET");
+                }
+            }
+        }
+
+        private void btnSaveElmsLogin_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtElmsUN.Text) && !string.IsNullOrWhiteSpace(txtElmsPWD.Text))
+            {
+                try
+                {
+                    ElmsUser user = new ElmsUser() { UserName = txtElmsUN.Text, Password = txtElmsPWD.Text, WindowsUser = userName };
+                    DataAccess.saveElmsLogin(user);
+                    MessageBox.Show("Login saved.");
+                    LoginPanel.Visible = false;
+                    LodgePanel.Visible = true;
+                }
+                catch(Exception ex)
+                {
+                    ErrorHandling.ShowMessage(ex);
+                }
+              
+            }
+            else
+            {
+                MessageBox.Show("Please enter username & passowrd.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
+        }
+
+        private void btnBrowseManifest_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if(openFileDialog.FileName != null)
+            {
+                txtManifestFileName.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void btnLodge_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbPre_Sort_CheckedChanged(object sender, EventArgs e)
+        {
+            cbSize.DataSource = DataAccess.GetSizes("Pre-Sort");
+        }
+
+        private void rbPrintPost_CheckedChanged(object sender, EventArgs e)
+        {
+            cbSize.DataSource = DataAccess.GetSizes("Print Post");           
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tabPage5_Enter(object sender, EventArgs e)
+        {
+            ElmsUser elmsUser = DataAccess.GetElmsUser(userName);
+
+            LodgePanel.Visible = elmsUser != null;
+            LoginPanel.Visible = elmsUser == null;
+            LodgePanel.Dock = DockStyle.Fill;
+            LoginPanel.Dock = DockStyle.Fill;
+
+            manifestFile = Directory.GetDirectories(jobDirectoryData).ToList()
+
+            txtManifestFileName= $@"{jobDirectoryData}"
+
+
         }
     }
 } 

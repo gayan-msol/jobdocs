@@ -52,6 +52,7 @@
     <Compile Include="JobProcess.cs" />
     <Compile Include="Lodgement.cs" />
     <Compile Include="MailPackItem.cs" />
+    <Compile Include="PostAcc.cs" />
     <Compile Include="PrintProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -126,26 +126,30 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnSampleSheet = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.LoginPanel = new System.Windows.Forms.Panel();
-            this.txtElmsUN = new System.Windows.Forms.TextBox();
-            this.UN = new System.Windows.Forms.Label();
+            this.LodgePanel = new System.Windows.Forms.Panel();
+            this.cbServiceType = new System.Windows.Forms.ComboBox();
+            this.btnBrowseManifest = new System.Windows.Forms.Button();
+            this.btnLodge = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.cbSize = new System.Windows.Forms.ComboBox();
+            this.txtManifestFileName = new System.Windows.Forms.TextBox();
+            this.groupBoxLodgeCat = new System.Windows.Forms.GroupBox();
+            this.rbPromoPost = new System.Windows.Forms.RadioButton();
+            this.rbCharityMail = new System.Windows.Forms.RadioButton();
+            this.rbFullRate = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.rbPrintPost = new System.Windows.Forms.RadioButton();
+            this.rbPre_Sort = new System.Windows.Forms.RadioButton();
+            this.label25 = new System.Windows.Forms.Label();
+            this.btnSaveElmsLogin = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.txtElmsPWD = new System.Windows.Forms.TextBox();
-            this.btnSaveElmsLogin = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnBrowseManifest = new System.Windows.Forms.Button();
-            this.groupBoxLodgeCat = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.btnLodge = new System.Windows.Forms.Button();
-            this.LodgePanel = new System.Windows.Forms.Panel();
+            this.UN = new System.Windows.Forms.Label();
+            this.txtElmsUN = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -168,8 +172,8 @@
             this.groupBox1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.LoginPanel.SuspendLayout();
-            this.groupBoxLodgeCat.SuspendLayout();
             this.LodgePanel.SuspendLayout();
+            this.groupBoxLodgeCat.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -705,6 +709,7 @@
             this.checkBoxAddInkJet.TabIndex = 75;
             this.checkBoxAddInkJet.Text = "Add InkJet";
             this.checkBoxAddInkJet.UseVisualStyleBackColor = true;
+            this.checkBoxAddInkJet.CheckedChanged += new System.EventHandler(this.checkBoxAddInkJet_CheckedChanged);
             // 
             // rbMInkjet
             // 
@@ -1213,10 +1218,8 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "eLMS";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
+            this.tabPage5.Enter += new System.EventHandler(this.tabPage5_Enter);
             // 
             // LoginPanel
             // 
@@ -1226,27 +1229,210 @@
             this.LoginPanel.Controls.Add(this.txtElmsPWD);
             this.LoginPanel.Controls.Add(this.UN);
             this.LoginPanel.Controls.Add(this.txtElmsUN);
-            this.LoginPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LoginPanel.Location = new System.Drawing.Point(3, 3);
+            this.LoginPanel.Location = new System.Drawing.Point(63, 15);
             this.LoginPanel.Name = "LoginPanel";
-            this.LoginPanel.Size = new System.Drawing.Size(671, 764);
+            this.LoginPanel.Size = new System.Drawing.Size(385, 292);
             this.LoginPanel.TabIndex = 0;
             // 
-            // txtElmsUN
+            // LodgePanel
             // 
-            this.txtElmsUN.Location = new System.Drawing.Point(218, 77);
-            this.txtElmsUN.Name = "txtElmsUN";
-            this.txtElmsUN.Size = new System.Drawing.Size(100, 20);
-            this.txtElmsUN.TabIndex = 0;
+            this.LodgePanel.Controls.Add(this.cbServiceType);
+            this.LodgePanel.Controls.Add(this.btnBrowseManifest);
+            this.LodgePanel.Controls.Add(this.btnLodge);
+            this.LodgePanel.Controls.Add(this.label23);
+            this.LodgePanel.Controls.Add(this.cbSize);
+            this.LodgePanel.Controls.Add(this.txtManifestFileName);
+            this.LodgePanel.Controls.Add(this.groupBoxLodgeCat);
+            this.LodgePanel.Location = new System.Drawing.Point(22, 111);
+            this.LodgePanel.Name = "LodgePanel";
+            this.LodgePanel.Size = new System.Drawing.Size(671, 764);
+            this.LodgePanel.TabIndex = 7;
             // 
-            // UN
+            // cbServiceType
             // 
-            this.UN.AutoSize = true;
-            this.UN.Location = new System.Drawing.Point(152, 80);
-            this.UN.Name = "UN";
-            this.UN.Size = new System.Drawing.Size(60, 13);
-            this.UN.TabIndex = 1;
-            this.UN.Text = "User Name";
+            this.cbServiceType.FormattingEnabled = true;
+            this.cbServiceType.Location = new System.Drawing.Point(254, 215);
+            this.cbServiceType.Name = "cbServiceType";
+            this.cbServiceType.Size = new System.Drawing.Size(121, 21);
+            this.cbServiceType.TabIndex = 7;
+            // 
+            // btnBrowseManifest
+            // 
+            this.btnBrowseManifest.Location = new System.Drawing.Point(580, 34);
+            this.btnBrowseManifest.Name = "btnBrowseManifest";
+            this.btnBrowseManifest.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseManifest.TabIndex = 3;
+            this.btnBrowseManifest.Text = "Browse";
+            this.btnBrowseManifest.UseVisualStyleBackColor = true;
+            this.btnBrowseManifest.Click += new System.EventHandler(this.btnBrowseManifest_Click);
+            // 
+            // btnLodge
+            // 
+            this.btnLodge.Location = new System.Drawing.Point(500, 215);
+            this.btnLodge.Name = "btnLodge";
+            this.btnLodge.Size = new System.Drawing.Size(75, 23);
+            this.btnLodge.TabIndex = 6;
+            this.btnLodge.Text = "Lodge";
+            this.btnLodge.UseVisualStyleBackColor = true;
+            this.btnLodge.Click += new System.EventHandler(this.btnLodge_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(14, 18);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(93, 13);
+            this.label23.TabIndex = 1;
+            this.label23.Text = "Manifest Summary";
+            // 
+            // cbSize
+            // 
+            this.cbSize.FormattingEnabled = true;
+            this.cbSize.Location = new System.Drawing.Point(113, 215);
+            this.cbSize.Name = "cbSize";
+            this.cbSize.Size = new System.Drawing.Size(121, 21);
+            this.cbSize.TabIndex = 5;
+            // 
+            // txtManifestFileName
+            // 
+            this.txtManifestFileName.Location = new System.Drawing.Point(113, 15);
+            this.txtManifestFileName.Multiline = true;
+            this.txtManifestFileName.Name = "txtManifestFileName";
+            this.txtManifestFileName.Size = new System.Drawing.Size(461, 42);
+            this.txtManifestFileName.TabIndex = 2;
+            // 
+            // groupBoxLodgeCat
+            // 
+            this.groupBoxLodgeCat.Controls.Add(this.rbPromoPost);
+            this.groupBoxLodgeCat.Controls.Add(this.rbCharityMail);
+            this.groupBoxLodgeCat.Controls.Add(this.rbFullRate);
+            this.groupBoxLodgeCat.Controls.Add(this.radioButton5);
+            this.groupBoxLodgeCat.Controls.Add(this.radioButton4);
+            this.groupBoxLodgeCat.Controls.Add(this.radioButton3);
+            this.groupBoxLodgeCat.Controls.Add(this.rbPrintPost);
+            this.groupBoxLodgeCat.Controls.Add(this.rbPre_Sort);
+            this.groupBoxLodgeCat.Location = new System.Drawing.Point(113, 72);
+            this.groupBoxLodgeCat.Name = "groupBoxLodgeCat";
+            this.groupBoxLodgeCat.Size = new System.Drawing.Size(462, 87);
+            this.groupBoxLodgeCat.TabIndex = 4;
+            this.groupBoxLodgeCat.TabStop = false;
+            this.groupBoxLodgeCat.Text = "Lodgement Category";
+            // 
+            // rbPromoPost
+            // 
+            this.rbPromoPost.AutoSize = true;
+            this.rbPromoPost.Enabled = false;
+            this.rbPromoPost.Location = new System.Drawing.Point(211, 19);
+            this.rbPromoPost.Name = "rbPromoPost";
+            this.rbPromoPost.Size = new System.Drawing.Size(79, 17);
+            this.rbPromoPost.TabIndex = 7;
+            this.rbPromoPost.TabStop = true;
+            this.rbPromoPost.Text = "Promo Post";
+            this.rbPromoPost.UseVisualStyleBackColor = true;
+            // 
+            // rbCharityMail
+            // 
+            this.rbCharityMail.AutoSize = true;
+            this.rbCharityMail.Enabled = false;
+            this.rbCharityMail.Location = new System.Drawing.Point(100, 19);
+            this.rbCharityMail.Name = "rbCharityMail";
+            this.rbCharityMail.Size = new System.Drawing.Size(79, 17);
+            this.rbCharityMail.TabIndex = 6;
+            this.rbCharityMail.TabStop = true;
+            this.rbCharityMail.Text = "Charity Mail";
+            this.rbCharityMail.UseVisualStyleBackColor = true;
+            // 
+            // rbFullRate
+            // 
+            this.rbFullRate.AutoSize = true;
+            this.rbFullRate.Enabled = false;
+            this.rbFullRate.Location = new System.Drawing.Point(100, 49);
+            this.rbFullRate.Name = "rbFullRate";
+            this.rbFullRate.Size = new System.Drawing.Size(67, 17);
+            this.rbFullRate.TabIndex = 5;
+            this.rbFullRate.TabStop = true;
+            this.rbFullRate.Text = "Full Rate";
+            this.rbFullRate.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Enabled = false;
+            this.radioButton5.Location = new System.Drawing.Point(399, 19);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(43, 17);
+            this.radioButton5.TabIndex = 4;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "INT";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Enabled = false;
+            this.radioButton4.Location = new System.Drawing.Point(211, 49);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(55, 17);
+            this.radioButton4.TabIndex = 3;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Parcel";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Enabled = false;
+            this.radioButton3.Location = new System.Drawing.Point(323, 20);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(42, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "UM";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // rbPrintPost
+            // 
+            this.rbPrintPost.AutoSize = true;
+            this.rbPrintPost.Enabled = false;
+            this.rbPrintPost.Location = new System.Drawing.Point(7, 49);
+            this.rbPrintPost.Name = "rbPrintPost";
+            this.rbPrintPost.Size = new System.Drawing.Size(70, 17);
+            this.rbPrintPost.TabIndex = 1;
+            this.rbPrintPost.TabStop = true;
+            this.rbPrintPost.Text = "Print Post";
+            this.rbPrintPost.UseVisualStyleBackColor = true;
+            this.rbPrintPost.CheckedChanged += new System.EventHandler(this.rbPrintPost_CheckedChanged);
+            // 
+            // rbPre_Sort
+            // 
+            this.rbPre_Sort.AutoSize = true;
+            this.rbPre_Sort.Location = new System.Drawing.Point(7, 20);
+            this.rbPre_Sort.Name = "rbPre_Sort";
+            this.rbPre_Sort.Size = new System.Drawing.Size(63, 17);
+            this.rbPre_Sort.TabIndex = 0;
+            this.rbPre_Sort.TabStop = true;
+            this.rbPre_Sort.Text = "Pre-Sort";
+            this.rbPre_Sort.UseVisualStyleBackColor = true;
+            this.rbPre_Sort.CheckedChanged += new System.EventHandler(this.rbPre_Sort_CheckedChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(171, 43);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(178, 13);
+            this.label25.TabIndex = 5;
+            this.label25.Text = "Please enter your eLMS login details";
+            // 
+            // btnSaveElmsLogin
+            // 
+            this.btnSaveElmsLogin.Location = new System.Drawing.Point(243, 159);
+            this.btnSaveElmsLogin.Name = "btnSaveElmsLogin";
+            this.btnSaveElmsLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveElmsLogin.TabIndex = 4;
+            this.btnSaveElmsLogin.Text = "Save";
+            this.btnSaveElmsLogin.UseVisualStyleBackColor = true;
+            this.btnSaveElmsLogin.Click += new System.EventHandler(this.btnSaveElmsLogin_Click);
             // 
             // label24
             // 
@@ -1266,149 +1452,25 @@
             this.txtElmsPWD.TabIndex = 2;
             this.txtElmsPWD.UseSystemPasswordChar = true;
             // 
-            // btnSaveElmsLogin
+            // UN
             // 
-            this.btnSaveElmsLogin.Location = new System.Drawing.Point(243, 159);
-            this.btnSaveElmsLogin.Name = "btnSaveElmsLogin";
-            this.btnSaveElmsLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveElmsLogin.TabIndex = 4;
-            this.btnSaveElmsLogin.Text = "Save";
-            this.btnSaveElmsLogin.UseVisualStyleBackColor = true;
+            this.UN.AutoSize = true;
+            this.UN.Location = new System.Drawing.Point(152, 80);
+            this.UN.Name = "UN";
+            this.UN.Size = new System.Drawing.Size(60, 13);
+            this.UN.TabIndex = 1;
+            this.UN.Text = "User Name";
             // 
-            // label25
+            // txtElmsUN
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(171, 43);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(178, 13);
-            this.label25.TabIndex = 5;
-            this.label25.Text = "Please enter your eLMS login details";
+            this.txtElmsUN.Location = new System.Drawing.Point(218, 77);
+            this.txtElmsUN.Name = "txtElmsUN";
+            this.txtElmsUN.Size = new System.Drawing.Size(100, 20);
+            this.txtElmsUN.TabIndex = 0;
             // 
-            // label23
+            // backgroundWorker1
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(14, 18);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(93, 13);
-            this.label23.TabIndex = 1;
-            this.label23.Text = "Manifest Summary";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(113, 15);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(461, 42);
-            this.textBox1.TabIndex = 2;
-            // 
-            // btnBrowseManifest
-            // 
-            this.btnBrowseManifest.Location = new System.Drawing.Point(580, 34);
-            this.btnBrowseManifest.Name = "btnBrowseManifest";
-            this.btnBrowseManifest.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowseManifest.TabIndex = 3;
-            this.btnBrowseManifest.Text = "Browse";
-            this.btnBrowseManifest.UseVisualStyleBackColor = true;
-            // 
-            // groupBoxLodgeCat
-            // 
-            this.groupBoxLodgeCat.Controls.Add(this.radioButton5);
-            this.groupBoxLodgeCat.Controls.Add(this.radioButton4);
-            this.groupBoxLodgeCat.Controls.Add(this.radioButton3);
-            this.groupBoxLodgeCat.Controls.Add(this.radioButton2);
-            this.groupBoxLodgeCat.Controls.Add(this.radioButton1);
-            this.groupBoxLodgeCat.Location = new System.Drawing.Point(113, 72);
-            this.groupBoxLodgeCat.Name = "groupBoxLodgeCat";
-            this.groupBoxLodgeCat.Size = new System.Drawing.Size(462, 46);
-            this.groupBoxLodgeCat.TabIndex = 4;
-            this.groupBoxLodgeCat.TabStop = false;
-            this.groupBoxLodgeCat.Text = "Lodgement Category";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 20);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(63, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Pre-Sort";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(90, 20);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(70, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Print Post";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(180, 19);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(42, 17);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "UM";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(251, 19);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(55, 17);
-            this.radioButton4.TabIndex = 3;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Parcel";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(346, 19);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(83, 17);
-            this.radioButton5.TabIndex = 4;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "International";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(113, 140);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 5;
-            // 
-            // btnLodge
-            // 
-            this.btnLodge.Location = new System.Drawing.Point(500, 215);
-            this.btnLodge.Name = "btnLodge";
-            this.btnLodge.Size = new System.Drawing.Size(75, 23);
-            this.btnLodge.TabIndex = 6;
-            this.btnLodge.Text = "Lodge";
-            this.btnLodge.UseVisualStyleBackColor = true;
-            // 
-            // LodgePanel
-            // 
-            this.LodgePanel.Controls.Add(this.btnBrowseManifest);
-            this.LodgePanel.Controls.Add(this.btnLodge);
-            this.LodgePanel.Controls.Add(this.label23);
-            this.LodgePanel.Controls.Add(this.comboBox1);
-            this.LodgePanel.Controls.Add(this.textBox1);
-            this.LodgePanel.Controls.Add(this.groupBoxLodgeCat);
-            this.LodgePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LodgePanel.Location = new System.Drawing.Point(3, 3);
-            this.LodgePanel.Name = "LodgePanel";
-            this.LodgePanel.Size = new System.Drawing.Size(671, 764);
-            this.LodgePanel.TabIndex = 7;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
             // 
             // Form1
             // 
@@ -1453,10 +1515,10 @@
             this.tabPage5.ResumeLayout(false);
             this.LoginPanel.ResumeLayout(false);
             this.LoginPanel.PerformLayout();
-            this.groupBoxLodgeCat.ResumeLayout(false);
-            this.groupBoxLodgeCat.PerformLayout();
             this.LodgePanel.ResumeLayout(false);
             this.LodgePanel.PerformLayout();
+            this.groupBoxLodgeCat.ResumeLayout(false);
+            this.groupBoxLodgeCat.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1562,15 +1624,15 @@
         private System.Windows.Forms.CheckBox checkBoxAddInkJet;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button btnLodge;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbSize;
         private System.Windows.Forms.GroupBox groupBoxLodgeCat;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbPrintPost;
+        private System.Windows.Forms.RadioButton rbPre_Sort;
         private System.Windows.Forms.Button btnBrowseManifest;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtManifestFileName;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Panel LoginPanel;
         private System.Windows.Forms.Label label25;
@@ -1580,6 +1642,10 @@
         private System.Windows.Forms.Label UN;
         private System.Windows.Forms.TextBox txtElmsUN;
         private System.Windows.Forms.Panel LodgePanel;
+        private System.Windows.Forms.RadioButton rbCharityMail;
+        private System.Windows.Forms.RadioButton rbFullRate;
+        private System.Windows.Forms.ComboBox cbServiceType;
+        private System.Windows.Forms.RadioButton rbPromoPost;
     }
 }
 

@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7180673F-56AF-4327-81F7-2D771C876DAA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JobDocsLibrary</RootNamespace>
-    <AssemblyName>JobDocsLibrary</AssemblyName>
+    <ProjectGuid>{06905876-ACEB-46DE-A615-95EDE41B5277}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TestConsole</RootNamespace>
+    <AssemblyName>TestConsole</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,22 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
-    </Reference>
-    <Reference Include="fastJSON, Version=2.2.0.0, Culture=neutral, PublicKeyToken=6b75a806b86095cd, processorArchitecture=MSIL">
-      <HintPath>..\packages\fastJSON.2.2.0.1\lib\net40\fastJSON.dll</HintPath>
-    </Reference>
-    <Reference Include="HelperLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\helperlibrary\HelperLibrary\bin\Debug\HelperLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,24 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="DataAccess.cs" />
-    <Compile Include="DataSummary.cs" />
-    <Compile Include="DirectoryInfo.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="JobData.cs" />
-    <Compile Include="PDF.cs" />
-    <Compile Include="Print.cs" />
-    <Compile Include="PrintSpecSheet.cs" />
-    <Compile Include="ProductionReport.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleRecord.cs" />
-    <Compile Include="SampleSheet.cs" />
-    <Compile Include="StockItem.cs" />
-    <Compile Include="StringProcessing.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DolphinClassLibrary\DolphinLibrary.csproj">
+      <Project>{9147da54-64d9-4e41-ab04-0597623e4f69}</Project>
+      <Name>DolphinLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElmsLibrary\ElmsLibrary.csproj">
+      <Project>{9299a69f-f4a3-406a-9d57-1ea675604567}</Project>
+      <Name>ElmsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JobDocsLibrary\JobDocsLibrary.csproj">
+      <Project>{7180673f-56af-4327-81f7-2d771c876daa}</Project>
+      <Name>JobDocsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

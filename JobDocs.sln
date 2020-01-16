@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobDocsTests", "JobDocsTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DolphinLibrary", "DolphinClassLibrary\DolphinLibrary.csproj", "{9147DA54-64D9-4E41-AB04-0597623E4F69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElmsLibrary", "ElmsLibrary\ElmsLibrary.csproj", "{9299A69F-F4A3-406A-9D57-1EA675604567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{06905876-ACEB-46DE-A615-95EDE41B5277}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{9147DA54-64D9-4E41-AB04-0597623E4F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9147DA54-64D9-4E41-AB04-0597623E4F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9147DA54-64D9-4E41-AB04-0597623E4F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9299A69F-F4A3-406A-9D57-1EA675604567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9299A69F-F4A3-406A-9D57-1EA675604567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9299A69F-F4A3-406A-9D57-1EA675604567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9299A69F-F4A3-406A-9D57-1EA675604567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06905876-ACEB-46DE-A615-95EDE41B5277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06905876-ACEB-46DE-A615-95EDE41B5277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06905876-ACEB-46DE-A615-95EDE41B5277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06905876-ACEB-46DE-A615-95EDE41B5277}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
