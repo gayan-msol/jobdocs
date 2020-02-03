@@ -27,6 +27,42 @@ namespace JobDocsLibrary
             }
         }
 
+        public static string GetManifestFile(string jobDirectory, string jobNo)
+        {
+            List<string> files = new List<string>();
+            if(!string.IsNullOrWhiteSpace(jobDirectory) && Directory.Exists(jobDirectory))
+            {
+                string jobDocDir = $@"{jobDirectory}\{jobNo} Job Docs";
+                files = Directory.GetFiles(jobDirectory).Select(x => Path.GetFileName(x)).Where( file => validExtensions.Contains(  "Manifest Summary") ).ToList();
+
+                if(files.Count > 0)
+                {
+                    return files[0];
+                }
+                else if (Directory.Exists(jobDocDir))
+                {
+                    files = Directory.GetFiles(jobDocDir).Select(x => Path.GetFileName(x)).Where(file => validExtensions.Contains("Manifest Summary")).ToList();
+                    if (files.Count > 0)
+                    {
+                        return files[0];
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+              //  
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static string getJobDir(string jobNo, string customer, string branch)
         {
             string path = $@"{branch}\{customer}";

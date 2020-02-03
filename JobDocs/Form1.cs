@@ -104,8 +104,8 @@ namespace JobDocs
 
         private void createPdf(string fileName)
         {
-                           
-            PDF dsPdf = new PDF(dataSummaryTemplate);
+
+            JobDocsLibrary.PDF dsPdf = new JobDocsLibrary.PDF(dataSummaryTemplate);
          
 
             try
@@ -923,10 +923,13 @@ namespace JobDocs
             LodgePanel.Dock = DockStyle.Fill;
             LoginPanel.Dock = DockStyle.Fill;
 
-            manifestFile = Directory.GetDirectories(jobDirectoryData).ToList()
+            manifestFile = DirectoryHelper.GetManifestFile(jobDirectoryData, jobNo);
 
-            txtManifestFileName= $@"{jobDirectoryData}"
+            txtManifestFileName.Text = manifestFile;
 
+            ElmsLibrary.Lodgement lodgement = new ElmsLibrary.Lodgement();
+
+            
 
         }
     }

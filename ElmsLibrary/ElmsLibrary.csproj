@@ -131,6 +131,7 @@
     <Compile Include="eLMS.cs" />
     <Compile Include="ElmsUser.cs" />
     <Compile Include="Lodgement.cs" />
+    <Compile Include="PDF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortCategory.cs" />
   </ItemGroup>

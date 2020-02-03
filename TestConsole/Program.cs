@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ElmsLibrary;
+using JobDocsLibrary;
 
 namespace TestConsole
 {
@@ -11,9 +12,10 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            Article  article = DataAccess.GetArticleInfo("PreSort", "Small", "Regular");
-            Console.WriteLine($"{article.ArticleType} - {article.ProductGroup}");
-            Console.ReadKey();
+            //Article  article = DataAccess.GetArticleInfo("PreSort", "Small", "Regular");
+            //Console.WriteLine($"{article.ArticleType} - {article.ProductGroup}");
+            //Console.ReadKey();
+            
         }
     }
 }
