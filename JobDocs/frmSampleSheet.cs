@@ -77,9 +77,12 @@ namespace JobDocs
 
             foreach (var item in dtFieldList)
             {
+                
                 Control[] cArr =flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "%")}", true);
-                if(cArr.Length >0 && cArr[0] is CheckBox checkBox)
+                if(cArr.Length >0 && cArr[0] is CheckBox checkBox && checkBox.Name != "cbDt%Barcode")
+                {
                     checkBox.Checked = !checkBoxExcludeDTFields.Checked;
+                }
             }
         }
 
@@ -323,10 +326,16 @@ namespace JobDocs
                 sourceTable.Clear();
                 sourceTable = JobData.GetSourceTable(outputFileName, delimiter);
                 columnList.Clear();
+                flowLayoutPanelColumns.Controls.Clear();
                 columnList = JobData.GetColumnList(outputFileName, delimiter);
+                cmbColumn.Items.Clear();
+               
+
                 foreach (var item in columnList)
                 {
-                    CheckBox checkBox = new CheckBox();
+                    cmbColumn.Items.Add(item.ToString());
+
+                   CheckBox checkBox = new CheckBox();
                     checkBox.Name = $"cb{item.Replace(" ", "%")}";
                     checkBox.Text = item;
                     checkBox.AutoSize = true;
@@ -341,6 +350,21 @@ namespace JobDocs
                 ErrorHandling.ShowMessage(ex);
                 this.Close();
             }
+        }
+
+        private void checkBoxExcludeDTFields_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxUncheckAll_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void wizardPage3_Leave(object sender, EventArgs e)
+        {
+            columnList.Clear();
         }
     }
 }

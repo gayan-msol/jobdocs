@@ -18,7 +18,6 @@ using System.Reflection;
 using System.Security;
 using System.Globalization;
 using ElmsLibrary;
-using Lodgement = DolphinLibrary.Lodgement;
 
 namespace JobDocs
 {
@@ -51,6 +50,7 @@ namespace JobDocs
         //string stockDescription = "";
         string outputFileName = "";
         public static string userName;
+        ElmsUser elmsUser = new ElmsUser();
 
 
         public Form1()
@@ -332,7 +332,7 @@ namespace JobDocs
                 if (importedJob.DocID != null)
                 {
                     // temp
-                    var test = Lodgement.GetLodgementDetails(importedJob.DocID);
+                 //   var test = Lodgement.GetLodgementDetails(importedJob.DocID);
 
                     //temp
 
@@ -559,6 +559,18 @@ namespace JobDocs
                 {
                     if (item is RadioButton radioButton && radioButton.Checked)
                     {
+                        if (radioButton.Name == "rbM7100")
+                        {
+                            if (rbCColour.Checked)
+                            {
+                                return "7100 - Colour";
+                            }
+                            else
+                            {
+                                return "7100 - Black";
+                            }
+                        }
+
                         return item.Name.Substring(3);
                     }
                 }
@@ -865,7 +877,7 @@ namespace JobDocs
             {
                 try
                 {
-                    ElmsUser user = new ElmsUser() { UserName = txtElmsUN.Text, Password = txtElmsPWD.Text, WindowsUser = userName };
+                    ElmsUser user = new ElmsUser() { UserName = txtElmsUN.Text.Trim(), Password = txtElmsPWD.Text.Trim(), WindowsUser = userName };
                     DataAccess.saveElmsLogin(user);
                     MessageBox.Show("Login saved.");
                     LoginPanel.Visible = false;
@@ -896,6 +908,18 @@ namespace JobDocs
 
         private void btnLodge_Click(object sender, EventArgs e)
         {
+            ElmsLibrary.Lodgement lodgement = new ElmsLibrary.Lodgement();
+            lodgement.AccNo = importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo;
+            lodgement.JobName = txtJobName.Text;
+            lodgement.JobNo = jobNo;
+            lodgement.RegName = importedJob.PostAccts.Where(x => x.AccType != "Aust Post").ToList()[0].AccType;
+            lodgement.RegNo = importedJob.PostAccts.Where(x => x.AccType != "Aust Post").ToList()[0].AccNo;
+            lodgement.ServiceType = cbServiceType?.SelectedText.ToString();
+            lodgement.Size = cbSize?.SelectedItem.ToString();
+            lodgement.SortType = "PRESORT";
+            lodgement.SortList = lodgement.ReadManifest(txtManifestFileName.Text, lodgement.SortType);
+
+            eLMS.Lodge(lodgement, elmsUser);
 
         }
 
@@ -916,7 +940,8 @@ namespace JobDocs
 
         private void tabPage5_Enter(object sender, EventArgs e)
         {
-            ElmsUser elmsUser = DataAccess.GetElmsUser(userName);
+            elmsUser = DataAccess.GetElmsUser(userName);
+            elmsUser.UserName = elmsUser.UserName.Trim();
 
             LodgePanel.Visible = elmsUser != null;
             LoginPanel.Visible = elmsUser == null;
@@ -927,7 +952,7 @@ namespace JobDocs
 
             txtManifestFileName.Text = manifestFile;
 
-            ElmsLibrary.Lodgement lodgement = new ElmsLibrary.Lodgement();
+           // ElmsLibrary.Lodgement lodgement = new ElmsLibrary.Lodgement();
 
             
 

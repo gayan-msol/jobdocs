@@ -41,7 +41,7 @@ namespace ElmsLibrary
                     {
                         i++;
                     }
-                    sortList.Add(sortCategories[i].ElementName, lines[i].Split(' ')[i] == "0" ? "" : lines[i].Split(' ')[i]);
+                    sortList.Add(sortCategories[i].ElementName, lines[i].Split(' ')[0] == "0" ? "" : lines[i].Split(' ')[0]);
                 }
             }
 

@@ -11,5 +11,6 @@ namespace JobDocsLibrary
         public int Index { get; set; }
         public int EmptyColCount { get; set; }
         public List<int> EmptyColIndexes { get; set; }
+        public int VariableColIndex { get; set; }
     }
 }

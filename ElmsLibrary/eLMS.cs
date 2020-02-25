@@ -14,7 +14,7 @@ namespace ElmsLibrary
         static string URL = "https://elms.auspost.com.au/elms/loginCheck.do";
         static string ChromeDriverPath = @"S:\SCRIPTS\DotNetProgrammes\Source Code\ChromeDriver";
 
-        public static void Lodgement(Lodgement lodgement, ElmsUser elmsUser)
+        public static void Lodge(Lodgement lodgement, ElmsUser elmsUser)
         {
 
             ChromeDriver chromeDriver = new ChromeDriver(ChromeDriverPath);
@@ -32,6 +32,11 @@ namespace ElmsLibrary
 
             IWebElement btnLogin = chromeDriver.FindElement(By.ClassName("inputSubmit"));
             btnLogin.Click();
+
+
+            WebDriverWait wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(30));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(
+            By.LinkText("New Mailing Statement")));
 
             IWebElement link = chromeDriver.FindElement(By.LinkText("New Mailing Statement"));
             link.Click();

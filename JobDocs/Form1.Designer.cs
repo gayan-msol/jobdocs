@@ -51,8 +51,10 @@
             this.checkBoxApproval = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
             this.txtCompany = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
             this.txtContact = new System.Windows.Forms.TextBox();
+            this.richTexNotes = new System.Windows.Forms.RichTextBox();
+            this.richTextJobDirectory = new System.Windows.Forms.RichTextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.cmbStreamStock = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.cmbStreamFN = new System.Windows.Forms.ComboBox();
@@ -68,8 +70,6 @@
             this.cmbFinishedSize = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.cmbPrintSize = new System.Windows.Forms.ComboBox();
-            this.richTexNotes = new System.Windows.Forms.RichTextBox();
-            this.richTextJobDirectory = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.tbnClearStreams = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -126,8 +126,8 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnSampleSheet = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.LoginPanel = new System.Windows.Forms.Panel();
             this.LodgePanel = new System.Windows.Forms.Panel();
+            this.cbWeight = new System.Windows.Forms.ComboBox();
             this.cbServiceType = new System.Windows.Forms.ComboBox();
             this.btnBrowseManifest = new System.Windows.Forms.Button();
             this.btnLodge = new System.Windows.Forms.Button();
@@ -143,6 +143,7 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.rbPrintPost = new System.Windows.Forms.RadioButton();
             this.rbPre_Sort = new System.Windows.Forms.RadioButton();
+            this.LoginPanel = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
             this.btnSaveElmsLogin = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
@@ -171,9 +172,9 @@
             this.tabPage4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.LoginPanel.SuspendLayout();
             this.LodgePanel.SuspendLayout();
             this.groupBoxLodgeCat.SuspendLayout();
+            this.LoginPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -383,8 +384,10 @@
             this.tabPage2.Controls.Add(this.checkBoxApproval);
             this.tabPage2.Controls.Add(this.label22);
             this.tabPage2.Controls.Add(this.txtCompany);
-            this.tabPage2.Controls.Add(this.label21);
             this.tabPage2.Controls.Add(this.txtContact);
+            this.tabPage2.Controls.Add(this.richTexNotes);
+            this.tabPage2.Controls.Add(this.richTextJobDirectory);
+            this.tabPage2.Controls.Add(this.label21);
             this.tabPage2.Controls.Add(this.cmbStreamStock);
             this.tabPage2.Controls.Add(this.label20);
             this.tabPage2.Controls.Add(this.cmbStreamFN);
@@ -400,8 +403,6 @@
             this.tabPage2.Controls.Add(this.cmbFinishedSize);
             this.tabPage2.Controls.Add(this.label16);
             this.tabPage2.Controls.Add(this.cmbPrintSize);
-            this.tabPage2.Controls.Add(this.richTexNotes);
-            this.tabPage2.Controls.Add(this.richTextJobDirectory);
             this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.tbnClearStreams);
             this.tabPage2.Controls.Add(this.label9);
@@ -461,6 +462,29 @@
             this.txtCompany.Size = new System.Drawing.Size(148, 20);
             this.txtCompany.TabIndex = 72;
             // 
+            // txtContact
+            // 
+            this.txtContact.Location = new System.Drawing.Point(26, 724);
+            this.txtContact.Name = "txtContact";
+            this.txtContact.Size = new System.Drawing.Size(133, 20);
+            this.txtContact.TabIndex = 70;
+            // 
+            // richTexNotes
+            // 
+            this.richTexNotes.Location = new System.Drawing.Point(321, 561);
+            this.richTexNotes.Name = "richTexNotes";
+            this.richTexNotes.Size = new System.Drawing.Size(315, 99);
+            this.richTexNotes.TabIndex = 43;
+            this.richTexNotes.Text = "";
+            // 
+            // richTextJobDirectory
+            // 
+            this.richTextJobDirectory.Location = new System.Drawing.Point(89, 14);
+            this.richTextJobDirectory.Name = "richTextJobDirectory";
+            this.richTextJobDirectory.Size = new System.Drawing.Size(548, 22);
+            this.richTextJobDirectory.TabIndex = 42;
+            this.richTextJobDirectory.Text = "";
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -469,13 +493,6 @@
             this.label21.Size = new System.Drawing.Size(84, 13);
             this.label21.TabIndex = 71;
             this.label21.Text = "Approved Name";
-            // 
-            // txtContact
-            // 
-            this.txtContact.Location = new System.Drawing.Point(26, 724);
-            this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(133, 20);
-            this.txtContact.TabIndex = 70;
             // 
             // cmbStreamStock
             // 
@@ -624,22 +641,6 @@
             this.cmbPrintSize.TabIndex = 54;
             this.cmbPrintSize.SelectedIndexChanged += new System.EventHandler(this.cmbPrintSize_SelectedIndexChanged);
             // 
-            // richTexNotes
-            // 
-            this.richTexNotes.Location = new System.Drawing.Point(321, 561);
-            this.richTexNotes.Name = "richTexNotes";
-            this.richTexNotes.Size = new System.Drawing.Size(315, 99);
-            this.richTexNotes.TabIndex = 43;
-            this.richTexNotes.Text = "";
-            // 
-            // richTextJobDirectory
-            // 
-            this.richTextJobDirectory.Location = new System.Drawing.Point(89, 14);
-            this.richTextJobDirectory.Name = "richTextJobDirectory";
-            this.richTextJobDirectory.Size = new System.Drawing.Size(548, 22);
-            this.richTextJobDirectory.TabIndex = 42;
-            this.richTextJobDirectory.Text = "";
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -766,7 +767,6 @@
             this.groupBoxColour.Size = new System.Drawing.Size(67, 53);
             this.groupBoxColour.TabIndex = 23;
             this.groupBoxColour.TabStop = false;
-            this.groupBoxColour.Visible = false;
             // 
             // rbCBlack
             // 
@@ -1221,21 +1221,9 @@
             this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             this.tabPage5.Enter += new System.EventHandler(this.tabPage5_Enter);
             // 
-            // LoginPanel
-            // 
-            this.LoginPanel.Controls.Add(this.label25);
-            this.LoginPanel.Controls.Add(this.btnSaveElmsLogin);
-            this.LoginPanel.Controls.Add(this.label24);
-            this.LoginPanel.Controls.Add(this.txtElmsPWD);
-            this.LoginPanel.Controls.Add(this.UN);
-            this.LoginPanel.Controls.Add(this.txtElmsUN);
-            this.LoginPanel.Location = new System.Drawing.Point(63, 15);
-            this.LoginPanel.Name = "LoginPanel";
-            this.LoginPanel.Size = new System.Drawing.Size(385, 292);
-            this.LoginPanel.TabIndex = 0;
-            // 
             // LodgePanel
             // 
+            this.LodgePanel.Controls.Add(this.cbWeight);
             this.LodgePanel.Controls.Add(this.cbServiceType);
             this.LodgePanel.Controls.Add(this.btnBrowseManifest);
             this.LodgePanel.Controls.Add(this.btnLodge);
@@ -1248,9 +1236,20 @@
             this.LodgePanel.Size = new System.Drawing.Size(671, 764);
             this.LodgePanel.TabIndex = 7;
             // 
+            // cbWeight
+            // 
+            this.cbWeight.FormattingEnabled = true;
+            this.cbWeight.Location = new System.Drawing.Point(397, 215);
+            this.cbWeight.Name = "cbWeight";
+            this.cbWeight.Size = new System.Drawing.Size(121, 21);
+            this.cbWeight.TabIndex = 8;
+            // 
             // cbServiceType
             // 
             this.cbServiceType.FormattingEnabled = true;
+            this.cbServiceType.Items.AddRange(new object[] {
+            "Regular",
+            "Priority"});
             this.cbServiceType.Location = new System.Drawing.Point(254, 215);
             this.cbServiceType.Name = "cbServiceType";
             this.cbServiceType.Size = new System.Drawing.Size(121, 21);
@@ -1268,7 +1267,7 @@
             // 
             // btnLodge
             // 
-            this.btnLodge.Location = new System.Drawing.Point(500, 215);
+            this.btnLodge.Location = new System.Drawing.Point(499, 300);
             this.btnLodge.Name = "btnLodge";
             this.btnLodge.Size = new System.Drawing.Size(75, 23);
             this.btnLodge.TabIndex = 6;
@@ -1415,6 +1414,19 @@
             this.rbPre_Sort.UseVisualStyleBackColor = true;
             this.rbPre_Sort.CheckedChanged += new System.EventHandler(this.rbPre_Sort_CheckedChanged);
             // 
+            // LoginPanel
+            // 
+            this.LoginPanel.Controls.Add(this.label25);
+            this.LoginPanel.Controls.Add(this.btnSaveElmsLogin);
+            this.LoginPanel.Controls.Add(this.label24);
+            this.LoginPanel.Controls.Add(this.txtElmsPWD);
+            this.LoginPanel.Controls.Add(this.UN);
+            this.LoginPanel.Controls.Add(this.txtElmsUN);
+            this.LoginPanel.Location = new System.Drawing.Point(63, 15);
+            this.LoginPanel.Name = "LoginPanel";
+            this.LoginPanel.Size = new System.Drawing.Size(385, 292);
+            this.LoginPanel.TabIndex = 0;
+            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -1513,12 +1525,12 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage5.ResumeLayout(false);
-            this.LoginPanel.ResumeLayout(false);
-            this.LoginPanel.PerformLayout();
             this.LodgePanel.ResumeLayout(false);
             this.LodgePanel.PerformLayout();
             this.groupBoxLodgeCat.ResumeLayout(false);
             this.groupBoxLodgeCat.PerformLayout();
+            this.LoginPanel.ResumeLayout(false);
+            this.LoginPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1532,7 +1544,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btnImportFromDolphin;
         private System.Windows.Forms.TextBox txtCustomer;
-        private System.Windows.Forms.Button btnSampleSheet;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button button1;
@@ -1545,16 +1557,34 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.CheckBox checkBoxApproval;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtCompany;
+        private System.Windows.Forms.TextBox txtContact;
+        private System.Windows.Forms.RichTextBox richTexNotes;
+        private System.Windows.Forms.RichTextBox richTextJobDirectory;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cmbStreamStock;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox cmbStreamFN;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btnRemoveStock;
+        private System.Windows.Forms.Button btnRemoveFileName;
+        private System.Windows.Forms.ListBox listBoxStock;
+        private System.Windows.Forms.ListBox listBoxFileNames;
+        private System.Windows.Forms.Button btnAddStock;
+        private System.Windows.Forms.Button btnAddFileName;
+        private System.Windows.Forms.ComboBox cmbGuillo;
+        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox cmbFinishedSize;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox cmbPrintSize;
-        private System.Windows.Forms.RichTextBox richTexNotes;
-        private System.Windows.Forms.RichTextBox richTextJobDirectory;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button tbnClearStreams;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numericUpDownSheetsPerRec;
         private System.Windows.Forms.GroupBox groupBoxPrintMachine;
+        private System.Windows.Forms.CheckBox checkBoxAddInkJet;
         private System.Windows.Forms.RadioButton rbMInkjet;
         private System.Windows.Forms.RadioButton rbMDuplo;
         private System.Windows.Forms.RadioButton rbM7100;
@@ -1566,6 +1596,10 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DataGridView dataGridViewStreams;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stream;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecordQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sheets;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrintQty;
         private System.Windows.Forms.GroupBox groupBoxBranch;
         private System.Windows.Forms.RadioButton rbArtwork;
         private System.Windows.Forms.RadioButton rbDatabase;
@@ -1589,51 +1623,34 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button btnProductionReport;
         private System.Windows.Forms.DataGridView dataGridViewReturnItems;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.ComboBox cmbGuillo;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbComma;
         private System.Windows.Forms.RadioButton rbTab;
         private System.Windows.Forms.RichTextBox richTextOutputFilePath;
         private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.Button btnAddStock;
-        private System.Windows.Forms.Button btnAddFileName;
-        private System.Windows.Forms.ListBox listBoxStock;
-        private System.Windows.Forms.ListBox listBoxFileNames;
-        private System.Windows.Forms.Button btnRemoveFileName;
-        private System.Windows.Forms.Button btnRemoveStock;
-        private System.Windows.Forms.ComboBox cmbStreamStock;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.ComboBox cmbStreamFN;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Stream;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RecordQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sheets;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrintQty;
-        private System.Windows.Forms.CheckBox checkBoxApproval;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox txtCompany;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox txtContact;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.CheckBox checkBoxAddInkJet;
+        private System.Windows.Forms.Button btnSampleSheet;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Panel LodgePanel;
+        private System.Windows.Forms.ComboBox cbServiceType;
+        private System.Windows.Forms.Button btnBrowseManifest;
         private System.Windows.Forms.Button btnLodge;
+        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ComboBox cbSize;
+        private System.Windows.Forms.TextBox txtManifestFileName;
         private System.Windows.Forms.GroupBox groupBoxLodgeCat;
+        private System.Windows.Forms.RadioButton rbPromoPost;
+        private System.Windows.Forms.RadioButton rbCharityMail;
+        private System.Windows.Forms.RadioButton rbFullRate;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton rbPrintPost;
         private System.Windows.Forms.RadioButton rbPre_Sort;
-        private System.Windows.Forms.Button btnBrowseManifest;
-        private System.Windows.Forms.TextBox txtManifestFileName;
-        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Panel LoginPanel;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button btnSaveElmsLogin;
@@ -1641,11 +1658,7 @@
         private System.Windows.Forms.TextBox txtElmsPWD;
         private System.Windows.Forms.Label UN;
         private System.Windows.Forms.TextBox txtElmsUN;
-        private System.Windows.Forms.Panel LodgePanel;
-        private System.Windows.Forms.RadioButton rbCharityMail;
-        private System.Windows.Forms.RadioButton rbFullRate;
-        private System.Windows.Forms.ComboBox cbServiceType;
-        private System.Windows.Forms.RadioButton rbPromoPost;
+        private System.Windows.Forms.ComboBox cbWeight;
     }
 }
 

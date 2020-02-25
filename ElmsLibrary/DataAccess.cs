@@ -77,10 +77,10 @@ namespace ElmsLibrary
 
         public static List<SortCategory> GetSortCategories(string sortType)
         {
-            string query = "SELECT * FROM SortCategories WHERE [SortType] =@CategoryCode";
+            string query = "SELECT * FROM SortCategories WHERE [CategoryCode] =@sortType Order By CatOrder";
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
-                var output = connection.Query<SortCategory>(query).ToList();
+                var output = connection.Query<SortCategory>(query, new { sortType }).ToList();
 
                 return output;
 

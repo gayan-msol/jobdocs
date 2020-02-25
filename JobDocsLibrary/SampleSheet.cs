@@ -11,7 +11,7 @@ namespace JobDocsLibrary
     public class SampleSheet
     {
  
-        public static DataTable GetSampleTable(DataTable sourceTable, List<string> selectedColList)
+        public static DataTable GetSampleTable(DataTable sourceTable, List<string> selectedColList, string variableColumn = null)
         {
             bool slipSheet = sourceTable.Columns.Contains("MediaSelect");
             RemoveUnselectedColumns(sourceTable, selectedColList);
@@ -64,12 +64,14 @@ namespace JobDocsLibrary
             
         }
 
-        private static List<Record> GenerateRecordList(DataTable dataTable)
+        private static List<Record> GenerateRecordList(DataTable dataTable/*, string variableColumn*/)
         {
             List<Record> allRecordsList = new List<Record>();
-
+        //    List<string> variableValues = new List<string>();
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
+               // variableValues.Add(dataTable.Rows[i][variableColumn].ToString());
+
                 Record sampleRecord = new Record();
                 List<int> emptyColList = new List<int>();
                 int emptyCount = 0;
@@ -78,6 +80,10 @@ namespace JobDocsLibrary
                     
                     if(string.IsNullOrWhiteSpace(dataTable.Rows[i][j].ToString()))
                     {
+                        //if(dataTable.Columns[j].ColumnName == variableColumn)
+                        //{
+                        //    sampleRecord.VariableColIndex = j;
+                        //}
                         emptyCount++;
                         emptyColList.Add(j);
                     }
@@ -91,6 +97,8 @@ namespace JobDocsLibrary
 
             }
 
+    //        variableValues = variableValues.Distinct().ToList();
+
             return allRecordsList;
         }
 
@@ -103,8 +111,7 @@ namespace JobDocsLibrary
             int currentColCount = sampleRecords[0].EmptyColCount;
             for (int i = 0; i < sampleRecords.Count; i++)
             {
-                if (i == 4289)
-                { }
+
 
                 if(sampleRecords[i].EmptyColCount == 0)
                 {

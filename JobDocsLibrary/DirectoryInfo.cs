@@ -33,18 +33,18 @@ namespace JobDocsLibrary
             if(!string.IsNullOrWhiteSpace(jobDirectory) && Directory.Exists(jobDirectory))
             {
                 string jobDocDir = $@"{jobDirectory}\{jobNo} Job Docs";
-                files = Directory.GetFiles(jobDirectory).Select(x => Path.GetFileName(x)).Where( file => validExtensions.Contains(  "Manifest Summary") ).ToList();
+                files = Directory.GetFiles(jobDirectory).Select(x => Path.GetFileName(x)).Where( file => file.Contains(  "Manifest Summary") ).ToList();
 
                 if(files.Count > 0)
                 {
-                    return files[0];
+                    return $@"{jobDirectory}\{files[0]}";
                 }
                 else if (Directory.Exists(jobDocDir))
                 {
-                    files = Directory.GetFiles(jobDocDir).Select(x => Path.GetFileName(x)).Where(file => validExtensions.Contains("Manifest Summary")).ToList();
+                    files = Directory.GetFiles(jobDocDir).Select(x => Path.GetFileName(x)).Where(file => file.Contains("Manifest Summary")).ToList();
                     if (files.Count > 0)
                     {
-                        return files[0];
+                        return $@"{jobDocDir}\{files[0]}";
                     }
                     else
                     {

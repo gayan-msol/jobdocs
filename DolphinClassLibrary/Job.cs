@@ -19,6 +19,7 @@ namespace DolphinLibrary
         public List<JobProcess> ProcessList { get; set; }
         public List<PrintInfo> PrintInfoList { get; set; }
         public List<MailPackItem> ItemList { get; set; }
+        public List<PostAcc> PostAccts { get; set; }
         public string DataFolder { get; set; }
         public string ArtworkFolder { get; set; }
 
@@ -44,6 +45,7 @@ namespace DolphinLibrary
                 job.ProcessList = JobProcess.GetProcesses(job.DocID);
                 job.PrintInfoList = PrintInfo.GetInfo(job.DocID);
                 job.ItemList = MailPackItem.GetItems(job.DocID);
+                job.PostAccts = PostAcc.GetAccounts(job.DocID);
 
                 return job;
             }

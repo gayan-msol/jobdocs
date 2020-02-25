@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSampleSheet));
             this.wizardControl1 = new AeroWizard.WizardControl();
             this.wizardPage1 = new AeroWizard.WizardPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbColumn = new System.Windows.Forms.ComboBox();
             this.checkBoxUncheckAll = new System.Windows.Forms.CheckBox();
             this.checkBoxExcludeDTFields = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanelColumns = new System.Windows.Forms.FlowLayoutPanel();
@@ -67,6 +69,8 @@
             // 
             // wizardPage1
             // 
+            this.wizardPage1.Controls.Add(this.label1);
+            this.wizardPage1.Controls.Add(this.cmbColumn);
             this.wizardPage1.Controls.Add(this.checkBoxUncheckAll);
             this.wizardPage1.Controls.Add(this.checkBoxExcludeDTFields);
             this.wizardPage1.Controls.Add(this.flowLayoutPanelColumns);
@@ -77,27 +81,47 @@
             this.wizardPage1.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage1_Commit);
             this.wizardPage1.Enter += new System.EventHandler(this.wizardPage1_Enter);
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(98, 127);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 43);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Pick a column to include all the distinct values in samples";
+            // 
+            // cmbColumn
+            // 
+            this.cmbColumn.FormattingEnabled = true;
+            this.cmbColumn.Location = new System.Drawing.Point(106, 173);
+            this.cmbColumn.Name = "cmbColumn";
+            this.cmbColumn.Size = new System.Drawing.Size(121, 23);
+            this.cmbColumn.TabIndex = 6;
+            // 
             // checkBoxUncheckAll
             // 
             this.checkBoxUncheckAll.AutoSize = true;
+            this.checkBoxUncheckAll.Enabled = false;
             this.checkBoxUncheckAll.Location = new System.Drawing.Point(106, 84);
             this.checkBoxUncheckAll.Name = "checkBoxUncheckAll";
             this.checkBoxUncheckAll.Size = new System.Drawing.Size(86, 19);
             this.checkBoxUncheckAll.TabIndex = 5;
             this.checkBoxUncheckAll.Text = "Remove All";
             this.checkBoxUncheckAll.UseVisualStyleBackColor = true;
+            this.checkBoxUncheckAll.CheckedChanged += new System.EventHandler(this.checkBoxUncheckAll_CheckedChanged_1);
             // 
             // checkBoxExcludeDTFields
             // 
             this.checkBoxExcludeDTFields.AutoSize = true;
             this.checkBoxExcludeDTFields.Checked = true;
             this.checkBoxExcludeDTFields.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxExcludeDTFields.Enabled = false;
             this.checkBoxExcludeDTFields.Location = new System.Drawing.Point(106, 37);
             this.checkBoxExcludeDTFields.Name = "checkBoxExcludeDTFields";
             this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(117, 19);
             this.checkBoxExcludeDTFields.TabIndex = 4;
             this.checkBoxExcludeDTFields.Text = "Exclude DT Fileds";
             this.checkBoxExcludeDTFields.UseVisualStyleBackColor = true;
+            this.checkBoxExcludeDTFields.CheckedChanged += new System.EventHandler(this.checkBoxExcludeDTFields_CheckedChanged_1);
             // 
             // flowLayoutPanelColumns
             // 
@@ -121,6 +145,7 @@
             this.wizardPage3.TabIndex = 2;
             this.wizardPage3.Text = "Sample Records";
             this.wizardPage3.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage3_Commit);
+            this.wizardPage3.Leave += new System.EventHandler(this.wizardPage3_Leave);
             // 
             // splitContainer1
             // 
@@ -133,7 +158,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.dataGridViewSample);
             // 
-            // 
+            // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
             this.splitContainer1.Size = new System.Drawing.Size(759, 398);
@@ -203,5 +228,7 @@
         private System.Windows.Forms.CheckBox checkBoxUncheckAll;
         private System.Windows.Forms.CheckBox checkBoxExcludeDTFields;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelColumns;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbColumn;
     }
 }
