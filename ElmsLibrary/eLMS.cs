@@ -80,15 +80,18 @@ namespace ElmsLibrary
 
             }
 
+            // select weight cat
+
+            IWebElement btnAdd = chromeDriver.FindElement(By.ClassName("inputSubmit"));
+            btnAdd.Click();
 
 
 
 
 
 
-
-            chromeDriver.Close();
-            chromeDriver.Dispose();
+            //chromeDriver.Close();
+            //chromeDriver.Dispose();
 
         }
 

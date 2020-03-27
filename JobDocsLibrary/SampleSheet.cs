@@ -10,7 +10,9 @@ namespace JobDocsLibrary
 {
     public class SampleSheet
     {
- 
+        static DataTable sampleTable = null;
+
+
         public static DataTable GetSampleTable(DataTable sourceTable, List<string> selectedColList, string variableColumn = null)
         {
             bool slipSheet = sourceTable.Columns.Contains("MediaSelect");
@@ -18,9 +20,13 @@ namespace JobDocsLibrary
 
             JobData.addIndexColumn(sourceTable);
 
-            DataTable sampleTable = sourceTable.Clone();
+             sampleTable = sourceTable.Clone();
 
-            List<int> sampleRecords = SelectSampleRecords(GenerateRecordList(sourceTable));
+            List<string> variableValues = new List<string>();
+
+            List<int> sampleRecords = SelectSampleRecords(GenerateRecordList(sourceTable,out variableValues, variableColumn));
+
+            addVariableValues(sampleRecords, variableValues,variableColumn, sourceTable);
 
             if(sampleRecords.Count >0)
             {
@@ -36,6 +42,38 @@ namespace JobDocsLibrary
             return sampleTable;
         }
 
+        private static void addVariableValues(List<int> sampleRecords, List<string> variableVaues, string varColumn, DataTable sourceTable)
+        {
+
+            List<string> existingRecords = new List<string>();
+            for (int i = 0; i < sampleRecords.Count; i++)
+            {
+                for (int j = 0; j < variableVaues.Count; j++)
+                {
+                    if (sourceTable.Rows[sampleRecords[i]][varColumn].ToString() == variableVaues[j])
+                    {
+                        existingRecords.Add(variableVaues[j]);
+                    }
+                }
+            }
+
+            foreach (var item in existingRecords)
+            {
+                variableVaues.Remove(item);
+            }
+
+            for (int i = 0; i < variableVaues.Count; i++)
+            {
+                for (int j = 0; j < sourceTable.Rows.Count; j++)
+                {
+                    if(sourceTable.Rows[j][varColumn].ToString() == variableVaues[i])
+                    {
+                        sampleRecords.Add(j);
+                        break;
+                    }
+                }
+            }
+        }
 
 
         private static void RemoveUnselectedColumns(DataTable dataTable, List<string> selectedColumns)
@@ -64,13 +102,16 @@ namespace JobDocsLibrary
             
         }
 
-        private static List<Record> GenerateRecordList(DataTable dataTable/*, string variableColumn*/)
+        private static List<Record> GenerateRecordList(DataTable dataTable,  out List<string> variableValues, string variableColumn = null)
         {
             List<Record> allRecordsList = new List<Record>();
-        //    List<string> variableValues = new List<string>();
+            List<string> variables = new List<string>();
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
-               // variableValues.Add(dataTable.Rows[i][variableColumn].ToString());
+                if(variableColumn != null && !string.IsNullOrWhiteSpace(dataTable.Rows[i][variableColumn].ToString()))
+                {
+                    variables.Add(dataTable.Rows[i][variableColumn].ToString());
+                }
 
                 Record sampleRecord = new Record();
                 List<int> emptyColList = new List<int>();
@@ -97,7 +138,7 @@ namespace JobDocsLibrary
 
             }
 
-    //        variableValues = variableValues.Distinct().ToList();
+           variableValues = variables.Distinct().ToList();
 
             return allRecordsList;
         }

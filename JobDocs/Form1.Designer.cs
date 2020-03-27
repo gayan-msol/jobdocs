@@ -471,9 +471,9 @@
             // 
             // richTexNotes
             // 
-            this.richTexNotes.Location = new System.Drawing.Point(321, 561);
+            this.richTexNotes.Location = new System.Drawing.Point(399, 561);
             this.richTexNotes.Name = "richTexNotes";
-            this.richTexNotes.Size = new System.Drawing.Size(315, 99);
+            this.richTexNotes.Size = new System.Drawing.Size(237, 99);
             this.richTexNotes.TabIndex = 43;
             this.richTexNotes.Text = "";
             // 
@@ -652,7 +652,7 @@
             // 
             // tbnClearStreams
             // 
-            this.tbnClearStreams.Location = new System.Drawing.Point(240, 663);
+            this.tbnClearStreams.Location = new System.Drawing.Point(277, 667);
             this.tbnClearStreams.Name = "tbnClearStreams";
             this.tbnClearStreams.Size = new System.Drawing.Size(75, 30);
             this.tbnClearStreams.TabIndex = 53;
@@ -811,7 +811,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(323, 545);
+            this.label13.Location = new System.Drawing.Point(399, 542);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 13);
             this.label13.TabIndex = 46;
@@ -827,7 +827,7 @@
             this.PrintQty});
             this.dataGridViewStreams.Location = new System.Drawing.Point(26, 561);
             this.dataGridViewStreams.Name = "dataGridViewStreams";
-            this.dataGridViewStreams.Size = new System.Drawing.Size(289, 100);
+            this.dataGridViewStreams.Size = new System.Drawing.Size(367, 100);
             this.dataGridViewStreams.TabIndex = 45;
             // 
             // Stream
@@ -888,7 +888,7 @@
             // 
             // btnAddStream
             // 
-            this.btnAddStream.Location = new System.Drawing.Point(240, 531);
+            this.btnAddStream.Location = new System.Drawing.Point(277, 531);
             this.btnAddStream.Name = "btnAddStream";
             this.btnAddStream.Size = new System.Drawing.Size(75, 24);
             this.btnAddStream.TabIndex = 41;
@@ -1145,6 +1145,7 @@
             this.tabPage4.Text = "Sample Sheet";
             this.tabPage4.UseVisualStyleBackColor = true;
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
+            this.tabPage4.Enter += new System.EventHandler(this.tabPage4_Enter);
             // 
             // groupBox1
             // 

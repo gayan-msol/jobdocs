@@ -55,6 +55,7 @@
     <Compile Include="PostAcc.cs" />
     <Compile Include="PrintProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

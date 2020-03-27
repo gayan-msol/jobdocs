@@ -24,9 +24,9 @@ namespace DolphinLibrary
           
         }
 
-        public  string getInfo(string[] paramArr, string queryValue)
+        public  string getInfo(string[] paramArr, string queryValue, QueryType queryType = QueryType.eq )
         {
-            string url = $"http://msol-p1:3000/{paramArr[0]}?{paramArr[1]}=eq.{queryValue}";
+            string url = $"http://msol-p1:3000/{paramArr[0]}?{paramArr[1]}={queryType}.{queryValue}";
             string content = "";
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             try

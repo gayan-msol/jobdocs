@@ -57,8 +57,9 @@ namespace JobDocs
                 }
             }
 
+            string varCol = cmbColumn.SelectedItem?.ToString() ??  null;
 
-            dataGridViewSample.DataSource = sampleTable = SampleSheet.GetSampleTable(sourceTable, selectedColumnList);
+            dataGridViewSample.DataSource = sampleTable = SampleSheet.GetSampleTable(sourceTable, selectedColumnList,varCol );
 
 
 

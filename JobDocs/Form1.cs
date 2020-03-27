@@ -505,7 +505,7 @@ namespace JobDocs
                     {
                         if (row.Cells[0].Value != null)
                         {
-                            streamList.Add($"Stream {row.Cells["Stream"]?.Value} : Record Qty = {row.Cells["RecordQty"]?.Value}  : {row.Cells["Sheets"]?.Value} Sheets : Print Qty = {row.Cells["PrintQty"]?.Value}");
+                            streamList.Add($"Stream {row.Cells["Stream"]?.Value} : Print Qty = {row.Cells["PrintQty"]?.Value} : Record Qty = {row.Cells["RecordQty"]?.Value}  : {row.Cells["Sheets"]?.Value} Sheets ");
 
                         }
                     }
@@ -759,7 +759,7 @@ namespace JobDocs
             if (!string.IsNullOrEmpty(openFileDialog.FileName))
             {
            
-                richTextOutputFilePath.Text =outputFileName = openFileDialog.FileName;
+                richTextOutputFilePath.Text = outputFileName = openFileDialog.FileName;
                 //  wizardPage1.AllowNext = true;
 
             }
@@ -899,6 +899,7 @@ namespace JobDocs
         private void btnBrowseManifest_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
 
             if(openFileDialog.FileName != null)
             {
@@ -912,12 +913,18 @@ namespace JobDocs
             lodgement.AccNo = importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo;
             lodgement.JobName = txtJobName.Text;
             lodgement.JobNo = jobNo;
-            lodgement.RegName = importedJob.PostAccts.Where(x => x.AccType != "Aust Post").ToList()[0].AccType;
-            lodgement.RegNo = importedJob.PostAccts.Where(x => x.AccType != "Aust Post").ToList()[0].AccNo;
-            lodgement.ServiceType = cbServiceType?.SelectedText.ToString();
+            if(importedJob.PostAccts.Exists(x => x.AccType != "Aust Post"))
+            {
+                lodgement.RegName = importedJob.PostAccts?.Where(x => x.AccType != "Aust Post").ToList()?[0].AccType ?? "";
+                lodgement.RegNo = importedJob.PostAccts.Where(x => x.AccType != "Aust Post").ToList()[0].AccNo;
+            }
+    
+            lodgement.ServiceType = cbServiceType?.SelectedItem.ToString();
             lodgement.Size = cbSize?.SelectedItem.ToString();
-            lodgement.SortType = "PRESORT";
+            lodgement.SortType = "Pre-Sort";
             lodgement.SortList = lodgement.ReadManifest(txtManifestFileName.Text, lodgement.SortType);
+
+            /// add weight
 
             eLMS.Lodge(lodgement, elmsUser);
 
@@ -956,6 +963,11 @@ namespace JobDocs
 
             
 
+        }
+
+        private void tabPage4_Enter(object sender, EventArgs e)
+        {
+            richTextOutputFilePath.Clear();
         }
     }
 } 

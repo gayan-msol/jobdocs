@@ -32,7 +32,7 @@ namespace ElmsLibrary
 
             List<SortCategory> sortCategories = DataAccess.GetSortCategories(sortType);
             
-            if(sortType == "PRESORT")
+            if(sortType == "Pre-Sort")
             {
 
                 for (int i = 0; i < sortCategories.Count; i++)

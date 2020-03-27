@@ -91,7 +91,7 @@ namespace ElmsLibrary
 
         public static Article GetArticleInfo(string SortType, string size, string serviceType)
         {
-            string query = "SELECT ProductGroup, ArticleType FROM ArticleSelections INNER JOIN GroupSelections ON ArticleSelections.ParentID=GroupSelections.ID WHERE [Name] =@name AND  [Size] =@size AND  [ServiceType] =@serviceType";
+            string query = "SELECT ProductGroup, ArticleType FROM ArticleSelections INNER JOIN GroupSelections ON ArticleSelections.ParentID=GroupSelections.ID WHERE [Name] =@SortType AND  [Size] =@size AND  [ServiceType] =@serviceType";
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
                 var output = connection.Query<Article>(query, new { SortType, size, serviceType }).ToList()[0];
