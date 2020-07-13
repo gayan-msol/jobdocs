@@ -42,6 +42,7 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.btnExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardPage1.SuspendLayout();
             this.wizardPage3.SuspendLayout();
@@ -117,7 +118,7 @@
             this.checkBoxExcludeDTFields.Enabled = false;
             this.checkBoxExcludeDTFields.Location = new System.Drawing.Point(106, 37);
             this.checkBoxExcludeDTFields.Name = "checkBoxExcludeDTFields";
-            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(117, 19);
+            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(116, 19);
             this.checkBoxExcludeDTFields.TabIndex = 4;
             this.checkBoxExcludeDTFields.Text = "Exclude DT Fileds";
             this.checkBoxExcludeDTFields.UseVisualStyleBackColor = true;
@@ -160,6 +161,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnExcel);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
             this.splitContainer1.Size = new System.Drawing.Size(759, 398);
             this.splitContainer1.SplitterDistance = 350;
@@ -192,6 +194,16 @@
             // 
             this.printDialog1.Document = this.printDocument1;
             this.printDialog1.UseEXDialog = true;
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.Location = new System.Drawing.Point(491, 3);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(77, 38);
+            this.btnExcel.TabIndex = 2;
+            this.btnExcel.Text = "Create Excel sheet";
+            this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // frmSampleSheet
             // 
@@ -230,5 +242,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelColumns;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbColumn;
+        private System.Windows.Forms.Button btnExcel;
     }
 }

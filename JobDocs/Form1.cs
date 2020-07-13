@@ -98,7 +98,8 @@ namespace JobDocs
                 }
           
             }
-
+            Printing p = new Printing();
+            p.PrintPRoductionReport(productionReport);
             productionReport.createPdf(fileName, productionReport);
         }
 

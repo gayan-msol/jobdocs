@@ -367,5 +367,40 @@ namespace JobDocs
         {
             columnList.Clear();
         }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            DataTable excelTable = new DataTable();
+            excelTable.Columns.Add("Field Name");
+            for (int k = 0; k < sampleTable.Rows.Count; k++)
+            {
+                excelTable.Columns.Add($"Sample Record {k+1}");
+            }
+
+
+           
+                for (int j = 0; j < sampleTable.Columns.Count; j++)
+                {
+
+                    DataRow row = excelTable.NewRow();
+                    for (int i = 0; i < sampleTable.Rows.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            row[0] = sampleTable.Columns[j].ColumnName;
+                        }
+                       
+                        {
+                            row[i + 1] = sampleTable.Rows[i][j];
+                        }
+                    }
+               
+                    
+                    excelTable.Rows.Add(row);
+                }
+            
+
+            HelperLibrary.ExcelRW.CreatExcelFile($@"{Form1.jobDirectoryData}\Job {Form1.jobNo} - SAMPLE RECORDS.xlsx", excelTable, "Sample Records");
+        }
     }
 }
