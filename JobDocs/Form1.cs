@@ -13,11 +13,12 @@ using System.Threading;
 using System.IO;
 using System.Drawing.Printing;
 using JobDocsLibrary;
-using DolphinLibrary;
+using Dolphin;
 using System.Reflection;
 using System.Security;
 using System.Globalization;
 using ElmsLibrary;
+using HelperLibrary;
 
 namespace JobDocs
 {
@@ -40,17 +41,14 @@ namespace JobDocs
         string dataSummaryPdf = "";
         string prodRepPdf = "";
         string dataSummaryTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\DATA SUMMARY SHEET - APR18 - TEMPLATE.pdf";
-        //string productioReportTemplate = @"S:\SCRIPTS\DotNetProgrammes\PDF Templates\PRODUCTION REPORT SEP17 - TEMPLATE.pdf";
-        //string directoryBranch = "";
-        //string printSize = "";
-        //string finishedSize = "";
-        //string plex = "";
-        //int up = 1;
-        //string stockSaupplier = "";
-        //string stockDescription = "";
         string outputFileName = "";
         public static string userName;
         ElmsUser elmsUser = new ElmsUser();
+        PreSort preSort = new PreSort();
+        string sortType = "";
+        string weightCat = "";
+        string serviceType = "Regular";
+        string size = "Small";
 
 
         public Form1()
@@ -70,7 +68,7 @@ namespace JobDocs
             return textInfo.ToTitleCase(un.Replace(".", " "));
         }
 
-        private void createProductionReport(DolphinLibrary.Job job,string fileName)
+        private void createProductionReport(Dolphin.Job job,string fileName)
         {
             ProductionReport productionReport = new ProductionReport();
 
@@ -878,7 +876,7 @@ namespace JobDocs
             {
                 try
                 {
-                    ElmsUser user = new ElmsUser() { UserName = txtElmsUN.Text.Trim(), Password = txtElmsPWD.Text.Trim(), WindowsUser = userName };
+                    ElmsUser user = new ElmsUser() { eLMSUserName = txtElmsUN.Text.Trim(), Password = txtElmsPWD.Text.Trim(), WindowsUser = userName };
                     DataAccess.saveElmsLogin(user);
                     MessageBox.Show("Login saved.");
                     LoginPanel.Visible = false;
@@ -900,17 +898,34 @@ namespace JobDocs
         private void btnBrowseManifest_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = jobDirectoryData;
+            openFileDialog.Filter = "Text | *.txt";
             openFileDialog.ShowDialog();
 
             if(openFileDialog.FileName != null)
             {
-                txtManifestFileName.Text = openFileDialog.FileName;
+               string fileName = txtManifestFileName.Text = openFileDialog.FileName;
+
+               List<string> lines =  File.ReadLines(fileName).ToList();
+
+                int tabCount = lines[0].Split('\t').Length;
+                int commaCount = lines[0].Split(',').Length;
+
+                DataTable dt = TextFileRW.readTextFileToTable(fileName, tabCount > commaCount ? "\t" :",");
+
+                if(dt != null)
+                {
+                    preSort = Lodgement.GetPreSortCategories(dt, "Dt_BP_Sort_Order");
+
+                    Lodgement.CreateSortSummary(preSort, jobNo, Path.GetDirectoryName(fileName));                    
+                }
+                
             }
         }
 
         private void btnLodge_Click(object sender, EventArgs e)
         {
-            ElmsLibrary.Lodgement lodgement = new ElmsLibrary.Lodgement();
+            Lodgement lodgement = new Lodgement();
             lodgement.AccNo = importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo;
             lodgement.JobName = txtJobName.Text;
             lodgement.JobNo = jobNo;
@@ -919,11 +934,11 @@ namespace JobDocs
                 lodgement.RegName = importedJob.PostAccts?.Where(x => x.AccType != "Aust Post").ToList()?[0].AccType ?? "";
                 lodgement.RegNo = importedJob.PostAccts.Where(x => x.AccType != "Aust Post").ToList()[0].AccNo;
             }
-    
-            lodgement.ServiceType = cbServiceType?.SelectedItem.ToString();
-            lodgement.Size = cbSize?.SelectedItem.ToString();
-            lodgement.SortType = "Pre-Sort";
-            lodgement.SortList = lodgement.ReadManifest(txtManifestFileName.Text, lodgement.SortType);
+
+            lodgement.ServiceType = serviceType;
+            lodgement.Size = size;
+            lodgement.SortType = sortType;
+      //      lodgement.SortList = preSort;
 
             /// add weight
 
@@ -933,12 +948,12 @@ namespace JobDocs
 
         private void rbPre_Sort_CheckedChanged(object sender, EventArgs e)
         {
-            cbSize.DataSource = DataAccess.GetSizes("Pre-Sort");
+          
         }
 
         private void rbPrintPost_CheckedChanged(object sender, EventArgs e)
         {
-            cbSize.DataSource = DataAccess.GetSizes("Print Post");           
+                    
         }
 
         private void tabPage5_Click(object sender, EventArgs e)
@@ -949,7 +964,6 @@ namespace JobDocs
         private void tabPage5_Enter(object sender, EventArgs e)
         {
             elmsUser = DataAccess.GetElmsUser(userName);
-            elmsUser.UserName = elmsUser.UserName.Trim();
 
             LodgePanel.Visible = elmsUser != null;
             LoginPanel.Visible = elmsUser == null;
@@ -959,6 +973,7 @@ namespace JobDocs
             manifestFile = DirectoryHelper.GetManifestFile(jobDirectoryData, jobNo);
 
             txtManifestFileName.Text = manifestFile;
+            cmbLodgementType.SelectedItem = "PreSort";
 
            // ElmsLibrary.Lodgement lodgement = new ElmsLibrary.Lodgement();
 
@@ -969,6 +984,78 @@ namespace JobDocs
         private void tabPage4_Enter(object sender, EventArgs e)
         {
             richTextOutputFilePath.Clear();
+        }
+
+        private void txtJobName_TextChanged(object sender, EventArgs e)
+        {
+            jobName = txtJobName.Text;
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbRegular_CheckedChanged(object sender, EventArgs e)
+        {
+            serviceType = rbRegular.Checked ? "Regular" : "Priority";
+            cmbWeight.DataSource = DataAccess.GetWeightCategories(sortType, serviceType, size);
+        }
+
+        private void cbmLodgementType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sortType= cmbLodgementType?.SelectedItem.ToString();
+            cmbWeight.DataSource = DataAccess.GetWeightCategories(sortType, serviceType, size);
+
+            switch (sortType)
+            {
+                case "PreSort":
+                    rbSmallPlus.Enabled = true;
+                    rbLarge.Enabled = true;
+                    rbPriority.Enabled = true;
+                    rbSmall.Checked = true;
+                    break;
+                case "Print Post":
+                    rbSmallPlus.Enabled = false;
+                    rbLarge.Enabled = true;
+                    rbPriority.Enabled = true;
+                    rbLarge.Checked = true;
+                    break;
+                case "Charity Mail":
+                    rbSmallPlus.Enabled = false;
+                    rbLarge.Enabled = true;
+                    rbPriority.Enabled = false;
+                    rbRegular.Checked = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void rbSmall_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSmall.Checked)
+            {
+                size = "Small";
+            }
+            cmbWeight.DataSource = DataAccess.GetWeightCategories(sortType, serviceType, size);
+        }
+
+        private void rbLarge_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbLarge.Checked)
+            {
+                size = "Large";
+            }
+            cmbWeight.DataSource = DataAccess.GetWeightCategories(sortType, serviceType, size);
+        }
+
+        private void rbSmallPlus_CheckedChanged(object sender, EventArgs e)
+        {if (rbSmallPlus.Checked)
+            {
+                size = "Small Plus";
+            }
+            cmbWeight.DataSource = DataAccess.GetWeightCategories(sortType, serviceType, size);
         }
     }
 } 

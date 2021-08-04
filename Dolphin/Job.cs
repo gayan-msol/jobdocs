@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using fastJSON;
+using System.Text.Json;
 
 namespace Dolphin
 {
@@ -26,7 +26,7 @@ namespace Dolphin
         public static Job GetJob(string jobNo)
         {
             Job job = new Job();
-            Dolphin dolphin = new Dolphin();
+            DolphinConnector dolphin = new DolphinConnector();
             string response=dolphin.getInfo(dolphin.JobInfo, jobNo);
             if( response != null && response != "[]")
             {
@@ -39,7 +39,7 @@ namespace Dolphin
                 response = response.Replace("\"data_folder\":", "\"DataFolder\":");
                 response = response.Replace("\"artwork_folder\":", "\"ArtworkFolder\":");
 
-                job = fastJSON.JSON.ToObject<List<Job>>(response)[0];
+                job = JsonSerializer.Deserialize<List<Job>>(response)[0];
               
             
                 job.ProcessList = JobProcess.GetProcesses(job.DocID);

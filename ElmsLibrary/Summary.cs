@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dolphin
+namespace ElmsLibrary
 {
-    public enum QueryType
+    public class Summary
     {
-        eq,
-        ilike
+        public string JobNo { get; set; }
+        public int Total { get; set; }
+       
     }
 }

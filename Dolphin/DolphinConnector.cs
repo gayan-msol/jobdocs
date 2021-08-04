@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Dolphin
 {
-    public class Dolphin
+    public class DolphinConnector
     {
         public string[] JobInfo = { "jobs", "doc_no" };
         public string[] QuoteInfo = { "quotes", "doc_id" };
@@ -20,7 +20,7 @@ namespace Dolphin
         public string[] PostAccount = { "post_account", "doc_id" };
         public string[] StockRequest = { "stock_request", "doc_id" };
 
-        public Dolphin()
+        public DolphinConnector()
         {
           
         }

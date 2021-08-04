@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Dolphin
 {
@@ -18,7 +19,7 @@ namespace Dolphin
         public static List<JobProcess> GetProcesses(string doc_id)
         {
             List<JobProcess> processList = new List<JobProcess>();
-            Dolphin dolphin = new Dolphin();
+            DolphinConnector dolphin = new DolphinConnector();
             string response = dolphin.getInfo(dolphin.ProcessInfo, doc_id);
             response = response?.Replace("\"doc_id\":", "\"DocID\":");
             response = response?.Replace("\"qr_id\":", "\"ID\":");
@@ -26,7 +27,7 @@ namespace Dolphin
 
             if (response != null && response != "[]")
             {
-                processList = fastJSON.JSON.ToObject<List<JobProcess>>(response);
+                processList = JsonSerializer.Deserialize<List<JobProcess>>(response);
             }
             return processList;
         }

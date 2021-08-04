@@ -25,7 +25,7 @@ namespace ElmsLibrary
 
 
             IWebElement user = chromeDriver.FindElement(By.Name("username"));
-            user.SendKeys(elmsUser.UserName);
+            user.SendKeys(elmsUser.eLMSUserName);
 
             IWebElement pwd = chromeDriver.FindElement(By.Name("password"));
             pwd.SendKeys(elmsUser.Password);

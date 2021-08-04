@@ -12,7 +12,7 @@ namespace ElmsLibrary
     public static class DataAccess
     {
         //public static string connStr = @"Data Source=GAYAN-PROBOOK\SQLEXPRESS;Initial Catalog=RMMS;integrated security=true";
-        public static string connStr = @"Data Source=MS-WS-HP01\SQLEXPRESS;Initial Catalog=ELMS;Integrated Security=False;user Id=sa;Password=MsolSQL123$;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public static string connStr = @"Data Source=MSOL-P1\SQLEXPRESS;Initial Catalog=eLMS;Integrated Security=False;user Id=sa;Password=P@ssw0rd123SQL;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
 
         public static void insertRecords(string query)
@@ -23,26 +23,12 @@ namespace ElmsLibrary
             }
         }
 
-        //public static int insertLetters(List<Letter> letters)
-        //{
-        //    string query = "IF NOT EXISTS (SELECT * FROM Letters WHERE LetterID=@LetterID) " +
-        //        "INSERT INTO Letters ([LetterID],[AccNo],[ClientID],[SortOrder],[AddressLine1],[AddressLine2],[AddressLine3],[AddressLine4],[AddressLine5],[Locality],[State],[Postcode],[Country],[LetterCode],[DebtCode],[Title],[FirstName],[LastName],[CompanyName],[Source],[Custom1],[Custom2],[Custom3],[JobNumber],[Returned]) " +
-        //        "VALUES (@LetterID,@AccNo,@ClientID,@SortOrder,@AddressLine1,@AddressLine2,@AddressLine3,@AddressLine4,@AddressLine5,@Locality,@State,@Postcode,@Country,@LetterCode,@DebtCode,@Title,@FirstName,@LastName,@CompanyName,@Source,@Custom1,@Custom2,@Custom3,@JobNumber,'False') " +
-        //        "ELSE UPDATE Letters SET [AccNo]=@AccNo,[ClientID]=@ClientID,[SortOrder]=@SortOrder,[AddressLine1]=@AddressLine1,[AddressLine2]=@AddressLine2,[AddressLine3]=@AddressLine3,[AddressLine4]=@AddressLine4,[AddressLine5]=@AddressLine5,[Locality]=@Locality," +
-        //        "[State]=@State,[Postcode]=@Postcode,[Country]=@Country,[LetterCode]=@LetterCode,[DebtCode]=@DebtCode,[Title]=@Title,[FirstName]=@FirstName,[LastName]=@LastName,[CompanyName]=@CompanyName,[Source]=@Source,[Custom1]=@Custom1,[Custom2]=@Custom2,[Custom3]=@Custom3,[JobNumber]=@JobNumber,[Returned]=@Returned " +
-        //        "WHERE [LetterID]=@LetterID";
 
-        //    using (IDbConnection conn = new System.Data.SqlClient.SqlConnection(connStr))
-        //    {
-        //        return conn.Execute(query, letters);
-        //    }
-        //    //  return count;
-        //}
 
         public static int saveElmsLogin(ElmsUser user)
         {
-            string query = "IF NOT EXISTS (SELECT * FROM Logins WHERE WindowsUser=@WindowsUser) INSERT INTO Logins ([UserName],[Password],[WindowsUser])  VALUES (@UserName,@Password,@WindowsUser) " +
-                "ELSE UPDATE Logins SET UserName=@UserName, Password=@Password WHERE WindowsUser=@WindowsUser  ";
+            string query = "IF NOT EXISTS (SELECT * FROM eLMSLogins WHERE User=@WindowsUser) INSERT INTO eLMSLogins ([eLMSUserName],[Password],[WindowsUser])  VALUES (@eLMSUserName,@Password,@WindowsUser) " +
+                "ELSE UPDATE eLMSLogins SET eLMSUserName=@eLMSUserName, Password=@Password WHERE WindowsUser=@WindowsUser  ";
             int count = 0;
 
             using (IDbConnection conn = new System.Data.SqlClient.SqlConnection(connStr))
@@ -52,9 +38,29 @@ namespace ElmsLibrary
             return count;
         }
 
+
+        public static string GetIntZone(string country)
+        {
+            string query = $@"SELECT Zone from IntZones WHERE Country='{country}'";
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<string>(query, new { country }).ToList();
+
+                if (output.Count > 0)
+                {
+                    return output[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public static ElmsUser GetElmsUser(string windowsUser)
         {
-            string query = "SELECT * FROM Logins WHERE [WindowsUser] =@windowsUser";
+            string query = "SELECT * FROM eLMSLogins WHERE [WindowsUser] =@windowsUser";
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
                 var output = connection.Query<ElmsUser>(query, new { windowsUser}).ToList();
@@ -66,11 +72,7 @@ namespace ElmsLibrary
                 else
                 {
                     return null;
-                }
-              
-
-               
-
+                }                            
             }
 
         }
@@ -108,6 +110,17 @@ namespace ElmsLibrary
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
                 var output = connection.Query<string>(query, new { SortType }).ToList();
+
+                return output;
+            }
+        }
+
+        public static List<string> GetWeightCategories(string SortType, string ServiceType, string Size)
+        {
+            string query = "SELECT WeightCategory FROM LodgementOptions WHERE SortType=@SortType AND ServiceType=@ServiceType AND Size=@Size";
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<string>(query, new { SortType, ServiceType, Size }).ToList();
 
                 return output;
             }

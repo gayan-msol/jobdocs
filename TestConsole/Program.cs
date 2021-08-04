@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ElmsLibrary;
 using JobDocsLibrary;
-using DolphinLibrary;
+using Dolphin;
 
 
 namespace TestConsole
@@ -18,8 +18,10 @@ namespace TestConsole
             //Console.WriteLine($"{article.ArticleType} - {article.ProductGroup}");
             //Console.ReadKey();
 
-            Dolphin dolphin = new Dolphin();
-            string RES = dolphin.getInfo(new string[]{ "contacts","email"}, "*", QueryType.ilike);
+         //   DolphinCo dolphin = new Dolphin();
+            Job job = Job.GetJob("207989");
+
+          List<  Dolphin.PostAccount> accList = Dolphin.PostAccount.GetAccountDetails(job.DocID);
 
             Console.ReadKey();
         }

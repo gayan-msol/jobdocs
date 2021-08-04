@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobDocs", "JobDocs\JobDocs.csproj", "{756496AA-05B9-481A-9A9F-126D2DEDD64B}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElmsLibrary", "ElmsLibrary\ElmsLibrary.csproj", "{9299A69F-F4A3-406A-9D57-1EA675604567}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{06905876-ACEB-46DE-A615-95EDE41B5277}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dolphin", "Dolphin\Dolphin.csproj", "{733D6D4A-B88C-4755-A4D8-FD214B4BB767}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{06905876-ACEB-46DE-A615-95EDE41B5277}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06905876-ACEB-46DE-A615-95EDE41B5277}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06905876-ACEB-46DE-A615-95EDE41B5277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{733D6D4A-B88C-4755-A4D8-FD214B4BB767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{733D6D4A-B88C-4755-A4D8-FD214B4BB767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{733D6D4A-B88C-4755-A4D8-FD214B4BB767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{733D6D4A-B88C-4755-A4D8-FD214B4BB767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

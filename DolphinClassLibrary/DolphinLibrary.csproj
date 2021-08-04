@@ -50,7 +50,7 @@
     <Compile Include="Dolphin.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobProcess.cs" />
-    <Compile Include="Lodgement.cs" />
+    <Compile Include="PostAccount.cs" />
     <Compile Include="MailPackItem.cs" />
     <Compile Include="PostAcc.cs" />
     <Compile Include="PrintProcess.cs" />

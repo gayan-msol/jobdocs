@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Dolphin
@@ -15,7 +15,7 @@ namespace Dolphin
         public static List<PostAcc> GetAccounts(string doc_id)
         {
             List<PostAcc> processList = new List<PostAcc>();
-            Dolphin dolphin = new Dolphin();
+            DolphinConnector dolphin = new DolphinConnector();
             string response = dolphin.getInfo(dolphin.PostAccount, doc_id);
             response = response?.Replace("\"Note\":", "\"AccType\":");
             response = response?.Replace("\"Post Number\":", "\"AccNo\":");
@@ -23,7 +23,7 @@ namespace Dolphin
 
             if (response != null && response != "[]")
             {
-                processList = fastJSON.JSON.ToObject<List<PostAcc>>(response);
+                processList = JsonSerializer.Deserialize<List<PostAcc>>(response);
             }
             return processList;
         }

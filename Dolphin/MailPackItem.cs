@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Dolphin
 {
@@ -25,7 +26,7 @@ namespace Dolphin
         public static List<MailPackItem> GetItems(string doc_id)
         {
             List<MailPackItem> itemList = new List<MailPackItem>();
-            Dolphin dolphin = new Dolphin();
+            DolphinConnector dolphin = new DolphinConnector();
             string response = dolphin.getInfo(dolphin.MailPackItemInfo, doc_id);
             response = response?.Replace("\"Linked To\":", "\"LinkedTo\":");
             response = response?.Replace("\"MP Weight\":", "\"Weight\":");
@@ -38,7 +39,7 @@ namespace Dolphin
 
             if (response != null && response != "[]")
             {
-                itemList = fastJSON.JSON.ToObject<List<MailPackItem>>(response);
+                itemList = JsonSerializer.Deserialize<List<MailPackItem>>(response);
             }
             return itemList;
         }
