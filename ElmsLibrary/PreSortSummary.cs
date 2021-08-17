@@ -6,16 +6,25 @@ using System.Threading.Tasks;
 
 namespace ElmsLibrary
 {
-    public class PreSort
+    public class SortSummary
     {
         public string JobNumber { get; set; }
-        public int Total { get; set; }
+        public int IntTotal { get; set; }
+        public string WeightCat { get; set; }
         public int BDSS { get; set; }
         public int BDOS { get; set; }
         public int BRSS { get; set; }
         public int BROS { get; set; }
         public int URSS { get; set; }
         public int UROS { get; set; }
+        public int PDOS { get; set; }
+        public int PDSS { get; set; }
+        public int ADOS { get; set; }
+        public int ADSS { get; set; }
+        public int RESSS { get; set; }
+        public int RESOS { get; set; }
+        public string RegName { get; set; }
+        public string RegNO { get; set; }
         public int Z1 { get; set; }
         public int Z2 { get; set; }
         public int Z3 { get; set; }
@@ -28,4 +37,6 @@ namespace ElmsLibrary
 
         public string UnmatchedCountries { get; set; }
     }
+
+   
 }

@@ -12,7 +12,8 @@ namespace ElmsLibrary
     public static class DataAccess
     {
         //public static string connStr = @"Data Source=GAYAN-PROBOOK\SQLEXPRESS;Initial Catalog=RMMS;integrated security=true";
-        public static string connStr = @"Data Source=MSOL-P1\SQLEXPRESS;Initial Catalog=eLMS;Integrated Security=False;user Id=sa;Password=P@ssw0rd123SQL;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+       // public static string connStr = @"Data Source=MSOL-P1\SQLEXPRESS;Initial Catalog=eLMS;Integrated Security=False;user Id=sa;Password=P@ssw0rd123SQL;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public static string connStr = @"Data Source=MSOL-P1\SQLEXPRESS;Initial Catalog=eLMS;Integrated Security=False;user Id=sa;Password=P@ssw0rd123SQL;Connect Timeout=30;";
 
 
         public static void insertRecords(string query)
@@ -90,13 +91,40 @@ namespace ElmsLibrary
 
         }
 
+        public static List<InputFiled> GetInputFileds(string sortType)
+        {
+            string query = "SELECT * FROM InputFields WHERE [SortType] =@sortType";
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<InputFiled>(query, new { sortType }).ToList();
+                return output;
+            }
+        }
 
-        public static Article GetArticleInfo(string SortType, string size, string serviceType)
+        public static LodgementType GetLodgementType(Lodgement lodgement)
+        {
+            string query = "SELECT * FROM [ArticleTypes] WHERE [SortType] =@sortType AND [Size]=@Size AND [WeightCategory]=@Weight ";
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<LodgementType>(query,  lodgement ).ToList();
+                if (output.Count > 0)
+                {
+                    return output[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
+        public static LodgementType GetArticleInfo(string SortType, string size, string serviceType)
         {
             string query = "SELECT ProductGroup, ArticleType FROM ArticleSelections INNER JOIN GroupSelections ON ArticleSelections.ParentID=GroupSelections.ID WHERE [Name] =@SortType AND  [Size] =@size AND  [ServiceType] =@serviceType";
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
-                var output = connection.Query<Article>(query, new { SortType, size, serviceType }).ToList()[0];
+                var output = connection.Query<LodgementType>(query, new { SortType, size, serviceType }).ToList()[0];
 
                 return output;
 

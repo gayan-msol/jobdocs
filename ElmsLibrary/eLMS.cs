@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -12,86 +12,95 @@ namespace ElmsLibrary
     public class eLMS
     {
         static string URL = "https://elms.auspost.com.au/elms/loginCheck.do";
-        static string ChromeDriverPath = @"S:\SCRIPTS\DotNetProgrammes\Source Code\ChromeDriver";
+        static string EdgeDriverPath = @"S:\DOT NET PROGRAMMES\SOURCE CODE\Edge Driver";
 
         public static void Lodge(Lodgement lodgement, ElmsUser elmsUser)
         {
-
-            ChromeDriver chromeDriver = new ChromeDriver(ChromeDriverPath);
-
-
-            chromeDriver.Url = URL;
-            chromeDriver.Navigate();
+            EdgeDriver edgeDriver = new EdgeDriver(EdgeDriverPath);
+            
+                edgeDriver.Url = URL;
+                edgeDriver.Navigate();
 
 
-            IWebElement user = chromeDriver.FindElement(By.Name("username"));
-            user.SendKeys(elmsUser.eLMSUserName);
+                IWebElement user = edgeDriver.FindElement(By.Name("username"));
+                user.SendKeys(elmsUser.eLMSUserName);
 
-            IWebElement pwd = chromeDriver.FindElement(By.Name("password"));
-            pwd.SendKeys(elmsUser.Password);
+                IWebElement pwd = edgeDriver.FindElement(By.Name("password"));
+                pwd.SendKeys(elmsUser.Password);
 
-            IWebElement btnLogin = chromeDriver.FindElement(By.ClassName("inputSubmit"));
-            btnLogin.Click();
-
-
-            WebDriverWait wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(30));
-            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(
-            By.LinkText("New Mailing Statement")));
-
-            IWebElement link = chromeDriver.FindElement(By.LinkText("New Mailing Statement"));
-            link.Click();
-
-            new SelectElement(chromeDriver.FindElement(By.Name("accountCode"))).SelectByText(lodgement.AccNo);
-
-            IWebElement jn = chromeDriver.FindElement(By.Name("jobNumber"));
-            jn.SendKeys(lodgement.JobNo);
-
-            IWebElement jobName = chromeDriver.FindElement(By.Name("jobName"));
-            jobName.SendKeys(lodgement.JobName);
-
-            IWebElement UID = chromeDriver.FindElement(By.Name("uniqueId"));
-            UID.SendKeys(lodgement.JobName);
-
-            IWebElement IRD = chromeDriver.FindElement(By.Name("invoiceRefDetails"));
-            IRD.SendKeys(lodgement.JobNo);
-
-            new SelectElement(chromeDriver.FindElement(By.Name("lodgementPointCode"))).SelectByText("Revenue Collection Group - PMC");
+                IWebElement btnLogin = edgeDriver.FindElement(By.ClassName("inputSubmit"));
+                btnLogin.Click();
 
 
-            IWebElement btnContinue = chromeDriver.FindElement(By.Id("submitButton"));
-            btnContinue.Click();
+                WebDriverWait wait = new WebDriverWait(edgeDriver, TimeSpan.FromSeconds(30));
+                wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(
+                By.LinkText("New Mailing Statement")));
 
-            Article article = DataAccess.GetArticleInfo(lodgement.SortType, lodgement.Size, lodgement.ServiceType);
+                IWebElement link = edgeDriver.FindElement(By.LinkText("New Mailing Statement"));
+                link.Click();
 
-            new SelectElement(chromeDriver.FindElement(By.Id("productGroups"))).SelectByText(article.ProductGroup);
+                new SelectElement(edgeDriver.FindElement(By.Name("accountCode"))).SelectByText(lodgement.AccNo);
+
+                IWebElement jn = edgeDriver.FindElement(By.Name("jobNumber"));
+                jn.SendKeys(lodgement.JobNo);
+
+                IWebElement jobName = edgeDriver.FindElement(By.Name("jobName"));
+                jobName.SendKeys(lodgement.JobName);
+
+                IWebElement UID = edgeDriver.FindElement(By.Name("uniqueId"));
+                UID.SendKeys(lodgement.JobName);
+
+                IWebElement IRD = edgeDriver.FindElement(By.Name("invoiceRefDetails"));
+                IRD.SendKeys(lodgement.JobNo);
+
+                new SelectElement(edgeDriver.FindElement(By.Name("lodgementPointCode"))).SelectByText("Revenue Collection Group - PMC");
 
 
-            new SelectElement(chromeDriver.FindElement(By.Id("articleTypes"))).SelectByText(article.ArticleType);
+                IWebElement btnContinue = edgeDriver.FindElement(By.Id("submitButton"));
+                btnContinue.Click();
 
-            new SelectElement(chromeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
+                //  Article article = DataAccess.GetArticleInfo(lodgement.SortType, lodgement.Size, lodgement.ServiceType);
 
-            foreach (var sort in lodgement.SortList)
-            {
-                if (sort.Value != "0")
+                new SelectElement(edgeDriver.FindElement(By.Id("productGroups"))).SelectByText(lodgement.ProductGroup);
+
+
+                new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgement.ArticleType);
+
+
+
+                if (lodgement.SortType=="PreSort")
                 {
-                    IWebElement webElement = chromeDriver.FindElement(By.Name(sort.Key));
-                    webElement.SendKeys(sort.Value.ToString());
+                    new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
                 }
 
-            }
+                foreach (var sort in lodgement.SortList)
+                {
+                    if (sort.Value != "0")
+                    {
 
-            // select weight cat
+                        if (sort.Key.Substring(0, 2) == "WT")
+                        {
+                            new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
+                        }
+                        else
+                        {
+                            IWebElement webElement = edgeDriver.FindElement(By.Name(sort.Key));
+                            webElement.SendKeys(sort.Value.ToString());
+                        }                                  
+                    }
 
-            IWebElement btnAdd = chromeDriver.FindElement(By.ClassName("inputSubmit"));
-            btnAdd.Click();
+                }
+
+                // select weight cat
+
+                IWebElement btnAdd = edgeDriver.FindElement(By.ClassName("inputSubmit"));
+                btnAdd.Click();
+            
+        
 
 
+        
 
-
-
-
-            //chromeDriver.Close();
-            //chromeDriver.Dispose();
 
         }
 

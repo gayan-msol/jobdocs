@@ -130,9 +130,11 @@
     <Compile Include="DataAccess.cs" />
     <Compile Include="eLMS.cs" />
     <Compile Include="ElmsUser.cs" />
+    <Compile Include="InputFiled.cs" />
     <Compile Include="Lodgement.cs" />
     <Compile Include="PDF.cs" />
-    <Compile Include="PreSort.cs" />
+    <Compile Include="PreSortCategories.cs" />
+    <Compile Include="PreSortSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortCategory.cs" />
     <Compile Include="SortTypes.cs" />

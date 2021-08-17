@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ElmsLibrary;
 using JobDocsLibrary;
 using Dolphin;
+using System.Data;
+using BBUtils;
 
 
 namespace TestConsole
@@ -14,16 +16,21 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            //Article  article = DataAccess.GetArticleInfo("PreSort", "Small", "Regular");
-            //Console.WriteLine($"{article.ArticleType} - {article.ProductGroup}");
-            //Console.ReadKey();
+            DataTable dt = TextFileRW.readTextFileToTable(@"S:\DATABASES\SCOTT PRINT\JOB 208030 MEGASTAR MAGAZINE\JOB208030DR - Correct mailing numbers.txt", "\t");
+            int index = 0;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if(string.IsNullOrEmpty(dt.Rows[i]["Name"].ToString()))
+                {
+                    dt.Rows[index]["Address"] += $", {dt.Rows[i]["Address"]}";
+                }
+                else
+                {
+                    index = i;
+                }
+            }
 
-         //   DolphinCo dolphin = new Dolphin();
-            Job job = Job.GetJob("207989");
-
-          List<  Dolphin.PostAccount> accList = Dolphin.PostAccount.GetAccountDetails(job.DocID);
-
-            Console.ReadKey();
+            TextFileRW.writeTableToTxtFile(dt, @"S:\DATABASES\SCOTT PRINT\JOB 208030 MEGASTAR MAGAZINE\JOB208030DR - Correct mailing numbers_merged.txt", "\t");
         }
     }
 }

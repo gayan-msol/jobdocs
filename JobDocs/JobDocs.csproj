@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</PublishUrl>
+    <PublishUrl>\\MSOL-P1\InstallerFiles\Dot Net Applications\Job Docs\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -22,10 +22,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</InstallUrl>
-    <UpdateUrl>\\msol-p1\Groups\SCRIPTS\DotNetProgrammes\Published\JobDocs\</UpdateUrl>
+    <UpdateUrl>\\MSOL-P1\InstallerFiles\Dot Net Applications\Job Docs\</UpdateUrl>
     <PublisherName>MSOL</PublisherName>
-    <ApplicationRevision>50</ApplicationRevision>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>54</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
