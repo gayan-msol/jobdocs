@@ -104,21 +104,21 @@ namespace ElmsLibrary
 
 
 
-                if (lodgements[0].SortType == "PreSort")
-                {
-                    new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
-                }
+                //if (lodgements[0].SortType == "PreSort")
+                //{
+                //    new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
+                //}
 
                 foreach (var sort in lodgements[1].SortList)
                 {
                     if (sort.Value != "0")
                     {
 
-                        if (sort.Key.Substring(0, 2) == "WT")
-                        {
-                            new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
-                        }
-                        else
+                        //if (sort.Key.Substring(0, 2) == "WT" && lodge)
+                        //{
+                        //    new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
+                        //}
+                        //else
                         {
                             IWebElement webElement = edgeDriver.FindElement(By.Name(sort.Key));
                             webElement.SendKeys(sort.Value.ToString());
@@ -128,8 +128,8 @@ namespace ElmsLibrary
                 }
 
 
-               // IWebElement btnAdd = edgeDriver.FindElement(By.ClassName("inputSubmit"));
-                btnAdd.Click();
+                IWebElement btnAdd2 = edgeDriver.FindElement(By.ClassName("inputSubmit"));
+                btnAdd2.Click();
 
             }
 

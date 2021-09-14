@@ -101,12 +101,12 @@ namespace ElmsLibrary
             }
         }
 
-        public static List<InputFiled> GetInputFileds(string sortType, string weightCat)
+        public static List<InputFiled> GetInputFileds(string sortType, string weightCat, string Size)
         {
-            string query = "SELECT * FROM InputFields WHERE [SortType] = @sortType AND ( WeightCategory=@weightCat OR WeightCategory IS NULL)";
+            string query = "SELECT * FROM InputFields WHERE [SortType] = @sortType AND ( WeightCategory=@weightCat OR WeightCategory IS NULL) AND ( Size=@Size OR Size IS NULL)";
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
-                var output = connection.Query<InputFiled>(query, new { sortType, weightCat }).ToList();
+                var output = connection.Query<InputFiled>(query, new { sortType, weightCat, Size }).ToList();
                 return output;
             }
         }

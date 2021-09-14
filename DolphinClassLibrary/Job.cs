@@ -20,6 +20,7 @@ namespace Dolphin
         public List<PrintInfo> PrintInfoList { get; set; }
         public List<MailPackItem> ItemList { get; set; }
         public List<PostAcc> PostAccts { get; set; }
+        public List<LodgementLine> LodgementLines { get; set; }
         public string DataFolder { get; set; }
         public string ArtworkFolder { get; set; }
 
@@ -46,6 +47,7 @@ namespace Dolphin
                 job.PrintInfoList = PrintInfo.GetInfo(job.DocID);
                 job.ItemList = MailPackItem.GetItems(job.DocID);
                 job.PostAccts = PostAcc.GetAccounts(job.DocID);
+                job.LodgementLines = LodgementLine.GetLodgementLines(job.DocID);
 
                 return job;
             }

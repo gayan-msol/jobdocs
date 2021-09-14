@@ -968,7 +968,7 @@ namespace JobDocs
 
             List<InputFiled> inputList = new List<InputFiled>();
 
-            inputList = DataAccess.GetInputFileds(sortType, lodgement.Weight);
+            inputList = DataAccess.GetInputFileds(sortType, lodgement.Weight, lodgement.Size);
 
             //if ((lodgement.SortType == "Full Rate" && lodgement.Size == "Large") || lodgement.SortType == "Print Post" || lodgement.SortType == "INT Full Rate" || lodgement.SortType == "INT Contract")
             //{
@@ -1016,14 +1016,19 @@ namespace JobDocs
 
             lodgements.Add(lodgement);
 
-       /*******
+
             if(sortSummary.IntTotal > 0)
             {
-                Lodgement lodgementINT = lodgement;
                 sortType = "INT Full Rate";
-                inputList = DataAccess.GetInputFileds(sortType, lodgementINT.Weight);
-               
+
+                Lodgement lodgementINT = new Lodgement();
+                lodgementINT.ServiceType = serviceType;
+                lodgementINT.Size = size;
                 lodgementINT.SortType = sortType;
+                lodgementINT.Weight = cmbWeight?.Text ?? "0";
+                
+                inputList = DataAccess.GetInputFileds(sortType, lodgementINT.Weight, lodgementINT.Size);
+
                 sortList = new Dictionary<string, string>();
 
                 foreach (InputFiled input in inputList)
@@ -1047,7 +1052,7 @@ namespace JobDocs
 
                 lodgements.Add(lodgementINT);
             }
-            ******/
+         
             
             /// add weight
 

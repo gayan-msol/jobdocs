@@ -14,7 +14,7 @@ namespace Dolphin
         public string[] JobInfo = { "jobs", "doc_no" };
         public string[] QuoteInfo = { "quotes", "doc_id" };
         public string[] ProcessInfo = { "process", "doc_id" };
-        public string[] LodgemntInfo = { "lodgement", "doc_id" };
+        public string[] LodgementInfo = { "lodgement", "doc_id" };
         public string[] MailPackItemInfo = { "outwork", "doc_id" };
         public string[] PrintProcessInfo = { "laser_print_options", "doc_id" };
         public string[] PostAccount = { "post_account", "doc_id" };

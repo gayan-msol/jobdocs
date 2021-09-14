@@ -14,20 +14,21 @@ namespace Dolphin
         public string Size { get; set; }
         public string Weight { get; set; }
 
-        //public static List<LodgementLine> GetLodgementLines(string doc_id)
-        //{
-        //    List<LodgementLine> processList = new List<LodgementLine>();
-        //    Dolphin dolphin = new Dolphin();
-        //    string response = dolphin.getInfo(dolphin.ProcessInfo, doc_id);
-        //    response = response?.Replace("\"doc_id\":", "\"DocID\":");
-        //    response = response?.Replace("\"qr_id\":", "\"ID\":");
-        //    response = response?.Replace("\"Link To\":", "\"LinkTo\":");
+        public static List<LodgementLine> GetLodgementLines(string doc_id)
+        {
+            List<LodgementLine> processList = new List<LodgementLine>();
+            Dolphin dolphin = new Dolphin();
+            string response = dolphin.getInfo(dolphin.LodgementInfo, doc_id);
+            response = response?.Replace("\"Note\":", "\"AccType\":");
+            response = response?.Replace("\"Post Number\":", "\"AccNo\":");
+            response = response?.Replace("\"doc_id\":", "\"DocID\":");
+            response = response?.Replace("\"Customer Name\":", "\"AccName\":");
 
-        //    if (response != null && response != "[]")
-        //    {
-        //        processList = JsonSerializer.Deserialize<List<JobProcess>>(response);
-        //    }
-        //    return processList;
-        //}
+            if (response != null && response != "[]")
+            {
+                processList = fastJSON.JSON.ToObject<List<LodgementLine>>(response);
+            }
+            return processList;
+        }
     }
 }
