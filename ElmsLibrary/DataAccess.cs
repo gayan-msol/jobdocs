@@ -42,7 +42,7 @@ namespace ElmsLibrary
 
         public static string GetIntZone(string country)
         {
-            string query = $@"SELECT Zone from IntZones WHERE Country='{country}'";
+            string query = $@"SELECT Zone from IntZonesFullRate WHERE Country='{country}' OR AltCountry='{country}'";
 
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
@@ -93,7 +93,7 @@ namespace ElmsLibrary
 
         public static List<InputFiled> GetInputFileds(string sortType)
         {
-            string query = "SELECT * FROM InputFields WHERE [SortType] =@sortType";
+            string query = "SELECT * FROM InputFields WHERE [SortType] = @sortType";
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
                 var output = connection.Query<InputFiled>(query, new { sortType }).ToList();
@@ -101,9 +101,23 @@ namespace ElmsLibrary
             }
         }
 
+        public static List<InputFiled> GetInputFileds(string sortType, string weightCat)
+        {
+            string query = "SELECT * FROM InputFields WHERE [SortType] = @sortType AND ( WeightCategory=@weightCat OR WeightCategory IS NULL)";
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+            {
+                var output = connection.Query<InputFiled>(query, new { sortType, weightCat }).ToList();
+                return output;
+            }
+        }
+
         public static LodgementType GetLodgementType(Lodgement lodgement)
         {
-            string query = "SELECT * FROM [ArticleTypes] WHERE [SortType] =@sortType AND [Size]=@Size AND [WeightCategory]=@Weight ";
+            string query = "SELECT * FROM [ArticleTypes] WHERE [SortType] =@sortType AND [Size]=@Size AND [ServiceType]=@ServiceType";
+            if(lodgement.SortType == "Print Post")
+            {
+                query += " AND [WeightCategory]=@Weight ";
+            }
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
                 var output = connection.Query<LodgementType>(query,  lodgement ).ToList();

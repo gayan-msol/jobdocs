@@ -10,6 +10,7 @@ namespace ElmsLibrary
     {
         public string JobNumber { get; set; }
         public int IntTotal { get; set; }
+        public int AusTotal { get; set; }
         public string WeightCat { get; set; }
         public int BDSS { get; set; }
         public int BDOS { get; set; }
@@ -24,7 +25,7 @@ namespace ElmsLibrary
         public int RESSS { get; set; }
         public int RESOS { get; set; }
         public string RegName { get; set; }
-        public string RegNO { get; set; }
+        public string RegNo { get; set; }
         public int Z1 { get; set; }
         public int Z2 { get; set; }
         public int Z3 { get; set; }

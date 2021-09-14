@@ -30,127 +30,178 @@ namespace ElmsLibrary
 
 
 
-        public static SortSummary GetPreSortCategories(DataTable dataTable, string sortType )
+
+        public static SortSummary GetSortCategories(DataTable dataTable, string sortType )
         {
             SortSummary sortSummary = new SortSummary();
           
-
-            foreach (DataRow row in dataTable.Rows)
+            if(sortType == "Full Rate")
             {
-                string sortCodeColumn = "";
-
-                switch (sortType)
+                if (dataTable.Columns.Contains("Country"))
                 {
-
-                    case "PreSort":                     
-                        sortCodeColumn = dataTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Code"; // for Pioneer column names
-                        break;
-                    case "Print Post":
-                            sortCodeColumn =  "Dt PP Sort Code";
-                        break;
-                    default:
-                        break;
-                }
-
-
-                string sortCode = row[sortCodeColumn]?.ToString().Replace(' ','_') ?? string.Empty;
-
-                if (string.IsNullOrEmpty(sortCode))
-                {
-                    continue;
-                }
-
-
-                if (sortCode == "x_OTHER" || sortCode == "xOTHER")
-                {
-                    sortSummary.IntTotal += 1;
-
-                    string country = row["Country"].ToString();
-                    string zone = DataAccess.GetIntZone(country);
-
-                    if (string.IsNullOrEmpty(zone))
+                    foreach (DataRow row in dataTable.Rows)
                     {
-                        sortSummary.UnmatchedCountries += $"{country},";
-                    }
+                        if(row["Country"] == "")
+                        {
+                            sortSummary.AusTotal += 1;
+                        }
+                        else
+                        {
+                            sortSummary.IntTotal += 1;
+                    
+                            string country = row["Country"].ToString();
+                            string zone = DataAccess.GetIntZone(country);
 
-                    sortSummary.Z1 += zone == "Z1" ? 1 : 0;
-                    sortSummary.Z2 += zone == "Z2" ? 1 : 0;
-                    sortSummary.Z3 += zone == "Z3" ? 1 : 0;
-                    sortSummary.Z4 += zone == "Z4" ? 1 : 0;
-                    sortSummary.Z5 += zone == "Z5" ? 1 : 0;
-                    sortSummary.Z6 += zone == "Z6" ? 1 : 0;
-                    sortSummary.Z7 += zone == "Z7" ? 1 : 0;
-                    sortSummary.Z8 += zone == "Z8" ? 1 : 0;
-                    sortSummary.Z9 += zone == "Z9" ? 1 : 0;
-                }
-                else if (sortCode.Split('_')[0] == "BD")
-                {
-                    if (sortCode.Split('_')[2].Substring(0, 1) == "6")
-                    {
-                        sortSummary.BDSS += 1;
-                    }
-                    else
-                    {
-                        sortSummary.BDOS += 1;
+                            if (string.IsNullOrEmpty(zone))
+                            {
+                                sortSummary.UnmatchedCountries += $"{country},";
+                            }
+
+                            sortSummary.Z1 += zone == "Z1" ? 1 : 0;
+                            sortSummary.Z2 += zone == "Z2" ? 1 : 0;
+                            sortSummary.Z3 += zone == "Z3" ? 1 : 0;
+                            sortSummary.Z4 += zone == "Z4" ? 1 : 0;
+                            sortSummary.Z5 += zone == "Z5" ? 1 : 0;
+                            sortSummary.Z6 += zone == "Z6" ? 1 : 0;
+                            sortSummary.Z7 += zone == "Z7" ? 1 : 0;
+                            sortSummary.Z8 += zone == "Z8" ? 1 : 0;
+                            sortSummary.Z9 += zone == "Z9" ? 1 : 0;
+                        }
                     }
                 }
-                else if (sortCode.Split('_')[0] == "BR")
+                else
                 {
-                    if (sortCode.Split('_')[1] == "WA")
-                    {
-                        sortSummary.BRSS += 1;
-                    }
-                    else
-                    {
-                        sortSummary.BROS += 1;
-                    }
+                    sortSummary.AusTotal = dataTable.Rows.Count;
                 }
-                else if (sortCode.Split('_')[0] == "UR")
-                {
-                    if (sortCode.Split('_')[1] == "WA")
-                    {
-                        sortSummary.URSS += 1;
-                    }
-                    else
-                    {
-                        sortSummary.UROS += 1;
-                    }
-                }
-                else if (sortCode.Split('_')[4] == "A") ////// Print Post
-                {
-                    if (sortCode.Split('_')[0] == "WA")
-                    {
-                        sortSummary.ADSS += 1;
-                    }
-                    else
-                    {
-                        sortSummary.ADOS += 1;
-                    }
-                }
-                else if (sortCode.Split('_')[4] == "P")
-                {
-                    if (sortCode.Split('_')[0] == "WA")
-                    {
-                        sortSummary.PDSS += 1;
-                    }
-                    else
-                    {
-                        sortSummary.PDOS += 1;
-                    }
-                }
-                else if (sortCode.Split('_')[4] == "R")
-                {
-                    if (sortCode.Split('_')[0] == "WA")
-                    {
-                        sortSummary.RESSS += 1;
-                    }
-                    else
-                    {
-                        sortSummary.RESOS += 1;
-                    }
-                }
-
+             
             }
+            else
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    string sortCodeColumn = "";
+
+                    switch (sortType)
+                    {
+
+                        case "PreSort":
+                            sortCodeColumn = dataTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+                            break;
+                        case "Charity Mail":
+                            sortCodeColumn = dataTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+                            break;
+                        case "Print Post":
+                            sortCodeColumn = "Dt PP Sort Code";
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                    string sortCode = row[sortCodeColumn]?.ToString().Replace(' ', '_') ?? string.Empty;
+
+                    if (string.IsNullOrEmpty(sortCode))
+                    {
+                        continue;
+                    }
+
+
+                    if (sortCode == "x_OTHER" || sortCode == "xOTHER")
+                    {
+                        sortSummary.IntTotal += 1;
+
+                        string country = row["Country"].ToString();
+                        string zone = DataAccess.GetIntZone(country);
+
+                        if (string.IsNullOrEmpty(zone))
+                        {
+                            sortSummary.UnmatchedCountries += $"{country},";
+                        }
+
+                        sortSummary.Z1 += zone == "Z1" ? 1 : 0;
+                        sortSummary.Z2 += zone == "Z2" ? 1 : 0;
+                        sortSummary.Z3 += zone == "Z3" ? 1 : 0;
+                        sortSummary.Z4 += zone == "Z4" ? 1 : 0;
+                        sortSummary.Z5 += zone == "Z5" ? 1 : 0;
+                        sortSummary.Z6 += zone == "Z6" ? 1 : 0;
+                        sortSummary.Z7 += zone == "Z7" ? 1 : 0;
+                        sortSummary.Z8 += zone == "Z8" ? 1 : 0;
+                        sortSummary.Z9 += zone == "Z9" ? 1 : 0;
+                    }
+                    else if (sortCode.Split('_')[0] == "BD")
+                    {
+                        if (sortCode.Split('_')[2].Substring(0, 1) == "6")
+                        {
+                            sortSummary.BDSS += 1;
+                        }
+                        else
+                        {
+                            sortSummary.BDOS += 1;
+                        }
+                    }
+                    else if (sortCode.Split('_')[0] == "BR")
+                    {
+                        if (sortCode.Split('_')[1] == "WA")
+                        {
+                            sortSummary.BRSS += 1;
+                        }
+                        else
+                        {
+                            sortSummary.BROS += 1;
+                        }
+                    }
+                    else if (sortCode.Split('_')[0] == "UR")
+                    {
+                        if (sortCode.Split('_')[1] == "WA")
+                        {
+                            sortSummary.URSS += 1;
+                        }
+                        else
+                        {
+                            sortSummary.UROS += 1;
+                        }
+                    }
+                    else if (sortCode.Split('_')[4] == "A") ////// Print Post
+                    {
+                        if (sortCode.Split('_')[0] == "WA")
+                        {
+                            sortSummary.ADSS += 1;
+                        }
+                        else
+                        {
+                            sortSummary.ADOS += 1;
+                        }
+                    }
+                    else if (sortCode.Split('_')[4] == "P")
+                    {
+                        if (sortCode.Split('_')[0] == "WA")
+                        {
+                            sortSummary.PDSS += 1;
+                        }
+                        else
+                        {
+                            sortSummary.PDOS += 1;
+                        }
+                    }
+                    else if (sortCode.Split('_')[4] == "R")
+                    {
+                        if (sortCode.Split('_')[0] == "WA")
+                        {
+                            sortSummary.RESSS += 1;
+                        }
+                        else
+                        {
+                            sortSummary.RESOS += 1;
+                        }
+                    }
+
+                }
+
+                sortSummary.AusTotal = dataTable.Rows.Count - sortSummary.IntTotal;
+            }
+
+
+  
 
             return sortSummary;
         }

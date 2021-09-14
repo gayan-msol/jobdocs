@@ -44,7 +44,7 @@ namespace JobDocs
         string outputFileName = "";
         public static string userName;
         ElmsUser elmsUser = new ElmsUser();
-        SortSummary preSortSummary = new SortSummary();
+        SortSummary sortSummary = new SortSummary();
         string sortType = "";
         string weightCat = "";
         string serviceType = "Regular";
@@ -915,6 +915,20 @@ namespace JobDocs
 
                 sourceTable = TextFileRW.readTextFileToTable(outputFileName, tabCount > commaCount ? "\t" :",");
 
+                if(sourceTable.Columns.Contains("Dt BP Sort Code")|| sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
+                {
+                    cmbLodgementType.SelectedItem = "PreSort";
+                }
+                else if(sourceTable.Columns.Contains("Dt PP Sort Code"))
+                {
+                    cmbLodgementType.SelectedItem = "Print Post";
+                }
+                else
+                {
+                    cmbLodgementType.SelectedItem = "Full Rate";
+                }
+
+
                 if(sourceTable != null)
                 {
                     btnLodge.Enabled = true;
@@ -927,12 +941,14 @@ namespace JobDocs
 
         private void btnLodge_Click(object sender, EventArgs e)
         {
+            List<Lodgement> lodgements = new List<Lodgement>();
 
-            preSortSummary = Lodgement.GetPreSortCategories(sourceTable, sortType);
+
+            sortSummary = Lodgement.GetSortCategories(sourceTable, sortType);
         
-            preSortSummary.WeightCat = cmbWeight?.Text ?? "0";
+            sortSummary.WeightCat = cmbWeight?.Text ?? "0";
 
-            Lodgement.CreateSortSummary(preSortSummary, jobNo, Path.GetDirectoryName(outputFileName));
+            Lodgement.CreateSortSummary(sortSummary, jobNo, Path.GetDirectoryName(outputFileName));
 
             Lodgement lodgement = new Lodgement();
             lodgement.AccNo = importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo;
@@ -940,8 +956,8 @@ namespace JobDocs
             lodgement.JobNo = jobNo;
             if(importedJob.PostAccts.Exists(x => x.AccType != "Aust Post"))
             {
-                preSortSummary.RegName = importedJob.PostAccts?.Where(x => x.AccType != "Aust Post").ToList()?[0].AccType ?? "";
-                preSortSummary.RegNO = importedJob.PostAccts.Where(x => x.AccType != "Aust Post").ToList()[0].AccNo;
+                sortSummary.RegName = importedJob.PostAccts?.Where(x => x.AccType != "Aust Post").ToList()?[0].AccName ?? "";
+                sortSummary.RegNo = importedJob.PostAccts.Where(x => x.AccType != "Aust Post").ToList()[0].AccNo;
             }
 
             lodgement.ServiceType = serviceType;
@@ -949,7 +965,21 @@ namespace JobDocs
             lodgement.SortType = sortType;
             lodgement.Weight= cmbWeight?.Text ?? "0";
             //      lodgement.SortList = preSort;
-            List<InputFiled> inputList = DataAccess.GetInputFileds(sortType);
+
+            List<InputFiled> inputList = new List<InputFiled>();
+
+            inputList = DataAccess.GetInputFileds(sortType, lodgement.Weight);
+
+            //if ((lodgement.SortType == "Full Rate" && lodgement.Size == "Large") || lodgement.SortType == "Print Post" || lodgement.SortType == "INT Full Rate" || lodgement.SortType == "INT Contract")
+            //{
+            //     inputList = DataAccess.GetInputFileds(sortType, lodgement.Weight);
+            //}
+            //else
+            //{
+            //     inputList = DataAccess.GetInputFileds(sortType);
+            //}
+
+            
             Dictionary<string, string> sortList = new Dictionary<string, string>();
 
             PropertyInfo[] properties = typeof(SortSummary).GetProperties();
@@ -971,7 +1001,7 @@ namespace JobDocs
                 {
                     if(p.Name == input.SortCategory)
                     {
-                        var test = p.GetValue(preSortSummary);
+                        var test = p.GetValue(sortSummary);
 
                         sortList.Add(input.InputName,test.ToString());
                     }
@@ -984,10 +1014,44 @@ namespace JobDocs
             lodgement.ProductGroup = lodgementType.ProductGroup;
             lodgement.ArticleType = lodgementType.ArticleType;
 
+            lodgements.Add(lodgement);
 
+       /*******
+            if(sortSummary.IntTotal > 0)
+            {
+                Lodgement lodgementINT = lodgement;
+                sortType = "INT Full Rate";
+                inputList = DataAccess.GetInputFileds(sortType, lodgementINT.Weight);
+               
+                lodgementINT.SortType = sortType;
+                sortList = new Dictionary<string, string>();
+
+                foreach (InputFiled input in inputList)
+                {
+                    foreach (var p in properties)
+                    {
+                        if (p.Name == input.SortCategory)
+                        {
+                            var test = p.GetValue(sortSummary);
+
+                            sortList.Add(input.InputName, test.ToString());
+                        }
+                    }
+
+                }
+
+                lodgementINT.SortList = sortList;
+                lodgementType = DataAccess.GetLodgementType(lodgementINT);
+                lodgementINT.ProductGroup = lodgementType.ProductGroup;
+                lodgementINT.ArticleType = lodgementType.ArticleType;
+
+                lodgements.Add(lodgementINT);
+            }
+            ******/
+            
             /// add weight
 
-            eLMS.Lodge(lodgement, elmsUser);
+            eLMS.Lodge(lodgements, elmsUser);
 
             btnLodge.Enabled = false;
         }

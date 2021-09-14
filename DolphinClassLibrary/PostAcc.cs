@@ -9,6 +9,7 @@ namespace Dolphin
     public class PostAcc
     {
         public string AccNo { get; set; }
+        public string AccName { get; set; }
         public string AccType { get; set; }
         public int DocID { get; set; }
 
@@ -20,6 +21,7 @@ namespace Dolphin
             response = response?.Replace("\"Note\":", "\"AccType\":");
             response = response?.Replace("\"Post Number\":", "\"AccNo\":");
             response = response?.Replace("\"doc_id\":", "\"DocID\":");
+            response = response?.Replace("\"Customer Name\":", "\"AccName\":");
 
             if (response != null && response != "[]")
             {

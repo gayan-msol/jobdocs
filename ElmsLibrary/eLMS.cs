@@ -14,7 +14,7 @@ namespace ElmsLibrary
         static string URL = "https://elms.auspost.com.au/elms/loginCheck.do";
         static string EdgeDriverPath = @"S:\DOT NET PROGRAMMES\SOURCE CODE\Edge Driver";
 
-        public static void Lodge(Lodgement lodgement, ElmsUser elmsUser)
+        public static void Lodge(List<Lodgement> lodgements, ElmsUser elmsUser)
         {
             EdgeDriver edgeDriver = new EdgeDriver(EdgeDriverPath);
             
@@ -39,19 +39,19 @@ namespace ElmsLibrary
                 IWebElement link = edgeDriver.FindElement(By.LinkText("New Mailing Statement"));
                 link.Click();
 
-                new SelectElement(edgeDriver.FindElement(By.Name("accountCode"))).SelectByText(lodgement.AccNo);
+                new SelectElement(edgeDriver.FindElement(By.Name("accountCode"))).SelectByText(lodgements[0].AccNo);
 
                 IWebElement jn = edgeDriver.FindElement(By.Name("jobNumber"));
-                jn.SendKeys(lodgement.JobNo);
+                jn.SendKeys(lodgements[0].JobNo);
 
                 IWebElement jobName = edgeDriver.FindElement(By.Name("jobName"));
-                jobName.SendKeys(lodgement.JobName);
+                jobName.SendKeys(lodgements[0].JobName);
 
                 IWebElement UID = edgeDriver.FindElement(By.Name("uniqueId"));
-                UID.SendKeys(lodgement.JobName);
+                UID.SendKeys(lodgements[0].JobName);
 
                 IWebElement IRD = edgeDriver.FindElement(By.Name("invoiceRefDetails"));
-                IRD.SendKeys(lodgement.JobNo);
+                IRD.SendKeys(lodgements[0].JobNo);
 
                 new SelectElement(edgeDriver.FindElement(By.Name("lodgementPointCode"))).SelectByText("Revenue Collection Group - PMC");
 
@@ -61,19 +61,19 @@ namespace ElmsLibrary
 
                 //  Article article = DataAccess.GetArticleInfo(lodgement.SortType, lodgement.Size, lodgement.ServiceType);
 
-                new SelectElement(edgeDriver.FindElement(By.Id("productGroups"))).SelectByText(lodgement.ProductGroup);
+                new SelectElement(edgeDriver.FindElement(By.Id("productGroups"))).SelectByText(lodgements[0].ProductGroup);
 
 
-                new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgement.ArticleType);
+                new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgements[0].ArticleType);
 
 
 
-                if (lodgement.SortType=="PreSort")
+                if (lodgements[0].SortType=="PreSort" || lodgements[0].SortType == "Charity Mail")
                 {
                     new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
                 }
 
-                foreach (var sort in lodgement.SortList)
+                foreach (var sort in lodgements[0].SortList)
                 {
                     if (sort.Value != "0")
                     {
@@ -91,15 +91,52 @@ namespace ElmsLibrary
 
                 }
 
-                // select weight cat
 
                 IWebElement btnAdd = edgeDriver.FindElement(By.ClassName("inputSubmit"));
                 btnAdd.Click();
-            
-        
+
+            if(lodgements.Count > 1)
+            {
+                new SelectElement(edgeDriver.FindElement(By.Id("productGroups"))).SelectByText(lodgements[1].ProductGroup);
 
 
-        
+                new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgements[1].ArticleType);
+
+
+
+                if (lodgements[0].SortType == "PreSort")
+                {
+                    new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
+                }
+
+                foreach (var sort in lodgements[1].SortList)
+                {
+                    if (sort.Value != "0")
+                    {
+
+                        if (sort.Key.Substring(0, 2) == "WT")
+                        {
+                            new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
+                        }
+                        else
+                        {
+                            IWebElement webElement = edgeDriver.FindElement(By.Name(sort.Key));
+                            webElement.SendKeys(sort.Value.ToString());
+                        }
+                    }
+
+                }
+
+
+               // IWebElement btnAdd = edgeDriver.FindElement(By.ClassName("inputSubmit"));
+                btnAdd.Click();
+
+            }
+
+
+
+
+
 
 
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json;
+
 
 namespace Dolphin
 {
@@ -20,6 +20,7 @@ namespace Dolphin
         public List<PrintInfo> PrintInfoList { get; set; }
         public List<MailPackItem> ItemList { get; set; }
         public List<PostAcc> PostAccts { get; set; }
+      
         public string DataFolder { get; set; }
         public string ArtworkFolder { get; set; }
 
