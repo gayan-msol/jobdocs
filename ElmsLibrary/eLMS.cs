@@ -78,7 +78,7 @@ namespace ElmsLibrary
                     if (sort.Value != "0")
                     {
 
-                        if (sort.Key.Substring(0, 2) == "WT")
+                        if (sort.Key.Substring(0, 2) == "WT" && lodgements[0].SortType != "INT Full Rate")
                         {
                             new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
                         }

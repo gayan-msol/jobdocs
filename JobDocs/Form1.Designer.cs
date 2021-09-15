@@ -127,6 +127,8 @@
             this.btnSampleSheet = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.LodgePanel = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.listBoxLodements = new System.Windows.Forms.ListBox();
             this.label27 = new System.Windows.Forms.Label();
             this.cmbLodgementType = new System.Windows.Forms.ComboBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -150,6 +152,7 @@
             this.UN = new System.Windows.Forms.Label();
             this.txtElmsUN = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1225,6 +1228,9 @@
             // 
             // LodgePanel
             // 
+            this.LodgePanel.Controls.Add(this.btnUpdate);
+            this.LodgePanel.Controls.Add(this.btnClear);
+            this.LodgePanel.Controls.Add(this.listBoxLodements);
             this.LodgePanel.Controls.Add(this.label27);
             this.LodgePanel.Controls.Add(this.cmbLodgementType);
             this.LodgePanel.Controls.Add(this.label26);
@@ -1239,6 +1245,26 @@
             this.LodgePanel.Name = "LodgePanel";
             this.LodgePanel.Size = new System.Drawing.Size(671, 764);
             this.LodgePanel.TabIndex = 7;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(437, 395);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(135, 23);
+            this.btnClear.TabIndex = 15;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // listBoxLodements
+            // 
+            this.listBoxLodements.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxLodements.FormattingEnabled = true;
+            this.listBoxLodements.ItemHeight = 20;
+            this.listBoxLodements.Location = new System.Drawing.Point(113, 311);
+            this.listBoxLodements.Name = "listBoxLodements";
+            this.listBoxLodements.Size = new System.Drawing.Size(459, 84);
+            this.listBoxLodements.TabIndex = 14;
             // 
             // label27
             // 
@@ -1259,7 +1285,7 @@
             "Charity Mail",
             "INT Full Rate",
             "INT Contract"});
-            this.cmbLodgementType.Location = new System.Drawing.Point(110, 105);
+            this.cmbLodgementType.Location = new System.Drawing.Point(113, 105);
             this.cmbLodgementType.Name = "cmbLodgementType";
             this.cmbLodgementType.Size = new System.Drawing.Size(250, 21);
             this.cmbLodgementType.TabIndex = 11;
@@ -1377,9 +1403,9 @@
             // btnLodge
             // 
             this.btnLodge.Enabled = false;
-            this.btnLodge.Location = new System.Drawing.Point(499, 308);
+            this.btnLodge.Location = new System.Drawing.Point(437, 471);
             this.btnLodge.Name = "btnLodge";
-            this.btnLodge.Size = new System.Drawing.Size(75, 23);
+            this.btnLodge.Size = new System.Drawing.Size(135, 46);
             this.btnLodge.TabIndex = 6;
             this.btnLodge.Text = "Lodge";
             this.btnLodge.UseVisualStyleBackColor = true;
@@ -1472,6 +1498,16 @@
             // backgroundWorker1
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(437, 288);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(135, 23);
+            this.btnUpdate.TabIndex = 16;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // Form1
             // 
@@ -1649,6 +1685,9 @@
         private System.Windows.Forms.RadioButton rbSmall;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ComboBox cmbLodgementType;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.ListBox listBoxLodements;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
 
