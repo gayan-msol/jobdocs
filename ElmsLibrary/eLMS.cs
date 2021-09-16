@@ -59,26 +59,29 @@ namespace ElmsLibrary
                 IWebElement btnContinue = edgeDriver.FindElement(By.Id("submitButton"));
                 btnContinue.Click();
 
-                //  Article article = DataAccess.GetArticleInfo(lodgement.SortType, lodgement.Size, lodgement.ServiceType);
-
-                new SelectElement(edgeDriver.FindElement(By.Id("productGroups"))).SelectByText(lodgements[0].ProductGroup);
+            //  Article article = DataAccess.GetArticleInfo(lodgement.SortType, lodgement.Size, lodgement.ServiceType);
 
 
-                new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgements[0].ArticleType);
+            foreach (Lodgement lodgement in lodgements)
+            {
+                new SelectElement(edgeDriver.FindElement(By.Id("productGroups"))).SelectByText(lodgement.ProductGroup);
+
+
+                new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgement.ArticleType);
 
 
 
-                if (lodgements[0].SortType=="PreSort" || lodgements[0].SortType == "Charity Mail")
+                if (lodgement.SortType == "PreSort" || lodgement.SortType == "Charity Mail")
                 {
                     new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
                 }
 
-                foreach (var sort in lodgements[0].SortList)
+                foreach (var sort in lodgement.SortList)
                 {
                     if (sort.Value != "0")
                     {
 
-                        if (sort.Key.Substring(0, 2) == "WT" && lodgements[0].SortType != "INT Full Rate")
+                        if (sort.Key.Substring(0, 2) == "WT" && lodgement.SortType != "INT Full Rate")
                         {
                             new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
                         }
@@ -86,7 +89,7 @@ namespace ElmsLibrary
                         {
                             IWebElement webElement = edgeDriver.FindElement(By.Name(sort.Key));
                             webElement.SendKeys(sort.Value.ToString());
-                        }                                  
+                        }
                     }
 
                 }
@@ -94,44 +97,47 @@ namespace ElmsLibrary
 
                 IWebElement btnAdd = edgeDriver.FindElement(By.ClassName("inputSubmit"));
                 btnAdd.Click();
-
-            if(lodgements.Count > 1)
-            {
-                new SelectElement(edgeDriver.FindElement(By.Id("productGroups"))).SelectByText(lodgements[1].ProductGroup);
-
-
-                new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgements[1].ArticleType);
-
-
-
-                //if (lodgements[0].SortType == "PreSort")
-                //{
-                //    new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
-                //}
-
-                foreach (var sort in lodgements[1].SortList)
-                {
-                    if (sort.Value != "0")
-                    {
-
-                        //if (sort.Key.Substring(0, 2) == "WT" && lodge)
-                        //{
-                        //    new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
-                        //}
-                        //else
-                        {
-                            IWebElement webElement = edgeDriver.FindElement(By.Name(sort.Key));
-                            webElement.SendKeys(sort.Value.ToString());
-                        }
-                    }
-
-                }
-
-
-                IWebElement btnAdd2 = edgeDriver.FindElement(By.ClassName("inputSubmit"));
-                btnAdd2.Click();
-
             }
+
+
+
+            //if(lodgements.Count > 1)
+            //{
+            //    new SelectElement(edgeDriver.FindElement(By.Id("productGroups"))).SelectByText(lodgements[1].ProductGroup);
+
+
+            //    new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgements[1].ArticleType);
+
+
+
+            //    //if (lodgements[0].SortType == "PreSort")
+            //    //{
+            //    //    new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
+            //    //}
+
+            //    foreach (var sort in lodgements[1].SortList)
+            //    {
+            //        if (sort.Value != "0")
+            //        {
+
+            //            //if (sort.Key.Substring(0, 2) == "WT" && lodge)
+            //            //{
+            //            //    new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
+            //            //}
+            //            //else
+            //            {
+            //                IWebElement webElement = edgeDriver.FindElement(By.Name(sort.Key));
+            //                webElement.SendKeys(sort.Value.ToString());
+            //            }
+            //        }
+
+            //    }
+
+
+            //    IWebElement btnAdd2 = edgeDriver.FindElement(By.ClassName("inputSubmit"));
+            //    btnAdd2.Click();
+
+            //}
 
 
 
