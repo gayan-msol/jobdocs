@@ -31,14 +31,16 @@ namespace ElmsLibrary
 
 
 
-        public static SortSummary GetSortCategories(DataTable dataTable, string sortType )
+        public static SortSummary GetSortCategories(DataTable dataTable, string sortType , bool intContract = false)
         {
             SortSummary sortSummary = new SortSummary();
-          
-            if(sortType == "Full Rate")
+            int unmatchedCount = 0;
+            if (sortType == "Full Rate")
             {
                 if (dataTable.Columns.Contains("Country"))
                 {
+                
+
                     foreach (DataRow row in dataTable.Rows)
                     {
                         if(row["Country"] == "")
@@ -50,10 +52,11 @@ namespace ElmsLibrary
                             sortSummary.IntTotal += 1;
                     
                             string country = row["Country"].ToString();
-                            string zone = DataAccess.GetIntZone(country);
+                            string zone = DataAccess.GetIntZone(country, intContract);
 
                             if (string.IsNullOrEmpty(zone))
                             {
+                                unmatchedCount++;
                                 sortSummary.UnmatchedCountries += $"{country},";
                             }
 
@@ -111,10 +114,11 @@ namespace ElmsLibrary
                         sortSummary.IntTotal += 1;
 
                         string country = row["Country"].ToString();
-                        string zone = DataAccess.GetIntZone(country);
+                        string zone = DataAccess.GetIntZone(country, intContract);
 
                         if (string.IsNullOrEmpty(zone))
                         {
+                            unmatchedCount++;
                             sortSummary.UnmatchedCountries += $"{country},";
                         }
 
@@ -197,11 +201,17 @@ namespace ElmsLibrary
 
                 }
 
+         
+
                 sortSummary.AusTotal = dataTable.Rows.Count - sortSummary.IntTotal;
             }
 
+            if (intContract)
+            {
+                sortSummary.Z8 = unmatchedCount;
+                sortSummary.UnmatchedCountries = "";
+            }
 
-  
 
             return sortSummary;
         }
@@ -228,7 +238,7 @@ namespace ElmsLibrary
                 if (p.Name.Substring(0, 1) == "Z")
                 {
                     intCount += int.Parse(p.GetValue(sortInfo).ToString());
-                    sortSummary.Append($"        {p.Name} : {p.GetValue(sortInfo)}\n");
+                    sortSummary.Append($"        {p.Name} :\t {p.GetValue(sortInfo)}\n");
                 }
             }
             sortSummary.Append($"Total Int. : {intCount}");

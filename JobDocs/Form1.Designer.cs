@@ -127,6 +127,7 @@
             this.btnSampleSheet = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.LodgePanel = new System.Windows.Forms.Panel();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.listBoxLodements = new System.Windows.Forms.ListBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -152,7 +153,7 @@
             this.UN = new System.Windows.Forms.Label();
             this.txtElmsUN = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnINTZones = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1228,6 +1229,7 @@
             // 
             // LodgePanel
             // 
+            this.LodgePanel.Controls.Add(this.btnINTZones);
             this.LodgePanel.Controls.Add(this.btnUpdate);
             this.LodgePanel.Controls.Add(this.btnClear);
             this.LodgePanel.Controls.Add(this.listBoxLodements);
@@ -1245,6 +1247,16 @@
             this.LodgePanel.Name = "LodgePanel";
             this.LodgePanel.Size = new System.Drawing.Size(671, 764);
             this.LodgePanel.TabIndex = 7;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(437, 288);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(135, 23);
+            this.btnUpdate.TabIndex = 16;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnClear
             // 
@@ -1499,15 +1511,16 @@
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             // 
-            // btnUpdate
+            // btnINTZones
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(437, 288);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(135, 23);
-            this.btnUpdate.TabIndex = 16;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnINTZones.Enabled = false;
+            this.btnINTZones.Location = new System.Drawing.Point(432, 105);
+            this.btnINTZones.Name = "btnINTZones";
+            this.btnINTZones.Size = new System.Drawing.Size(94, 23);
+            this.btnINTZones.TabIndex = 17;
+            this.btnINTZones.Text = "INT Zones";
+            this.btnINTZones.UseVisualStyleBackColor = true;
+            this.btnINTZones.Click += new System.EventHandler(this.btnINTZones_Click);
             // 
             // Form1
             // 
@@ -1688,6 +1701,7 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.ListBox listBoxLodements;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnINTZones;
     }
 }
 

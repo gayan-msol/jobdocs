@@ -981,16 +981,22 @@ namespace JobDocs
         private void addLodgementLine()
         {
            
-            sortSummary = Lodgement.GetSortCategories(sourceTable, sortType);
+           
 
-            sortSummary.WeightCat = cmbWeight?.Text ?? "0";
-
-            Lodgement.CreateSortSummary(sortSummary, jobNo, Path.GetDirectoryName(outputFileName));
+         
 
             Lodgement lodgement = new Lodgement();
             lodgement.AccNo = importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo;
             lodgement.JobName = txtJobName.Text;
             lodgement.JobNo = jobNo;
+
+            bool intContract = lodgement.AccNo == "6258639" || sortType == "INT Contract";
+            sortSummary = Lodgement.GetSortCategories(sourceTable, sortType, intContract);
+
+            sortSummary.WeightCat = cmbWeight?.Text ?? "0";
+
+            Lodgement.CreateSortSummary(sortSummary, jobNo, Path.GetDirectoryName(outputFileName));
+
             if (importedJob.PostAccts.Exists(x => x.AccType != "Aust Post"))
             {
                 sortSummary.RegName = importedJob.PostAccts?.Where(x => x.AccType != "Aust Post").ToList()?[0].AccName ?? "";
@@ -1039,10 +1045,18 @@ namespace JobDocs
                 Lodgement lodgementINT = new Lodgement();
                 lodgementINT.ServiceType = serviceType;
                 lodgementINT.Size = size;
-                lodgementINT.SortType = "INT Full Rate";
+                if(lodgement.AccNo== "6258639")
+                {
+                    lodgementINT.SortType = "INT Contract";
+                }
+                else
+                {
+                    lodgementINT.SortType = "INT Full Rate";
+                }
+              
                 lodgementINT.Weight = cmbWeight?.Text ?? "0";
 
-                inputList = DataAccess.GetInputFileds("INT Full Rate", lodgementINT.Weight, lodgementINT.Size);
+                inputList = DataAccess.GetInputFileds(lodgementINT.SortType, lodgementINT.Weight, lodgementINT.Size);
 
                 sortList = new Dictionary<string, string>();
 
@@ -1214,6 +1228,67 @@ namespace JobDocs
         {
             lodgements.Clear();
             addLodgementLine();
+        }
+
+        private void btnINTZones_Click(object sender, EventArgs e)
+        {
+            if (sourceTable != null && sourceTable.Columns.Contains("Country"))
+            {
+                SortSummary summary = new SortSummary();
+                bool contract = false;
+                if (importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo == "6258639")
+                {
+                    contract = true;
+                }
+
+                if(sortType == "INT Contract")
+                {
+                    contract = true;
+                }
+
+                int count = 0;
+                int unmatchedCount = 0;
+
+                foreach (DataRow row in sourceTable.Rows)
+                {
+                    string country = row["Country"].ToString();
+
+                    if(country != "")
+                    {
+                        count++;
+                        string zone = DataAccess.GetIntZone(country, contract);
+
+                        if (string.IsNullOrEmpty(zone))
+                        {
+                            unmatchedCount++;
+                            summary.UnmatchedCountries += $"{country},";
+                        }
+
+                        summary.Z1 += zone == "Z1" ? 1 : 0;
+                        summary.Z2 += zone == "Z2" ? 1 : 0;
+                        summary.Z3 += zone == "Z3" ? 1 : 0;
+                        summary.Z4 += zone == "Z4" ? 1 : 0;
+                        summary.Z5 += zone == "Z5" ? 1 : 0;
+                        summary.Z6 += zone == "Z6" ? 1 : 0;
+                        summary.Z7 += zone == "Z7" ? 1 : 0;
+                        summary.Z8 += zone == "Z8" ? 1 : 0;
+                        summary.Z9 += zone == "Z9" ? 1 : 0;
+                    }
+                    
+                }
+
+                string summaryStr = $"Zone 1:\t {summary.Z1}\n";
+                summaryStr += $"Zone 2:\t {summary.Z2}\n";
+                summaryStr += $"Zone 3:\t {summary.Z3}\n";
+                summaryStr += $"Zone 4:\t {summary.Z4}\n";
+                summaryStr += $"Zone 5:\t {summary.Z5}\n";
+                summaryStr += $"Zone 6:\t {summary.Z6}\n";
+                summaryStr += $"Zone 7:\t {summary.Z7}\n";
+                summaryStr += $"Zone 8:\t {unmatchedCount}";
+                summaryStr += $"Total :\t {count}\n";
+
+                File.WriteAllText($@"{Path.GetDirectoryName(outputFileName)}\International Zones.txt", summaryStr);
+            }
         }
     }
 } 

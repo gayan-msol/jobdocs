@@ -40,9 +40,18 @@ namespace ElmsLibrary
         }
 
 
-        public static string GetIntZone(string country)
+        public static string GetIntZone(string country, bool contract = false)
         {
-            string query = $@"SELECT Zone from IntZonesFullRate WHERE Country='{country}' OR AltCountry='{country}'";
+            string query;
+            if (contract)
+            {
+                query = $@"SELECT Zone from IntZonesContract WHERE Country='{country}' OR AltCountry='{country}'";
+            }
+            else
+            {
+                query = $@"SELECT Zone from IntZonesFullRate WHERE Country='{country}' OR AltCountry='{country}'";
+            }
+
 
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
             {
@@ -50,7 +59,7 @@ namespace ElmsLibrary
 
                 if (output.Count > 0)
                 {
-                    return output[0];
+                    return output[0].Trim();
                 }
                 else
                 {
@@ -113,7 +122,7 @@ namespace ElmsLibrary
 
         public static LodgementType GetLodgementType(Lodgement lodgement)
         {
-            string query = "SELECT * FROM [ArticleTypes] WHERE [SortType] =@sortType AND [Size]=@Size AND [ServiceType]=@ServiceType";
+            string query = "SELECT * FROM [ArticleTypes] WHERE [SortType] =@sortType AND ( Size=@Size OR Size IS NULL) AND ([ServiceType]=@ServiceType OR [ServiceType] IS NULL)";
             if(lodgement.SortType == "Print Post")
             {
                 query += " AND [WeightCategory]=@Weight ";
