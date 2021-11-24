@@ -94,7 +94,7 @@ namespace ElmsLibrary
                             sortCodeColumn = dataTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
                             break;
                         case "Print Post":
-                            sortCodeColumn = "Dt PP Sort Code";
+                            sortCodeColumn = dataTable.Columns.Contains("Dt PP Sort Code") ? "Dt PP Sort Code" : "Dt LH Sort Code";
                             break;
                         default:
                             break;

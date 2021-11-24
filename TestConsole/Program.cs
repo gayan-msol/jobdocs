@@ -8,6 +8,7 @@ using JobDocsLibrary;
 using Dolphin;
 using System.Data;
 using BBUtils;
+using System.Diagnostics;
 
 
 namespace TestConsole
@@ -16,7 +17,10 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            function2();
+            // function2();
+            string command = "/C notepad.exe";
+            Process.Start("cmd.exe", command);
+
         }
 
         static void function2()

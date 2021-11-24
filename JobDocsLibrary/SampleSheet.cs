@@ -108,7 +108,7 @@ namespace JobDocsLibrary
             List<string> variables = new List<string>();
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
-                if(variableColumn != null && !string.IsNullOrWhiteSpace(dataTable.Rows[i][variableColumn].ToString()))
+                if(variableColumn != null /*&& !string.IsNullOrWhiteSpace(dataTable.Rows[i][variableColumn].ToString())*/)
                 {
                     variables.Add(dataTable.Rows[i][variableColumn].ToString());
                 }
