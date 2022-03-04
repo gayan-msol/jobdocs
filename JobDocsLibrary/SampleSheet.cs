@@ -13,7 +13,7 @@ namespace JobDocsLibrary
         static DataTable sampleTable = null;
 
 
-        public static DataTable GetSampleTable(DataTable sourceTable, List<string> selectedColList, string variableColumn = null)
+        public static DataTable GetSampleTable(DataTable sourceTable, List<string> selectedColList,List<int> selectedRecords, string variableColumn = null)
         {
             bool slipSheet = sourceTable.Columns.Contains("MediaSelect");
             RemoveUnselectedColumns(sourceTable, selectedColList);
@@ -27,6 +27,10 @@ namespace JobDocsLibrary
             List<int> sampleRecords = SelectSampleRecords(GenerateRecordList(sourceTable,out variableValues, variableColumn));
 
             addVariableValues(sampleRecords, variableValues,variableColumn, sourceTable);
+
+            sampleRecords.AddRange(selectedRecords);
+
+            sampleRecords = sampleRecords.Distinct().ToList();
 
             if(sampleRecords.Count >0)
             {

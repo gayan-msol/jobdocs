@@ -21,6 +21,7 @@ namespace JobDocs
      //   string delimiter = "\t";
         DataTable sampleTable = new DataTable();
         DataTable sourceTable = new DataTable();
+        List<int> selectedRecordList = new List<int>();
 
         private DataGridPrinter dataGridPrinter1 = null;
 
@@ -59,7 +60,10 @@ namespace JobDocs
 
             string varCol = cmbColumn.SelectedItem?.ToString() ??  null;
 
-            dataGridViewSample.DataSource = sampleTable = SampleSheet.GetSampleTable(sourceTable, selectedColumnList,varCol );
+
+
+
+            dataGridViewSample.DataSource = sampleTable = SampleSheet.GetSampleTable(sourceTable, selectedColumnList, selectedRecordList, varCol );
 
 
 
@@ -131,31 +135,55 @@ namespace JobDocs
 
             //}
 
-            printSampleSheet(sampleTable, "test", 1, false, "a");
+            printSampleSheet( sampleTable, "test", 1, false, "a");
 
         }
 
         private void printSampleSheet(DataTable dataTable, string page, int count, bool unknownTotal, string type, int startPage = 1)
         {
+            Font headerFont = new Font("Calibri", 10, FontStyle.Bold);
+            Font bodyFont = new Font("Calibri", 10);
 
+            
             int total = count + startPage - 1;
             int width = 1170;
             int colCount = dataTable.Rows.Count;
-            int headerColWidth = 225;
-            int dataColWidth = 300;
+            float headerColWidth = 225;
+            float dataColWidth = 300;
             List<int> colWidthList = new List<int>();
 
             int headerMaxLength = 225;
             int dataMaxLength = 300;
 
+            List<float> lengths = new List<float>();
             foreach (DataColumn c in dataTable.Columns)
-            {
-                
+            {                
+                lengths.Add(TextRenderer.MeasureText(c.ColumnName, bodyFont).Width);
             }
+
+            headerColWidth = lengths.Max() +10;
+
+            lengths = new List<float>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                foreach (DataColumn c in dataTable.Columns)
+                {
+                    lengths.Add(TextRenderer.MeasureText(row[c].ToString(), bodyFont).Width);
+                }
+            }
+
+            dataColWidth = lengths.Max() + 10;
+
+            if(dataColWidth * colCount < 900)
+            {
+                dataColWidth = 300;
+            }
+
+
 
             if ( colCount > 3)
             {
-                width += 300 * (colCount - 3);
+                width = (int)headerColWidth + (int)dataColWidth * colCount + 45;
             }
             PrintDocument printDoc = new PrintDocument();
 
@@ -205,8 +233,7 @@ namespace JobDocs
                 formatCenter.Alignment = StringAlignment.Center;
 
             
-                    Font headerFont = new Font("Calibri", 10,FontStyle.Bold);
-                    Font bodyFont = new Font("Calibri", 10);
+                    
                     
 
                 int tableHeight = sampleTable.Columns.Contains("Source") ? ((sampleTable.Columns.Count -1) * lineHeight) : (sampleTable.Columns.Count * lineHeight);
@@ -244,17 +271,17 @@ namespace JobDocs
 
                         for (int r = 0; r < sampleTable.Rows.Count; r++)
                         {
-                            RectangleF rectangleF = new RectangleF(x1 + 5 + 225 + r * 300, yLine, 300, 30);
+                            RectangleF rectangleF = new RectangleF(x1 + 5 + headerColWidth + r * dataColWidth, yLine, dataColWidth, 30);
 
                             g.DrawString(sampleTable.Rows[r][c].ToString(), bodyFont, Brushes.Black, rectangleF);
-                            if(g.MeasureString(sampleTable.Rows[r][c].ToString(),bodyFont).Width >290)
+                            if(g.MeasureString(sampleTable.Rows[r][c].ToString(),bodyFont).Width > dataColWidth)
                             {
                                 yLine += 15;
                             }
                            
                         }
 
-                        g.DrawLine(Pens.Black, x1, yLine + lineHeight, x1 + 225 + colCount*300, yLine + lineHeight);
+                        g.DrawLine(Pens.Black, x1, yLine + lineHeight, x1 + headerColWidth + colCount* dataColWidth, yLine + lineHeight);
 
                         if (c == sampleTable.Columns.Count - 1)
                         {
@@ -272,27 +299,15 @@ namespace JobDocs
 
                 }
 
-                Rectangle borderRect = new Rectangle(x1, yTable, 1130, tableHeight);
-                Rectangle headerCol = new Rectangle(x1, yTable, 225, tableHeight);
+                Rectangle borderRect = new Rectangle(x1, yTable, (int)headerColWidth + colCount * (int)dataColWidth, tableHeight);
+                Rectangle headerCol = new Rectangle(x1, yTable, (int)headerColWidth, tableHeight);
                 g.DrawRectangle(Pens.Black, headerCol);
 
                 for (int c = 0; c < colCount; c++)
                 {
-                    Rectangle col = new Rectangle(x1 + 225 + c * 300, yTable, 300, tableHeight);
+                    Rectangle col = new Rectangle(x1 + (int)headerColWidth + c * (int)dataColWidth, yTable, (int)dataColWidth, tableHeight);
                     g.DrawRectangle(Pens.Black, col);
                 }
-                //Rectangle col1 = new Rectangle(x1 + 225, yTable, 300, tableHeight);
-                //Rectangle col2 = new Rectangle(x1 + 525, yTable, 300, tableHeight);
-                //Rectangle col3 = new Rectangle(x1 + 825, yTable, 300, tableHeight);
-
-                
-                //g.DrawRectangle(Pens.Black, col1);
-                //g.DrawRectangle(Pens.Black, col2);
-                //g.DrawRectangle(Pens.Black, col3);
-
-
-
-
 
                 //i++;
                 //    i++;
@@ -345,6 +360,7 @@ namespace JobDocs
             {
                 sourceTable.Clear();
                 sourceTable = JobData.GetSourceTable(outputFileName, delimiter);
+                numUpDownPageNumbers.Maximum = sourceTable.Rows.Count;
                 columnList.Clear();
                 flowLayoutPanelColumns.Controls.Clear();
                 columnList = JobData.GetColumnList(outputFileName, delimiter);
@@ -420,6 +436,12 @@ namespace JobDocs
             
 
             HelperLibrary.ExcelRW.CreatExcelFile($@"{Form1.jobDirectoryData}\Job {Form1.jobNo} - SAMPLE RECORDS.xlsx", excelTable, "Sample Records");
+        }
+
+        private void btnAddPageNumbers_Click(object sender, EventArgs e)
+        {
+            listBoxPageNumbers.Items.Add(numUpDownPageNumbers.Value);
+            selectedRecordList.Add((int)numUpDownPageNumbers.Value-1);
         }
     }
 }

@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSampleSheet));
             this.wizardControl1 = new AeroWizard.WizardControl();
             this.wizardPage1 = new AeroWizard.WizardPage();
+            this.btnAddPageNumbers = new System.Windows.Forms.Button();
+            this.numUpDownPageNumbers = new System.Windows.Forms.NumericUpDown();
+            this.listBoxPageNumbers = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbColumn = new System.Windows.Forms.ComboBox();
             this.checkBoxUncheckAll = new System.Windows.Forms.CheckBox();
@@ -39,12 +42,14 @@
             this.wizardPage3 = new AeroWizard.WizardPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewSample = new System.Windows.Forms.DataGridView();
+            this.btnExcel = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.btnExcel = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDownPageNumbers)).BeginInit();
             this.wizardPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -70,6 +75,10 @@
             // 
             // wizardPage1
             // 
+            this.wizardPage1.Controls.Add(this.label2);
+            this.wizardPage1.Controls.Add(this.btnAddPageNumbers);
+            this.wizardPage1.Controls.Add(this.numUpDownPageNumbers);
+            this.wizardPage1.Controls.Add(this.listBoxPageNumbers);
             this.wizardPage1.Controls.Add(this.label1);
             this.wizardPage1.Controls.Add(this.cmbColumn);
             this.wizardPage1.Controls.Add(this.checkBoxUncheckAll);
@@ -81,6 +90,37 @@
             this.wizardPage1.Text = "Import Output File";
             this.wizardPage1.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage1_Commit);
             this.wizardPage1.Enter += new System.EventHandler(this.wizardPage1_Enter);
+            // 
+            // btnAddPageNumbers
+            // 
+            this.btnAddPageNumbers.Location = new System.Drawing.Point(168, 269);
+            this.btnAddPageNumbers.Name = "btnAddPageNumbers";
+            this.btnAddPageNumbers.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPageNumbers.TabIndex = 10;
+            this.btnAddPageNumbers.Text = "Add";
+            this.btnAddPageNumbers.UseVisualStyleBackColor = true;
+            this.btnAddPageNumbers.Click += new System.EventHandler(this.btnAddPageNumbers_Click);
+            // 
+            // numUpDownPageNumbers
+            // 
+            this.numUpDownPageNumbers.Location = new System.Drawing.Point(106, 272);
+            this.numUpDownPageNumbers.Name = "numUpDownPageNumbers";
+            this.numUpDownPageNumbers.Size = new System.Drawing.Size(56, 23);
+            this.numUpDownPageNumbers.TabIndex = 9;
+            this.numUpDownPageNumbers.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // listBoxPageNumbers
+            // 
+            this.listBoxPageNumbers.FormattingEnabled = true;
+            this.listBoxPageNumbers.ItemHeight = 15;
+            this.listBoxPageNumbers.Location = new System.Drawing.Point(106, 298);
+            this.listBoxPageNumbers.Name = "listBoxPageNumbers";
+            this.listBoxPageNumbers.Size = new System.Drawing.Size(137, 64);
+            this.listBoxPageNumbers.TabIndex = 8;
             // 
             // label1
             // 
@@ -176,6 +216,16 @@
             this.dataGridViewSample.Size = new System.Drawing.Size(759, 350);
             this.dataGridViewSample.TabIndex = 0;
             // 
+            // btnExcel
+            // 
+            this.btnExcel.Location = new System.Drawing.Point(491, 3);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(77, 38);
+            this.btnExcel.TabIndex = 2;
+            this.btnExcel.Text = "Create Excel sheet";
+            this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+            // 
             // btnPrint
             // 
             this.btnPrint.Location = new System.Drawing.Point(646, 3);
@@ -195,15 +245,13 @@
             this.printDialog1.Document = this.printDocument1;
             this.printDialog1.UseEXDialog = true;
             // 
-            // btnExcel
+            // label2
             // 
-            this.btnExcel.Location = new System.Drawing.Point(491, 3);
-            this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(77, 38);
-            this.btnExcel.TabIndex = 2;
-            this.btnExcel.Text = "Create Excel sheet";
-            this.btnExcel.UseVisualStyleBackColor = true;
-            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+            this.label2.Location = new System.Drawing.Point(103, 248);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(164, 18);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Include following records";
             // 
             // frmSampleSheet
             // 
@@ -217,6 +265,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).EndInit();
             this.wizardPage1.ResumeLayout(false);
             this.wizardPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDownPageNumbers)).EndInit();
             this.wizardPage3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -243,5 +292,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbColumn;
         private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.NumericUpDown numUpDownPageNumbers;
+        private System.Windows.Forms.ListBox listBoxPageNumbers;
+        private System.Windows.Forms.Button btnAddPageNumbers;
+        private System.Windows.Forms.Label label2;
     }
 }
