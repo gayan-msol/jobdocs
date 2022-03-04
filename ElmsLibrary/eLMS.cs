@@ -36,8 +36,16 @@ namespace ElmsLibrary
                 wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(
                 By.LinkText("New Mailing Statement")));
 
+
+
                 IWebElement link = edgeDriver.FindElement(By.LinkText("New Mailing Statement"));
                 link.Click();
+
+                if (lodgements[0].ProgressiveLodgement)
+                {
+                    new SelectElement(edgeDriver.FindElement(By.Name("progressiveMsId"))).SelectByText("Create NEW Progressive MS");
+                }
+                
 
                 new SelectElement(edgeDriver.FindElement(By.Name("accountCode"))).SelectByText(lodgements[0].AccNo);
 
@@ -53,7 +61,7 @@ namespace ElmsLibrary
                 IWebElement IRD = edgeDriver.FindElement(By.Name("invoiceRefDetails"));
                 IRD.SendKeys(lodgements[0].JobNo);
 
-                new SelectElement(edgeDriver.FindElement(By.Name("lodgementPointCode"))).SelectByText("Revenue Collection Group - PMC");
+                new SelectElement(edgeDriver.FindElement(By.Name("lodgementPointCode"))).SelectByText("Perth MC Bulk Dock");
 
 
                 IWebElement btnContinue = edgeDriver.FindElement(By.Id("submitButton"));

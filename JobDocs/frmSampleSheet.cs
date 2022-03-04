@@ -139,12 +139,29 @@ namespace JobDocs
         {
 
             int total = count + startPage - 1;
+            int width = 1170;
+            int colCount = dataTable.Rows.Count;
+            int headerColWidth = 225;
+            int dataColWidth = 300;
+            List<int> colWidthList = new List<int>();
 
+            int headerMaxLength = 225;
+            int dataMaxLength = 300;
+
+            foreach (DataColumn c in dataTable.Columns)
+            {
+                
+            }
+
+            if ( colCount > 3)
+            {
+                width += 300 * (colCount - 3);
+            }
             PrintDocument printDoc = new PrintDocument();
 
 
             printDoc.DefaultPageSettings.Landscape = true;
-            printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, 1170);
+            printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, width);
             printDoc.DocumentName = $@"{Form1.jobDirectoryData}\Job {Form1.jobNo} - Sample Records";
             printDoc.PrinterSettings.PrinterName = "Adobe PDF";
        //     printDoc.PrinterSettings.PrintFileName = $@"{Form1.jobDirectory}\Job {Form1.jobNo} - Sample Records";
@@ -172,10 +189,7 @@ namespace JobDocs
             {
                 Graphics g = ev.Graphics;
 
-                Font font2 = new Font("Calibri", 22);
-                string tot = unknownTotal ? "" : $"of {total}";
-                Font font3 = new Font("Calibri", 12);
-                Font font4 = new Font("Calibri", 18, FontStyle.Bold);
+             
 
                 int x1 = ev.MarginBounds.Left;
                 int y1 = ev.MarginBounds.Top;
@@ -184,10 +198,7 @@ namespace JobDocs
                 int yTable = y1 + 50;
                 int yLine = yTable;
                 int lineHeight = 20;
-                int headerColWidth = 0;
-                int col1Width = 0;
-                int col2Width = 0;
-                int col3Width = 0;
+
 
                 StringFormat formatLeft = new StringFormat(StringFormatFlags.NoClip);
                 StringFormat formatCenter = new StringFormat(formatLeft);
@@ -196,8 +207,7 @@ namespace JobDocs
             
                     Font headerFont = new Font("Calibri", 10,FontStyle.Bold);
                     Font bodyFont = new Font("Calibri", 10);
-                    string boxNo1 = $"{i + 1} {tot}";
-                    string boxNo2 = $"{i + 2} {tot}";
+                    
 
                 int tableHeight = sampleTable.Columns.Contains("Source") ? ((sampleTable.Columns.Count -1) * lineHeight) : (sampleTable.Columns.Count * lineHeight);
 
@@ -237,17 +247,19 @@ namespace JobDocs
                             RectangleF rectangleF = new RectangleF(x1 + 5 + 225 + r * 300, yLine, 300, 30);
 
                             g.DrawString(sampleTable.Rows[r][c].ToString(), bodyFont, Brushes.Black, rectangleF);
-                        if(g.MeasureString(sampleTable.Rows[r][c].ToString(),bodyFont).Width >290)
-                        {
-                            yLine += 15;
-                        }
-                            g.DrawLine(Pens.Black, x1, yLine + lineHeight, x1 + 1125, yLine + lineHeight);
+                            if(g.MeasureString(sampleTable.Rows[r][c].ToString(),bodyFont).Width >290)
+                            {
+                                yLine += 15;
+                            }
+                           
                         }
 
-                    if (c == sampleTable.Columns.Count - 1)
-                    {
-                        tableHeight = yLine + lineHeight - yTable;
-                    }
+                        g.DrawLine(Pens.Black, x1, yLine + lineHeight, x1 + 225 + colCount*300, yLine + lineHeight);
+
+                        if (c == sampleTable.Columns.Count - 1)
+                        {
+                            tableHeight = yLine + lineHeight - yTable;
+                        }
 
                         //if(c== sampleTable.Columns.Count -1)
                         //{
@@ -262,14 +274,21 @@ namespace JobDocs
 
                 Rectangle borderRect = new Rectangle(x1, yTable, 1130, tableHeight);
                 Rectangle headerCol = new Rectangle(x1, yTable, 225, tableHeight);
-                Rectangle col1 = new Rectangle(x1 + 225, yTable, 300, tableHeight);
-                Rectangle col2 = new Rectangle(x1 + 525, yTable, 300, tableHeight);
-                Rectangle col3 = new Rectangle(x1 + 825, yTable, 300, tableHeight);
-
                 g.DrawRectangle(Pens.Black, headerCol);
-                g.DrawRectangle(Pens.Black, col1);
-                g.DrawRectangle(Pens.Black, col2);
-                g.DrawRectangle(Pens.Black, col3);
+
+                for (int c = 0; c < colCount; c++)
+                {
+                    Rectangle col = new Rectangle(x1 + 225 + c * 300, yTable, 300, tableHeight);
+                    g.DrawRectangle(Pens.Black, col);
+                }
+                //Rectangle col1 = new Rectangle(x1 + 225, yTable, 300, tableHeight);
+                //Rectangle col2 = new Rectangle(x1 + 525, yTable, 300, tableHeight);
+                //Rectangle col3 = new Rectangle(x1 + 825, yTable, 300, tableHeight);
+
+                
+                //g.DrawRectangle(Pens.Black, col1);
+                //g.DrawRectangle(Pens.Black, col2);
+                //g.DrawRectangle(Pens.Black, col3);
 
 
 

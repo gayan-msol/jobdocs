@@ -1115,6 +1115,7 @@ namespace JobDocs
         {
             if (lodgements.Count > 0)
             {
+                lodgements[0].ProgressiveLodgement = cbProgressiveLodge.Checked;
                 eLMS.Lodge(lodgements, elmsUser);
 
                 btnLodge.Enabled = false;

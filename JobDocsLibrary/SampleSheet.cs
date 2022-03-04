@@ -37,7 +37,7 @@ namespace JobDocsLibrary
             {
                 addRowIndex(sampleTable);
             }
-            sampleTable.Columns.Remove("RowIndex");
+          //  sampleTable.Columns.Remove("RowIndex");
 
             return sampleTable;
         }

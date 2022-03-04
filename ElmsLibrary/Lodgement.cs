@@ -26,6 +26,7 @@ namespace ElmsLibrary
         public string Weight { get; set; }
         public string RegNo { get; set; }
         public string RegName { get; set; }
+        public bool ProgressiveLodgement { get; set; }
 
 
 
