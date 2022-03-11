@@ -480,10 +480,11 @@ namespace JobDocs
 
         private void btnSampleSheet_Click(object sender, EventArgs e)
         {
+
             Form form = Application.OpenForms["frmSampleSheet"];
             if(form == null)
             {
-                Form sampleSheet = new frmSampleSheet(outputFileName, getDelimeter());
+                Form sampleSheet = new frmSampleSheet(outputFileName, DirectoryHelper.getDelimiter(outputFileName));
                 sampleSheet.ShowDialog();
             }
         }
@@ -761,7 +762,6 @@ namespace JobDocs
            
                 richTextOutputFilePath.Text = outputFileName = openFileDialog.FileName;
                 //  wizardPage1.AllowNext = true;
-
             }
         }
 

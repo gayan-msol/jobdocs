@@ -83,5 +83,18 @@ namespace JobDocsLibrary
             }
             return null;
         }
+
+        public static string getDelimiter(string fileName)
+        {
+            string header = File.ReadLines(fileName).First();
+            if(header.Split(',').Length > header.Split('\t').Length)
+            {
+                return ",";
+            }
+            else
+            {
+                return "\t";
+            }
+        }
     }
 }

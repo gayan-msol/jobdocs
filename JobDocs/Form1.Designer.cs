@@ -127,6 +127,7 @@
             this.btnSampleSheet = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.LodgePanel = new System.Windows.Forms.Panel();
+            this.cbProgressiveLodge = new System.Windows.Forms.CheckBox();
             this.btnINTZones = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -154,7 +155,6 @@
             this.UN = new System.Windows.Forms.Label();
             this.txtElmsUN = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.cbProgressiveLodge = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1157,6 +1157,7 @@
             // 
             this.groupBox1.Controls.Add(this.rbComma);
             this.groupBox1.Controls.Add(this.rbTab);
+            this.groupBox1.Enabled = false;
             this.groupBox1.Location = new System.Drawing.Point(350, 146);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(159, 48);
@@ -1249,6 +1250,16 @@
             this.LodgePanel.Name = "LodgePanel";
             this.LodgePanel.Size = new System.Drawing.Size(671, 764);
             this.LodgePanel.TabIndex = 7;
+            // 
+            // cbProgressiveLodge
+            // 
+            this.cbProgressiveLodge.AutoSize = true;
+            this.cbProgressiveLodge.Location = new System.Drawing.Point(437, 448);
+            this.cbProgressiveLodge.Name = "cbProgressiveLodge";
+            this.cbProgressiveLodge.Size = new System.Drawing.Size(137, 17);
+            this.cbProgressiveLodge.TabIndex = 18;
+            this.cbProgressiveLodge.Text = "Progressive Lodgement";
+            this.cbProgressiveLodge.UseVisualStyleBackColor = true;
             // 
             // btnINTZones
             // 
@@ -1523,16 +1534,6 @@
             // backgroundWorker1
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
-            // 
-            // cbProgressiveLodge
-            // 
-            this.cbProgressiveLodge.AutoSize = true;
-            this.cbProgressiveLodge.Location = new System.Drawing.Point(437, 448);
-            this.cbProgressiveLodge.Name = "cbProgressiveLodge";
-            this.cbProgressiveLodge.Size = new System.Drawing.Size(137, 17);
-            this.cbProgressiveLodge.TabIndex = 18;
-            this.cbProgressiveLodge.Text = "Progressive Lodgement";
-            this.cbProgressiveLodge.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
