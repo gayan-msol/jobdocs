@@ -318,6 +318,8 @@ namespace JobDocs
             importedJob = Job.GetJob(txtJobNo.Text);
             if(importedJob != null)
             {
+                btnFullRateTags.Enabled = true;
+
                 jobName = txtJobName.Text = importedJob.JobName;
                 customer = txtCustomer.Text = importedJob.Customer;
                 jobNo = txtJobNo.Text;
@@ -900,20 +902,21 @@ namespace JobDocs
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = jobDirectoryData;
-            openFileDialog.Filter = "Text | *.txt";
+            openFileDialog.Filter = "Text | *.txt| CSV | *.csv";
             openFileDialog.ShowDialog();
 
             if(openFileDialog.FileName != null)
             {
                 outputFileName = txtManifestFileName.Text = openFileDialog.FileName;
 
-               List<string> lines =  File.ReadLines(outputFileName).ToList();
+               //List<string> lines =  File.ReadLines(outputFileName).ToList();
 
-                int tabCount = lines[0].Split('\t').Length;
-                int commaCount = lines[0].Split(',').Length;
+               // int tabCount = lines[0].Split('\t').Length;
+               // int commaCount = lines[0].Split(',').Length;
 
-                sourceTable = TextFileRW.readTextFileToTable(outputFileName, tabCount > commaCount ? "\t" :",");
+                sourceTable = TextFileRW.readTextFileToTable(outputFileName, DirectoryHelper.getDelimiter(outputFileName));
 
+                
               
 
                 if(sourceTable.Columns.Contains("Dt BP Sort Code")|| sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
@@ -988,6 +991,7 @@ namespace JobDocs
                     if (sourceTable != null)
                     {
                         btnLodge.Enabled = true;
+
                     }
                 }
                 else
@@ -1308,6 +1312,81 @@ namespace JobDocs
                 summaryStr += $"Total :\t {count}\n";
 
                 File.WriteAllText($@"{Path.GetDirectoryName(outputFileName)}\International Zones.txt", summaryStr);
+            }
+        }
+
+        private void btnFullRateTags_Click(object sender, EventArgs e)
+        {
+            int lblCount = (int)numericUpDownTags.Value;
+            string service = serviceType == "Regular" ? "R" : "1";
+            string traySize = size == "Small" ? "S" : "L";
+            string labelName = $"{jobNo} {jobName}";
+            if(labelName.Length > 32)
+            {
+                labelName = labelName.Substring(0, 32);
+            }
+            string labelText = $@"#Australia Post Visa Tray Label System - Ver:
+3v0-700
+#Label Plan File
+#Label Plan Header
+{labelName},MAILING SOLUTIONS,{jobName},6,{jobNo},
+#Label Details
+#Service,Sort_Plan_Type,Sort_Plan,Destination_ID,Mail_Size,Label_Qty,Date
+{service},6,6,{traySize},{lblCount},{DateTime.Now.ToString("dd MMM yyyy")}
+#End Of File";
+
+
+            string lableFileName = $@"{importedJob.DataFolder}\{jobNo} - Tray Labels.lpf";
+
+            File.WriteAllText(lableFileName, labelText);          
+
+            string cmdImport = $"/C VisaCommand /i {lableFileName}";
+            string cmdPrint = $"/C VisaCommand /p {labelName}";
+
+
+
+            var proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = cmdImport,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+
+                }
+            };
+
+            if (cbImportLabel.Checked)
+            {
+                proc.Start();
+                proc.WaitForExit();
+                proc.Close();
+            }
+
+            if (cbPrintLabel.Checked)
+            {
+                proc.StartInfo.Arguments = cmdPrint;
+                proc.Start();
+                proc.WaitForExit();
+                proc.Close();
+            }                                            
+        }
+
+    private void cbPrintLabel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbPrintLabel.Checked)
+            {
+                cbImportLabel.Checked = true;
+            }
+        }
+
+        private void cbImportLabel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!cbImportLabel.Checked)
+            {
+                cbPrintLabel.Checked = false;
             }
         }
     }

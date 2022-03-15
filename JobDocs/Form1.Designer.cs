@@ -155,6 +155,12 @@
             this.UN = new System.Windows.Forms.Label();
             this.txtElmsUN = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnFullRateTags = new System.Windows.Forms.Button();
+            this.numericUpDownTags = new System.Windows.Forms.NumericUpDown();
+            this.label28 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbImportLabel = new System.Windows.Forms.CheckBox();
+            this.cbPrintLabel = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -180,6 +186,8 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.LoginPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -1231,6 +1239,7 @@
             // 
             // LodgePanel
             // 
+            this.LodgePanel.Controls.Add(this.groupBox4);
             this.LodgePanel.Controls.Add(this.cbProgressiveLodge);
             this.LodgePanel.Controls.Add(this.btnINTZones);
             this.LodgePanel.Controls.Add(this.btnUpdate);
@@ -1246,7 +1255,7 @@
             this.LodgePanel.Controls.Add(this.btnLodge);
             this.LodgePanel.Controls.Add(this.label23);
             this.LodgePanel.Controls.Add(this.txtManifestFileName);
-            this.LodgePanel.Location = new System.Drawing.Point(22, 111);
+            this.LodgePanel.Location = new System.Drawing.Point(-28, 111);
             this.LodgePanel.Name = "LodgePanel";
             this.LodgePanel.Size = new System.Drawing.Size(671, 764);
             this.LodgePanel.TabIndex = 7;
@@ -1254,7 +1263,7 @@
             // cbProgressiveLodge
             // 
             this.cbProgressiveLodge.AutoSize = true;
-            this.cbProgressiveLodge.Location = new System.Drawing.Point(437, 448);
+            this.cbProgressiveLodge.Location = new System.Drawing.Point(437, 488);
             this.cbProgressiveLodge.Name = "cbProgressiveLodge";
             this.cbProgressiveLodge.Size = new System.Drawing.Size(137, 17);
             this.cbProgressiveLodge.TabIndex = 18;
@@ -1439,7 +1448,7 @@
             // btnLodge
             // 
             this.btnLodge.Enabled = false;
-            this.btnLodge.Location = new System.Drawing.Point(437, 471);
+            this.btnLodge.Location = new System.Drawing.Point(437, 518);
             this.btnLodge.Name = "btnLodge";
             this.btnLodge.Size = new System.Drawing.Size(135, 46);
             this.btnLodge.TabIndex = 6;
@@ -1535,6 +1544,78 @@
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             // 
+            // btnFullRateTags
+            // 
+            this.btnFullRateTags.Enabled = false;
+            this.btnFullRateTags.Location = new System.Drawing.Point(9, 112);
+            this.btnFullRateTags.Name = "btnFullRateTags";
+            this.btnFullRateTags.Size = new System.Drawing.Size(135, 46);
+            this.btnFullRateTags.TabIndex = 19;
+            this.btnFullRateTags.Text = "Create Full Rate Tags";
+            this.btnFullRateTags.UseVisualStyleBackColor = true;
+            this.btnFullRateTags.Click += new System.EventHandler(this.btnFullRateTags_Click);
+            // 
+            // numericUpDownTags
+            // 
+            this.numericUpDownTags.Location = new System.Drawing.Point(92, 24);
+            this.numericUpDownTags.Name = "numericUpDownTags";
+            this.numericUpDownTags.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownTags.TabIndex = 20;
+            this.numericUpDownTags.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(12, 26);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(63, 13);
+            this.label28.TabIndex = 21;
+            this.label28.Text = "No. of Tags";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.cbPrintLabel);
+            this.groupBox4.Controls.Add(this.cbImportLabel);
+            this.groupBox4.Controls.Add(this.label28);
+            this.groupBox4.Controls.Add(this.btnFullRateTags);
+            this.groupBox4.Controls.Add(this.numericUpDownTags);
+            this.groupBox4.Location = new System.Drawing.Point(119, 464);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(149, 164);
+            this.groupBox4.TabIndex = 22;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Tray Labels";
+            // 
+            // cbImportLabel
+            // 
+            this.cbImportLabel.AutoSize = true;
+            this.cbImportLabel.Checked = true;
+            this.cbImportLabel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbImportLabel.Location = new System.Drawing.Point(20, 70);
+            this.cbImportLabel.Name = "cbImportLabel";
+            this.cbImportLabel.Size = new System.Drawing.Size(119, 17);
+            this.cbImportLabel.TabIndex = 22;
+            this.cbImportLabel.Text = "Import to VisaTLMS";
+            this.cbImportLabel.UseVisualStyleBackColor = true;
+            this.cbImportLabel.CheckedChanged += new System.EventHandler(this.cbImportLabel_CheckedChanged);
+            // 
+            // cbPrintLabel
+            // 
+            this.cbPrintLabel.AutoSize = true;
+            this.cbPrintLabel.Checked = true;
+            this.cbPrintLabel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbPrintLabel.Location = new System.Drawing.Point(20, 89);
+            this.cbPrintLabel.Name = "cbPrintLabel";
+            this.cbPrintLabel.Size = new System.Drawing.Size(81, 17);
+            this.cbPrintLabel.TabIndex = 23;
+            this.cbPrintLabel.Text = "Print Labels";
+            this.cbPrintLabel.UseVisualStyleBackColor = true;
+            this.cbPrintLabel.CheckedChanged += new System.EventHandler(this.cbPrintLabel_CheckedChanged);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
@@ -1584,6 +1665,9 @@
             this.groupBox2.PerformLayout();
             this.LoginPanel.ResumeLayout(false);
             this.LoginPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1716,6 +1800,12 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnINTZones;
         private System.Windows.Forms.CheckBox cbProgressiveLodge;
+        private System.Windows.Forms.Button btnFullRateTags;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.NumericUpDown numericUpDownTags;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox cbPrintLabel;
+        private System.Windows.Forms.CheckBox cbImportLabel;
     }
 }
 
