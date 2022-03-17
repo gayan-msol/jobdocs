@@ -84,11 +84,19 @@ namespace JobDocs
             {
                 
                 Control[] cArr =flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "%")}", true);
-                if(cArr.Length >0 && cArr[0] is CheckBox checkBox && checkBox.Name != "cbDt%Barcode")
+                if(cArr.Length >0 && cArr[0] is CheckBox checkBox && checkBox.Name != "cbDt%BSP" && checkBox.Name != "cbDt%PP%Sort%Code")
                 {
                     checkBox.Checked = !checkBoxExcludeDTFields.Checked;
+
+                    if(checkBox.Name == "cbDt%Barcode")
+                    {
+                        checkBox.Checked = columnList.Contains("Dt PP Sort Code");
+                    }
                 }
+
             }
+
+
         }
 
         private void uncheckAllFileds()
@@ -162,23 +170,31 @@ namespace JobDocs
             }
 
             headerColWidth = lengths.Max() +10;
+            if(headerColWidth > headerMaxLength)
+            {
+                headerColWidth = headerMaxLength;
+            }
 
             lengths = new List<float>();
             foreach (DataRow row in dataTable.Rows)
             {
                 foreach (DataColumn c in dataTable.Columns)
                 {
-                    lengths.Add(TextRenderer.MeasureText(row[c].ToString(), bodyFont).Width);
-
-                    if(TextRenderer.MeasureText(row[c].ToString(), bodyFont).Width > 300)
+                    if(c.ColumnName != "Source")
                     {
-
+                        lengths.Add(TextRenderer.MeasureText(row[c].ToString(), bodyFont).Width);
                     }
 
                 }
             }
 
-            dataColWidth = lengths.Max() + 10;
+            dataColWidth =  lengths.Max() + 10;
+            if(dataColWidth > dataMaxLength)
+            {
+                dataColWidth = dataMaxLength;
+            }
+
+        
 
             if(dataColWidth * colCount < 900)
             {
@@ -335,15 +351,6 @@ namespace JobDocs
             }
         }
 
-        void SetupGridPrinter()
-        {
-            printDocument1.DefaultPageSettings.Landscape = true;
-            printDocument1.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, 1170);
-            printDocument1.DocumentName = $"{Form1.jobNo} - Sample Records";
-
-
-            dataGridPrinter1 = new DataGridPrinter(dataGridViewSample, printDocument1,sampleTable);
-        }
 
         private void checkBoxUncheckAll_CheckedChanged(object sender, EventArgs e)
         {
@@ -448,6 +455,11 @@ namespace JobDocs
         {
             listBoxPageNumbers.Items.Add(numUpDownPageNumbers.Value);
             selectedRecordList.Add((int)numUpDownPageNumbers.Value-1);
+        }
+
+        private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

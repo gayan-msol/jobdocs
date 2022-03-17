@@ -41,8 +41,16 @@ namespace JobDocsLibrary
             {
                 addRowIndex(sampleTable);
             }
-          //  sampleTable.Columns.Remove("RowIndex");
+            //  sampleTable.Columns.Remove("RowIndex");
 
+           if(sampleTable.Columns.Contains("Dt Barcode"))
+            {
+                foreach (DataRow row in sampleTable.Rows)
+                {                
+                    row["Dt Barcode"] = row["Dt Barcode"] != "" ? "barcode" : "";
+                }
+            }
+            
             return sampleTable;
         }
 

@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSampleSheet));
             this.wizardControl1 = new AeroWizard.WizardControl();
             this.wizardPage1 = new AeroWizard.WizardPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnAddPageNumbers = new System.Windows.Forms.Button();
             this.numUpDownPageNumbers = new System.Windows.Forms.NumericUpDown();
             this.listBoxPageNumbers = new System.Windows.Forms.ListBox();
@@ -46,7 +47,6 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownPageNumbers)).BeginInit();
@@ -72,6 +72,7 @@
             this.wizardControl1.Text = "Sample Sheet Creation Wizard";
             this.wizardControl1.Title = "Sample Sheet Creation Wizard";
             this.wizardControl1.TitleIcon = ((System.Drawing.Icon)(resources.GetObject("wizardControl1.TitleIcon")));
+            this.wizardControl1.SelectedPageChanged += new System.EventHandler(this.wizardControl1_SelectedPageChanged);
             // 
             // wizardPage1
             // 
@@ -90,6 +91,14 @@
             this.wizardPage1.Text = "Import Output File";
             this.wizardPage1.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.wizardPage1_Commit);
             this.wizardPage1.Enter += new System.EventHandler(this.wizardPage1_Enter);
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(103, 248);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(164, 18);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Include following records";
             // 
             // btnAddPageNumbers
             // 
@@ -244,14 +253,6 @@
             // 
             this.printDialog1.Document = this.printDocument1;
             this.printDialog1.UseEXDialog = true;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(103, 248);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(164, 18);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Include following records";
             // 
             // frmSampleSheet
             // 
