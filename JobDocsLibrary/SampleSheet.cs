@@ -37,7 +37,7 @@ namespace JobDocsLibrary
                 PopulateSampleTable(sourceTable, sampleTable, sampleRecords);
             }
 
-            if (slipSheet)
+            if (slipSheet && sampleTable.Columns.Contains("Sort Order"))
             {
                 addRowIndex(sampleTable);
             }

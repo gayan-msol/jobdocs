@@ -38,7 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbColumn = new System.Windows.Forms.ComboBox();
             this.checkBoxUncheckAll = new System.Windows.Forms.CheckBox();
-            this.checkBoxExcludeDTFields = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanelColumns = new System.Windows.Forms.FlowLayoutPanel();
             this.wizardPage3 = new AeroWizard.WizardPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -83,7 +82,6 @@
             this.wizardPage1.Controls.Add(this.label1);
             this.wizardPage1.Controls.Add(this.cmbColumn);
             this.wizardPage1.Controls.Add(this.checkBoxUncheckAll);
-            this.wizardPage1.Controls.Add(this.checkBoxExcludeDTFields);
             this.wizardPage1.Controls.Add(this.flowLayoutPanelColumns);
             this.wizardPage1.Name = "wizardPage1";
             this.wizardPage1.Size = new System.Drawing.Size(759, 398);
@@ -150,28 +148,13 @@
             // checkBoxUncheckAll
             // 
             this.checkBoxUncheckAll.AutoSize = true;
-            this.checkBoxUncheckAll.Enabled = false;
-            this.checkBoxUncheckAll.Location = new System.Drawing.Point(106, 84);
+            this.checkBoxUncheckAll.Location = new System.Drawing.Point(101, 37);
             this.checkBoxUncheckAll.Name = "checkBoxUncheckAll";
-            this.checkBoxUncheckAll.Size = new System.Drawing.Size(86, 19);
+            this.checkBoxUncheckAll.Size = new System.Drawing.Size(119, 19);
             this.checkBoxUncheckAll.TabIndex = 5;
-            this.checkBoxUncheckAll.Text = "Remove All";
+            this.checkBoxUncheckAll.Text = "Remove All Fileds";
             this.checkBoxUncheckAll.UseVisualStyleBackColor = true;
-            this.checkBoxUncheckAll.CheckedChanged += new System.EventHandler(this.checkBoxUncheckAll_CheckedChanged_1);
-            // 
-            // checkBoxExcludeDTFields
-            // 
-            this.checkBoxExcludeDTFields.AutoSize = true;
-            this.checkBoxExcludeDTFields.Checked = true;
-            this.checkBoxExcludeDTFields.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxExcludeDTFields.Enabled = false;
-            this.checkBoxExcludeDTFields.Location = new System.Drawing.Point(106, 37);
-            this.checkBoxExcludeDTFields.Name = "checkBoxExcludeDTFields";
-            this.checkBoxExcludeDTFields.Size = new System.Drawing.Size(116, 19);
-            this.checkBoxExcludeDTFields.TabIndex = 4;
-            this.checkBoxExcludeDTFields.Text = "Exclude DT Fileds";
-            this.checkBoxExcludeDTFields.UseVisualStyleBackColor = true;
-            this.checkBoxExcludeDTFields.CheckedChanged += new System.EventHandler(this.checkBoxExcludeDTFields_CheckedChanged_1);
+            this.checkBoxUncheckAll.CheckedChanged += new System.EventHandler(this.checkBoxUncheckAll_CheckedChanged);
             // 
             // flowLayoutPanelColumns
             // 
@@ -288,7 +271,6 @@
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Windows.Forms.CheckBox checkBoxUncheckAll;
-        private System.Windows.Forms.CheckBox checkBoxExcludeDTFields;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelColumns;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbColumn;

@@ -1633,7 +1633,6 @@
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(677, 770);
             this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = "tabPage7";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // splitContainer2

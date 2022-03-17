@@ -52,7 +52,7 @@ namespace JobDocs
             List<string> selectedColumnList = new List<string>();
             foreach (CheckBox c in flowLayoutPanelColumns.Controls)
             {
-                if (c.Checked)
+                if (c.Checked || c.Name =="cbSource" || c.Name == "cbSort%Order")
                 {
                     selectedColumnList.Add(c.Name.Substring(2).Replace("%", " "));
                 }
@@ -60,35 +60,37 @@ namespace JobDocs
 
             string varCol = cmbColumn.SelectedItem?.ToString() ??  null;
 
-
-
-
-            dataGridViewSample.DataSource = sampleTable = SampleSheet.GetSampleTable(sourceTable, selectedColumnList, selectedRecordList, varCol );
-
-
+            if(selectedColumnList.Count > 0)
+            {
+                dataGridViewSample.DataSource = sampleTable = SampleSheet.GetSampleTable(sourceTable, selectedColumnList, selectedRecordList, varCol);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
 
         }
 
-        private void checkBoxExcludeDTFields_CheckedChanged(object sender, EventArgs e)
-        {
-            uncheckDTFileds();
-        }
+        //private void checkBoxExcludeDTFields_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    uncheckDTFileds();
+        //}
 
         private void uncheckDTFileds()
         {
-            List<string> dtFieldList = columnList.Where(x => !string.IsNullOrWhiteSpace(x) && x.Substring(0,2)=="Dt").ToList();
-          //  dtFieldList.Add("Source");
+            List<string> dtFieldList = columnList.Where(x => !string.IsNullOrWhiteSpace(x) && x.Substring(0, 2) == "Dt").ToList();
+            //  dtFieldList.Add("Source");
             dtFieldList.Add("MediaSelect");
 
             foreach (var item in dtFieldList)
             {
-                
-                Control[] cArr =flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "%")}", true);
-                if(cArr.Length >0 && cArr[0] is CheckBox checkBox && checkBox.Name != "cbDt%BSP" && checkBox.Name != "cbDt%PP%Sort%Code")
-                {
-                    checkBox.Checked = !checkBoxExcludeDTFields.Checked;
 
-                    if(checkBox.Name == "cbDt%Barcode")
+                Control[] cArr = flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "%")}", true);
+                if (cArr.Length > 0 && cArr[0] is CheckBox checkBox && checkBox.Name != "cbDt%BSP" && checkBox.Name != "cbDt%PP%Sort%Code")
+                {
+                    checkBox.Checked = false;
+
+                    if (checkBox.Name == "cbDt%Barcode")
                     {
                         checkBox.Checked = columnList.Contains("Dt PP Sort Code");
                     }
@@ -101,18 +103,7 @@ namespace JobDocs
 
         private void uncheckAllFileds()
         {
-            //List<string> dtFieldList = columnList.Where(x => !string.IsNullOrWhiteSpace(x) && x.Substring(0, 2) == "Dt").ToList();
-            //dtFieldList.Add("Source");
-            //dtFieldList.Add("MediaSelect");
-
-            //foreach (var item in dtFieldList)
-            //{
-            //    Control[] cArr = flowLayoutPanelColumns.Controls.Find($"cb{item.Replace(" ", "_")}", true);
-            //    if (cArr.Length > 0 && cArr[0] is CheckBox checkBox)
-            //        checkBox.Checked = !checkBoxExcludeDTFields.Checked;
-            //}
-
-            foreach (Control c in flowLayoutPanelColumns.Controls)
+             foreach (Control c in flowLayoutPanelColumns.Controls)
             {
                 if(c is CheckBox cb)
                 {
