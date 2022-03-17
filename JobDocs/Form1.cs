@@ -50,6 +50,9 @@ namespace JobDocs
         string size = "Small";
         DataTable sourceTable = new DataTable();
         List<Lodgement> lodgements = new List<Lodgement>();
+        List<string> remainingItems = new List<string>();
+        List<string> dtColList = new List<string>();
+        TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
 
 
         public Form1()
@@ -130,18 +133,23 @@ namespace JobDocs
                         int j = 0;
                         outputList.Clear();
 
-                        for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
+                        for (int i = 0; i < tableLayoutPanel.Controls.Count; i++)
                         {
 
-                            ComboBox c = (ComboBox)flowLayoutPanel2.Controls[i];
-                            if (c.SelectedIndex > 0 || (c.Text != ""&& c.Text != "<Select or Enter DT Field>"))// index 0 is the displayed value which should be ignored
+                            if(tableLayoutPanel.Controls[i] is ComboBox combo)
                             {
-                                j++;
-                                string column = c.SelectedItem == null ? c.Text : c.SelectedItem.ToString();
-                                pdfStamper.AcroFields.SetField($"Col{j}", columnsList[i]);
-                                pdfStamper.AcroFields.SetField($"dtCol{j}", column);
-                                outputList.Add(column);
-                            }
+                                if (combo.SelectedIndex > 0 || (combo.Text != "" && combo.Text != "<Select or Enter DT Field>"))// index 0 is the displayed value which should be ignored
+                                {
+                                    j++;
+                                    string column = combo.SelectedItem == null ? combo.Text : combo.SelectedItem.ToString();
+                                    pdfStamper.AcroFields.SetField($"Col{j}", columnsList[j]);
+                                    pdfStamper.AcroFields.SetField($"dtCol{j}", column);
+                                    outputList.Add(column);
+                                }
+                             }
+
+                            //ComboBox c = (ComboBox)tableLayoutPanel.Controls[i];
+                            
                         }
 
                         List<string> addBlockList = Address.GetAddressBlock(outputList);
@@ -243,6 +251,7 @@ namespace JobDocs
             columnsList.Clear();
             flowLayoutPanel1.Controls.Clear();
             flowLayoutPanel2.Controls.Clear();
+     
             List<string> itemsList = Address.getDtFieldList();
 
             foreach (string file in files)
@@ -262,6 +271,7 @@ namespace JobDocs
                     flowLayoutPanel1.Controls.Add(new TextBox { Text = columnsList[i], Size = new System.Drawing.Size(150, 25), Name = $"txtBox{i}" });
                     ComboBox comboBox = new ComboBox { Size = new System.Drawing.Size(150, 25) };
                     flowLayoutPanel2.Controls.Add(comboBox);
+                    
                     comboBox.DataSource = new List<string>(itemsList);
                     comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                     comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -274,6 +284,7 @@ namespace JobDocs
                     {
                         comboBox.SelectedItem = selection;
                     }
+
                 }
             }
         }
@@ -1388,6 +1399,150 @@ namespace JobDocs
             {
                 cbPrintLabel.Checked = false;
             }
+        }
+
+      
+        private void combobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //foreach (Control c in flowLayoutPanelDataSummary.Controls)
+            //{
+            //    if( c is ComboBox combo )
+            //    {
+
+            //    }
+            //}
+
+            //ComboBox cmb = sender as ComboBox;
+            //string test = cmb.SelectedItem.ToString();
+
+
+            ComboBox cmb = (ComboBox)sender;
+            remainingItems = new List<string>(dtColList);
+            foreach (Control c in tableLayoutPanel.Controls)
+            {
+                if (c is ComboBox combo)
+                {
+                    remainingItems.Remove(combo.SelectedItem.ToString());
+                }
+
+            }
+
+
+
+            foreach (Control c in tableLayoutPanel.Controls)
+            {
+                if (c is ComboBox combo)
+                {
+                    string item = combo.SelectedItem.ToString();
+                    List<string> bindingList = new List<string>(remainingItems);
+                    bindingList.Add(item);
+                    combo.DataSource = bindingList;
+                    combo.SelectedItem = item;
+                }
+
+            }
+        }
+
+
+        private void flowLayoutPanelDataSummary_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void cmbStreamFN_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer2_Panel1_DragDrop(object sender, DragEventArgs e)
+        {
+
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if(Path.GetExtension(files[0]) == ".txt")
+            {
+                columnsList = DirectoryHelper.getColumnList(files[0]);
+
+            }
+
+            dtColList = Address.getDtFieldList();
+
+            foreach (string file in files)
+            {
+                if (file.Substring(file.Length - 4, 4) == ".txt")
+                {
+                    path = file;
+                }
+                columnsList = JobData.GetColumnList(path, delimiter);
+            }
+
+
+
+           
+            tableLayoutPanel.ColumnCount = 2;
+
+
+            tableLayoutPanel.Parent = splitContainer2.Panel1;
+            tableLayoutPanel.AutoScroll = true;
+            tableLayoutPanel.AutoSize = true;
+            tableLayoutPanel.Controls.Add(new Label() { Text = "Source File Fields", Font = new Font(Label.DefaultFont, FontStyle.Bold) }, 0, 1);
+            tableLayoutPanel.Controls.Add(new Label() { Text = "Database Fields", Font = new Font(Label.DefaultFont, FontStyle.Bold) }, 1, 1);
+
+
+   
+            int rowIndex = 1;
+            int columnIndex = 0;
+            remainingItems = new List<string>(dtColList);
+            foreach (string col in columnsList)
+            {
+                tableLayoutPanel.RowCount += 1;
+                rowIndex++;
+                //if (rowIndex == 18)
+                //{
+                //    columnIndex += 3;
+
+                //    tableLayoutPanel.ColumnCount += 3;
+                //    rowIndex = 2;
+                //    tableLayoutPanel.Controls.Add(new Label() { Text = "Source File Fields", Font = new Font(Label.DefaultFont, FontStyle.Bold) }, columnIndex, 1);
+                //    tableLayoutPanel.Controls.Add(new Label() { Text = "Database Fields", Font = new Font(Label.DefaultFont, FontStyle.Bold) }, columnIndex + 1, 1);
+                //    tableLayoutPanel.Controls.Add(new Label() { Text = "         ", Font = new Font(Label.DefaultFont, FontStyle.Bold) }, columnIndex - 1, 1);
+
+                //}
+
+
+
+                Label label = new Label { Text = col , AutoSize=true};
+                ComboBox comboBox = new ComboBox();
+
+                comboBox.Refresh();
+                comboBox.SelectionChangeCommitted += new EventHandler(combobox_SelectedIndexChanged);
+
+
+
+                tableLayoutPanel.Controls.Add(label, columnIndex, rowIndex);
+                tableLayoutPanel.Controls.Add(comboBox, columnIndex + 1, rowIndex);
+
+                comboBox.DataSource = new List<string>(remainingItems);
+                string selection = remainingItems.Where(x => x == col).FirstOrDefault();
+                if (selection == null)
+                {
+                    selection = remainingItems.Where(x => StringProcessing.MatchStrings(x, col) < 3).FirstOrDefault();
+
+                }
+
+                if (selection != null)
+                {
+                    comboBox.SelectedItem = selection;
+                }
+
+
+            }
+        }
+    
+
+        private void splitContainer2_Panel1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
     }
 } 

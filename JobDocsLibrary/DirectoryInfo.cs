@@ -96,5 +96,18 @@ namespace JobDocsLibrary
                 return "\t";
             }
         }
+
+        public static List<string> getColumnList(string fileName)
+        {
+            string header = File.ReadLines(fileName).First();
+            if (header.Split(',').Length > header.Split('\t').Length)
+            {
+                return header.Split(',').ToList();
+            }
+            else
+            {
+                return header.Split('\t').ToList();
+            }
+        }
     }
 }

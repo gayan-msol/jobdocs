@@ -127,6 +127,12 @@
             this.btnSampleSheet = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.LodgePanel = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbPrintLabel = new System.Windows.Forms.CheckBox();
+            this.cbImportLabel = new System.Windows.Forms.CheckBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.btnFullRateTags = new System.Windows.Forms.Button();
+            this.numericUpDownTags = new System.Windows.Forms.NumericUpDown();
             this.cbProgressiveLodge = new System.Windows.Forms.CheckBox();
             this.btnINTZones = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -155,12 +161,9 @@
             this.UN = new System.Windows.Forms.Label();
             this.txtElmsUN = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.btnFullRateTags = new System.Windows.Forms.Button();
-            this.numericUpDownTags = new System.Windows.Forms.NumericUpDown();
-            this.label28 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.cbImportLabel = new System.Windows.Forms.CheckBox();
-            this.cbPrintLabel = new System.Windows.Forms.CheckBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -183,11 +186,15 @@
             this.groupBox1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.LodgePanel.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.LoginPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -280,6 +287,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -536,6 +544,7 @@
             this.cmbStreamFN.Name = "cmbStreamFN";
             this.cmbStreamFN.Size = new System.Drawing.Size(61, 21);
             this.cmbStreamFN.TabIndex = 66;
+            this.cmbStreamFN.SelectedIndexChanged += new System.EventHandler(this.cmbStreamFN_SelectedIndexChanged);
             // 
             // label19
             // 
@@ -1260,6 +1269,78 @@
             this.LodgePanel.Size = new System.Drawing.Size(671, 764);
             this.LodgePanel.TabIndex = 7;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.cbPrintLabel);
+            this.groupBox4.Controls.Add(this.cbImportLabel);
+            this.groupBox4.Controls.Add(this.label28);
+            this.groupBox4.Controls.Add(this.btnFullRateTags);
+            this.groupBox4.Controls.Add(this.numericUpDownTags);
+            this.groupBox4.Location = new System.Drawing.Point(119, 464);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(149, 164);
+            this.groupBox4.TabIndex = 22;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Tray Labels";
+            // 
+            // cbPrintLabel
+            // 
+            this.cbPrintLabel.AutoSize = true;
+            this.cbPrintLabel.Checked = true;
+            this.cbPrintLabel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbPrintLabel.Location = new System.Drawing.Point(20, 89);
+            this.cbPrintLabel.Name = "cbPrintLabel";
+            this.cbPrintLabel.Size = new System.Drawing.Size(81, 17);
+            this.cbPrintLabel.TabIndex = 23;
+            this.cbPrintLabel.Text = "Print Labels";
+            this.cbPrintLabel.UseVisualStyleBackColor = true;
+            this.cbPrintLabel.CheckedChanged += new System.EventHandler(this.cbPrintLabel_CheckedChanged);
+            // 
+            // cbImportLabel
+            // 
+            this.cbImportLabel.AutoSize = true;
+            this.cbImportLabel.Checked = true;
+            this.cbImportLabel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbImportLabel.Location = new System.Drawing.Point(20, 70);
+            this.cbImportLabel.Name = "cbImportLabel";
+            this.cbImportLabel.Size = new System.Drawing.Size(119, 17);
+            this.cbImportLabel.TabIndex = 22;
+            this.cbImportLabel.Text = "Import to VisaTLMS";
+            this.cbImportLabel.UseVisualStyleBackColor = true;
+            this.cbImportLabel.CheckedChanged += new System.EventHandler(this.cbImportLabel_CheckedChanged);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(12, 26);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(63, 13);
+            this.label28.TabIndex = 21;
+            this.label28.Text = "No. of Tags";
+            // 
+            // btnFullRateTags
+            // 
+            this.btnFullRateTags.Enabled = false;
+            this.btnFullRateTags.Location = new System.Drawing.Point(9, 112);
+            this.btnFullRateTags.Name = "btnFullRateTags";
+            this.btnFullRateTags.Size = new System.Drawing.Size(135, 46);
+            this.btnFullRateTags.TabIndex = 19;
+            this.btnFullRateTags.Text = "Create Full Rate Tags";
+            this.btnFullRateTags.UseVisualStyleBackColor = true;
+            this.btnFullRateTags.Click += new System.EventHandler(this.btnFullRateTags_Click);
+            // 
+            // numericUpDownTags
+            // 
+            this.numericUpDownTags.Location = new System.Drawing.Point(92, 24);
+            this.numericUpDownTags.Name = "numericUpDownTags";
+            this.numericUpDownTags.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownTags.TabIndex = 20;
+            this.numericUpDownTags.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // cbProgressiveLodge
             // 
             this.cbProgressiveLodge.AutoSize = true;
@@ -1544,77 +1625,44 @@
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             // 
-            // btnFullRateTags
+            // tabPage7
             // 
-            this.btnFullRateTags.Enabled = false;
-            this.btnFullRateTags.Location = new System.Drawing.Point(9, 112);
-            this.btnFullRateTags.Name = "btnFullRateTags";
-            this.btnFullRateTags.Size = new System.Drawing.Size(135, 46);
-            this.btnFullRateTags.TabIndex = 19;
-            this.btnFullRateTags.Text = "Create Full Rate Tags";
-            this.btnFullRateTags.UseVisualStyleBackColor = true;
-            this.btnFullRateTags.Click += new System.EventHandler(this.btnFullRateTags_Click);
+            this.tabPage7.Controls.Add(this.splitContainer2);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(677, 770);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "tabPage7";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // numericUpDownTags
+            // splitContainer2
             // 
-            this.numericUpDownTags.Location = new System.Drawing.Point(92, 24);
-            this.numericUpDownTags.Name = "numericUpDownTags";
-            this.numericUpDownTags.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDownTags.TabIndex = 20;
-            this.numericUpDownTags.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
             // 
-            // label28
+            // splitContainer2.Panel1
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(12, 26);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(63, 13);
-            this.label28.TabIndex = 21;
-            this.label28.Text = "No. of Tags";
+            this.splitContainer2.Panel1.AllowDrop = true;
+            this.splitContainer2.Panel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel1_DragDrop);
+            this.splitContainer2.Panel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel1_DragEnter);
             // 
-            // groupBox4
+            // splitContainer2.Panel2
             // 
-            this.groupBox4.Controls.Add(this.cbPrintLabel);
-            this.groupBox4.Controls.Add(this.cbImportLabel);
-            this.groupBox4.Controls.Add(this.label28);
-            this.groupBox4.Controls.Add(this.btnFullRateTags);
-            this.groupBox4.Controls.Add(this.numericUpDownTags);
-            this.groupBox4.Location = new System.Drawing.Point(119, 464);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(149, 164);
-            this.groupBox4.TabIndex = 22;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Tray Labels";
+            this.splitContainer2.Panel2.Controls.Add(this.button3);
+            this.splitContainer2.Size = new System.Drawing.Size(671, 764);
+            this.splitContainer2.SplitterDistance = 549;
+            this.splitContainer2.TabIndex = 0;
             // 
-            // cbImportLabel
+            // button3
             // 
-            this.cbImportLabel.AutoSize = true;
-            this.cbImportLabel.Checked = true;
-            this.cbImportLabel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbImportLabel.Location = new System.Drawing.Point(20, 70);
-            this.cbImportLabel.Name = "cbImportLabel";
-            this.cbImportLabel.Size = new System.Drawing.Size(119, 17);
-            this.cbImportLabel.TabIndex = 22;
-            this.cbImportLabel.Text = "Import to VisaTLMS";
-            this.cbImportLabel.UseVisualStyleBackColor = true;
-            this.cbImportLabel.CheckedChanged += new System.EventHandler(this.cbImportLabel_CheckedChanged);
-            // 
-            // cbPrintLabel
-            // 
-            this.cbPrintLabel.AutoSize = true;
-            this.cbPrintLabel.Checked = true;
-            this.cbPrintLabel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbPrintLabel.Location = new System.Drawing.Point(20, 89);
-            this.cbPrintLabel.Name = "cbPrintLabel";
-            this.cbPrintLabel.Size = new System.Drawing.Size(81, 17);
-            this.cbPrintLabel.TabIndex = 23;
-            this.cbPrintLabel.Text = "Print Labels";
-            this.cbPrintLabel.UseVisualStyleBackColor = true;
-            this.cbPrintLabel.CheckedChanged += new System.EventHandler(this.cbPrintLabel_CheckedChanged);
+            this.button3.Location = new System.Drawing.Point(27, 105);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 0;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1659,15 +1707,19 @@
             this.tabPage5.ResumeLayout(false);
             this.LodgePanel.ResumeLayout(false);
             this.LodgePanel.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.LoginPanel.ResumeLayout(false);
             this.LoginPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1806,6 +1858,9 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox cbPrintLabel;
         private System.Windows.Forms.CheckBox cbImportLabel;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

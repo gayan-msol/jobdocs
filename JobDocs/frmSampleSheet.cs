@@ -169,6 +169,12 @@ namespace JobDocs
                 foreach (DataColumn c in dataTable.Columns)
                 {
                     lengths.Add(TextRenderer.MeasureText(row[c].ToString(), bodyFont).Width);
+
+                    if(TextRenderer.MeasureText(row[c].ToString(), bodyFont).Width > 300)
+                    {
+
+                    }
+
                 }
             }
 
