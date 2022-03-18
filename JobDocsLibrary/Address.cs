@@ -39,6 +39,9 @@ namespace JobDocsLibrary
         public string State = "State";
         public string Postcode = "Postcode";
         public string Country = "Country";
+        public string Salutaion = "Salutation";
+        public string Stream = "Stream";
+        public string FileID = "FileID";
 
         public static List<string> CreateAddressBlock(Address address)
         {

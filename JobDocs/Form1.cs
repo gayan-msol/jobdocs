@@ -133,24 +133,36 @@ namespace JobDocs
                         int j = 0;
                         outputList.Clear();
 
-                        for (int i = 0; i < tableLayoutPanel.Controls.Count; i++)
+                    for (int i = 0; i < tableLayoutPanel.Controls.Count; i++)
+                    {
+
+                        if (tableLayoutPanel.Controls[i] is ComboBox combo)
                         {
-
-                            if(tableLayoutPanel.Controls[i] is ComboBox combo)
+                            if (combo.SelectedIndex > 0 || (combo.Text != "" && combo.Text != "<Select or Enter DT Field>"))// index 0 is the displayed value which should be ignored
                             {
-                                if (combo.SelectedIndex > 0 || (combo.Text != "" && combo.Text != "<Select or Enter DT Field>"))// index 0 is the displayed value which should be ignored
-                                {
-                                    j++;
-                                    string column = combo.SelectedItem == null ? combo.Text : combo.SelectedItem.ToString();
-                                    pdfStamper.AcroFields.SetField($"Col{j}", columnsList[j]);
-                                    pdfStamper.AcroFields.SetField($"dtCol{j}", column);
-                                    outputList.Add(column);
-                                }
-                             }
-
-                            //ComboBox c = (ComboBox)tableLayoutPanel.Controls[i];
-                            
+                                j++;
+                                string column = combo.SelectedItem == null ? combo.Text : combo.SelectedItem.ToString();
+                                pdfStamper.AcroFields.SetField($"Col{j}", columnsList[j]);
+                                pdfStamper.AcroFields.SetField($"dtCol{j}", column);
+                                outputList.Add(column);
+                            }
                         }
+
+                        //ComboBox c = (ComboBox)tableLayoutPanel.Controls[i];
+
+                    }
+
+                    //foreach (ComboBox combo in tableLayoutPanel.Controls)
+                    //{
+                    //    if (combo.SelectedIndex > 0 || (combo.Text != "" && combo.Text != "<Select or Enter DT Field>"))// index 0 is the displayed value which should be ignored
+                    //    {
+                    //        j++;
+                    //        string column = combo.SelectedItem == null ? combo.Text : combo.SelectedItem.ToString();
+                    //        pdfStamper.AcroFields.SetField($"Col{j}", columnsList[j]);
+                    //        pdfStamper.AcroFields.SetField($"dtCol{j}", column);
+                    //        outputList.Add(column);
+                    //    }
+                    //}
 
                         List<string> addBlockList = Address.GetAddressBlock(outputList);
                         for(int k=0;k<addBlockList.Count;k++)
@@ -254,13 +266,19 @@ namespace JobDocs
      
             List<string> itemsList = Address.getDtFieldList();
 
-            foreach (string file in files)
+            //foreach (string file in files)
+            //{
+            //    if (file.Substring(file.Length - 4, 4) == ".txt")
+            //    {
+            //        path = file;
+            //    }
+            //    columnsList = JobData.GetColumnList(path, delimiter);
+            //}
+
+            if (files.Length > 0 && (Path.GetExtension(files[0]) == ".txt" || Path.GetExtension(files[0]) == ".csv"))
             {
-                if (file.Substring(file.Length - 4, 4) == ".txt")
-                {
-                    path = file;
-                }
-                columnsList = JobData.GetColumnList(path, delimiter);
+                path = files[0];
+                columnsList = DirectoryHelper.getColumnList(path);
             }
 
             if (columnsList != null)
@@ -1444,10 +1462,10 @@ namespace JobDocs
         }
 
 
-        private void flowLayoutPanelDataSummary_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
-        }
+        //private void flowLayoutPanelDataSummary_DragEnter(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        //}
 
         private void cmbStreamFN_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1456,38 +1474,31 @@ namespace JobDocs
 
         private void splitContainer2_Panel1_DragDrop(object sender, DragEventArgs e)
         {
+            tableLayoutPanel.Controls.Clear();
 
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-            if(Path.GetExtension(files[0]) == ".txt")
+            if (files.Length > 0 && (Path.GetExtension(files[0]) == ".txt" || Path.GetExtension(files[0]) == ".csv"))
             {
-                columnsList = DirectoryHelper.getColumnList(files[0]);
-
+                path = files[0];
+                columnsList = DirectoryHelper.getColumnList(path);
             }
+            else
+            {
+                MessageBox.Show("Invalid file!");
+                return;
+            }
+
 
             dtColList = Address.getDtFieldList();
-
-            foreach (string file in files)
-            {
-                if (file.Substring(file.Length - 4, 4) == ".txt")
-                {
-                    path = file;
-                }
-                columnsList = JobData.GetColumnList(path, delimiter);
-            }
-
-
-
            
             tableLayoutPanel.ColumnCount = 2;
-
-
             tableLayoutPanel.Parent = splitContainer2.Panel1;
             tableLayoutPanel.AutoScroll = true;
             tableLayoutPanel.AutoSize = true;
             tableLayoutPanel.Controls.Add(new Label() { Text = "Source File Fields", Font = new Font(Label.DefaultFont, FontStyle.Bold) }, 0, 1);
-            tableLayoutPanel.Controls.Add(new Label() { Text = "Database Fields", Font = new Font(Label.DefaultFont, FontStyle.Bold) }, 1, 1);
-
+            tableLayoutPanel.Controls.Add(new Label() { Text = "Datatools Fields", Font = new Font(Label.DefaultFont, FontStyle.Bold) }, 1, 1);
+            tableLayoutPanel.Visible = false;
 
    
             int rowIndex = 1;
@@ -1495,6 +1506,8 @@ namespace JobDocs
             remainingItems = new List<string>(dtColList);
             foreach (string col in columnsList)
             {
+                
+
                 tableLayoutPanel.RowCount += 1;
                 rowIndex++;
                 //if (rowIndex == 18)
@@ -1511,7 +1524,7 @@ namespace JobDocs
 
 
 
-                Label label = new Label { Text = col , AutoSize=true};
+                Label label = new Label { Text = col.Replace("\"","") , AutoSize=true};
                 ComboBox comboBox = new ComboBox();
 
                 comboBox.Refresh();
@@ -1523,11 +1536,16 @@ namespace JobDocs
                 tableLayoutPanel.Controls.Add(comboBox, columnIndex + 1, rowIndex);
 
                 comboBox.DataSource = new List<string>(remainingItems);
-                string selection = remainingItems.Where(x => x == col).FirstOrDefault();
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+                string selection = remainingItems.Where(x => x == col.Replace("\"", "")).FirstOrDefault();
                 if (selection == null)
                 {
-                    selection = remainingItems.Where(x => StringProcessing.MatchStrings(x, col) < 3).FirstOrDefault();
-
+                    selection = remainingItems.Where(x => StringProcessing.MatchStrings(x, col.Replace("\"", "")) < 3).FirstOrDefault();
+                }
+                if(selection == null)
+                {
+                    selection = remainingItems.Where(x => col.Contains(x)).FirstOrDefault();
                 }
 
                 if (selection != null)
@@ -1537,12 +1555,34 @@ namespace JobDocs
 
 
             }
+
+            tableLayoutPanel.Visible = true;
         }
     
 
         private void splitContainer2_Panel1_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void bntCreateDSSheet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.InitialDirectory = richTextJobDirectory.Text;
+                saveFileDialog.FileName = $"{txtJobNo.Text} - Data Summary Sheet.pdf";
+                saveFileDialog.Filter = "PDF|*.pdf";
+                saveFileDialog.ShowDialog();
+                if (saveFileDialog.FileName != null)
+                {
+                    createPdf(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.ShowMessage(ex);
+            }
         }
     }
 } 

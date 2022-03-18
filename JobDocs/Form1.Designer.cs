@@ -47,7 +47,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPagePSS = new System.Windows.Forms.TabPage();
             this.checkBoxApproval = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
             this.txtCompany = new System.Windows.Forms.TextBox();
@@ -113,19 +113,19 @@
             this.cmbFileName = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPagePR = new System.Windows.Forms.TabPage();
             this.label18 = new System.Windows.Forms.Label();
             this.btnProductionReport = new System.Windows.Forms.Button();
             this.dataGridViewReturnItems = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPageSS = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbComma = new System.Windows.Forms.RadioButton();
             this.rbTab = new System.Windows.Forms.RadioButton();
             this.richTextOutputFilePath = new System.Windows.Forms.RichTextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnSampleSheet = new System.Windows.Forms.Button();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPageElms = new System.Windows.Forms.TabPage();
             this.LodgePanel = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cbPrintLabel = new System.Windows.Forms.CheckBox();
@@ -160,17 +160,17 @@
             this.txtElmsPWD = new System.Windows.Forms.TextBox();
             this.UN = new System.Windows.Forms.Label();
             this.txtElmsUN = new System.Windows.Forms.TextBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPageDS = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.button3 = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.bntCreateDSSheet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPagePSS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSheetsPerRec)).BeginInit();
             this.groupBoxPrintMachine.SuspendLayout();
             this.groupBoxColour.SuspendLayout();
@@ -180,18 +180,18 @@
             this.groupBoxStock.SuspendLayout();
             this.groupBoxLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).BeginInit();
-            this.tabPage3.SuspendLayout();
+            this.tabPagePR.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).BeginInit();
-            this.tabPage4.SuspendLayout();
+            this.tabPageSS.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage5.SuspendLayout();
+            this.tabPageElms.SuspendLayout();
             this.LodgePanel.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.LoginPanel.SuspendLayout();
-            this.tabPage7.SuspendLayout();
+            this.tabPageDS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -282,12 +282,12 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPageDS);
+            this.tabControl1.Controls.Add(this.tabPagePSS);
+            this.tabControl1.Controls.Add(this.tabPagePR);
+            this.tabControl1.Controls.Add(this.tabPageSS);
+            this.tabControl1.Controls.Add(this.tabPageElms);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -312,7 +312,6 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(677, 770);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Data Summary";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -401,60 +400,60 @@
             this.flowLayoutPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
             this.flowLayoutPanel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
-            // tabPage2
+            // tabPagePSS
             // 
-            this.tabPage2.Controls.Add(this.checkBoxApproval);
-            this.tabPage2.Controls.Add(this.label22);
-            this.tabPage2.Controls.Add(this.txtCompany);
-            this.tabPage2.Controls.Add(this.txtContact);
-            this.tabPage2.Controls.Add(this.richTexNotes);
-            this.tabPage2.Controls.Add(this.richTextJobDirectory);
-            this.tabPage2.Controls.Add(this.label21);
-            this.tabPage2.Controls.Add(this.cmbStreamStock);
-            this.tabPage2.Controls.Add(this.label20);
-            this.tabPage2.Controls.Add(this.cmbStreamFN);
-            this.tabPage2.Controls.Add(this.label19);
-            this.tabPage2.Controls.Add(this.btnRemoveStock);
-            this.tabPage2.Controls.Add(this.btnRemoveFileName);
-            this.tabPage2.Controls.Add(this.listBoxStock);
-            this.tabPage2.Controls.Add(this.listBoxFileNames);
-            this.tabPage2.Controls.Add(this.btnAddStock);
-            this.tabPage2.Controls.Add(this.btnAddFileName);
-            this.tabPage2.Controls.Add(this.cmbGuillo);
-            this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.cmbFinishedSize);
-            this.tabPage2.Controls.Add(this.label16);
-            this.tabPage2.Controls.Add(this.cmbPrintSize);
-            this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.tbnClearStreams);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.numericUpDownSheetsPerRec);
-            this.tabPage2.Controls.Add(this.groupBoxPrintMachine);
-            this.tabPage2.Controls.Add(this.btnPrintSpecSheet);
-            this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.label13);
-            this.tabPage2.Controls.Add(this.dataGridViewStreams);
-            this.tabPage2.Controls.Add(this.groupBoxBranch);
-            this.tabPage2.Controls.Add(this.btnAddStream);
-            this.tabPage2.Controls.Add(this.numericUpDownStreamQty);
-            this.tabPage2.Controls.Add(this.cmbStream);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.groupBoxStock);
-            this.tabPage2.Controls.Add(this.lblPrintDescription);
-            this.tabPage2.Controls.Add(this.groupBoxLayout);
-            this.tabPage2.Controls.Add(this.cmbPrintJobs);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.cmbFileName);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(677, 770);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Print Spec Sheet";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            this.tabPagePSS.Controls.Add(this.checkBoxApproval);
+            this.tabPagePSS.Controls.Add(this.label22);
+            this.tabPagePSS.Controls.Add(this.txtCompany);
+            this.tabPagePSS.Controls.Add(this.txtContact);
+            this.tabPagePSS.Controls.Add(this.richTexNotes);
+            this.tabPagePSS.Controls.Add(this.richTextJobDirectory);
+            this.tabPagePSS.Controls.Add(this.label21);
+            this.tabPagePSS.Controls.Add(this.cmbStreamStock);
+            this.tabPagePSS.Controls.Add(this.label20);
+            this.tabPagePSS.Controls.Add(this.cmbStreamFN);
+            this.tabPagePSS.Controls.Add(this.label19);
+            this.tabPagePSS.Controls.Add(this.btnRemoveStock);
+            this.tabPagePSS.Controls.Add(this.btnRemoveFileName);
+            this.tabPagePSS.Controls.Add(this.listBoxStock);
+            this.tabPagePSS.Controls.Add(this.listBoxFileNames);
+            this.tabPagePSS.Controls.Add(this.btnAddStock);
+            this.tabPagePSS.Controls.Add(this.btnAddFileName);
+            this.tabPagePSS.Controls.Add(this.cmbGuillo);
+            this.tabPagePSS.Controls.Add(this.label17);
+            this.tabPagePSS.Controls.Add(this.cmbFinishedSize);
+            this.tabPagePSS.Controls.Add(this.label16);
+            this.tabPagePSS.Controls.Add(this.cmbPrintSize);
+            this.tabPagePSS.Controls.Add(this.label15);
+            this.tabPagePSS.Controls.Add(this.tbnClearStreams);
+            this.tabPagePSS.Controls.Add(this.label9);
+            this.tabPagePSS.Controls.Add(this.numericUpDownSheetsPerRec);
+            this.tabPagePSS.Controls.Add(this.groupBoxPrintMachine);
+            this.tabPagePSS.Controls.Add(this.btnPrintSpecSheet);
+            this.tabPagePSS.Controls.Add(this.label14);
+            this.tabPagePSS.Controls.Add(this.label13);
+            this.tabPagePSS.Controls.Add(this.dataGridViewStreams);
+            this.tabPagePSS.Controls.Add(this.groupBoxBranch);
+            this.tabPagePSS.Controls.Add(this.btnAddStream);
+            this.tabPagePSS.Controls.Add(this.numericUpDownStreamQty);
+            this.tabPagePSS.Controls.Add(this.cmbStream);
+            this.tabPagePSS.Controls.Add(this.label10);
+            this.tabPagePSS.Controls.Add(this.groupBoxStock);
+            this.tabPagePSS.Controls.Add(this.lblPrintDescription);
+            this.tabPagePSS.Controls.Add(this.groupBoxLayout);
+            this.tabPagePSS.Controls.Add(this.cmbPrintJobs);
+            this.tabPagePSS.Controls.Add(this.label11);
+            this.tabPagePSS.Controls.Add(this.cmbFileName);
+            this.tabPagePSS.Controls.Add(this.label8);
+            this.tabPagePSS.Controls.Add(this.label7);
+            this.tabPagePSS.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePSS.Name = "tabPagePSS";
+            this.tabPagePSS.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePSS.Size = new System.Drawing.Size(677, 770);
+            this.tabPagePSS.TabIndex = 1;
+            this.tabPagePSS.Text = "Print Spec Sheet";
+            this.tabPagePSS.UseVisualStyleBackColor = true;
+            this.tabPagePSS.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // checkBoxApproval
             // 
@@ -1104,18 +1103,18 @@
             this.label7.TabIndex = 3;
             this.label7.Text = "Job Directory";
             // 
-            // tabPage3
+            // tabPagePR
             // 
-            this.tabPage3.Controls.Add(this.label18);
-            this.tabPage3.Controls.Add(this.btnProductionReport);
-            this.tabPage3.Controls.Add(this.dataGridViewReturnItems);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(677, 770);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Production Report";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPagePR.Controls.Add(this.label18);
+            this.tabPagePR.Controls.Add(this.btnProductionReport);
+            this.tabPagePR.Controls.Add(this.dataGridViewReturnItems);
+            this.tabPagePR.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePR.Name = "tabPagePR";
+            this.tabPagePR.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePR.Size = new System.Drawing.Size(677, 770);
+            this.tabPagePR.TabIndex = 2;
+            this.tabPagePR.Text = "Production Report";
+            this.tabPagePR.UseVisualStyleBackColor = true;
             // 
             // label18
             // 
@@ -1154,21 +1153,21 @@
             this.Column1.Name = "Column1";
             this.Column1.Width = 92;
             // 
-            // tabPage4
+            // tabPageSS
             // 
-            this.tabPage4.Controls.Add(this.groupBox1);
-            this.tabPage4.Controls.Add(this.richTextOutputFilePath);
-            this.tabPage4.Controls.Add(this.btnBrowse);
-            this.tabPage4.Controls.Add(this.btnSampleSheet);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(677, 770);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Sample Sheet";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
-            this.tabPage4.Enter += new System.EventHandler(this.tabPage4_Enter);
+            this.tabPageSS.Controls.Add(this.groupBox1);
+            this.tabPageSS.Controls.Add(this.richTextOutputFilePath);
+            this.tabPageSS.Controls.Add(this.btnBrowse);
+            this.tabPageSS.Controls.Add(this.btnSampleSheet);
+            this.tabPageSS.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSS.Name = "tabPageSS";
+            this.tabPageSS.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSS.Size = new System.Drawing.Size(677, 770);
+            this.tabPageSS.TabIndex = 3;
+            this.tabPageSS.Text = "Sample Sheet";
+            this.tabPageSS.UseVisualStyleBackColor = true;
+            this.tabPageSS.Click += new System.EventHandler(this.tabPage4_Click);
+            this.tabPageSS.Enter += new System.EventHandler(this.tabPage4_Enter);
             // 
             // groupBox1
             // 
@@ -1232,19 +1231,19 @@
             this.btnSampleSheet.UseVisualStyleBackColor = true;
             this.btnSampleSheet.Click += new System.EventHandler(this.btnSampleSheet_Click);
             // 
-            // tabPage5
+            // tabPageElms
             // 
-            this.tabPage5.Controls.Add(this.LodgePanel);
-            this.tabPage5.Controls.Add(this.LoginPanel);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(677, 770);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "eLMS";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
-            this.tabPage5.Enter += new System.EventHandler(this.tabPage5_Enter);
+            this.tabPageElms.Controls.Add(this.LodgePanel);
+            this.tabPageElms.Controls.Add(this.LoginPanel);
+            this.tabPageElms.Location = new System.Drawing.Point(4, 22);
+            this.tabPageElms.Name = "tabPageElms";
+            this.tabPageElms.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageElms.Size = new System.Drawing.Size(677, 770);
+            this.tabPageElms.TabIndex = 4;
+            this.tabPageElms.Text = "eLMS";
+            this.tabPageElms.UseVisualStyleBackColor = true;
+            this.tabPageElms.Click += new System.EventHandler(this.tabPage5_Click);
+            this.tabPageElms.Enter += new System.EventHandler(this.tabPage5_Enter);
             // 
             // LodgePanel
             // 
@@ -1621,19 +1620,16 @@
             this.txtElmsUN.Size = new System.Drawing.Size(100, 20);
             this.txtElmsUN.TabIndex = 0;
             // 
-            // backgroundWorker1
+            // tabPageDS
             // 
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.splitContainer2);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(677, 770);
-            this.tabPage7.TabIndex = 6;
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.tabPageDS.Controls.Add(this.splitContainer2);
+            this.tabPageDS.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDS.Name = "tabPageDS";
+            this.tabPageDS.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDS.Size = new System.Drawing.Size(677, 770);
+            this.tabPageDS.TabIndex = 6;
+            this.tabPageDS.Text = "Data Summary";
+            this.tabPageDS.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
             // 
@@ -1649,19 +1645,24 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.button3);
+            this.splitContainer2.Panel2.Controls.Add(this.bntCreateDSSheet);
             this.splitContainer2.Size = new System.Drawing.Size(671, 764);
-            this.splitContainer2.SplitterDistance = 549;
+            this.splitContainer2.SplitterDistance = 535;
             this.splitContainer2.TabIndex = 0;
             // 
-            // button3
+            // backgroundWorker1
             // 
-            this.button3.Location = new System.Drawing.Point(27, 105);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            // 
+            // bntCreateDSSheet
+            // 
+            this.bntCreateDSSheet.Location = new System.Drawing.Point(3, 64);
+            this.bntCreateDSSheet.Name = "bntCreateDSSheet";
+            this.bntCreateDSSheet.Size = new System.Drawing.Size(122, 56);
+            this.bntCreateDSSheet.TabIndex = 8;
+            this.bntCreateDSSheet.Text = "Create PDF";
+            this.bntCreateDSSheet.UseVisualStyleBackColor = true;
+            this.bntCreateDSSheet.Click += new System.EventHandler(this.bntCreateDSSheet_Click);
             // 
             // Form1
             // 
@@ -1681,8 +1682,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabPagePSS.ResumeLayout(false);
+            this.tabPagePSS.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSheetsPerRec)).EndInit();
             this.groupBoxPrintMachine.ResumeLayout(false);
             this.groupBoxPrintMachine.PerformLayout();
@@ -1697,13 +1698,13 @@
             this.groupBoxLayout.ResumeLayout(false);
             this.groupBoxLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUp)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tabPagePR.ResumeLayout(false);
+            this.tabPagePR.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReturnItems)).EndInit();
-            this.tabPage4.ResumeLayout(false);
+            this.tabPageSS.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
+            this.tabPageElms.ResumeLayout(false);
             this.LodgePanel.ResumeLayout(false);
             this.LodgePanel.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1715,7 +1716,7 @@
             this.groupBox2.PerformLayout();
             this.LoginPanel.ResumeLayout(false);
             this.LoginPanel.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
+            this.tabPageDS.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
@@ -1744,7 +1745,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPagePSS;
         private System.Windows.Forms.CheckBox checkBoxApproval;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox txtCompany;
@@ -1810,19 +1811,19 @@
         private System.Windows.Forms.ComboBox cmbFileName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPagePR;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button btnProductionReport;
         private System.Windows.Forms.DataGridView dataGridViewReturnItems;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPageSS;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbComma;
         private System.Windows.Forms.RadioButton rbTab;
         private System.Windows.Forms.RichTextBox richTextOutputFilePath;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Button btnSampleSheet;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPageElms;
         private System.Windows.Forms.Panel LodgePanel;
         private System.Windows.Forms.Button btnBrowseManifest;
         private System.Windows.Forms.Button btnLodge;
@@ -1857,9 +1858,9 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox cbPrintLabel;
         private System.Windows.Forms.CheckBox cbImportLabel;
-        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPageDS;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button bntCreateDSSheet;
     }
 }
 
