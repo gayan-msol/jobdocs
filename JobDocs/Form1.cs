@@ -348,6 +348,7 @@ namespace JobDocs
             if(importedJob != null)
             {
                 btnFullRateTags.Enabled = true;
+                btnINTZones.Enabled = true;
 
                 jobName = txtJobName.Text = importedJob.JobName;
                 customer = txtCustomer.Text = importedJob.Customer;
@@ -1289,7 +1290,7 @@ namespace JobDocs
             {
                 SortSummary summary = new SortSummary();
                 bool contract = false;
-                if (importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo == "6258639")
+                if (importedJob != null && importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo == "6258639")
                 {
                     contract = true;
                 }
@@ -1309,7 +1310,7 @@ namespace JobDocs
                     if(country != "")
                     {
                         count++;
-                        string zone = DataAccess.GetIntZone(country, contract);
+                        string zone = DataAccess.GetIntZones(country, contract);
 
                         if (string.IsNullOrEmpty(zone))
                         {
@@ -1337,7 +1338,7 @@ namespace JobDocs
                 summaryStr += $"Zone 5:\t {summary.Z5}\n";
                 summaryStr += $"Zone 6:\t {summary.Z6}\n";
                 summaryStr += $"Zone 7:\t {summary.Z7}\n";
-                summaryStr += $"Zone 8:\t {unmatchedCount}";
+                summaryStr += $"Zone 8:\t {unmatchedCount}\n";
                 summaryStr += $"Total :\t {count}\n";
 
                 File.WriteAllText($@"{Path.GetDirectoryName(outputFileName)}\International Zones.txt", summaryStr);
@@ -1382,7 +1383,7 @@ namespace JobDocs
                     Arguments = cmdImport,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
-                    CreateNoWindow = true
+               
 
                 }
             };

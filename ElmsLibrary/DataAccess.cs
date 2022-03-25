@@ -40,7 +40,7 @@ namespace ElmsLibrary
         }
 
 
-        public static string GetIntZone(string country, bool contract = false)
+        public static string GetIntZones(string country, bool contract = false)
         {
             string query;
             if (contract)
@@ -67,6 +67,34 @@ namespace ElmsLibrary
                 }
             }
         }
+
+        //public static Dictionary<string,string> GetIntZones(bool contract = false)
+        //{
+        //    string query;
+        //    if (contract)
+        //    {
+        //        query = $@"SELECT Country,Zone from IntZonesContract ";
+        //    }
+        //    else
+        //    {
+        //        query = $@"SELECT Country,Zone from IntZonesFullRate ";
+        //    }
+
+
+        //    using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connStr))
+        //    {
+        //        var output = connection.Query<KeyValuePair<string,string>>(query).ToDictionary(x=>x.Key,x=>x.Value);
+
+        //        if (output.Count > 0)
+        //        {
+        //            return output;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
 
         public static ElmsUser GetElmsUser(string windowsUser)
         {

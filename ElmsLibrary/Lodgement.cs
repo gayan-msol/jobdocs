@@ -27,14 +27,18 @@ namespace ElmsLibrary
         public string RegNo { get; set; }
         public string RegName { get; set; }
         public bool ProgressiveLodgement { get; set; }
-
-
-
+        public static Dictionary<string,string> IntZonesContract { get; set; }
+        public static Dictionary<string, string> IntZonesFullRate { get; set; }
 
 
         public static SortSummary GetSortCategories(DataTable dataTable, string sortType , bool intContract = false)
         {
             SortSummary sortSummary = new SortSummary();
+            //Dictionary<string, string> IntZonesContract = DataAccess.GetIntZones(true);
+            //Dictionary<string, string> IntZonesFullRate = DataAccess.GetIntZones();
+
+
+
             int unmatchedCount = 0;
             if (sortType == "Full Rate")
             {
@@ -53,7 +57,8 @@ namespace ElmsLibrary
                             sortSummary.IntTotal += 1;
                     
                             string country = row["Country"].ToString();
-                            string zone = DataAccess.GetIntZone(country, intContract);
+                            string zone = DataAccess.GetIntZones(country, intContract);
+                           // zone = intContract ? IntZonesContract[country] : IntZonesFullRate[country];
 
                             if (string.IsNullOrEmpty(zone))
                             {
@@ -115,7 +120,7 @@ namespace ElmsLibrary
                         sortSummary.IntTotal += 1;
 
                         string country = row["Country"].ToString();
-                        string zone = DataAccess.GetIntZone(country, intContract);
+                        string zone = DataAccess.GetIntZones(country, intContract);
 
                         if (string.IsNullOrEmpty(zone))
                         {

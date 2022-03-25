@@ -37,16 +37,9 @@
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.btnImportFromDolphin = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnSecondStream = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPageDS = new System.Windows.Forms.TabPage();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.bntCreateDSSheet = new System.Windows.Forms.Button();
             this.tabPagePSS = new System.Windows.Forms.TabPage();
             this.checkBoxApproval = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -160,16 +153,26 @@
             this.txtElmsPWD = new System.Windows.Forms.TextBox();
             this.UN = new System.Windows.Forms.Label();
             this.txtElmsUN = new System.Windows.Forms.TextBox();
-            this.tabPageDS = new System.Windows.Forms.TabPage();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnSecondStream = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.bntCreateDSSheet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabPageDS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.tabPagePSS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSheetsPerRec)).BeginInit();
             this.groupBoxPrintMachine.SuspendLayout();
@@ -191,10 +194,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.LoginPanel.SuspendLayout();
-            this.tabPageDS.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -289,6 +289,8 @@
             this.tabControl1.Controls.Add(this.tabPageElms);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.ItemSize = new System.Drawing.Size(81, 30);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -296,109 +298,46 @@
             this.tabControl1.TabIndex = 25;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
-            // tabPage1
+            // tabPageDS
             // 
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.btnSecondStream);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.flowLayoutPanel2);
-            this.tabPage1.Controls.Add(this.dateTimePicker1);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.flowLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(677, 770);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageDS.Controls.Add(this.splitContainer2);
+            this.tabPageDS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPageDS.Location = new System.Drawing.Point(4, 34);
+            this.tabPageDS.Name = "tabPageDS";
+            this.tabPageDS.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDS.Size = new System.Drawing.Size(677, 758);
+            this.tabPageDS.TabIndex = 6;
+            this.tabPageDS.Text = "Data Summary";
+            this.tabPageDS.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // splitContainer2
             // 
-            this.button1.Location = new System.Drawing.Point(484, 469);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 56);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Create PDF";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
             // 
-            // btnSecondStream
+            // splitContainer2.Panel1
             // 
-            this.btnSecondStream.Enabled = false;
-            this.btnSecondStream.Location = new System.Drawing.Point(335, 192);
-            this.btnSecondStream.Name = "btnSecondStream";
-            this.btnSecondStream.Size = new System.Drawing.Size(122, 32);
-            this.btnSecondStream.TabIndex = 24;
-            this.btnSecondStream.Text = "Add Second Stream";
-            this.btnSecondStream.UseVisualStyleBackColor = true;
-            this.btnSecondStream.Click += new System.EventHandler(this.btnSecondStream_Click);
+            this.splitContainer2.Panel1.AllowDrop = true;
+            this.splitContainer2.Panel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel1_DragDrop);
+            this.splitContainer2.Panel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel1_DragEnter);
             // 
-            // label6
+            // splitContainer2.Panel2
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(254, 214);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 13);
-            this.label6.TabIndex = 23;
+            this.splitContainer2.Panel2.Controls.Add(this.bntCreateDSSheet);
+            this.splitContainer2.Size = new System.Drawing.Size(671, 752);
+            this.splitContainer2.SplitterDistance = 535;
+            this.splitContainer2.TabIndex = 0;
             // 
-            // button2
+            // bntCreateDSSheet
             // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(484, 531);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(122, 56);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Print";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoScroll = true;
-            this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(257, 230);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 544);
-            this.flowLayoutPanel2.TabIndex = 4;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(109, 175);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 12;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 214);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 13);
-            this.label5.TabIndex = 22;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 175);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 13);
-            this.label4.TabIndex = 19;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AllowDrop = true;
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.AutoScrollMargin = new System.Drawing.Size(10, 10);
-            this.flowLayoutPanel1.AutoScrollMinSize = new System.Drawing.Size(10, 10);
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 230);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 544);
-            this.flowLayoutPanel1.TabIndex = 3;
-            this.flowLayoutPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
-            this.flowLayoutPanel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
+            this.bntCreateDSSheet.Location = new System.Drawing.Point(3, 64);
+            this.bntCreateDSSheet.Name = "bntCreateDSSheet";
+            this.bntCreateDSSheet.Size = new System.Drawing.Size(122, 56);
+            this.bntCreateDSSheet.TabIndex = 8;
+            this.bntCreateDSSheet.Text = "Create PDF";
+            this.bntCreateDSSheet.UseVisualStyleBackColor = true;
+            this.bntCreateDSSheet.Click += new System.EventHandler(this.bntCreateDSSheet_Click);
             // 
             // tabPagePSS
             // 
@@ -446,10 +385,10 @@
             this.tabPagePSS.Controls.Add(this.cmbFileName);
             this.tabPagePSS.Controls.Add(this.label8);
             this.tabPagePSS.Controls.Add(this.label7);
-            this.tabPagePSS.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePSS.Location = new System.Drawing.Point(4, 34);
             this.tabPagePSS.Name = "tabPagePSS";
             this.tabPagePSS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePSS.Size = new System.Drawing.Size(677, 770);
+            this.tabPagePSS.Size = new System.Drawing.Size(677, 758);
             this.tabPagePSS.TabIndex = 1;
             this.tabPagePSS.Text = "Print Spec Sheet";
             this.tabPagePSS.UseVisualStyleBackColor = true;
@@ -1108,10 +1047,10 @@
             this.tabPagePR.Controls.Add(this.label18);
             this.tabPagePR.Controls.Add(this.btnProductionReport);
             this.tabPagePR.Controls.Add(this.dataGridViewReturnItems);
-            this.tabPagePR.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePR.Location = new System.Drawing.Point(4, 34);
             this.tabPagePR.Name = "tabPagePR";
             this.tabPagePR.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePR.Size = new System.Drawing.Size(677, 770);
+            this.tabPagePR.Size = new System.Drawing.Size(677, 758);
             this.tabPagePR.TabIndex = 2;
             this.tabPagePR.Text = "Production Report";
             this.tabPagePR.UseVisualStyleBackColor = true;
@@ -1159,10 +1098,10 @@
             this.tabPageSS.Controls.Add(this.richTextOutputFilePath);
             this.tabPageSS.Controls.Add(this.btnBrowse);
             this.tabPageSS.Controls.Add(this.btnSampleSheet);
-            this.tabPageSS.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSS.Location = new System.Drawing.Point(4, 34);
             this.tabPageSS.Name = "tabPageSS";
             this.tabPageSS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSS.Size = new System.Drawing.Size(677, 770);
+            this.tabPageSS.Size = new System.Drawing.Size(677, 758);
             this.tabPageSS.TabIndex = 3;
             this.tabPageSS.Text = "Sample Sheet";
             this.tabPageSS.UseVisualStyleBackColor = true;
@@ -1235,10 +1174,10 @@
             // 
             this.tabPageElms.Controls.Add(this.LodgePanel);
             this.tabPageElms.Controls.Add(this.LoginPanel);
-            this.tabPageElms.Location = new System.Drawing.Point(4, 22);
+            this.tabPageElms.Location = new System.Drawing.Point(4, 34);
             this.tabPageElms.Name = "tabPageElms";
             this.tabPageElms.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageElms.Size = new System.Drawing.Size(677, 770);
+            this.tabPageElms.Size = new System.Drawing.Size(677, 758);
             this.tabPageElms.TabIndex = 4;
             this.tabPageElms.Text = "eLMS";
             this.tabPageElms.UseVisualStyleBackColor = true;
@@ -1277,7 +1216,7 @@
             this.groupBox4.Controls.Add(this.numericUpDownTags);
             this.groupBox4.Location = new System.Drawing.Point(119, 464);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(149, 164);
+            this.groupBox4.Size = new System.Drawing.Size(165, 164);
             this.groupBox4.TabIndex = 22;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tray Labels";
@@ -1320,9 +1259,10 @@
             // btnFullRateTags
             // 
             this.btnFullRateTags.Enabled = false;
+            this.btnFullRateTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFullRateTags.Location = new System.Drawing.Point(9, 112);
             this.btnFullRateTags.Name = "btnFullRateTags";
-            this.btnFullRateTags.Size = new System.Drawing.Size(135, 46);
+            this.btnFullRateTags.Size = new System.Drawing.Size(140, 46);
             this.btnFullRateTags.TabIndex = 19;
             this.btnFullRateTags.Text = "Create Full Rate Tags";
             this.btnFullRateTags.UseVisualStyleBackColor = true;
@@ -1352,12 +1292,11 @@
             // 
             // btnINTZones
             // 
-            this.btnINTZones.Enabled = false;
-            this.btnINTZones.Location = new System.Drawing.Point(432, 105);
+            this.btnINTZones.Location = new System.Drawing.Point(374, 105);
             this.btnINTZones.Name = "btnINTZones";
-            this.btnINTZones.Size = new System.Drawing.Size(94, 23);
+            this.btnINTZones.Size = new System.Drawing.Size(198, 23);
             this.btnINTZones.TabIndex = 17;
-            this.btnINTZones.Text = "INT Zones";
+            this.btnINTZones.Text = "INT Zone Breakdown";
             this.btnINTZones.UseVisualStyleBackColor = true;
             this.btnINTZones.Click += new System.EventHandler(this.btnINTZones_Click);
             // 
@@ -1517,6 +1456,7 @@
             // 
             // btnBrowseManifest
             // 
+            this.btnBrowseManifest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowseManifest.Location = new System.Drawing.Point(499, 57);
             this.btnBrowseManifest.Name = "btnBrowseManifest";
             this.btnBrowseManifest.Size = new System.Drawing.Size(75, 23);
@@ -1528,6 +1468,7 @@
             // btnLodge
             // 
             this.btnLodge.Enabled = false;
+            this.btnLodge.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLodge.Location = new System.Drawing.Point(437, 518);
             this.btnLodge.Name = "btnLodge";
             this.btnLodge.Size = new System.Drawing.Size(135, 46);
@@ -1620,49 +1561,113 @@
             this.txtElmsUN.Size = new System.Drawing.Size(100, 20);
             this.txtElmsUN.TabIndex = 0;
             // 
-            // tabPageDS
+            // tabPage1
             // 
-            this.tabPageDS.Controls.Add(this.splitContainer2);
-            this.tabPageDS.Location = new System.Drawing.Point(4, 22);
-            this.tabPageDS.Name = "tabPageDS";
-            this.tabPageDS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDS.Size = new System.Drawing.Size(677, 770);
-            this.tabPageDS.TabIndex = 6;
-            this.tabPageDS.Text = "Data Summary";
-            this.tabPageDS.UseVisualStyleBackColor = true;
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.btnSecondStream);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.flowLayoutPanel2);
+            this.tabPage1.Controls.Add(this.dateTimePicker1);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.flowLayoutPanel1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(677, 758);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // splitContainer2
+            // button1
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer2.Name = "splitContainer2";
+            this.button1.Location = new System.Drawing.Point(484, 469);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 56);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Create PDF";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // splitContainer2.Panel1
+            // btnSecondStream
             // 
-            this.splitContainer2.Panel1.AllowDrop = true;
-            this.splitContainer2.Panel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel1_DragDrop);
-            this.splitContainer2.Panel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel1_DragEnter);
+            this.btnSecondStream.Enabled = false;
+            this.btnSecondStream.Location = new System.Drawing.Point(335, 192);
+            this.btnSecondStream.Name = "btnSecondStream";
+            this.btnSecondStream.Size = new System.Drawing.Size(122, 32);
+            this.btnSecondStream.TabIndex = 24;
+            this.btnSecondStream.Text = "Add Second Stream";
+            this.btnSecondStream.UseVisualStyleBackColor = true;
+            this.btnSecondStream.Click += new System.EventHandler(this.btnSecondStream_Click);
             // 
-            // splitContainer2.Panel2
+            // label6
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.bntCreateDSSheet);
-            this.splitContainer2.Size = new System.Drawing.Size(671, 764);
-            this.splitContainer2.SplitterDistance = 535;
-            this.splitContainer2.TabIndex = 0;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(254, 214);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 13);
+            this.label6.TabIndex = 23;
+            // 
+            // button2
+            // 
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(484, 531);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(122, 56);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Print";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoScroll = true;
+            this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(257, 230);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 544);
+            this.flowLayoutPanel2.TabIndex = 4;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(109, 175);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 214);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 13);
+            this.label5.TabIndex = 22;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.TabIndex = 19;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AllowDrop = true;
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.AutoScrollMargin = new System.Drawing.Size(10, 10);
+            this.flowLayoutPanel1.AutoScrollMinSize = new System.Drawing.Size(10, 10);
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 230);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 544);
+            this.flowLayoutPanel1.TabIndex = 3;
+            this.flowLayoutPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
+            this.flowLayoutPanel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
-            // 
-            // bntCreateDSSheet
-            // 
-            this.bntCreateDSSheet.Location = new System.Drawing.Point(3, 64);
-            this.bntCreateDSSheet.Name = "bntCreateDSSheet";
-            this.bntCreateDSSheet.Size = new System.Drawing.Size(122, 56);
-            this.bntCreateDSSheet.TabIndex = 8;
-            this.bntCreateDSSheet.Text = "Create PDF";
-            this.bntCreateDSSheet.UseVisualStyleBackColor = true;
-            this.bntCreateDSSheet.Click += new System.EventHandler(this.bntCreateDSSheet_Click);
             // 
             // Form1
             // 
@@ -1680,8 +1685,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabPageDS.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.tabPagePSS.ResumeLayout(false);
             this.tabPagePSS.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSheetsPerRec)).EndInit();
@@ -1716,10 +1723,8 @@
             this.groupBox2.PerformLayout();
             this.LoginPanel.ResumeLayout(false);
             this.LoginPanel.PerformLayout();
-            this.tabPageDS.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }

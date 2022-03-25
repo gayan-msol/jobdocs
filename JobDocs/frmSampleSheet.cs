@@ -205,6 +205,7 @@ namespace JobDocs
             printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 830, width);
             printDoc.DocumentName = $@"{Form1.jobDirectoryData}\Job {Form1.jobNo} - Sample Records";
             printDoc.PrinterSettings.PrinterName = "Adobe PDF";
+            
        //     printDoc.PrinterSettings.PrintFileName = $@"{Form1.jobDirectory}\Job {Form1.jobNo} - Sample Records";
 
 
