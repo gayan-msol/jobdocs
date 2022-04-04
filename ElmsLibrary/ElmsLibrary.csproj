@@ -138,6 +138,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortCategory.cs" />
     <Compile Include="SortTypes.cs" />
+    <Compile Include="TrayLabels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

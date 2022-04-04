@@ -24,7 +24,6 @@ namespace JobDocs
 {
     public partial class Form1 : Form
     {
-
         string customer = "";
         public static string jobNo = "";
         public static string jobName = "";
@@ -53,6 +52,9 @@ namespace JobDocs
         List<string> remainingItems = new List<string>();
         List<string> dtColList = new List<string>();
         TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
+        int fullratetagCount = 0;
+        int intTagCount = 0;
+        
 
 
         public Form1()
@@ -973,10 +975,26 @@ namespace JobDocs
                 {
                     cmbLodgementType.SelectedItem = "Print Post";
                 }
-
                 else
                 {
                     cmbLodgementType.SelectedItem = "Full Rate";
+                }
+
+                switch (cmbLodgementType.SelectedItem)
+                {
+                    case "PreSort":
+                        listBoxTrayLabels.Items.Add("Presort Tags");
+                        cbIncSorted.Checked = true;
+                        break;
+                    case "Print Post":
+                        listBoxTrayLabels.Items.Add("Print Post Tags");
+                        cbIncSorted.Checked = true;
+                        break;
+                    case "Full Rate":
+                        cbIncSorted.Checked = false;
+                        break;
+                    default:
+                        break;
                 }
 
                 var lodgementLines = importedJob.LodgementLines.Where(x => x.Name == sortType).ToList();
@@ -1584,6 +1602,246 @@ namespace JobDocs
             {
                 ErrorHandling.ShowMessage(ex);
             }
+        }
+
+        private void btnINTTags_Click(object sender, EventArgs e)
+        {
+            printLabels(int.Parse(numericUpDownTags.Value.ToString()));
+        }
+
+
+        private void printLabels( int count)
+        {
+
+            int total = count;
+
+            PrintDocument printDoc = new PrintDocument();
+            
+                printDoc.DefaultPageSettings.Landscape = true;
+                printDoc.DefaultPageSettings.PaperSize = new PaperSize("Custom Size", 200, 467);
+                printDoc.DefaultPageSettings.PaperSize.RawKind = 120;
+                printDoc.DocumentName = $"Tray Lables - {txtJobNo.Text}";
+                printDoc.PrinterSettings.PrinterName = "Godex G530";
+            
+
+
+            printDoc.DefaultPageSettings.Margins.Left = 10;
+            printDoc.DefaultPageSettings.Margins.Right = 10;//100 = 1 inch = 2.54 cm
+            printDoc.DefaultPageSettings.Margins.Top = 10;
+            printDoc.DefaultPageSettings.Margins.Bottom = 10;
+            int i = 0;
+
+
+            printDoc.PrintPage += new PrintPageEventHandler(printDoc_PrintPage);
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDoc; //Document property must be set before ShowDialog()
+
+            DialogResult dialogResult = printDialog.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                printDoc.Print();
+            }
+
+            void printDoc_PrintPage(object senderp, PrintPageEventArgs ev)
+            {
+                Graphics g = ev.Graphics;
+                string jobNo = txtJobNo.Text.ToUpper();
+                //string customer = txtCustomer.Text.ToUpper();
+                string customer = txtCustomer.Text;
+                Font font1 = new Font("Calibri", 32, FontStyle.Bold);
+                string jobName = txtJobName.Text.ToUpper();
+                Font font2 = new Font("Calibri", 22);
+                string tot = total.ToString();
+                Font font3 = new Font("Calibri", 12);
+                Font font4 = new Font("Calibri", 18, FontStyle.Bold);
+                Font font7 = new Font("Calibri", 14);
+
+                int x1 = ev.MarginBounds.Left;
+                int y1 = ev.MarginBounds.Top;
+                int w = ev.MarginBounds.Width;
+                int h = ev.MarginBounds.Height;
+                int y2 = 65;
+                int y3 = 140;
+                int y4 = 160;
+
+                StringFormat formatLeft = new StringFormat(StringFormatFlags.NoClip);
+                StringFormat formatCenter = new StringFormat(formatLeft);
+                formatCenter.Alignment = StringAlignment.Center;
+
+                
+               RectangleF rectF1 = new RectangleF(x1, y2, 450, 70);
+
+                    g.DrawString($"{jobNo} - {jobName}", font3, Brushes.Black, x1, y1);
+                    g.DrawString("INTERNATIONAL", font1, Brushes.Black, rectF1, formatCenter);
+                    g.DrawString("Mailing Solutions", font3, Brushes.Black, x1, y3);
+                    g.DrawRectangle(Pens.Black, x1, y2, 450, 70);
+                    // g.DrawString("- INT", font1, Brushes.Black, 160, y1);
+                   // g.DrawString($"eLMS No:  {eLMS}", font4, Brushes.Black, x1, y4);
+                    string trayNo = $"Tray {i + 1} of {tot}";
+                    g.DrawString(trayNo, font4, Brushes.Black, x1 + 300, y4);
+
+                    i++;
+                    ev.HasMorePages = i >= total ? false : true;
+                
+
+            }
+        }
+
+        private void btnCreateAndPrintTags_Click(object sender, EventArgs e)
+        {
+           
+
+            string service = serviceType == "Regular" ? "R" : "1";
+            string traySize = size == "Small" ? "S" : "L";
+            string labelName = $"{jobNo} {jobName}";
+            if (labelName.Length > 32)
+            {
+                labelName = labelName.Substring(0, 32);
+            }
+            string labelText = "#Australia Post Visa Tray Label System - Ver:\n3v0-700\n#Label Plan File\n#Label Plan Header\n";
+            labelText += $"{labelName},MAILING SOLUTIONS,{jobName},6,{jobNo}\n#Label Details\n";
+
+            if (cbIncSorted.Checked)
+            {
+                decimal countPerTray = 0;
+                using (var frmCount = new FormCount())
+                {
+                    var res = frmCount.ShowDialog();
+                    if (res == DialogResult.OK)
+                    {
+                        countPerTray = frmCount.Count;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                if (countPerTray == 0)
+                {
+                    MessageBox.Show("Articles per Tray must be greater than zero!");
+                    return;
+                }
+
+
+                if (sourceTable != null)
+                {
+
+                    List<string> labels = new List<string>();
+                    string sortCodeColumn = "";
+
+                    switch (sortType)
+                    {
+
+                        case "PreSort":
+                            sortCodeColumn = sourceTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+                            break;
+                        case "Charity Mail":
+                            sortCodeColumn = sourceTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+                            break;
+                        case "Print Post":
+                            sortCodeColumn = sourceTable.Columns.Contains("Dt PP Sort Code") ? "Dt PP Sort Code" : "Dt LH Sort Code";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    foreach (DataRow row in sourceTable.Rows)
+                    {
+                        TrayLabel label = new TrayLabel();
+                        label.ServiceType = serviceType;
+                        label.Size = size;
+                        label.SortCode = row[sortCodeColumn].ToString();
+                        label.SortType = sortType;
+                        if (label.SortCode != "")
+                        {
+                            labels.Add(TrayLabel.CreateLabelLine(label, DateTime.Now));
+                        }
+                    }
+
+
+                    // int lblCount = (int)numericUpDownTags.Value;
+
+
+
+                    int itemCount = 0;
+                    for (int i = 0; i < labels.Count; i++)
+                    {
+                        itemCount++;
+                        if (i == labels.Count - 1 || labels[i] != labels[i + 1])
+                        {
+                            int labelCount = (int)Math.Ceiling(itemCount / countPerTray);
+                            labelText += $"{labels[i]},{labelCount},{DateTime.Now.ToString("dd MMM yyyy")}\n";
+                            itemCount = 0;
+                        }
+
+                    }
+                }
+            }
+          
+            if(fullratetagCount > 0)
+            {
+                labelText += $"{ service},6,6,{ traySize},{ fullratetagCount},{ DateTime.Now.ToString("dd MMM yyyy")}\n";
+            }
+
+
+
+
+            labelText += "#End Of File";
+
+
+            string lableFileName = $@"{importedJob.DataFolder}\{jobNo} - Tray Labels.lpf";
+
+            File.WriteAllText(lableFileName, labelText);
+
+            string cmdImport = $"/C VisaCommand /i {lableFileName}";
+            string cmdPrint = $"/C VisaCommand /p {labelName}";
+
+
+
+            var proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = cmdImport,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+
+
+                }
+            };
+
+            if (cbImportLabel.Checked)
+            {
+                proc.Start();
+                proc.WaitForExit();
+                proc.Close();
+            }
+
+            if (cbPrintLabel.Checked)
+            {
+                proc.StartInfo.Arguments = cmdPrint;
+                proc.Start();
+                proc.WaitForExit();
+                proc.Close();
+            }
+
+
+
+
+        }
+
+        private void btnAddFullRate_Click(object sender, EventArgs e)
+        {
+            listBoxTrayLabels.Items.Add($"{(int)numericUpDownFR.Value} Full Rate Tags");
+            fullratetagCount += (int)numericUpDownFR.Value;
+        }
+
+        private void btnAddINTTags_Click(object sender, EventArgs e)
+        {
+            listBoxTrayLabels.Items.Add($"{(int)numericUpDownINT.Value} International Tags");
+            intTagCount += (int)numericUpDownINT.Value;
         }
     }
 } 

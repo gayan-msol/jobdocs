@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtJobNo = new System.Windows.Forms.TextBox();
             this.txtJobName = new System.Windows.Forms.TextBox();
@@ -120,7 +124,13 @@
             this.btnSampleSheet = new System.Windows.Forms.Button();
             this.tabPageElms = new System.Windows.Forms.TabPage();
             this.LodgePanel = new System.Windows.Forms.Panel();
+            this.btnCreateAndPrintTags = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.listBoxTrayLabels = new System.Windows.Forms.ListBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbIncSorted = new System.Windows.Forms.CheckBox();
+            this.btnINTTags = new System.Windows.Forms.Button();
             this.cbPrintLabel = new System.Windows.Forms.CheckBox();
             this.cbImportLabel = new System.Windows.Forms.CheckBox();
             this.label28 = new System.Windows.Forms.Label();
@@ -164,6 +174,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.numericUpDownFR = new System.Windows.Forms.NumericUpDown();
+            this.btnAddFullRate = new System.Windows.Forms.Button();
+            this.btnAddINTTags = new System.Windows.Forms.Button();
+            this.numericUpDownINT = new System.Windows.Forms.NumericUpDown();
+            this.label30 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -189,12 +204,15 @@
             this.groupBox1.SuspendLayout();
             this.tabPageElms.SuspendLayout();
             this.LodgePanel.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.LoginPanel.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownINT)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -259,8 +277,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(685, 909);
-            this.splitContainer1.SplitterDistance = 109;
+            this.splitContainer1.Size = new System.Drawing.Size(685, 1021);
+            this.splitContainer1.SplitterDistance = 122;
             this.splitContainer1.TabIndex = 26;
             // 
             // txtCustomer
@@ -294,7 +312,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(685, 796);
+            this.tabControl1.Size = new System.Drawing.Size(685, 895);
             this.tabControl1.TabIndex = 25;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -305,7 +323,7 @@
             this.tabPageDS.Location = new System.Drawing.Point(4, 34);
             this.tabPageDS.Name = "tabPageDS";
             this.tabPageDS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDS.Size = new System.Drawing.Size(677, 758);
+            this.tabPageDS.Size = new System.Drawing.Size(677, 857);
             this.tabPageDS.TabIndex = 6;
             this.tabPageDS.Text = "Data Summary";
             this.tabPageDS.UseVisualStyleBackColor = true;
@@ -325,7 +343,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.bntCreateDSSheet);
-            this.splitContainer2.Size = new System.Drawing.Size(671, 752);
+            this.splitContainer2.Size = new System.Drawing.Size(671, 851);
             this.splitContainer2.SplitterDistance = 535;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -388,7 +406,7 @@
             this.tabPagePSS.Location = new System.Drawing.Point(4, 34);
             this.tabPagePSS.Name = "tabPagePSS";
             this.tabPagePSS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePSS.Size = new System.Drawing.Size(677, 758);
+            this.tabPagePSS.Size = new System.Drawing.Size(677, 857);
             this.tabPagePSS.TabIndex = 1;
             this.tabPagePSS.Text = "Print Spec Sheet";
             this.tabPagePSS.UseVisualStyleBackColor = true;
@@ -780,12 +798,28 @@
             // 
             // dataGridViewStreams
             // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewStreams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewStreams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Stream,
             this.RecordQty,
             this.Sheets,
             this.PrintQty});
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewStreams.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewStreams.Location = new System.Drawing.Point(26, 561);
             this.dataGridViewStreams.Name = "dataGridViewStreams";
             this.dataGridViewStreams.Size = new System.Drawing.Size(367, 100);
@@ -1050,7 +1084,7 @@
             this.tabPagePR.Location = new System.Drawing.Point(4, 34);
             this.tabPagePR.Name = "tabPagePR";
             this.tabPagePR.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePR.Size = new System.Drawing.Size(677, 758);
+            this.tabPagePR.Size = new System.Drawing.Size(677, 857);
             this.tabPagePR.TabIndex = 2;
             this.tabPagePR.Text = "Production Report";
             this.tabPagePR.UseVisualStyleBackColor = true;
@@ -1077,9 +1111,25 @@
             // 
             // dataGridViewReturnItems
             // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewReturnItems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewReturnItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReturnItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewReturnItems.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewReturnItems.Location = new System.Drawing.Point(37, 70);
             this.dataGridViewReturnItems.Name = "dataGridViewReturnItems";
             this.dataGridViewReturnItems.Size = new System.Drawing.Size(392, 220);
@@ -1101,7 +1151,7 @@
             this.tabPageSS.Location = new System.Drawing.Point(4, 34);
             this.tabPageSS.Name = "tabPageSS";
             this.tabPageSS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSS.Size = new System.Drawing.Size(677, 758);
+            this.tabPageSS.Size = new System.Drawing.Size(677, 857);
             this.tabPageSS.TabIndex = 3;
             this.tabPageSS.Text = "Sample Sheet";
             this.tabPageSS.UseVisualStyleBackColor = true;
@@ -1177,7 +1227,7 @@
             this.tabPageElms.Location = new System.Drawing.Point(4, 34);
             this.tabPageElms.Name = "tabPageElms";
             this.tabPageElms.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageElms.Size = new System.Drawing.Size(677, 758);
+            this.tabPageElms.Size = new System.Drawing.Size(677, 857);
             this.tabPageElms.TabIndex = 4;
             this.tabPageElms.Text = "eLMS";
             this.tabPageElms.UseVisualStyleBackColor = true;
@@ -1186,6 +1236,8 @@
             // 
             // LodgePanel
             // 
+            this.LodgePanel.Controls.Add(this.groupBox5);
+            this.LodgePanel.Controls.Add(this.label29);
             this.LodgePanel.Controls.Add(this.groupBox4);
             this.LodgePanel.Controls.Add(this.cbProgressiveLodge);
             this.LodgePanel.Controls.Add(this.btnINTZones);
@@ -1207,26 +1259,95 @@
             this.LodgePanel.Size = new System.Drawing.Size(671, 764);
             this.LodgePanel.TabIndex = 7;
             // 
+            // btnCreateAndPrintTags
+            // 
+            this.btnCreateAndPrintTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateAndPrintTags.Location = new System.Drawing.Point(100, 203);
+            this.btnCreateAndPrintTags.Name = "btnCreateAndPrintTags";
+            this.btnCreateAndPrintTags.Size = new System.Drawing.Size(121, 46);
+            this.btnCreateAndPrintTags.TabIndex = 26;
+            this.btnCreateAndPrintTags.Text = "Create Tags";
+            this.btnCreateAndPrintTags.UseVisualStyleBackColor = true;
+            this.btnCreateAndPrintTags.Click += new System.EventHandler(this.btnCreateAndPrintTags_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnCreateAndPrintTags);
+            this.groupBox5.Controls.Add(this.cbPrintLabel);
+            this.groupBox5.Controls.Add(this.cbIncSorted);
+            this.groupBox5.Controls.Add(this.cbImportLabel);
+            this.groupBox5.Controls.Add(this.btnAddINTTags);
+            this.groupBox5.Controls.Add(this.numericUpDownINT);
+            this.groupBox5.Controls.Add(this.label30);
+            this.groupBox5.Controls.Add(this.btnAddFullRate);
+            this.groupBox5.Controls.Add(this.numericUpDownFR);
+            this.groupBox5.Controls.Add(this.listBoxTrayLabels);
+            this.groupBox5.Controls.Add(this.label28);
+            this.groupBox5.Location = new System.Drawing.Point(112, 425);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(227, 268);
+            this.groupBox5.TabIndex = 25;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Tray Labels";
+            // 
+            // listBoxTrayLabels
+            // 
+            this.listBoxTrayLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxTrayLabels.FormattingEnabled = true;
+            this.listBoxTrayLabels.ItemHeight = 20;
+            this.listBoxTrayLabels.Location = new System.Drawing.Point(7, 111);
+            this.listBoxTrayLabels.Name = "listBoxTrayLabels";
+            this.listBoxTrayLabels.Size = new System.Drawing.Size(214, 84);
+            this.listBoxTrayLabels.TabIndex = 24;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(110, 295);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(113, 13);
+            this.label29.TabIndex = 23;
+            this.label29.Text = "Lodgement Categories";
+            // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.cbPrintLabel);
-            this.groupBox4.Controls.Add(this.cbImportLabel);
-            this.groupBox4.Controls.Add(this.label28);
+            this.groupBox4.Controls.Add(this.btnINTTags);
             this.groupBox4.Controls.Add(this.btnFullRateTags);
             this.groupBox4.Controls.Add(this.numericUpDownTags);
-            this.groupBox4.Location = new System.Drawing.Point(119, 464);
+            this.groupBox4.Location = new System.Drawing.Point(560, 401);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(165, 164);
+            this.groupBox4.Size = new System.Drawing.Size(165, 225);
             this.groupBox4.TabIndex = 22;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tray Labels";
+            // 
+            // cbIncSorted
+            // 
+            this.cbIncSorted.AutoSize = true;
+            this.cbIncSorted.Location = new System.Drawing.Point(9, 92);
+            this.cbIncSorted.Name = "cbIncSorted";
+            this.cbIncSorted.Size = new System.Drawing.Size(112, 17);
+            this.cbIncSorted.TabIndex = 25;
+            this.cbIncSorted.Text = "Add to sorted plan";
+            this.cbIncSorted.UseVisualStyleBackColor = true;
+            // 
+            // btnINTTags
+            // 
+            this.btnINTTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnINTTags.Location = new System.Drawing.Point(9, 172);
+            this.btnINTTags.Name = "btnINTTags";
+            this.btnINTTags.Size = new System.Drawing.Size(140, 46);
+            this.btnINTTags.TabIndex = 24;
+            this.btnINTTags.Text = "Print INT Tags";
+            this.btnINTTags.UseVisualStyleBackColor = true;
+            this.btnINTTags.Click += new System.EventHandler(this.btnINTTags_Click);
             // 
             // cbPrintLabel
             // 
             this.cbPrintLabel.AutoSize = true;
             this.cbPrintLabel.Checked = true;
             this.cbPrintLabel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbPrintLabel.Location = new System.Drawing.Point(20, 89);
+            this.cbPrintLabel.Location = new System.Drawing.Point(7, 226);
             this.cbPrintLabel.Name = "cbPrintLabel";
             this.cbPrintLabel.Size = new System.Drawing.Size(81, 17);
             this.cbPrintLabel.TabIndex = 23;
@@ -1239,28 +1360,28 @@
             this.cbImportLabel.AutoSize = true;
             this.cbImportLabel.Checked = true;
             this.cbImportLabel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbImportLabel.Location = new System.Drawing.Point(20, 70);
+            this.cbImportLabel.Location = new System.Drawing.Point(7, 207);
             this.cbImportLabel.Name = "cbImportLabel";
-            this.cbImportLabel.Size = new System.Drawing.Size(119, 17);
+            this.cbImportLabel.Size = new System.Drawing.Size(90, 17);
             this.cbImportLabel.TabIndex = 22;
-            this.cbImportLabel.Text = "Import to VisaTLMS";
+            this.cbImportLabel.Text = "Import to Visa";
             this.cbImportLabel.UseVisualStyleBackColor = true;
             this.cbImportLabel.CheckedChanged += new System.EventHandler(this.cbImportLabel_CheckedChanged);
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(12, 26);
+            this.label28.Location = new System.Drawing.Point(6, 35);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(63, 13);
+            this.label28.Size = new System.Drawing.Size(76, 13);
             this.label28.TabIndex = 21;
-            this.label28.Text = "No. of Tags";
+            this.label28.Text = "Full Rate Tags";
             // 
             // btnFullRateTags
             // 
             this.btnFullRateTags.Enabled = false;
             this.btnFullRateTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFullRateTags.Location = new System.Drawing.Point(9, 112);
+            this.btnFullRateTags.Location = new System.Drawing.Point(9, 120);
             this.btnFullRateTags.Name = "btnFullRateTags";
             this.btnFullRateTags.Size = new System.Drawing.Size(140, 46);
             this.btnFullRateTags.TabIndex = 19;
@@ -1306,7 +1427,7 @@
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(135, 23);
             this.btnUpdate.TabIndex = 16;
-            this.btnUpdate.Text = "Update";
+            this.btnUpdate.Text = "Update Lodgement Info";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
@@ -1316,7 +1437,7 @@
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(135, 23);
             this.btnClear.TabIndex = 15;
-            this.btnClear.Text = "Clear";
+            this.btnClear.Text = "Clear Lodgement Lines";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
@@ -1575,7 +1696,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(677, 758);
+            this.tabPage1.Size = new System.Drawing.Size(677, 857);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -1669,12 +1790,65 @@
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             // 
+            // numericUpDownFR
+            // 
+            this.numericUpDownFR.Location = new System.Drawing.Point(88, 31);
+            this.numericUpDownFR.Name = "numericUpDownFR";
+            this.numericUpDownFR.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownFR.TabIndex = 25;
+            this.numericUpDownFR.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // btnAddFullRate
+            // 
+            this.btnAddFullRate.Location = new System.Drawing.Point(146, 29);
+            this.btnAddFullRate.Name = "btnAddFullRate";
+            this.btnAddFullRate.Size = new System.Drawing.Size(75, 23);
+            this.btnAddFullRate.TabIndex = 26;
+            this.btnAddFullRate.Text = "Add";
+            this.btnAddFullRate.UseVisualStyleBackColor = true;
+            this.btnAddFullRate.Click += new System.EventHandler(this.btnAddFullRate_Click);
+            // 
+            // btnAddINTTags
+            // 
+            this.btnAddINTTags.Location = new System.Drawing.Point(146, 55);
+            this.btnAddINTTags.Name = "btnAddINTTags";
+            this.btnAddINTTags.Size = new System.Drawing.Size(75, 23);
+            this.btnAddINTTags.TabIndex = 29;
+            this.btnAddINTTags.Text = "Add";
+            this.btnAddINTTags.UseVisualStyleBackColor = true;
+            this.btnAddINTTags.Click += new System.EventHandler(this.btnAddINTTags_Click);
+            // 
+            // numericUpDownINT
+            // 
+            this.numericUpDownINT.Location = new System.Drawing.Point(88, 57);
+            this.numericUpDownINT.Name = "numericUpDownINT";
+            this.numericUpDownINT.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownINT.TabIndex = 28;
+            this.numericUpDownINT.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(6, 61);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(52, 13);
+            this.label30.TabIndex = 27;
+            this.label30.Text = "INT Tags";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 909);
+            this.ClientSize = new System.Drawing.Size(685, 1021);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Job Docs";
@@ -1714,8 +1888,9 @@
             this.tabPageElms.ResumeLayout(false);
             this.LodgePanel.ResumeLayout(false);
             this.LodgePanel.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -1725,6 +1900,8 @@
             this.LoginPanel.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownINT)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1866,6 +2043,17 @@
         private System.Windows.Forms.TabPage tabPageDS;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button bntCreateDSSheet;
+        private System.Windows.Forms.Button btnINTTags;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ListBox listBoxTrayLabels;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.CheckBox cbIncSorted;
+        private System.Windows.Forms.Button btnCreateAndPrintTags;
+        private System.Windows.Forms.Button btnAddINTTags;
+        private System.Windows.Forms.NumericUpDown numericUpDownINT;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Button btnAddFullRate;
+        private System.Windows.Forms.NumericUpDown numericUpDownFR;
     }
 }
 

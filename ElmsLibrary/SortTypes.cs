@@ -8,6 +8,9 @@ namespace ElmsLibrary
 {
     public enum SortTypes
     {
-
+        PreSort,
+        PrintPost,
+        FullRate,
+        INT
     }
 }

@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dolphin", "Dolphin\Dolphin.csproj", "{733D6D4A-B88C-4755-A4D8-FD214B4BB767}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisaLibrary", "VisaLibrary\VisaLibrary.csproj", "{8F7D4E53-C29D-47D7-B384-52CDE88C0FE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaLibrary", "VisaLibrary\VisaLibrary.csproj", "{8F7D4E53-C29D-47D7-B384-52CDE88C0FE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
