@@ -31,80 +31,69 @@ namespace ElmsLibrary
             stateCodes.Add("NT", 8);
         }
 
-        public static string CreateLabelLine(TrayLabel trayLabel, DateTime lodgeDate)
+        public static TrayLabel CreateLabelLine(TrayLabel trayLabel)
         {
             string sortCode = trayLabel.SortCode.Replace(' ', '_');
-            if (trayLabel.SortCode == "xOTHER" || trayLabel.SortCode == "x_OTHER")
+            if (sortCode == "xOTHER" || sortCode == "x_OTHER")
             {
-                return "";
+                return null;
             }
 
-            string planType = "";
-            string plan = "";
-            string qty = trayLabel.LabelCount.ToString();          
-            string service = trayLabel.ServiceType == "Priority" ? "1" : "R";
-            string size = trayLabel.Size.Substring(0, 1);
-            string date = lodgeDate.ToString("dd MMM yyyy");
-
+            trayLabel.ServiceType = trayLabel.ServiceType == "Priority" ? "1" : "R";
+            trayLabel.Size = trayLabel.Size.Substring(0, 1);
 
             if (sortCode.Split('_')[0] == "BD")
             {
-                planType = "1";
-                string p1 = sortCode.Split('_')[2].Substring(1);
-                if(service == "R" && size == "S")
+                trayLabel.Sort_Plan_Type = "1";
+                string p1 = sortCode.Split('_')[1].Substring(1);
+                if(trayLabel.ServiceType == "R" && trayLabel.Size == "S")
                 {
-                    planType = $"2{p1}";
+                    trayLabel.Sort_Plan = $"2{p1}";
                 }
-                else if (service == "R" && size == "L")
+                else if (trayLabel.ServiceType == "R" && trayLabel.Size == "L")
                 {
-                    planType = $"7{p1}";
+                    trayLabel.Sort_Plan = $"7{p1}";
                 }
-                else if (service == "P" && size == "S")
+                else if (trayLabel.ServiceType == "P" && trayLabel.Size == "S")
                 {
-                    planType = $"1{p1}";
+                    trayLabel.Sort_Plan = $"1{p1}";
                 }
-                else if (service == "P" && size == "L")
+                else if (trayLabel.ServiceType == "P" && trayLabel.Size == "L")
                 {
-                    planType = $"6{p1}";
+                    trayLabel.Sort_Plan = $"6{p1}";
                 }
             }
-            if (sortCode.Split('_')[0] == "BR")
+            else if (sortCode.Split('_')[0] == "BR")
             {
-                planType = "2";
-                plan = "6";
+                trayLabel.Sort_Plan_Type = "2";
+                trayLabel.Sort_Plan = trayLabel.stateCodes[sortCode.Split('_')[1]].ToString();
             }
-            if (sortCode.Split('_')[0] == "UR")
+            else if (sortCode.Split('_')[0] == "UR")
             {
-                planType = "5";
-                plan = "6";
+                trayLabel.Sort_Plan_Type = "5";
+                trayLabel.Sort_Plan = "6";
             }
-
-
             else if (sortCode.Split('_')[4] == "P")
             {
-                planType = "3";
-                plan = sortCode.Split('_')[3]; // postcode
+                trayLabel.Sort_Plan_Type = "3";
+                trayLabel.Sort_Plan = sortCode.Split('_')[3]; // postcode
             }
             else if (sortCode.Split('_')[4] == "A")
             {
-                planType = "4";
-                plan = sortCode.Split('_')[5]; // bsp
+                trayLabel.Sort_Plan_Type = "4";
+                trayLabel.Sort_Plan = sortCode.Split('_')[5]; // bsp
             }
             else if (sortCode.Split('_')[4] == "R")
             {
-                planType = "5";
-                plan =trayLabel.stateCodes[sortCode.Split('_')[0]].ToString();
-                service = trayLabel.ServiceType == "Priority" ? "G" : "H";
+                trayLabel.Sort_Plan_Type = "5";
+                trayLabel.Sort_Plan = trayLabel.stateCodes[sortCode.Split('_')[0]].ToString();
+                trayLabel.ServiceType = trayLabel.ServiceType == "Priority" ? "G" : "H";
             }
 
-            return $"{service},{planType},{plan},{size}";
+            trayLabel.SortCode = ""; // sortcode can change within the same label type.
+
+            return trayLabel;
         }
 
-        //public static string CreateLabelPlan(List<TrayLabel> trayLabels)
-        //{
-        //    string labelPlan = "#Australia Post Visa Tray Label System - Ver:\n3v0-700\n#Label Plan File\n#Label Plan Header\n";
-        //    labelPlan += $"{jobNo} {jobName},MAILING SOLUTIONS,{jobName},6,{jobNo}";
-
-        //}
     }
 }

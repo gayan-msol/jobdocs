@@ -45,11 +45,11 @@ namespace ElmsLibrary
             string query;
             if (contract)
             {
-                query = $@"SELECT Zone from IntZonesContract WHERE Country='{country}' OR AltCountry='{country}'";
+                query = $@"SELECT Zone from IntZonesContract WHERE UPPER([Country])='{country.ToUpper()}' OR UPPER([AltCountry])='{country.ToUpper()}' ";
             }
             else
             {
-                query = $@"SELECT Zone from IntZonesFullRate WHERE Country='{country}' OR AltCountry='{country}'";
+                query = $@"SELECT Zone from IntZonesFullRate WHERE UPPER([Country])='{country.ToUpper()}' OR UPPER([AltCountry])='{country.ToUpper()}' OR UPPER([ISO3])='{country.ToUpper()}'";
             }
 
 

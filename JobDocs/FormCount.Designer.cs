@@ -36,6 +36,11 @@
             // numericUpDownCount
             // 
             this.numericUpDownCount.Location = new System.Drawing.Point(84, 41);
+            this.numericUpDownCount.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.numericUpDownCount.Name = "numericUpDownCount";
             this.numericUpDownCount.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownCount.TabIndex = 0;
@@ -52,6 +57,7 @@
             // 
             // FormCount
             // 
+            this.AcceptButton = this.btnColseCount;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(268, 186);

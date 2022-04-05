@@ -1689,7 +1689,7 @@ namespace JobDocs
 
         private void btnCreateAndPrintTags_Click(object sender, EventArgs e)
         {
-           
+            string lodgeDate = dateTimePickerLodgeDate.Value.ToString("dd MMM yyyy");
 
             string service = serviceType == "Regular" ? "R" : "1";
             string traySize = size == "Small" ? "S" : "L";
@@ -1698,8 +1698,8 @@ namespace JobDocs
             {
                 labelName = labelName.Substring(0, 32);
             }
-            string labelText = "#Australia Post Visa Tray Label System - Ver:\n3v0-700\n#Label Plan File\n#Label Plan Header\n";
-            labelText += $"{labelName},MAILING SOLUTIONS,{jobName},6,{jobNo}\n#Label Details\n";
+            StringBuilder labelText = new StringBuilder("#Australia Post Visa Tray Label System - Ver:\n3v0-700\n#Label Plan File\n#Label Plan Header\n");
+            labelText.Append( $"{labelName},MAILING SOLUTIONS,{jobName},6,{jobNo}\n#Label Details\n");
 
             if (cbIncSorted.Checked)
             {
@@ -1727,7 +1727,7 @@ namespace JobDocs
                 if (sourceTable != null)
                 {
 
-                    List<string> labels = new List<string>();
+                    List<TrayLabel> labels = new List<TrayLabel>();
                     string sortCodeColumn = "";
 
                     switch (sortType)
@@ -1755,23 +1755,25 @@ namespace JobDocs
                         label.SortType = sortType;
                         if (label.SortCode != "")
                         {
-                            labels.Add(TrayLabel.CreateLabelLine(label, DateTime.Now));
+                            TrayLabel updatedLabel = TrayLabel.CreateLabelLine(label);
+                            if(updatedLabel != null)
+                            {
+                                labels.Add(updatedLabel);
+                            }
+                            
                         }
                     }
-
-
-                    // int lblCount = (int)numericUpDownTags.Value;
-
 
 
                     int itemCount = 0;
                     for (int i = 0; i < labels.Count; i++)
                     {
+
                         itemCount++;
-                        if (i == labels.Count - 1 || labels[i] != labels[i + 1])
+                        if (i == labels.Count - 1 || $"{labels[i].ServiceType}{labels[i].Sort_Plan_Type}{labels[i].Sort_Plan}" != $"{labels[i+1].ServiceType}{labels[i+1].Sort_Plan_Type}{labels[i+1].Sort_Plan}")
                         {
-                            int labelCount = (int)Math.Ceiling(itemCount / countPerTray);
-                            labelText += $"{labels[i]},{labelCount},{DateTime.Now.ToString("dd MMM yyyy")}\n";
+                            labels[i].LabelCount = (int)Math.Ceiling(itemCount / countPerTray);
+                            labelText.Append($"{labels[i].ServiceType},{labels[i].Sort_Plan_Type},{labels[i].Sort_Plan},{labels[i].Size},{labels[i].LabelCount},{lodgeDate}\n");
                             itemCount = 0;
                         }
 
@@ -1781,18 +1783,18 @@ namespace JobDocs
           
             if(fullratetagCount > 0)
             {
-                labelText += $"{ service},6,6,{ traySize},{ fullratetagCount},{ DateTime.Now.ToString("dd MMM yyyy")}\n";
+                labelText.Append($"{ service},6,6,{ traySize},{ fullratetagCount},{lodgeDate}\n");
             }
 
 
 
 
-            labelText += "#End Of File";
+            labelText.Append("#End Of File");
 
 
             string lableFileName = $@"{importedJob.DataFolder}\{jobNo} - Tray Labels.lpf";
 
-            File.WriteAllText(lableFileName, labelText);
+            File.WriteAllText(lableFileName, labelText.ToString());
 
             string cmdImport = $"/C VisaCommand /i {lableFileName}";
             string cmdPrint = $"/C VisaCommand /p {labelName}";
@@ -1842,6 +1844,13 @@ namespace JobDocs
         {
             listBoxTrayLabels.Items.Add($"{(int)numericUpDownINT.Value} International Tags");
             intTagCount += (int)numericUpDownINT.Value;
+        }
+
+        private void btnClearLabels_Click(object sender, EventArgs e)
+        {
+            listBoxTrayLabels.Items.Clear();
+            fullratetagCount = 0;
+            intTagCount = 0;
         }
     }
 } 
