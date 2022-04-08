@@ -1692,6 +1692,10 @@ namespace JobDocs
 
         private void btnCreateAndPrintTags_Click(object sender, EventArgs e)
         {
+            if(listBoxTrayLabels.Items.Count == 0)
+            {
+                return;
+            }
             string lodgeDate = dateTimePickerLodgeDate.Value.ToString("dd MMM yyyy");
 
             string service = serviceType == "Regular" ? "R" : "1";
@@ -1701,8 +1705,8 @@ namespace JobDocs
             {
                 labelName = labelName.Substring(0, 32);
             }
-            StringBuilder labelText = new StringBuilder("#Australia Post Visa Tray Label System - Ver:\n3v0-700\n#Label Plan File\n#Label Plan Header\n");
-            labelText.Append( $"{labelName},MAILING SOLUTIONS,{jobName},6,{jobNo}\n#Label Details\n");
+            StringBuilder labelText = new StringBuilder("#Australia Post Visa Tray Label System - Ver:\n3v0-700\n#Label Plan File\n\n#Label Plan Header\n");
+            labelText.Append( $"{labelName},MAILING SOLUTIONS,{jobName},6,{jobNo}\n\n#Label Details\n\n");
 
             if (cbIncSorted.Checked)
             {
@@ -1749,38 +1753,39 @@ namespace JobDocs
                             break;
                     }
 
-                    foreach (DataRow row in sourceTable.Rows)
-                    {
-                        TrayLabel label = new TrayLabel();
-                        label.ServiceType = serviceType;
-                        label.Size = size;
-                        label.SortCode = row[sortCodeColumn].ToString();
-                        label.SortType = sortType;
-                        if (label.SortCode != "")
-                        {
-                            TrayLabel updatedLabel = TrayLabel.CreateLabelLine(label);
-                            if(updatedLabel != null)
-                            {
-                                labels.Add(updatedLabel);
-                            }
-                            
-                        }
-                    }
+                    //foreach (DataRow row in sourceTable.Rows)
+                    //{
+                    //    TrayLabel label = new TrayLabel();
+                    //    label.ServiceType = serviceType;
+                    //    label.Size = size;
+                    //    label.SortCode = row[sortCodeColumn].ToString();
+                    //    label.SortType = sortType;
+                    //    if (label.SortCode != "")
+                    //    {
+                    //        TrayLabel updatedLabel = TrayLabel.CreateLabelLine(label);
+                    //        if(updatedLabel != null)
+                    //        {
+                    //            labels.Add(updatedLabel);
+                    //        }
 
+                    //    }
+                    //}
 
-                    int itemCount = 0;
-                    for (int i = 0; i < labels.Count; i++)
-                    {
+                    labelText.Append(TrayLabel.CreateLabelLines(sourceTable, serviceType, size, sortType, lodgeDate, countPerTray));
 
-                        itemCount++;
-                        if (i == labels.Count - 1 || $"{labels[i].ServiceType}{labels[i].Sort_Plan_Type}{labels[i].Sort_Plan}" != $"{labels[i+1].ServiceType}{labels[i+1].Sort_Plan_Type}{labels[i+1].Sort_Plan}")
-                        {
-                            labels[i].LabelCount = (int)Math.Ceiling(itemCount / countPerTray);
-                            labelText.Append($"{labels[i].ServiceType},{labels[i].Sort_Plan_Type},{labels[i].Sort_Plan},{labels[i].Size},{labels[i].LabelCount},{lodgeDate}\n");
-                            itemCount = 0;
-                        }
+                    //int itemCount = 0;
+                    //for (int i = 0; i < labels.Count; i++)
+                    //{
 
-                    }
+                    //    itemCount++;
+                    //    if (i == labels.Count - 1 || $"{labels[i].ServiceType}{labels[i].Sort_Plan_Type}{labels[i].Sort_Plan}" != $"{labels[i+1].ServiceType}{labels[i+1].Sort_Plan_Type}{labels[i+1].Sort_Plan}")
+                    //    {
+                    //        labels[i].LabelCount = (int)Math.Ceiling(itemCount / countPerTray);
+                    //        labelText.Append($"{labels[i].ServiceType},{labels[i].Sort_Plan_Type},{labels[i].Sort_Plan},{labels[i].Size},{labels[i].LabelCount},{lodgeDate}\n");
+                    //        itemCount = 0;
+                    //    }
+
+                    //}
                 }
             }
           
@@ -1795,7 +1800,7 @@ namespace JobDocs
             labelText.Append("#End Of File");
 
 
-            string lableFileName = $@"{importedJob.DataFolder}\{jobNo} - Tray Labels.lpf";
+            string lableFileName = $@"{Path.GetDirectoryName(outputFileName)}\{jobNo} - Tray Labels.lpf";
 
             File.WriteAllText(lableFileName, labelText.ToString());
 
