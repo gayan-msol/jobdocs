@@ -54,11 +54,11 @@ namespace ElmsLibrary
                 {
                     trayLabel.Sort_Plan = $"7{p1}";
                 }
-                else if (trayLabel.ServiceType == "P" && trayLabel.Size == "S")
+                else if (trayLabel.ServiceType == "1" && trayLabel.Size == "S")
                 {
                     trayLabel.Sort_Plan = $"1{p1}";
                 }
-                else if (trayLabel.ServiceType == "P" && trayLabel.Size == "L")
+                else if (trayLabel.ServiceType == "1" && trayLabel.Size == "L")
                 {
                     trayLabel.Sort_Plan = $"6{p1}";
                 }

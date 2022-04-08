@@ -354,7 +354,7 @@ namespace JobDocs
 
                 jobName = txtJobName.Text = importedJob.JobName;
                 customer = txtCustomer.Text = importedJob.Customer;
-                jobNo = txtJobNo.Text;
+                jobNo = importedJob.JobNumber;
                // jobDirectory = richTextJobDirectory.Text = DirectoryHelper.getJobDir(jobNo, customer, directoryBranch);
                 jobDirectoryData = richTextJobDirectory.Text = importedJob.DataFolder;
                 jobDirectoryArt = importedJob.ArtworkFolder;
@@ -790,12 +790,13 @@ namespace JobDocs
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Text | *.txt| CSV | *.csv";
             openFileDialog.InitialDirectory = Form1.jobDirectoryData;
-            openFileDialog.ShowDialog();
-            if (!string.IsNullOrEmpty(openFileDialog.FileName))
+            var res = openFileDialog.ShowDialog();
+            if (res == DialogResult.OK && !string.IsNullOrEmpty(openFileDialog.FileName))
             {
            
                 richTextOutputFilePath.Text = outputFileName = openFileDialog.FileName;
                 //  wizardPage1.AllowNext = true;
+                btnSampleSheet.Enabled = true;
             }
         }
 
@@ -932,130 +933,132 @@ namespace JobDocs
 
         private void btnBrowseManifest_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = jobDirectoryData;
-            openFileDialog.Filter = "Text | *.txt| CSV | *.csv";
-            openFileDialog.ShowDialog();
-
-            if(openFileDialog.FileName != null)
+            if(importedJob == null || importedJob.JobNumber == null)
             {
-                outputFileName = txtManifestFileName.Text = openFileDialog.FileName;
+                MessageBox.Show("You need to import job data before using this function.");
+            }
+            else
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.InitialDirectory = jobDirectoryData;
+                openFileDialog.Filter = "Text | *.txt| CSV | *.csv";
+                var res = openFileDialog.ShowDialog();
 
-               //List<string> lines =  File.ReadLines(outputFileName).ToList();
-
-               // int tabCount = lines[0].Split('\t').Length;
-               // int commaCount = lines[0].Split(',').Length;
-
-                sourceTable = TextFileRW.readTextFileToTable(outputFileName, DirectoryHelper.getDelimiter(outputFileName));
-
-                
-              
-
-                if(sourceTable.Columns.Contains("Dt BP Sort Code")|| sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
+                if (res == DialogResult.OK && openFileDialog.FileName != null)
                 {
-                     cmbLodgementType.SelectedItem = "PreSort";
+                    outputFileName = txtManifestFileName.Text = openFileDialog.FileName;
 
-                    int dpidCount = 0;
-                    string dpidCol = sourceTable.Columns.Contains("Dt DPID") ? "Dt DPID" : "Dt Barcode";
-                    for (int i = 0; i < sourceTable.Rows.Count; i++)
+                    //List<string> lines =  File.ReadLines(outputFileName).ToList();
+
+                    // int tabCount = lines[0].Split('\t').Length;
+                    // int commaCount = lines[0].Split(',').Length;
+
+                    sourceTable = TextFileRW.readTextFileToTable(outputFileName, DirectoryHelper.getDelimiter(outputFileName));
+
+                    if (sourceTable != null)
                     {
-                        if (sourceTable.Rows[i][dpidCol].ToString() != "")
-                        {
-                            dpidCount++;
-                        }
+                        btnLodge.Enabled = true;
+                        btnCreateAndPrintTags.Enabled = true;
+
                     }
 
-                    if(dpidCount < 300)
+
+                    if (sourceTable.Columns.Contains("Dt BP Sort Code") || sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
+                    {
+                        cmbLodgementType.SelectedItem = "PreSort";
+
+                        int dpidCount = 0;
+                        string dpidCol = sourceTable.Columns.Contains("Dt DPID") ? "Dt DPID" : "Dt Barcode";
+                        for (int i = 0; i < sourceTable.Rows.Count; i++)
+                        {
+                            if (sourceTable.Rows[i][dpidCol].ToString() != "")
+                            {
+                                dpidCount++;
+                            }
+                        }
+
+                        if (dpidCount < 300)
+                        {
+                            cmbLodgementType.SelectedItem = "Full Rate";
+                        }
+
+                    }
+                    else if (sourceTable.Columns.Contains("Dt PP Sort Code") || sourceTable.Columns.Contains("Dt LH Sort Code"))
+                    {
+                        cmbLodgementType.SelectedItem = "Print Post";
+                    }
+                    else
                     {
                         cmbLodgementType.SelectedItem = "Full Rate";
                     }
 
-                }
-                else if(sourceTable.Columns.Contains("Dt PP Sort Code") || sourceTable.Columns.Contains("Dt LH Sort Code"))
-                {
-                    cmbLodgementType.SelectedItem = "Print Post";
-                }
-                else
-                {
-                    cmbLodgementType.SelectedItem = "Full Rate";
-                }
-
-                switch (cmbLodgementType.SelectedItem)
-                {
-                    case "PreSort":
-                        listBoxTrayLabels.Items.Add("Presort Tags");
-                        cbIncSorted.Checked = true;
-                        break;
-                    case "Print Post":
-                        listBoxTrayLabels.Items.Add("Print Post Tags");
-                        cbIncSorted.Checked = true;
-                        break;
-                    case "Full Rate":
-                        cbIncSorted.Checked = false;
-                        break;
-                    default:
-                        break;
-                }
-
-                var lodgementLines = importedJob.LodgementLines.Where(x => x.Name == sortType).ToList();
-
-                if(lodgementLines.Count > 0)
-                {
-                    if (sortType == "PreSort" && lodgementLines[0].Description.Contains("Charity Mail"))
+                    switch (cmbLodgementType.SelectedItem)
                     {
-                        cmbLodgementType.SelectedItem = "Charity Mail";
-                    }
-
-                    if (lodgementLines[0].Description.Contains("Priority"))
-                    {
-                        rbPriority.Checked = true;
-                    }
-                    else
-                    {
-                        rbRegular.Checked = true;
-                    }
-
-                    cmbWeight.SelectedItem = lodgementLines[0].Weight;
-
-                    size = lodgementLines[0].Size;
-
-                    switch (size)
-                    {
-                        case "Small":
-                            rbSmall.Checked = true;
+                        case "PreSort":
+                            listBoxTrayLabels.Items.Add("Presort Tags");
+                            cbIncSorted.Checked = true;
                             break;
-                        case "Small Plus":
-                            rbSmallPlus.Checked = true;
+                        case "Print Post":
+                            listBoxTrayLabels.Items.Add("Print Post Tags");
+                            cbIncSorted.Checked = true;
                             break;
-                        case "Large":
-                            rbLarge.Checked = true;
+                        case "Full Rate":
+                            cbIncSorted.Checked = false;
                             break;
                         default:
                             break;
                     }
 
-                    addLodgementLine();
+                    var lodgementLines = importedJob.LodgementLines.Where(x => x.Name == sortType).ToList();
 
-                    if (sourceTable != null)
+                    if (lodgementLines.Count > 0)
                     {
-                        btnLodge.Enabled = true;
+                        if (sortType == "PreSort" && lodgementLines[0].Description.Contains("Charity Mail"))
+                        {
+                            cmbLodgementType.SelectedItem = "Charity Mail";
+                        }
 
+                        if (lodgementLines[0].Description.Contains("Priority"))
+                        {
+                            rbPriority.Checked = true;
+                        }
+                        else
+                        {
+                            rbRegular.Checked = true;
+                        }
+
+                        cmbWeight.SelectedItem = lodgementLines[0].Weight;
+
+                        size = lodgementLines[0].Size;
+
+                        switch (size)
+                        {
+                            case "Small":
+                                rbSmall.Checked = true;
+                                break;
+                            case "Small Plus":
+                                rbSmallPlus.Checked = true;
+                                break;
+                            case "Large":
+                                rbLarge.Checked = true;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        addLodgementLine();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No matching lodgement details found in Dolphin.");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("No matching lodgement details found in Dolphin.");
-                }                       
             }
+
         }
 
         private void addLodgementLine()
-        {
-           
-           
-
-         
-
+        {          
             Lodgement lodgement = new Lodgement();
             lodgement.AccNo = importedJob.PostAccts.Where(x => x.AccType == "Aust Post").ToList()[0].AccNo;
             lodgement.JobName = txtJobName.Text;
@@ -1796,6 +1799,7 @@ namespace JobDocs
 
             File.WriteAllText(lableFileName, labelText.ToString());
 
+            string cmdDel = $"/C VisaCommand /d {labelName}";
             string cmdImport = $"/C VisaCommand /i {lableFileName}";
             string cmdPrint = $"/C VisaCommand /p {labelName}";
 
@@ -1806,7 +1810,7 @@ namespace JobDocs
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
-                    Arguments = cmdImport,
+                    Arguments = cmdDel,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
 
@@ -1815,7 +1819,11 @@ namespace JobDocs
             };
 
             if (cbImportLabel.Checked)
-            {
+            {                
+                proc.Start();
+                proc.WaitForExit();
+                proc.Close();
+                proc.StartInfo.Arguments = cmdImport;
                 proc.Start();
                 proc.WaitForExit();
                 proc.Close();
