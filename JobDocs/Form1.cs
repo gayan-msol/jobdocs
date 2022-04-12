@@ -351,6 +351,10 @@ namespace JobDocs
             {
                 btnFullRateTags.Enabled = true;
                 btnINTZones.Enabled = true;
+                listBoxTrayLabels.Items.Clear();
+                listBoxLodements.Items.Clear();
+                lodgements.Clear();
+                sourceTable = new DataTable();
 
                 jobName = txtJobName.Text = importedJob.JobName;
                 customer = txtCustomer.Text = importedJob.Customer;
