@@ -964,97 +964,95 @@ namespace JobDocs
                         btnLodge.Enabled = true;
                         btnCreateAndPrintTags.Enabled = true;
 
-                    }
 
-
-                    if (sourceTable.Columns.Contains("Dt BP Sort Code") || sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
-                    {
-                        cmbLodgementType.SelectedItem = "PreSort";
-
-                        int dpidCount = 0;
-                        string dpidCol = sourceTable.Columns.Contains("Dt DPID") ? "Dt DPID" : "Dt Barcode";
-                        for (int i = 0; i < sourceTable.Rows.Count; i++)
+                        if (sourceTable.Columns.Contains("Dt BP Sort Code") || sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
                         {
-                            if (sourceTable.Rows[i][dpidCol].ToString() != "")
-                            {
-                                dpidCount++;
-                            }
-                        }
+                            cmbLodgementType.SelectedItem = "PreSort";
 
-                        if (dpidCount < 300)
+                            int dpidCount = 0;
+                            string dpidCol = sourceTable.Columns.Contains("Dt DPID") ? "Dt DPID" : "Dt Barcode";
+                            for (int i = 0; i < sourceTable.Rows.Count; i++)
+                            {
+                                if (sourceTable.Rows[i][dpidCol].ToString() != "")
+                                {
+                                    dpidCount++;
+                                }
+                            }
+
+                            if (dpidCount < 300)
+                            {
+                                cmbLodgementType.SelectedItem = "Full Rate";
+                            }
+
+                        }
+                        else if (sourceTable.Columns.Contains("Dt PP Sort Code") || sourceTable.Columns.Contains("Dt LH Sort Code"))
+                        {
+                            cmbLodgementType.SelectedItem = "Print Post";
+                        }
+                        else
                         {
                             cmbLodgementType.SelectedItem = "Full Rate";
                         }
 
-                    }
-                    else if (sourceTable.Columns.Contains("Dt PP Sort Code") || sourceTable.Columns.Contains("Dt LH Sort Code"))
-                    {
-                        cmbLodgementType.SelectedItem = "Print Post";
-                    }
-                    else
-                    {
-                        cmbLodgementType.SelectedItem = "Full Rate";
-                    }
-
-                    switch (cmbLodgementType.SelectedItem)
-                    {
-                        case "PreSort":
-                            listBoxTrayLabels.Items.Add("Presort Tags");
-                            cbIncSorted.Checked = true;
-                            break;
-                        case "Print Post":
-                            listBoxTrayLabels.Items.Add("Print Post Tags");
-                            cbIncSorted.Checked = true;
-                            break;
-                        case "Full Rate":
-                            cbIncSorted.Checked = false;
-                            break;
-                        default:
-                            break;
-                    }
-
-                    var lodgementLines = importedJob.LodgementLines.Where(x => x.Name == sortType).ToList();
-
-                    if (lodgementLines.Count > 0)
-                    {
-                        if (sortType == "PreSort" && lodgementLines[0].Description.Contains("Charity Mail"))
+                        switch (cmbLodgementType.SelectedItem)
                         {
-                            cmbLodgementType.SelectedItem = "Charity Mail";
-                        }
-
-                        if (lodgementLines[0].Description.Contains("Priority"))
-                        {
-                            rbPriority.Checked = true;
-                        }
-                        else
-                        {
-                            rbRegular.Checked = true;
-                        }
-
-                        cmbWeight.SelectedItem = lodgementLines[0].Weight;
-
-                        size = lodgementLines[0].Size;
-
-                        switch (size)
-                        {
-                            case "Small":
-                                rbSmall.Checked = true;
+                            case "PreSort":
+                                listBoxTrayLabels.Items.Add("PreSort Tags");
                                 break;
-                            case "Small Plus":
-                                rbSmallPlus.Checked = true;
+                            case "Print Post":
+                                listBoxTrayLabels.Items.Add("Print Post Tags");
                                 break;
-                            case "Large":
-                                rbLarge.Checked = true;
+                            case "Full Rate":
+                                listBoxTrayLabels.Items.Add("1 Full Rate Tag");
+                                fullratetagCount = 1;
                                 break;
                             default:
                                 break;
                         }
 
-                        addLodgementLine();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No matching lodgement details found in Dolphin.");
+                        var lodgementLines = importedJob.LodgementLines.Where(x => x.Name == sortType).ToList();
+
+                        if (lodgementLines.Count > 0)
+                        {
+                            if (sortType == "PreSort" && lodgementLines[0].Description.Contains("Charity Mail"))
+                            {
+                                cmbLodgementType.SelectedItem = "Charity Mail";
+                            }
+
+                            if (lodgementLines[0].Description.Contains("Priority"))
+                            {
+                                rbPriority.Checked = true;
+                            }
+                            else
+                            {
+                                rbRegular.Checked = true;
+                            }
+
+                            cmbWeight.SelectedItem = lodgementLines[0].Weight;
+
+                            size = lodgementLines[0].Size;
+
+                            switch (size)
+                            {
+                                case "Small":
+                                    rbSmall.Checked = true;
+                                    break;
+                                case "Small Plus":
+                                    rbSmallPlus.Checked = true;
+                                    break;
+                                case "Large":
+                                    rbLarge.Checked = true;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            addLodgementLine();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No matching lodgement details found in Dolphin.");
+                        }
                     }
                 }
             }
@@ -1305,6 +1303,7 @@ namespace JobDocs
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            //var lodgementToUpdate = listBoxLodements.Items
             lodgements.Clear();
             addLodgementLine();
         }
@@ -1712,11 +1711,13 @@ namespace JobDocs
             StringBuilder labelText = new StringBuilder("#Australia Post Visa Tray Label System - Ver:\n3v0-700\n#Label Plan File\n\n#Label Plan Header\n");
             labelText.Append( $"{labelName},MAILING SOLUTIONS,{jobName},6,{jobNo}\n\n#Label Details\n\n");
 
-            if (cbIncSorted.Checked)
+            if (listBoxTrayLabels.Items.Contains("PreSort Tags") || listBoxTrayLabels.Items.Contains("Print Post Tags"))
             {
                 decimal countPerTray = 0;
                 using (var frmCount = new FormCount())
                 {
+                    frmCount.StartPosition = FormStartPosition.CenterParent;
+                    frmCount.Text = "Max Qty Per Tray";
                     var res = frmCount.ShowDialog();
                     if (res == DialogResult.OK)
                     {
@@ -1738,58 +1739,17 @@ namespace JobDocs
                 if (sourceTable != null)
                 {
 
-                    List<TrayLabel> labels = new List<TrayLabel>();
-                    string sortCodeColumn = "";
+                  
 
-                    switch (sortType)
+                    if(sortType == "Full Rate")
                     {
-
-                        case "PreSort":
-                            sortCodeColumn = sourceTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
-                            break;
-                        case "Charity Mail":
-                            sortCodeColumn = sourceTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
-                            break;
-                        case "Print Post":
-                            sortCodeColumn = sourceTable.Columns.Contains("Dt PP Sort Code") ? "Dt PP Sort Code" : "Dt LH Sort Code";
-                            break;
-                        default:
-                            break;
+                        sortType = lodgements.Where(x => x.SortType == "PreSort").ToList().Count > 0 ? "PreSort" : "Print Post";
                     }
+                    // sortType = lodgements.Where(x=>x.SortType !=)
+                    List<TrayLabel> labels = TrayLabel.CreateLabelList(sourceTable, serviceType, size, sortType);
 
-                    //foreach (DataRow row in sourceTable.Rows)
-                    //{
-                    //    TrayLabel label = new TrayLabel();
-                    //    label.ServiceType = serviceType;
-                    //    label.Size = size;
-                    //    label.SortCode = row[sortCodeColumn].ToString();
-                    //    label.SortType = sortType;
-                    //    if (label.SortCode != "")
-                    //    {
-                    //        TrayLabel updatedLabel = TrayLabel.CreateLabelLine(label);
-                    //        if(updatedLabel != null)
-                    //        {
-                    //            labels.Add(updatedLabel);
-                    //        }
 
-                    //    }
-                    //}
-
-                    labelText.Append(TrayLabel.CreateLabelLines(sourceTable, serviceType, size, sortType, lodgeDate, countPerTray));
-
-                    //int itemCount = 0;
-                    //for (int i = 0; i < labels.Count; i++)
-                    //{
-
-                    //    itemCount++;
-                    //    if (i == labels.Count - 1 || $"{labels[i].ServiceType}{labels[i].Sort_Plan_Type}{labels[i].Sort_Plan}" != $"{labels[i+1].ServiceType}{labels[i+1].Sort_Plan_Type}{labels[i+1].Sort_Plan}")
-                    //    {
-                    //        labels[i].LabelCount = (int)Math.Ceiling(itemCount / countPerTray);
-                    //        labelText.Append($"{labels[i].ServiceType},{labels[i].Sort_Plan_Type},{labels[i].Sort_Plan},{labels[i].Size},{labels[i].LabelCount},{lodgeDate}\n");
-                    //        itemCount = 0;
-                    //    }
-
-                    //}
+                    labelText.Append(TrayLabel.CreateLabelLines(labels, sortType, lodgeDate, countPerTray));
                 }
             }
           

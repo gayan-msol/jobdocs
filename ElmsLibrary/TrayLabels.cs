@@ -99,9 +99,8 @@ namespace ElmsLibrary
             return trayLabel;
         }
 
-        public static string CreateLabelLines(DataTable sourceTable, string serviceType, string size, string sortType, string lodgeDate, decimal countPerTray)
+        public static List<TrayLabel> CreateLabelList(DataTable sourceTable, string serviceType, string size, string sortType)
         {
-            StringBuilder lines = new StringBuilder();
             List<TrayLabel> labels = new List<TrayLabel>();
             string sortCodeColumn = "";
             int BRCount = 0;
@@ -191,22 +190,133 @@ namespace ElmsLibrary
                         trayLabel.ServiceType = serviceType == "Priority" ? "G" : "H";
                     }
 
-                   
+
                     labels.Add(trayLabel);
-                    
+
 
                 }
+
+                
             }
+            return labels;
+        }
 
-            for (int i = 0; i < labels.Count; i++)
+        
+
+        public static string CreateLabelLines(List<TrayLabel> labels,string sortType, string lodgeDate, decimal countPerTray)
+        {
+            StringBuilder lines = new StringBuilder();
+            //List<TrayLabel> labels = new List<TrayLabel>();
+            //string sortCodeColumn = "";
+            //int BRCount = 0;
+            //int URCount = 0;
+
+            //switch (sortType)
+            //{
+
+            //    case "PreSort":
+            //        sortCodeColumn = sourceTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+            //        break;
+            //    case "Charity Mail":
+            //        sortCodeColumn = sourceTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+            //        break;
+            //    case "Print Post":
+            //        sortCodeColumn = sourceTable.Columns.Contains("Dt PP Sort Code") ? "Dt PP Sort Code" : "Dt LH Sort Code";
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+            //foreach (DataRow row in sourceTable.Rows)
+            //{
+            //    string sortCode = row[sortCodeColumn].ToString().Replace(' ', '_');
+            //    TrayLabel trayLabel = new TrayLabel();
+            //    trayLabel.ServiceType = serviceType == "Priority" ? "1" : "R";
+            //    trayLabel.Size = size;
+            //    trayLabel.SortType = sortType;
+
+            //    if (sortCode != "")
+            //    {
+
+            //        if (sortCode == "xOTHER" || sortCode == "x_OTHER")
+            //        {
+            //            continue;
+            //        }
+
+            //        size = size.Substring(0, 1);
+
+            //        if (sortCode.Split('_')[0] == "BD")
+            //        {
+            //            trayLabel.Sort_Plan_Type = "1";
+            //            string p1 = sortCode.Split('_')[1].Substring(1);
+            //            if (trayLabel.ServiceType == "R" && size == "S")
+            //            {
+            //                trayLabel.Sort_Plan = $"2{p1}";
+            //            }
+            //            else if (trayLabel.ServiceType == "R" && size == "L")
+            //            {
+            //                trayLabel.Sort_Plan = $"7{p1}";
+            //            }
+            //            else if (trayLabel.ServiceType == "1" && size == "S")
+            //            {
+            //                trayLabel.Sort_Plan = $"1{p1}";
+            //            }
+            //            else if (trayLabel.ServiceType == "1" && size == "L")
+            //            {
+            //                trayLabel.Sort_Plan = $"6{p1}";
+            //            }
+            //        }
+            //        else if (sortCode.Split('_')[0] == "BR")
+            //        {
+            //            BRCount++;
+            //            trayLabel.Sort_Plan_Type = "2";
+            //            trayLabel.Sort_Plan = trayLabel.stateCodes[sortCode.Split('_')[1]].ToString();
+            //        }
+            //        else if (sortCode.Split('_')[0] == "UR")
+            //        {
+            //            URCount++;
+            //            trayLabel.Sort_Plan_Type = "5";
+            //            trayLabel.Sort_Plan = trayLabel.stateCodes[sortCode.Split('_')[1]].ToString();
+            //        }
+            //        else if (sortCode.Split('_')[4] == "P")
+            //        {
+            //            trayLabel.Sort_Plan_Type = "3";
+            //            trayLabel.Sort_Plan = sortCode.Split('_')[3]; // postcode
+            //        }
+            //        else if (sortCode.Split('_')[4] == "A")
+            //        {
+            //            trayLabel.Sort_Plan_Type = "4";
+            //            trayLabel.Sort_Plan = sortCode.Split('_')[5]; // bsp
+            //        }
+            //        else if (sortCode.Split('_')[4] == "R")
+            //        {
+            //            trayLabel.Sort_Plan_Type = "5";
+            //            trayLabel.Sort_Plan = trayLabel.stateCodes[sortCode.Split('_')[0]].ToString();
+            //            trayLabel.ServiceType = serviceType == "Priority" ? "G" : "H";
+            //        }
+
+
+            //        labels.Add(trayLabel);
+
+
+            //    }
+            //}
+
+            int BRCount = labels.Where(x => x.Sort_Plan_Type == "2").ToList().Count;
+            int URCount = labels.Where(x => x.Sort_Plan_Type == "5").ToList().Count;
+
+            if (sortType != "Print Post")
             {
-                if (BRCount < 2000 && (labels[i].Sort_Plan_Type == "2" || labels[i].Sort_Plan_Type == "5"))
+                for (int i = 0; i < labels.Count; i++)
                 {
-                    labels[i].Sort_Plan = "6";
-                }
-                else if(URCount < 2000 && (labels[i].Sort_Plan_Type == "2" || labels[i].Sort_Plan_Type == "5"))
-                {
-                    labels[i].Sort_Plan = "6";
+                    if (BRCount < 2000 && (labels[i].Sort_Plan_Type == "2" || labels[i].Sort_Plan_Type == "5"))
+                    {
+                        labels[i].Sort_Plan = "6";
+                    }
+                    else if (URCount < 2000 && (labels[i].Sort_Plan_Type == "2" || labels[i].Sort_Plan_Type == "5"))
+                    {
+                        labels[i].Sort_Plan = "6";
+                    }
                 }
             }
 
@@ -221,26 +331,12 @@ namespace ElmsLibrary
                     lines.Append($"{labels[i].ServiceType},{labels[i].Sort_Plan_Type},{labels[i].Sort_Plan},{labels[i].Size},{labels[i].LabelCount},{lodgeDate}\n");
                     itemCount = 0;
                 }
-                //else if($"{labels[i].Sort_Plan_Type}{labels[i].Sort_Plan}" != $"{labels[i + 1].Sort_Plan_Type}{labels[i + 1].Sort_Plan}")
-                //{
-                //    if (BRCount < 2000 && (labels[i].Sort_Plan_Type == "2" || labels[i].Sort_Plan_Type == "5"))
-                //    {
-                //        labels[i].Sort_Plan = "6";
-                //        if(labels[i].Sort_Plan_Type == labels[i + 1].Sort_Plan_Type)
-                //        {
-                //            continue;
-                //        }
-
-                //        labels[i].LabelCount = (int)Math.Ceiling(itemCount / countPerTray);
-                //        lines.Append($"{labels[i].ServiceType},{labels[i].Sort_Plan_Type},{labels[i].Sort_Plan},{labels[i].Size},{labels[i].LabelCount},{lodgeDate}\n");
-                //        itemCount = 0;
-                //    }
-                //}
-
             }
 
             return lines.ToString();
         }
+
+
 
     }
 }

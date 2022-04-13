@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtJobNo = new System.Windows.Forms.TextBox();
             this.txtJobName = new System.Windows.Forms.TextBox();
@@ -84,6 +84,10 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.dataGridViewStreams = new System.Windows.Forms.DataGridView();
+            this.Stream = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecordQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sheets = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrintQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxBranch = new System.Windows.Forms.GroupBox();
             this.rbArtwork = new System.Windows.Forms.RadioButton();
             this.rbDatabase = new System.Windows.Forms.RadioButton();
@@ -125,7 +129,6 @@
             this.dateTimePickerLodgeDate = new System.Windows.Forms.DateTimePicker();
             this.btnCreateAndPrintTags = new System.Windows.Forms.Button();
             this.cbPrintLabel = new System.Windows.Forms.CheckBox();
-            this.cbIncSorted = new System.Windows.Forms.CheckBox();
             this.cbImportLabel = new System.Windows.Forms.CheckBox();
             this.btnAddINTTags = new System.Windows.Forms.Button();
             this.numericUpDownINT = new System.Windows.Forms.NumericUpDown();
@@ -135,10 +138,6 @@
             this.listBoxTrayLabels = new System.Windows.Forms.ListBox();
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnINTTags = new System.Windows.Forms.Button();
-            this.btnFullRateTags = new System.Windows.Forms.Button();
-            this.numericUpDownTags = new System.Windows.Forms.NumericUpDown();
             this.cbProgressiveLodge = new System.Windows.Forms.CheckBox();
             this.btnINTZones = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -166,6 +165,10 @@
             this.txtElmsPWD = new System.Windows.Forms.TextBox();
             this.UN = new System.Windows.Forms.Label();
             this.txtElmsUN = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnINTTags = new System.Windows.Forms.Button();
+            this.btnFullRateTags = new System.Windows.Forms.Button();
+            this.numericUpDownTags = new System.Windows.Forms.NumericUpDown();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSecondStream = new System.Windows.Forms.Button();
@@ -177,10 +180,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.Stream = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sheets = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrintQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label31 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -209,11 +209,11 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownINT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFR)).BeginInit();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.LoginPanel.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -800,33 +800,57 @@
             // 
             // dataGridViewStreams
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewStreams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewStreams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewStreams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Stream,
             this.RecordQty,
             this.Sheets,
             this.PrintQty});
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewStreams.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewStreams.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewStreams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewStreams.Location = new System.Drawing.Point(26, 561);
             this.dataGridViewStreams.Name = "dataGridViewStreams";
             this.dataGridViewStreams.Size = new System.Drawing.Size(367, 100);
             this.dataGridViewStreams.TabIndex = 45;
+            // 
+            // Stream
+            // 
+            this.Stream.HeaderText = "Stream";
+            this.Stream.Name = "Stream";
+            this.Stream.ReadOnly = true;
+            this.Stream.Width = 50;
+            // 
+            // RecordQty
+            // 
+            this.RecordQty.HeaderText = "Record Qty";
+            this.RecordQty.Name = "RecordQty";
+            this.RecordQty.ReadOnly = true;
+            // 
+            // Sheets
+            // 
+            this.Sheets.HeaderText = "Sheets per Record";
+            this.Sheets.Name = "Sheets";
+            // 
+            // PrintQty
+            // 
+            this.PrintQty.HeaderText = "Print Qty";
+            this.PrintQty.Name = "PrintQty";
+            this.PrintQty.ReadOnly = true;
             // 
             // groupBoxBranch
             // 
@@ -1090,25 +1114,25 @@
             // 
             // dataGridViewReturnItems
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewReturnItems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewReturnItems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewReturnItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReturnItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewReturnItems.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewReturnItems.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewReturnItems.Location = new System.Drawing.Point(37, 70);
             this.dataGridViewReturnItems.Name = "dataGridViewReturnItems";
             this.dataGridViewReturnItems.Size = new System.Drawing.Size(392, 220);
@@ -1241,11 +1265,11 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label31);
             this.groupBox5.Controls.Add(this.btnClearLabels);
             this.groupBox5.Controls.Add(this.dateTimePickerLodgeDate);
             this.groupBox5.Controls.Add(this.btnCreateAndPrintTags);
             this.groupBox5.Controls.Add(this.cbPrintLabel);
-            this.groupBox5.Controls.Add(this.cbIncSorted);
             this.groupBox5.Controls.Add(this.cbImportLabel);
             this.groupBox5.Controls.Add(this.btnAddINTTags);
             this.groupBox5.Controls.Add(this.numericUpDownINT);
@@ -1263,7 +1287,7 @@
             // 
             // btnClearLabels
             // 
-            this.btnClearLabels.Location = new System.Drawing.Point(86, 196);
+            this.btnClearLabels.Location = new System.Drawing.Point(86, 176);
             this.btnClearLabels.Name = "btnClearLabels";
             this.btnClearLabels.Size = new System.Drawing.Size(135, 23);
             this.btnClearLabels.TabIndex = 30;
@@ -1273,7 +1297,7 @@
             // 
             // dateTimePickerLodgeDate
             // 
-            this.dateTimePickerLodgeDate.Location = new System.Drawing.Point(7, 243);
+            this.dateTimePickerLodgeDate.Location = new System.Drawing.Point(7, 233);
             this.dateTimePickerLodgeDate.MinDate = new System.DateTime(2022, 4, 5, 0, 0, 0, 0);
             this.dateTimePickerLodgeDate.Name = "dateTimePickerLodgeDate";
             this.dateTimePickerLodgeDate.Size = new System.Drawing.Size(214, 20);
@@ -1303,16 +1327,6 @@
             this.cbPrintLabel.Text = "Print Labels";
             this.cbPrintLabel.UseVisualStyleBackColor = true;
             this.cbPrintLabel.CheckedChanged += new System.EventHandler(this.cbPrintLabel_CheckedChanged);
-            // 
-            // cbIncSorted
-            // 
-            this.cbIncSorted.AutoSize = true;
-            this.cbIncSorted.Location = new System.Drawing.Point(9, 92);
-            this.cbIncSorted.Name = "cbIncSorted";
-            this.cbIncSorted.Size = new System.Drawing.Size(112, 17);
-            this.cbIncSorted.TabIndex = 25;
-            this.cbIncSorted.Text = "Add to sorted plan";
-            this.cbIncSorted.UseVisualStyleBackColor = true;
             // 
             // cbImportLabel
             // 
@@ -1385,7 +1399,7 @@
             this.listBoxTrayLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxTrayLabels.FormattingEnabled = true;
             this.listBoxTrayLabels.ItemHeight = 20;
-            this.listBoxTrayLabels.Location = new System.Drawing.Point(7, 111);
+            this.listBoxTrayLabels.Location = new System.Drawing.Point(7, 91);
             this.listBoxTrayLabels.Name = "listBoxTrayLabels";
             this.listBoxTrayLabels.Size = new System.Drawing.Size(214, 84);
             this.listBoxTrayLabels.TabIndex = 24;
@@ -1407,53 +1421,6 @@
             this.label29.Size = new System.Drawing.Size(113, 13);
             this.label29.TabIndex = 23;
             this.label29.Text = "Lodgement Categories";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.btnINTTags);
-            this.groupBox4.Controls.Add(this.btnFullRateTags);
-            this.groupBox4.Controls.Add(this.numericUpDownTags);
-            this.groupBox4.Location = new System.Drawing.Point(649, 633);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(165, 225);
-            this.groupBox4.TabIndex = 22;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Tray Labels";
-            // 
-            // btnINTTags
-            // 
-            this.btnINTTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnINTTags.Location = new System.Drawing.Point(9, 172);
-            this.btnINTTags.Name = "btnINTTags";
-            this.btnINTTags.Size = new System.Drawing.Size(140, 46);
-            this.btnINTTags.TabIndex = 24;
-            this.btnINTTags.Text = "Print INT Tags";
-            this.btnINTTags.UseVisualStyleBackColor = true;
-            this.btnINTTags.Click += new System.EventHandler(this.btnINTTags_Click);
-            // 
-            // btnFullRateTags
-            // 
-            this.btnFullRateTags.Enabled = false;
-            this.btnFullRateTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFullRateTags.Location = new System.Drawing.Point(9, 120);
-            this.btnFullRateTags.Name = "btnFullRateTags";
-            this.btnFullRateTags.Size = new System.Drawing.Size(140, 46);
-            this.btnFullRateTags.TabIndex = 19;
-            this.btnFullRateTags.Text = "Create Full Rate Tags";
-            this.btnFullRateTags.UseVisualStyleBackColor = true;
-            this.btnFullRateTags.Click += new System.EventHandler(this.btnFullRateTags_Click);
-            // 
-            // numericUpDownTags
-            // 
-            this.numericUpDownTags.Location = new System.Drawing.Point(92, 24);
-            this.numericUpDownTags.Name = "numericUpDownTags";
-            this.numericUpDownTags.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDownTags.TabIndex = 20;
-            this.numericUpDownTags.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // cbProgressiveLodge
             // 
@@ -1736,6 +1703,53 @@
             this.txtElmsUN.Size = new System.Drawing.Size(100, 20);
             this.txtElmsUN.TabIndex = 0;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnINTTags);
+            this.groupBox4.Controls.Add(this.btnFullRateTags);
+            this.groupBox4.Controls.Add(this.numericUpDownTags);
+            this.groupBox4.Location = new System.Drawing.Point(649, 633);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(165, 225);
+            this.groupBox4.TabIndex = 22;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Tray Labels";
+            // 
+            // btnINTTags
+            // 
+            this.btnINTTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnINTTags.Location = new System.Drawing.Point(9, 172);
+            this.btnINTTags.Name = "btnINTTags";
+            this.btnINTTags.Size = new System.Drawing.Size(140, 46);
+            this.btnINTTags.TabIndex = 24;
+            this.btnINTTags.Text = "Print INT Tags";
+            this.btnINTTags.UseVisualStyleBackColor = true;
+            this.btnINTTags.Click += new System.EventHandler(this.btnINTTags_Click);
+            // 
+            // btnFullRateTags
+            // 
+            this.btnFullRateTags.Enabled = false;
+            this.btnFullRateTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFullRateTags.Location = new System.Drawing.Point(9, 120);
+            this.btnFullRateTags.Name = "btnFullRateTags";
+            this.btnFullRateTags.Size = new System.Drawing.Size(140, 46);
+            this.btnFullRateTags.TabIndex = 19;
+            this.btnFullRateTags.Text = "Create Full Rate Tags";
+            this.btnFullRateTags.UseVisualStyleBackColor = true;
+            this.btnFullRateTags.Click += new System.EventHandler(this.btnFullRateTags_Click);
+            // 
+            // numericUpDownTags
+            // 
+            this.numericUpDownTags.Location = new System.Drawing.Point(92, 24);
+            this.numericUpDownTags.Name = "numericUpDownTags";
+            this.numericUpDownTags.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownTags.TabIndex = 20;
+            this.numericUpDownTags.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.button1);
@@ -1844,29 +1858,14 @@
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             // 
-            // Stream
+            // label31
             // 
-            this.Stream.HeaderText = "Stream";
-            this.Stream.Name = "Stream";
-            this.Stream.ReadOnly = true;
-            this.Stream.Width = 50;
-            // 
-            // RecordQty
-            // 
-            this.RecordQty.HeaderText = "Record Qty";
-            this.RecordQty.Name = "RecordQty";
-            this.RecordQty.ReadOnly = true;
-            // 
-            // Sheets
-            // 
-            this.Sheets.HeaderText = "Sheets per Record";
-            this.Sheets.Name = "Sheets";
-            // 
-            // PrintQty
-            // 
-            this.PrintQty.HeaderText = "Print Qty";
-            this.PrintQty.Name = "PrintQty";
-            this.PrintQty.ReadOnly = true;
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(6, 217);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(63, 13);
+            this.label31.TabIndex = 31;
+            this.label31.Text = "Lodge Date";
             // 
             // Form1
             // 
@@ -1917,14 +1916,14 @@
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownINT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFR)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.LoginPanel.ResumeLayout(false);
             this.LoginPanel.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTags)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
@@ -2068,7 +2067,6 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ListBox listBoxTrayLabels;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.CheckBox cbIncSorted;
         private System.Windows.Forms.Button btnCreateAndPrintTags;
         private System.Windows.Forms.Button btnAddINTTags;
         private System.Windows.Forms.NumericUpDown numericUpDownINT;
@@ -2081,6 +2079,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RecordQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sheets;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrintQty;
+        private System.Windows.Forms.Label label31;
     }
 }
 
