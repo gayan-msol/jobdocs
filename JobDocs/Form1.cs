@@ -1829,5 +1829,21 @@ namespace JobDocs
             fullratetagCount = 0;
             intTagCount = 0;
         }
+
+        private void btnRefreshFiles_Click(object sender, EventArgs e)
+        {
+            if (rbDatabase.Checked)
+            {
+                richTextJobDirectory.Text = importedJob.DataFolder;
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
+            }
+            else
+            {
+                richTextJobDirectory.Text = importedJob.ArtworkFolder;
+                cmbFileName.DataSource = DirectoryHelper.GetOutPutFiles(richTextJobDirectory.Text);
+            }
+
+            cmbFileName.DroppedDown = true;
+        }
     }
 } 
