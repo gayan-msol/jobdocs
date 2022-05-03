@@ -77,31 +77,34 @@ namespace ElmsLibrary
 
                 new SelectElement(edgeDriver.FindElement(By.Id("articleTypes"))).SelectByText(lodgement.ArticleType);
 
-
-
-                if (lodgement.SortType == "PreSort" || lodgement.SortType == "Charity Mail")
+                if (lodgement.ArticleType != "Print Post Line Haul")
                 {
-                    new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
-                }
 
-                foreach (var sort in lodgement.SortList)
-                {
-                    if (sort.Value != "0")
+
+
+                    if (lodgement.SortType == "PreSort" || lodgement.SortType == "Charity Mail")
                     {
-
-                        if (sort.Key.Substring(0, 2) == "WT" && lodgement.SortType != "INT Full Rate")
-                        {
-                            new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
-                        }
-                        else
-                        {
-                            IWebElement webElement = edgeDriver.FindElement(By.Name(sort.Key));
-                            webElement.SendKeys(sort.Value.ToString());
-                        }
+                        new SelectElement(edgeDriver.FindElement(By.Name("CT001D"))).SelectByText("Promotional");
                     }
 
-                }
+                    foreach (var sort in lodgement.SortList)
+                    {
+                        if (sort.Value != "0")
+                        {
 
+                            if (sort.Key.Substring(0, 2) == "WT" && lodgement.SortType != "INT Full Rate")
+                            {
+                                new SelectElement(edgeDriver.FindElement(By.Name(sort.Key))).SelectByText(sort.Value.ToString());
+                            }
+                            else
+                            {
+                                IWebElement webElement = edgeDriver.FindElement(By.Name(sort.Key));
+                                webElement.SendKeys(sort.Value.ToString());
+                            }
+                        }
+
+                    }
+                }
 
                 IWebElement btnAdd = edgeDriver.FindElement(By.ClassName("inputSubmit"));
                 btnAdd.Click();

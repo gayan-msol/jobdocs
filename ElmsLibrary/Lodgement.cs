@@ -31,14 +31,12 @@ namespace ElmsLibrary
         public static Dictionary<string, string> IntZonesFullRate { get; set; }
 
 
-        public static SortSummary GetSortCategories(DataTable dataTable, string sortType , bool intContract = false)
+        public static SortSummary GetSortCategories(DataTable dataTable, string sortType ,bool isLineHaul, bool intContract = false)
         {
             SortSummary sortSummary = new SortSummary();
             //Dictionary<string, string> IntZonesContract = DataAccess.GetIntZones(true);
             //Dictionary<string, string> IntZonesFullRate = DataAccess.GetIntZones();
-
-
-
+     
             int unmatchedCount = 0;
             if (sortType == "Full Rate")
             {
@@ -86,6 +84,8 @@ namespace ElmsLibrary
             }
             else
             {
+                int resOsCage = 0;
+
                 foreach (DataRow row in dataTable.Rows)
                 {
                     string sortCodeColumn = "";
@@ -94,13 +94,13 @@ namespace ElmsLibrary
                     {
 
                         case "PreSort":
-                            sortCodeColumn = dataTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+                            sortCodeColumn = "Dt_BP_Sort_Order"; 
                             break;
                         case "Charity Mail":
-                            sortCodeColumn = dataTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+                            sortCodeColumn =  "Dt_BP_Sort_Order";
                             break;
                         case "Print Post":
-                            sortCodeColumn = dataTable.Columns.Contains("Dt PP Sort Code") ? "Dt PP Sort Code" : "Dt LH Sort Code";
+                            sortCodeColumn = dataTable.Columns.Contains("Dt_PP_Sort_Code") ? "Dt_PP_Sort_Code" : "Dt_LH_Sort_Code";
                             break;
                         default:
                             break;
@@ -108,6 +108,8 @@ namespace ElmsLibrary
 
 
                     string sortCode = row[sortCodeColumn]?.ToString().Replace(' ', '_') ?? string.Empty;
+                    
+
 
                     if (string.IsNullOrEmpty(sortCode))
                     {
@@ -171,7 +173,7 @@ namespace ElmsLibrary
                             sortSummary.UROS += 1;
                         }
                     }
-                    else if (sortCode.Split('_')[4] == "A") ////// Print Post
+                    else if (sortCode.Split('_')[4] == "A" ) ////// Print Post
                     {
                         if (sortCode.Split('_')[0] == "WA")
                         {
@@ -196,6 +198,32 @@ namespace ElmsLibrary
                     else if (sortCode.Split('_')[4] == "R")
                     {
                         if (sortCode.Split('_')[0] == "WA")
+                        {
+                            sortSummary.RESSS += 1;
+                        }
+                        else
+                        {
+                            sortSummary.RESOS += 1;
+                        }
+                    }
+                    else if(sortCode.Split('_')[5] == "A") // line haul
+                    {
+                        sortSummary.ADSS += 1;
+                        resOsCage = int.Parse(sortCode.Split('_')[0]) + 1;
+                    }
+                    else if(sortCode.Split('_')[5] == "P")
+                    {
+                        sortSummary.PDSS += 1;
+                        resOsCage = int.Parse(sortCode.Split('_')[0]) + 1;
+                    }
+                    else if (sortCode.Split('_')[5] == "R")
+                    {
+                        if (sortCode.Split('_')[1] == "WA")
+                        {
+                            sortSummary.RESSS += 1;
+                            resOsCage = int.Parse(sortCode.Split('_')[0]) + 1;
+                        }
+                        else if(int.Parse(sortCode.Split('_')[0]) < resOsCage)
                         {
                             sortSummary.RESSS += 1;
                         }

@@ -54,6 +54,7 @@ namespace JobDocs
         TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
         int fullratetagCount = 0;
         int intTagCount = 0;
+        bool isLinehaul = false;
         
 
 
@@ -961,16 +962,22 @@ namespace JobDocs
 
                     if (sourceTable != null)
                     {
+                        isLinehaul = false;
                         btnLodge.Enabled = true;
                         btnCreateAndPrintTags.Enabled = true;
 
+                        foreach(DataColumn col in sourceTable.Columns)
+                        {
+                            col.ColumnName = col.ColumnName.Replace(' ', '_');
+                        }
 
-                        if (sourceTable.Columns.Contains("Dt BP Sort Code") || sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
+
+                        if (sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
                         {
                             cmbLodgementType.SelectedItem = "PreSort";
 
                             int dpidCount = 0;
-                            string dpidCol = sourceTable.Columns.Contains("Dt DPID") ? "Dt DPID" : "Dt Barcode";
+                            string dpidCol = sourceTable.Columns.Contains("Dt_DPID") ? "Dt_DPID" : "Dt_Barcode";
                             for (int i = 0; i < sourceTable.Rows.Count; i++)
                             {
                                 if (sourceTable.Rows[i][dpidCol].ToString() != "")
@@ -985,9 +992,14 @@ namespace JobDocs
                             }
 
                         }
-                        else if (sourceTable.Columns.Contains("Dt PP Sort Code") || sourceTable.Columns.Contains("Dt LH Sort Code"))
+                        else if (sourceTable.Columns.Contains("Dt_PP_Sort_Code"))
                         {
                             cmbLodgementType.SelectedItem = "Print Post";
+                        }
+                        else if (sourceTable.Columns.Contains("Dt_LH_Sort_Code"))
+                        {
+                            cmbLodgementType.SelectedItem = "Print Post";
+                            isLinehaul = true;
                         }
                         else
                         {
@@ -1067,7 +1079,7 @@ namespace JobDocs
             lodgement.JobNo = jobNo;
 
             bool intContract = lodgement.AccNo == "6258639" || sortType == "INT Contract";
-            sortSummary = Lodgement.GetSortCategories(sourceTable, sortType, intContract);
+            sortSummary = Lodgement.GetSortCategories(sourceTable, sortType,isLinehaul, intContract);
 
             sortSummary.WeightCat = cmbWeight?.Text ?? "0";
 
@@ -1158,11 +1170,22 @@ namespace JobDocs
                 lodgements.Add(lodgementINT);
             }
 
+            if (isLinehaul)
+            {
+                Lodgement lodgementLH = new Lodgement();
+                lodgementLH.ProductGroup = "Print Post";
+                lodgementLH.ArticleType = "Print Post Line Haul";
+                lodgements.Add(lodgementLH);
+            }
+
+
             listBoxLodements.Items.Clear();
+
+            string lh = isLinehaul ? " - Line Haul" : "";
 
             foreach (Lodgement l in lodgements)
             {
-                listBoxLodements.Items.Add($"{l.SortType} - {l.ServiceType} - {l.Size}");
+                listBoxLodements.Items.Add($"{l.SortType}{lh} - {l.ServiceType} - {l.Size}");
             }
 
            
@@ -1846,4 +1869,4 @@ namespace JobDocs
             cmbFileName.DroppedDown = true;
         }
     }
-} 
+}
