@@ -972,7 +972,7 @@ namespace JobDocs
                         }
 
 
-                        if (sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
+                        if (sourceTable.Columns.Contains("Dt_BP_Sort_Code") || sourceTable.Columns.Contains("Dt_BP_Sort_Order"))
                         {
                             cmbLodgementType.SelectedItem = "PreSort";
 

@@ -108,15 +108,14 @@ namespace ElmsLibrary
 
             switch (sortType)
             {
-
                 case "PreSort":
-                    sortCodeColumn = sourceTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+                    sortCodeColumn = sourceTable.Columns.Contains("Dt_BP_Sort_Code") ? "Dt_BP_Sort_Code" : "Dt_BP_Sort_Order";//for Pioneer
                     break;
                 case "Charity Mail":
-                    sortCodeColumn = sourceTable.Columns.Contains("Dt BP Sort Code") ? "Dt BP Sort Code" : "Dt_BP_Sort_Order"; // for Pioneer column names
+                    sortCodeColumn = "Dt_BP_Sort_Code";
                     break;
                 case "Print Post":
-                    sortCodeColumn = sourceTable.Columns.Contains("Dt PP Sort Code") ? "Dt PP Sort Code" : "Dt LH Sort Code";
+                    sortCodeColumn = sourceTable.Columns.Contains("Dt_PP_Sort_Code") ? "Dt_PP_Sort_Code" : "Dt_LH_Sort_Code";
                     break;
                 default:
                     break;
@@ -181,7 +180,12 @@ namespace ElmsLibrary
                     else if (sortCode.Split('_')[4] == "A")
                     {
                         trayLabel.Sort_Plan_Type = "4";
-                        trayLabel.Sort_Plan = sortCode.Split('_')[5]; // bsp
+                        string bsp = sortCode.Split('_')[5]; // bsp
+                        if(bsp.Length > 3)
+                        {
+                            bsp = bsp.Substring(0, 3);
+                        }
+                        trayLabel.Sort_Plan = bsp;
                     }
                     else if (sortCode.Split('_')[4] == "R")
                     {

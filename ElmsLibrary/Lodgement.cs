@@ -94,10 +94,10 @@ namespace ElmsLibrary
                     {
 
                         case "PreSort":
-                            sortCodeColumn = "Dt_BP_Sort_Order"; 
+                            sortCodeColumn = dataTable.Columns.Contains("Dt_BP_Sort_Code") ? "Dt_BP_Sort_Code" : "Dt_BP_Sort_Order";//for Pioneer
                             break;
                         case "Charity Mail":
-                            sortCodeColumn =  "Dt_BP_Sort_Order";
+                            sortCodeColumn = "Dt_BP_Sort_Code";
                             break;
                         case "Print Post":
                             sortCodeColumn = dataTable.Columns.Contains("Dt_PP_Sort_Code") ? "Dt_PP_Sort_Code" : "Dt_LH_Sort_Code";
