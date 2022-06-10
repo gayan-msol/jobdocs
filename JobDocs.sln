@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaLibrary", "VisaLibrary\VisaLibrary.csproj", "{8F7D4E53-C29D-47D7-B384-52CDE88C0FE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSetup", "JobSetup\JobSetup.csproj", "{056686FC-5D99-4BE3-8E4B-87477E1B7A4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{8F7D4E53-C29D-47D7-B384-52CDE88C0FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F7D4E53-C29D-47D7-B384-52CDE88C0FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F7D4E53-C29D-47D7-B384-52CDE88C0FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{056686FC-5D99-4BE3-8E4B-87477E1B7A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{056686FC-5D99-4BE3-8E4B-87477E1B7A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{056686FC-5D99-4BE3-8E4B-87477E1B7A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{056686FC-5D99-4BE3-8E4B-87477E1B7A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
