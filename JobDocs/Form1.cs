@@ -351,10 +351,13 @@ namespace JobDocs
             if(importedJob != null)
             {
                 btnFullRateTags.Enabled = true;
+                btnAddFullRate.Enabled = true;
+                btnAddINTTags.Enabled = true;
                 btnINTZones.Enabled = true;
                 listBoxTrayLabels.Items.Clear();
                 listBoxLodements.Items.Clear();
                 lodgements.Clear();
+                dateTimePickerLodgeDate.Value = DateTime.Today;
                 sourceTable = new DataTable();
 
                 jobName = txtJobName.Text = importedJob.JobName;
@@ -1786,22 +1789,25 @@ namespace JobDocs
 
             labelText.Append("#End Of File");
 
-
-            string lableFileName = $@"{Path.GetDirectoryName(outputFileName)}\{jobNo} - Tray Labels.lpf";
+            string dir = string.IsNullOrEmpty(outputFileName) ? jobDirectoryData : Path.GetDirectoryName(outputFileName);
+            string lableFileName = $@"{dir}\{jobNo} - Tray Labels.lpf";
 
             File.WriteAllText(lableFileName, labelText.ToString());
 
-            string cmdDel = $"/C VisaCommand /d {labelName}";
-            string cmdImport = $"/C VisaCommand /i {lableFileName}";
-            string cmdPrint = $"/C VisaCommand /p {labelName}";
-
+            //string cmdDel = $"/C VisaCommand /d {labelName}";
+            //string cmdImport = $"/C VisaCommand /i {lableFileName}";
+            //string cmdPrint = $"/C VisaCommand /p {labelName}";
+            string cmdDel = $"  /d {labelName}";
+            string cmdImport = $"  /i {lableFileName}";
+            string cmdPrint = $"  /p {labelName}";
 
 
             var proc = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "cmd.exe",
+                   // FileName = "cmd.exe",
+                    FileName = "VisaCommand.exe",
                     Arguments = cmdDel,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
@@ -1838,12 +1844,14 @@ namespace JobDocs
         {
             listBoxTrayLabels.Items.Add($"{(int)numericUpDownFR.Value} Full Rate Tags");
             fullratetagCount += (int)numericUpDownFR.Value;
+            btnCreateAndPrintTags.Enabled = true;
         }
 
         private void btnAddINTTags_Click(object sender, EventArgs e)
         {
             listBoxTrayLabels.Items.Add($"{(int)numericUpDownINT.Value} International Tags");
             intTagCount += (int)numericUpDownINT.Value;
+            btnCreateAndPrintTags.Enabled = true;
         }
 
         private void btnClearLabels_Click(object sender, EventArgs e)

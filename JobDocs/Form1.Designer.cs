@@ -45,6 +45,7 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.bntCreateDSSheet = new System.Windows.Forms.Button();
             this.tabPagePSS = new System.Windows.Forms.TabPage();
+            this.btnRefreshFiles = new System.Windows.Forms.Button();
             this.checkBoxApproval = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
             this.txtCompany = new System.Windows.Forms.TextBox();
@@ -181,7 +182,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.btnRefreshFiles = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -280,7 +280,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(685, 1041);
+            this.splitContainer1.Size = new System.Drawing.Size(719, 1041);
             this.splitContainer1.SplitterDistance = 124;
             this.splitContainer1.TabIndex = 26;
             // 
@@ -315,7 +315,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(685, 913);
+            this.tabControl1.Size = new System.Drawing.Size(719, 913);
             this.tabControl1.TabIndex = 25;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -415,6 +415,16 @@
             this.tabPagePSS.Text = "Print Spec Sheet";
             this.tabPagePSS.UseVisualStyleBackColor = true;
             this.tabPagePSS.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // btnRefreshFiles
+            // 
+            this.btnRefreshFiles.Location = new System.Drawing.Point(432, 63);
+            this.btnRefreshFiles.Name = "btnRefreshFiles";
+            this.btnRefreshFiles.Size = new System.Drawing.Size(115, 21);
+            this.btnRefreshFiles.TabIndex = 75;
+            this.btnRefreshFiles.Text = "Refresh File List";
+            this.btnRefreshFiles.UseVisualStyleBackColor = true;
+            this.btnRefreshFiles.Click += new System.EventHandler(this.btnRefreshFiles_Click);
             // 
             // checkBoxApproval
             // 
@@ -1234,7 +1244,7 @@
             this.tabPageElms.Location = new System.Drawing.Point(4, 34);
             this.tabPageElms.Name = "tabPageElms";
             this.tabPageElms.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageElms.Size = new System.Drawing.Size(677, 875);
+            this.tabPageElms.Size = new System.Drawing.Size(711, 875);
             this.tabPageElms.TabIndex = 4;
             this.tabPageElms.Text = "eLMS";
             this.tabPageElms.UseVisualStyleBackColor = true;
@@ -1262,7 +1272,7 @@
             this.LodgePanel.Controls.Add(this.txtManifestFileName);
             this.LodgePanel.Location = new System.Drawing.Point(-28, 111);
             this.LodgePanel.Name = "LodgePanel";
-            this.LodgePanel.Size = new System.Drawing.Size(671, 764);
+            this.LodgePanel.Size = new System.Drawing.Size(743, 764);
             this.LodgePanel.TabIndex = 7;
             // 
             // groupBox5
@@ -1354,6 +1364,7 @@
             // 
             // btnAddINTTags
             // 
+            this.btnAddINTTags.Enabled = false;
             this.btnAddINTTags.Location = new System.Drawing.Point(146, 55);
             this.btnAddINTTags.Name = "btnAddINTTags";
             this.btnAddINTTags.Size = new System.Drawing.Size(75, 23);
@@ -1385,6 +1396,7 @@
             // 
             // btnAddFullRate
             // 
+            this.btnAddFullRate.Enabled = false;
             this.btnAddFullRate.Location = new System.Drawing.Point(146, 29);
             this.btnAddFullRate.Name = "btnAddFullRate";
             this.btnAddFullRate.Size = new System.Drawing.Size(75, 23);
@@ -1436,7 +1448,7 @@
             // cbProgressiveLodge
             // 
             this.cbProgressiveLodge.AutoSize = true;
-            this.cbProgressiveLodge.Location = new System.Drawing.Point(437, 488);
+            this.cbProgressiveLodge.Location = new System.Drawing.Point(437, 436);
             this.cbProgressiveLodge.Name = "cbProgressiveLodge";
             this.cbProgressiveLodge.Size = new System.Drawing.Size(137, 17);
             this.cbProgressiveLodge.TabIndex = 18;
@@ -1622,7 +1634,7 @@
             // 
             this.btnLodge.Enabled = false;
             this.btnLodge.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLodge.Location = new System.Drawing.Point(437, 518);
+            this.btnLodge.Location = new System.Drawing.Point(437, 466);
             this.btnLodge.Name = "btnLodge";
             this.btnLodge.Size = new System.Drawing.Size(135, 46);
             this.btnLodge.TabIndex = 6;
@@ -1869,22 +1881,12 @@
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             // 
-            // btnRefreshFiles
-            // 
-            this.btnRefreshFiles.Location = new System.Drawing.Point(432, 63);
-            this.btnRefreshFiles.Name = "btnRefreshFiles";
-            this.btnRefreshFiles.Size = new System.Drawing.Size(115, 21);
-            this.btnRefreshFiles.TabIndex = 75;
-            this.btnRefreshFiles.Text = "Refresh File List";
-            this.btnRefreshFiles.UseVisualStyleBackColor = true;
-            this.btnRefreshFiles.Click += new System.EventHandler(this.btnRefreshFiles_Click);
-            // 
             // Form1
             // 
             this.AcceptButton = this.btnImportFromDolphin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 1041);
+            this.ClientSize = new System.Drawing.Size(719, 1041);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Job Docs";

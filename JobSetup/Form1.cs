@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -95,7 +96,7 @@ namespace JobSetup
                 if (!extList.Contains(file.Extension))
                 {
 
-                    string targetFilePath = Path.Combine(destinationDir, file.Name.Replace(oldJobNo, jobNo));
+                    string targetFilePath = Path.Combine(destinationDir, file.Name.Replace(txtOldJobNo.Text, jobNo));
                     file.CopyTo(targetFilePath);
                 }
             }
@@ -103,7 +104,7 @@ namespace JobSetup
                    
                 foreach (DirectoryInfo subDir in dirs)
                 {
-                    string newDestinationDir = Path.Combine(destinationDir, subDir.Name.Replace(oldJobNo, jobNo));
+                    string newDestinationDir = Path.Combine(destinationDir, subDir.Name.Replace(txtOldJobNo.Text, jobNo));
                     CopyDirectory(subDir.FullName, newDestinationDir);
                 }
             
@@ -124,10 +125,13 @@ namespace JobSetup
             if (!string.IsNullOrWhiteSpace(txtData.Text) && Directory.Exists(txtData.Text))
             {
                 CopyDirectory(txtData.Text, newJobDirectoryData);
+
+                Process.Start(newJobDirectoryData);
             }
             if (!string.IsNullOrWhiteSpace(txtArt.Text) && Directory.Exists(txtArt.Text))
             {
                 CopyDirectory(txtArt.Text, newJobDirectoryArt);
+                Process.Start(newJobDirectoryArt);
             }
 
 
